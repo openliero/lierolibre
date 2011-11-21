@@ -148,25 +148,21 @@ try
 
 	gfx.settingsFile = "LIERO";
 
-#if 0 // This is just stupid, no need to emulate it
-	if(!fileExists(lieroOPT)) // NOTE: Liero doesn't seem to use the contents of LIERO.OPT for anything useful
+	if(!fileExists(lieroOPT)) // NOTE: Liero uses LIERO.OPT to store the name of the currently active settings file
 	{
 		gfx.settings.reset(new Settings);
 		gfx.saveSettings();
 	}
 	else
-#endif
 	{
-	/*
 		FILE* f = fopen(lieroOPT.c_str(), "rb");
 		std::size_t len = fileLength(f);
 		if(len > 255) len = 255;
 		char buf[256];
 		fread(buf, 1, len, f);
-		game.settingsFile.assign(buf, len);
+		gfx.settingsFile.assign(buf, len);
 
-		rtrim(game.settingsFile);
-		*/
+		rtrim(gfx.settingsFile);
 		if(!gfx.loadSettings())
 		{
 			gfx.settingsFile = "LIERO";
@@ -174,7 +170,7 @@ try
 			gfx.saveSettings();
 		}
 
-		//fclose(f);
+		fclose(f);
 	}
 
 	gfx.setVideoMode();
@@ -183,8 +179,7 @@ try
 	//game.initGame();
 	gfx.mainLoop();
 
-	gfx.settingsFile = "LIERO";
-	gfx.settings->save(data_path->file("LIERO.DAT"));
+	gfx.saveSettings();
 
 	FILE* f = fopen(lieroOPT.c_str(), "wb");
 	fwrite(gfx.settingsFile.data(), 1, gfx.settingsFile.size(), f);
