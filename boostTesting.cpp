@@ -29,7 +29,7 @@ file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
 file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 }
 
-map<string, bool>:iterator file_access_pair;
+map<string, bool>::iterator file_access_pair;
 
 
 BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
@@ -119,21 +119,22 @@ BOOST_AUTO_TEST_CASE(files_in_map)
 	mkdtemp(temp_readonlydir);
 	mkdtemp(temp_configdir);
 
-	for(file_access_pair = file_access_map.begin(), file_access_pair != file_access_map.end(), file_access_pair++) {
+	for(file_access_pair = file_access_map.begin(); file_access_pair != file_access_map.end(); file_access_pair++) {
 		strcpy(filepath_readonly, temp_readonlydir);
-		strcat(filepath_readonly, file_access_pair->first);
+		strcat(filepath_readonly, file_access_pair->first.c_str());
 		if(file_access_pair->second) {
 			// file should be writable
 			setenv(home, temp_configdir, 1);
 			strcpy(filepath_writable, temp_configdir);
-			strcat(filepath_writable, '/');
+			strcat(filepath_writable, "/");
 			strcat(filepath_writable, file_access_pair->first.c_str());
 		} else {
 			// file should not be writable
 		}
 	}
 
-	remove_all(tempdir);
+	remove_all(temp_readonlydir);
+	remove_all(temp_configdir);
 
 	printf("### end test files_in_map\n\n");
 }

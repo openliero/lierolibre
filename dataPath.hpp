@@ -16,7 +16,6 @@ public:
 	string configdir(void);
 
 private:
-	string a_readonly_path;
 	string readonly_path;
 	string configdotdir;
 	char delimitor;
