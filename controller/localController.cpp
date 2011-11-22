@@ -220,7 +220,7 @@ void LocalController::changeState(State newState)
 					
 					
 				}
-				std::string path = joinPath(lieroEXERoot, prefix + buf);
+				std::string path = joinPath(/*FIXME*/lieroEXERoot, prefix + buf);
 				replay.reset(new ReplayWriter(gvl::stream_ptr(new gvl::fstream(path.c_str(), "wb"))));
 				replay->beginRecord(game);
 			}

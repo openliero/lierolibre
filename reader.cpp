@@ -17,7 +17,7 @@ struct ReaderFile
 };
 
 typedef std::map<std::string, ReaderFile> ReaderFileMap;
-
+/*FIXME*/
 std::string lieroEXE;
 std::string lieroCHR;
 std::string lieroSND;

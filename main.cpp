@@ -65,7 +65,7 @@ try
 		}
 		else
 		{
-			setLieroEXE(argv[i]);
+			/*FIXME*/setLieroEXE(argv[i]);
 			exeSet = true;
 		}
 	}
@@ -184,7 +184,7 @@ try
 	gfx.mainLoop();
 	
 	gfx.settingsFile = "LIERO";
-	gfx.settings->save(joinPath(lieroEXERoot, "LIERO.DAT"));
+	gfx.settings->save(joinPath(/*FIXME*/lieroEXERoot, "LIERO.DAT"));
 	
 	FILE* f = fopen(lieroOPT.c_str(), "wb");
 	fwrite(gfx.settingsFile.data(), 1, gfx.settingsFile.size(), f);
