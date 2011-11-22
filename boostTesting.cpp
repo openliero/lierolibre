@@ -21,8 +21,8 @@ const char template_string[] = "/tmp/liero_tmp_XXXXXX";
 
 BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
 {
-	char configdir[500];
-	char tempdir[500];
+	char configdir[FILENAME_MAX];
+	char tempdir[FILENAME_MAX];
 
 	strcpy(tempdir, template_string);
 	mkdtemp(tempdir);
@@ -34,6 +34,7 @@ BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
 	DataPath data_path("/usr/lib/liero");
 
 	BOOST_CHECK(strcmp(data_path.configdir().c_str(), configdir) == 0);
+//	printf("data_path.configdir().c_str() = %s and configdir = %s\n\n", data_path.configdir().c_str(), configdir);
 
 	remove_all(tempdir);
 
@@ -43,8 +44,8 @@ BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
 BOOST_AUTO_TEST_CASE(configdir_can_create_file)
 {
 	const char *configdir;
-	char configfile_path[500];
-	char tempdir[500];
+	char configfile_path[FILENAME_MAX];
+	char tempdir[FILENAME_MAX];
         FILE *configfile;
 
 	strcpy(tempdir, template_string);
@@ -67,22 +68,22 @@ BOOST_AUTO_TEST_CASE(configdir_can_create_file)
 
 BOOST_AUTO_TEST_CASE(lieroexe_return_correct_path)
 {
-	char tempdir[500];
-	char lieroexe_path[500];
+	char tempdir[FILENAME_MAX];
+	char lieroexe_path[FILENAME_MAX];
         FILE *lieroexe;
 
 	strcpy(tempdir, template_string);
 	mkdtemp(tempdir);
-	printf("tempdir: %s\n", tempdir);
+//	printf("tempdir: %s\n", tempdir);
 	strcpy(lieroexe_path, tempdir);
 	strcat(lieroexe_path, lieroexe_fname);
-	printf("lieroexe_path: %s\n", lieroexe_path);
+//	printf("lieroexe_path: %s\n", lieroexe_path);
 	lieroexe = fopen(lieroexe_path, "w+");
 	fclose(lieroexe);
 
 	DataPath data_path(tempdir);
 
-
+//	printf("data_path.file(\"LIERO.EXE\").c_str(): %s\n", data_path.file("LIERO.EXE").c_str());
 	BOOST_CHECK(strcmp(data_path.file("LIERO.EXE").c_str(), lieroexe_path) == 0);
 
 	remove_all(tempdir);
