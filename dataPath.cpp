@@ -78,9 +78,12 @@ string DataPath::file(string filename)
 
 string DataPath::configdir(void)
 {
-	if (mkdir(configdotdir.c_str(), 0777)) {
+	if (mkdir(configdotdir.c_str(), 0777) == 0) {
+		return configdotdir;
+	} else if (errno == EEXIST) {
 		return configdotdir;
 	} else {
 		return "ECONFIGDIR";
+//		}
 	}
 }
