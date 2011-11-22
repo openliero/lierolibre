@@ -44,7 +44,13 @@ string DataPath::file(string filename)
 	string filepath_readonly = readonly_path + '/' + filename;
 	string filepath_writable = configdotdir + '/' + filename;
 	if (file_access_map.count(filename) == 0) {
-		throw runtime_error("Unknown file '" + filename + "'");
+		if (filename.substr(filename.find_last_of(".") + 1)
+								== "DAT") {
+			// file ends with .DAT
+			return filepath_writable;
+		} else {
+			throw runtime_error("Unknown file '" + filename + "'");
+		}
 	}
 	bool file_shouldbe_writable = file_access_map.find(filename)->second;
 
