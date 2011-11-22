@@ -379,3 +379,16 @@ BOOST_FIXTURE_TEST_CASE(all_exists__IncompleteFilename, AllFilesSetup)
 						runtime_error,
 						test_exception_message);
 }
+
+BOOST_FIXTURE_TEST_CASE(all_exists__AnyDatPath_AnyDatRw, AllFilesSetup)
+{
+	string meepdat_path;
+	fstream meepdat;
+	DataPath data_path(temp_readonlydir);
+
+	// test returned path and if file is rw
+	meepdat_path = temp_configdir + '/' + "MEEP.DAT";
+	BOOST_CHECK_EQUAL(data_path.file("MEEP.DAT"), meepdat_path);
+	meepdat.open(meepdat_path.c_str(), ios::out);
+	BOOST_CHECK(meepdat.is_open());
+}
