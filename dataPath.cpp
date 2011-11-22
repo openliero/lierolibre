@@ -13,7 +13,7 @@ DataPath::DataPath(string a_readonly_path)
 	configdotdir = string(getenv("HOME")) + '/' + ".liero";
 
 	// Map of files we may want to return path to
-	// should be read from plaintext file
+	// should probably be read from plaintext file
 	// true means writable, false read-only
 	file_access_map.insert(pair<string, bool>("LIERO.EXE", false));
 	file_access_map.insert(pair<string, bool>("LIERO.CHR", false));
@@ -42,6 +42,7 @@ string DataPath::file(string filename)
 			if(file_readonly.is_open()) {
 				// file exists in readonly
 				mkdir(configdotdir.c_str(), 0777);
+				// error handling
 				file_writable.open(
 					filepath_writable.c_str(), ios::out);
 				if(file_writable.is_open()) {
@@ -49,8 +50,9 @@ string DataPath::file(string filename)
 					// error handling
 					return filepath_writable;
 				} else {
-				//throw meep
-				return "ENOFILE";
+				// couldn't open writable file
+				// throw meep
+				return "ENOTOPEN";
 				}
 			} else {
 				// file does not exist anywhere
