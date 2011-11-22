@@ -66,6 +66,7 @@ struct FilesInReadonlySetup : virtual DirectorySetup
 	FilesInReadonlySetup()
 	{
 //		cout << "begin FilesInReadonlySetup" << endl;
+		// create all files with content "readonly FILENAME"
 		for(file_access_pair = file_access_map.begin();
 			file_access_pair != file_access_map.end();
 			file_access_pair++) {
@@ -92,10 +93,12 @@ struct FilesInWritableSetup : virtual DirectorySetup
 	FilesInWritableSetup()
 	{
 //		cout << "begin FilesInWritableSetup" << endl;
+		// create all writable files with content "writable FILENAME"
 		for(file_access_pair = file_access_map.begin();
 			file_access_pair != file_access_map.end();
 			file_access_pair++) {
 			if(file_access_pair->second) {
+				// file should be writable
 				filepath = temp_configdir + '/'
 					+ file_access_pair->first;
 				file.open(filepath.c_str(), ios::out);
@@ -129,14 +132,14 @@ struct AllFilesSetup : FilesInWritableSetup, FilesInReadonlySetup
 	}
 };
 
-BOOST_FIXTURE_TEST_CASE(configdir_return_correct_path, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(configdir__Path, DirectorySetup)
 {
 	DataPath data_path(temp_readonlydir);
 
 	BOOST_CHECK_EQUAL(data_path.configdir(), temp_configdir);
 }
 
-BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(configdir__CreateFile, DirectorySetup)
 {
 	string configfile_path;
 	fstream configfile;
@@ -147,56 +150,152 @@ BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
 	BOOST_CHECK(configfile.is_open());
 }
 
-BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists__Error, DirectorySetup)
 {
 	DataPath data_path(temp_readonlydir);
 
+	// test if error for no file anywhere is correct
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), "ENOFILE");
 }
 
-BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists, FilesInReadonlySetup)
+BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists__Path_Nocopy, FilesInReadonlySetup)
 {
 	string lieroexe_path;
 	string lieroexe_wrong_path;
 	fstream lieroexe_wrong;
 	DataPath data_path(temp_readonlydir);
 
+	// test returned path
 	lieroexe_path = temp_readonlydir + '/' + "LIERO.EXE";
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), lieroexe_path);
 
+	// make sure it wasn't copied to configdir
 	lieroexe_wrong_path = temp_configdir + '/' + "LIERO.EXE";
 	lieroexe_wrong.open(lieroexe_wrong_path.c_str(), ios::out|ios::in);
 	BOOST_CHECK(!lieroexe_wrong.is_open());
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_no_exists, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, DirectorySetup)
 {
 	DataPath data_path(temp_readonlydir);
 
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), "ENOFILE");
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists, FilesInReadonlySetup)
+BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
+	FilesInReadonlySetup)
+{
+	string lierodat_ro_path;
+	string lierodat_rw_path;
+	fstream lierodat_rw;
+	fstream lierodat_ro;
+	stringstream lierodat_ro_buffer;
+	stringstream lierodat_rw_buffer;
+
+	// save readonly contents to buffer
+	lierodat_ro_path = temp_readonlydir + '/' + "LIERO.DAT";
+	lierodat_ro.open(lierodat_ro_path.c_str(), ios::in);
+	if(lierodat_ro.is_open()) {
+		lierodat_ro_buffer << lierodat_ro.rdbuf();
+		lierodat_ro.close();
+	} else {
+		cout << "Can't read readonly DAT" << endl;
+	}
+
+	DataPath data_path(temp_readonlydir);
+
+	// test returned path
+	lierodat_rw_path = temp_configdir + '/' + "LIERO.DAT";
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), lierodat_rw_path);
+
+	// test if file is rw
+	lierodat_rw.open(lierodat_rw_path.c_str(), ios::out|ios::in);
+	BOOST_CHECK(lierodat_rw.is_open());
+
+	if(lierodat_rw.is_open()) {
+		lierodat_rw_buffer << lierodat_rw.rdbuf();
+		// convert both buffers to strings and compare
+		BOOST_CHECK_EQUAL(lierodat_ro_buffer.str(), lierodat_rw_buffer.str());
+		lierodat_rw.close();
+	} else {
+		BOOST_ERROR("Cant open rw after copying");
+	}
+}
+
+BOOST_FIXTURE_TEST_CASE(lierodat_rw_exists__Path, FilesInWritableSetup)
 {
 	string lierodat_path;
 	fstream lierodat;
 	DataPath data_path(temp_readonlydir);
 
+	// test returned path and if file is rw
 	lierodat_path = temp_configdir + '/' + "LIERO.DAT";
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), lierodat_path);
 	lierodat.open(lierodat_path.c_str(), ios::out|ios::in);
 	BOOST_CHECK(lierodat.is_open());
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_rw_exists, FilesInWritableSetup)
+BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 {
-	string lierodat_path;
-	fstream lierodat;
-	DataPath data_path(temp_readonlydir);
+	string lierodat_ro_path;
+	string lierodat_rw_path;
+	fstream lierodat_rw;
+	fstream lierodat_ro;
+	stringstream lierodat_buffer;
+	string lierodat_ro_orig_content;
+	string lierodat_rw_orig_content;
 
-	lierodat_path = temp_configdir + '/' + "LIERO.DAT";
-	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), lierodat_path);
-	lierodat.open(lierodat_path.c_str(), ios::out|ios::in);
-	BOOST_CHECK(lierodat.is_open());
+	// save readonly file content
+	lierodat_ro_path = temp_readonlydir + '/' + "LIERO.DAT";
+	lierodat_ro.open(lierodat_ro_path.c_str(), ios::in);
+	if(lierodat_ro.is_open()) {
+		lierodat_buffer << lierodat_ro.rdbuf();
+		lierodat_ro.close();
+		lierodat_ro_orig_content = lierodat_buffer.str();
+		// clear buffer
+		lierodat_buffer.str("");
+	} else {
+		cout << "Can't read readonly DAT" << endl;
+	}
+
+	// save writable file content
+	lierodat_rw_path = temp_configdir + '/' + "LIERO.DAT";
+	lierodat_rw.open(lierodat_rw_path.c_str(), ios::in);
+	if(lierodat_rw.is_open()) {
+		lierodat_buffer << lierodat_rw.rdbuf();
+		lierodat_rw.close();
+		lierodat_rw_orig_content = lierodat_buffer.str();
+		// clear buffer
+		lierodat_buffer.str("");
+	} else {
+		cout << "Can't read writable DAT" << endl;
+	}
+
+	DataPath data_path(temp_readonlydir);
+	data_path.file("LIERO.DAT");
+
+	lierodat_ro.open(lierodat_ro_path.c_str(), ios::in);
+	if(lierodat_ro.is_open()) {
+		lierodat_buffer << lierodat_ro.rdbuf();
+		lierodat_ro.close();
+		// check that file is unchanged
+		BOOST_CHECK_EQUAL(lierodat_ro_orig_content, lierodat_buffer.str());
+		// clear buffer
+		lierodat_buffer.str("");
+	} else {
+		cout << "Can't read readonly DAT" << endl;
+	}
+
+	lierodat_rw.open(lierodat_rw_path.c_str(), ios::in);
+	if(lierodat_rw.is_open()) {
+		lierodat_buffer << lierodat_rw.rdbuf();
+		lierodat_rw.close();
+		// check that file is unchanged
+		BOOST_CHECK_EQUAL(lierodat_rw_orig_content, lierodat_buffer.str());
+		// clear buffer
+		lierodat_buffer.str("");
+	} else {
+		cout << "Can't read writable DAT" << endl;
+	}
 }
 
