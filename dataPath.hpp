@@ -11,13 +11,14 @@ class DataPath
 public:
 	DataPath(string a_readonly_path);
 
-	string file(string a_filename);
+	string file(string filename);
 
 	string configdir(void);
 
 private:
 	string a_readonly_path;
 	string readonly_path;
+	string configdotdir;
 	char delimitor;
 	// map: <filename, writable?>
 	std::map<string, bool> file_access_map;
