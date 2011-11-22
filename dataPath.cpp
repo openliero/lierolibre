@@ -50,10 +50,12 @@ string DataPath::file(string filename)
 					return filepath_writable;
 				} else {
 				//throw meep
+				return "ENOFILE";
 				}
 			} else {
 				// file does not exist anywhere
 				// throw meep
+				return "ENOFILE";
 			}
 		}
 	} else {
@@ -65,6 +67,7 @@ string DataPath::file(string filename)
 		} else {
 			// file does not exist anywhere
 			// throw meep
+			return "ENOFILE";
 		}
 	}
 }
