@@ -1,3 +1,4 @@
+// Compile via ~$ g++ -c dataPath.cpp
 #include "dataPath.hpp"
 
 
@@ -8,5 +9,5 @@ return "";
 
 string DataPath::path_configdir(void)
 {
-return "";
+return "/tmp";
 }
