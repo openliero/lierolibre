@@ -1,7 +1,8 @@
 /*
  dataPath.hpp & dataPath.cpp
 
- This object is intended to simplify integration into a GNU/Linux system.
+ This object is intended to simplify integration into a GNU/Linux multi-user
+ system.
  It contains two methods, file() and configdir().
  The constructor requires a path to a directory containing the (readonly)
  Liero data files.
@@ -14,9 +15,11 @@
  * If file should be readonly, checks if file exists, then returns its path
  * If file should be writable, it makes sure the file exits in the
    $HOME/.liero directory (by copying if need be), then returns its path
+ * Throws runtime_error()s if it is unable to provide the path.
 
  configdir() is used simply for getting the path to the $HOME/.liero
  directory, creating it if need be.
+ configdir() throws a runtime_error() if it is unable to provide the path.
 
  Unit tests for this object are avaialble in boostTesting.cpp
 
