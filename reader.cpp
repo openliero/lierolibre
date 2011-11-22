@@ -6,6 +6,7 @@
 
 std::string lieroOPT;
 
+DataPath* data_path = NULL;
 // DATAPATH std::string lieroEXERoot;
 
 namespace
