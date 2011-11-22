@@ -16,20 +16,23 @@ using namespace boost::filesystem;
 const char *home_varname = "HOME";
 const char *dotdir = "/.liero";
 const char *afile = "/LIERO.DAT";
-char template_string[] = "/tmp/lireo_configdir_tmp_XXXXXX";
-char *tempdir;
+const char template_string[] = "/tmp/lireo_configdir_tmp_XXXXXX";
+char tempdir[500];
 
 BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
 {
-	char *configdir;
+	char configdir[500];
 
-	tempdir = mkdtemp(template_string);
+	strcpy(tempdir, template_string);
+	mkdtemp(tempdir);
 	setenv("HOME", tempdir, 1);
+
         strcpy(configdir, tempdir);
 	strcat(configdir, dotdir);
-	DataPath data_path;
 
-	BOOST_CHECK(data_path.path_configdir().c_str() == configdir);
+	DataPath data_path("/usr/lib/liero");
+
+	BOOST_CHECK(data_path.configdir().c_str() == configdir);
 
 	remove_all(tempdir);
 }
@@ -37,16 +40,18 @@ BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
 BOOST_AUTO_TEST_CASE(configdir_can_create_file)
 {
 	const char *configdir;
-	char *configfile_path;
+	char configfile_path[500];
         FILE *configfile;
 
-	tempdir = mkdtemp(template_string);
+	strcpy(tempdir, template_string);
+	mkdtemp(tempdir);
 	setenv("HOME", tempdir, 1);
-	DataPath data_path;
-	configdir = data_path.path_configdir().c_str();
+
+	DataPath data_path("/usr/lib/liero");
+	configdir = data_path.configdir().c_str();
+
 	strcpy(configfile_path, configdir);
 	strcat(configfile_path, afile);
-
 
 	BOOST_CHECK(configfile = fopen(configfile_path, "w+"));
 	fclose(configfile);
