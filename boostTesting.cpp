@@ -59,9 +59,12 @@ struct DirectorySetup
 	DirectorySetup()
 	{
 //		cout << "begin DirectorySetup" << endl;
-		file_access_map.insert(pair<string, bool>("LIERO.EXE", false));
-		file_access_map.insert(pair<string, bool>("LIERO.CHR", false));
-		file_access_map.insert(pair<string, bool>("LIERO.SND", false));
+		file_access_map.insert(pair<string, bool>("LIERO.EXE",
+								false));
+		file_access_map.insert(pair<string, bool>("LIERO.CHR",
+								false));
+		file_access_map.insert(pair<string, bool>("LIERO.SND",
+								false));
 		file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
 		file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 
@@ -102,17 +105,18 @@ struct FilesInReadonlySetup : virtual ConfigdirSetup
 //		cout << "begin FilesInReadonlySetup" << endl;
 		// create all files with content "readonly FILENAME"
 		for (file_access_pair = file_access_map.begin();
-					file_access_pair != file_access_map.end();
-					file_access_pair++) {
+				file_access_pair != file_access_map.end();
+				file_access_pair++) {
 			filepath = temp_readonlydir + '/'
 				 + file_access_pair->first;
 			file.open(filepath.c_str(), ios::out);
 			if (file.is_open()) {
 				file << "readonly "
-						<< file_access_pair->first << endl;
+					<< file_access_pair->first << endl;
 				file.close();
 			} else {
-				cout << "Can't write to file: " << file << endl;
+				cout << "Can't write to file: "
+							<< file << endl;
 			}
 		}
 	}
@@ -129,12 +133,12 @@ struct FilesInWritableSetup : virtual ConfigdirSetup
 //		cout << "begin FilesInWritableSetup" << endl;
 		// create all writable files with content "writable FILENAME"
 		for (file_access_pair = file_access_map.begin();
-					file_access_pair != file_access_map.end();
-					file_access_pair++) {
+				file_access_pair != file_access_map.end();
+				file_access_pair++) {
 			if (file_access_pair->second) {
 				// file should be writable
 				filepath = temp_configdir + '/'
-							+ file_access_pair->first;
+						+ file_access_pair->first;
 				file.open(filepath.c_str(), ios::out);
 				if(file.is_open()) {
 					file << "writable "
@@ -228,7 +232,7 @@ BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, ConfigdirSetup)
 }
 
 BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
-						FilesInReadonlySetup)
+							FilesInReadonlySetup)
 {
 	string lierodat_ro_path;
 	string lierodat_rw_path;
@@ -260,7 +264,8 @@ BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
 	if (lierodat_rw.is_open()) {
 		lierodat_rw_buffer << lierodat_rw.rdbuf();
 		// convert both buffers to strings and compare
-		BOOST_CHECK_EQUAL(lierodat_ro_buffer.str(), lierodat_rw_buffer.str());
+		BOOST_CHECK_EQUAL(lierodat_ro_buffer.str(),
+						lierodat_rw_buffer.str());
 		lierodat_rw.close();
 	} else {
 		BOOST_ERROR("Cant open rw after copying");
@@ -324,7 +329,8 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 		lierodat_buffer << lierodat_ro.rdbuf();
 		lierodat_ro.close();
 		// check that file is unchanged
-		BOOST_CHECK_EQUAL(lierodat_ro_orig_content, lierodat_buffer.str());
+		BOOST_CHECK_EQUAL(lierodat_ro_orig_content,
+						lierodat_buffer.str());
 		// clear buffer
 		lierodat_buffer.str("");
 	} else {
@@ -336,7 +342,8 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 		lierodat_buffer << lierodat_rw.rdbuf();
 		lierodat_rw.close();
 		// check that file is unchanged
-		BOOST_CHECK_EQUAL(lierodat_rw_orig_content, lierodat_buffer.str());
+		BOOST_CHECK_EQUAL(lierodat_rw_orig_content,
+						lierodat_buffer.str());
 		// clear buffer
 		lierodat_buffer.str("");
 	} else {
