@@ -19,12 +19,15 @@ const char *lierodat_fname = "/LIERO.DAT";
 const char *lieroexe_fname = "/LIERO.EXE";
 const char template_string[] = "/tmp/liero_tmp_XXXXXX";
 
-map<string, bool> mfile_access_map;
-mfile_access_map.insert(pair<string, bool>("LIERO.EXE", false));
-mfile_access_map.insert(pair<string, bool>("LIERO.CHR", false));
-mfile_access_map.insert(pair<string, bool>("LIERO.SND", false));
-mfile_access_map.insert(pair<string, bool>("LIERO.OPT", true));
-mfile_access_map.insert(pair<string, bool>("LIERO.DAT", true));
+map<string, bool> file_access_map;
+void init_map()
+{
+file_access_map.insert(pair<string, bool>("LIERO.EXE", false));
+file_access_map.insert(pair<string, bool>("LIERO.CHR", false));
+file_access_map.insert(pair<string, bool>("LIERO.SND", false));
+file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
+file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
+}
 
 map<string, bool>:iterator file_access_pair;
 
@@ -109,6 +112,7 @@ BOOST_AUTO_TEST_CASE(files_in_map)
 	char filepath_writable[FILENAME_MAX];
         FILE *file_readonly;
         FILE *file_writable;
+	init_map();
 
 	strcpy(temp_readonlydir, template_string);
 	strcpy(temp_configdir, template_string);
