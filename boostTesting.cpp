@@ -37,11 +37,18 @@
 #include <cstdio>
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
 
 #include "dataPath.hpp"
 
 using namespace boost::filesystem;
 using namespace std;
+
+string correct_message;
+
+bool test_exception_message(exception const& ex) {
+	return ex.what() == correct_message;
+}
 
 struct DirectorySetup
 {
@@ -203,9 +210,12 @@ BOOST_FIXTURE_TEST_CASE(configdir_no_exists__CreateFile, DirectorySetup)
 BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists__Error, ConfigdirSetup)
 {
 	DataPath data_path(temp_readonlydir);
+	correct_message = "Could not open file '" + temp_readonlydir + '/'
+						 + "LIERO.EXE"  + "'";
 
-	// test if error for no file anywhere is correct
-	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), "ENOFILE");
+	BOOST_CHECK_EXCEPTION(throw data_path.file("LIERO.EXE"),
+						runtime_error,
+						test_exception_message);
 }
 
 BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists__Path_Nocopy, FilesInReadonlySetup)
@@ -225,11 +235,16 @@ BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists__Path_Nocopy, FilesInReadonlySetup)
 	BOOST_CHECK(!lieroexe_wrong.is_open());
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, ConfigdirSetup)
+BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Error, ConfigdirSetup)
 {
 	DataPath data_path(temp_readonlydir);
 
-	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), "ENOFILE");
+	correct_message = "Could not open file '" + temp_configdir + '/'
+						 + "LIERO.DAT"  + "'";
+
+	BOOST_CHECK_EXCEPTION(throw data_path.file("LIERO.DAT"),
+						runtime_error,
+						test_exception_message);
 }
 
 BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
@@ -355,5 +370,10 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 BOOST_FIXTURE_TEST_CASE(all_exists__IncompleteFilename, AllFilesSetup)
 {
 	DataPath data_path(temp_readonlydir);
-	BOOST_CHECK_EQUAL(data_path.file("LIE"), "ENOFILE");
+
+	correct_message = "Unknown file 'LIE'";
+
+	BOOST_CHECK_EXCEPTION(throw data_path.file("LIE"),
+						runtime_error,
+						test_exception_message);
 }
