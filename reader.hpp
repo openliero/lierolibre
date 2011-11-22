@@ -1,6 +1,7 @@
 #ifndef LIERO_READER_HPP
 #define LIERO_READER_HPP
 
+#include "dataPath.hpp"
 #include <cstdio>
 #include <string>
 #include <stdexcept>

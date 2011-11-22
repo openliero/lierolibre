@@ -1,6 +1,5 @@
 #include "reader.hpp"
 #include "filesystem.hpp"
-#include "dataPath.hpp"
 #include <SDL/SDL.h>
 #include <map>
 #include <stdexcept>
