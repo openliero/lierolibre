@@ -18,7 +18,6 @@ public:
 private:
 	string readonly_path;
 	string configdotdir;
-	char delimitor;
 	// map: <filename, writable?>
 	map<string, bool> file_access_map;
 };

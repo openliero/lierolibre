@@ -10,8 +10,7 @@
 DataPath::DataPath(string a_readonly_path)
 {
 	readonly_path = a_readonly_path;
-	delimitor = '/';
-	configdotdir = string(getenv("HOME")) + delimitor + ".liero";
+	configdotdir = string(getenv("HOME")) + '/' + ".liero";
 
 	// Map of files we may want to return path to
 	// should be read from plaintext file
@@ -28,8 +27,8 @@ string DataPath::file(string filename)
 	fstream file_writable;
 	ifstream file_readonly;
 
-	string filepath_readonly = readonly_path + delimitor + filename;
-	string filepath_writable = configdotdir + delimitor + filename;
+	string filepath_readonly = readonly_path + '/' + filename;
+	string filepath_writable = configdotdir + '/' + filename;
 	bool file_shouldbe_writable = file_access_map.find(filename)->second;
 
 	if(file_shouldbe_writable) {
@@ -45,8 +44,13 @@ string DataPath::file(string filename)
 				mkdir(configdotdir.c_str(), 0777);
 				file_writable.open(
 					filepath_writable.c_str(), ios::out);
-				file_writable << file_readonly.rdbuf();
-				return filepath_writable;
+				if(file_writable.is_open()) {
+					file_writable << file_readonly.rdbuf();
+					// error handling
+					return filepath_writable;
+				} else {
+				//throw meep
+				}
 			} else {
 				// file does not exist anywhere
 				// throw meep
@@ -68,5 +72,6 @@ string DataPath::file(string filename)
 string DataPath::configdir(void)
 {
 	mkdir(configdotdir.c_str(), 0777);
+	// error handling
 	return configdotdir;
 }
