@@ -1,13 +1,14 @@
 // Compile via ~$ g++ -c dataPath.cpp
 #include "dataPath.hpp"
 
-
-string DataPath::path_readonly(string filename)
-{
-return "";
+DataPath::DataPath(string a_lieroexe) {
+	lieroexe = a_lieroexe;
 }
 
-string DataPath::path_configdir(void)
-{
-return "/tmp";
+string DataPath::file(string filename) {
+	return "";
+}
+
+string DataPath::configdir(void) {
+	return "/tmp";
 }
