@@ -45,9 +45,6 @@ struct DirectorySetup
 		temp_homedir = mkdtemp(c_temp_homedir);
 		temp_readonlydir = mkdtemp(c_temp_readonlydir);
 
-		temp_configdir = temp_homedir + '/' + ".liero";
-		create_directory(temp_configdir);
-
 		original_home = getenv("HOME");
 		setenv("HOME", temp_homedir.c_str(), 1);
 	}
@@ -61,7 +58,17 @@ struct DirectorySetup
 	}
 };
 
-struct FilesInReadonlySetup : virtual DirectorySetup
+struct ConfigdirSetup : DirectorySetup
+{
+	ConfigdirSetup()
+	{
+		temp_configdir = temp_homedir + '/' + ".liero";
+
+		create_directory(temp_configdir);
+	}
+};
+
+struct FilesInReadonlySetup : virtual ConfigdirSetup
 {
 	FilesInReadonlySetup()
 	{
@@ -88,7 +95,7 @@ struct FilesInReadonlySetup : virtual DirectorySetup
 	}
 };
 
-struct FilesInWritableSetup : virtual DirectorySetup
+struct FilesInWritableSetup : virtual ConfigdirSetup
 {
 	FilesInWritableSetup()
 	{
@@ -132,14 +139,14 @@ struct AllFilesSetup : FilesInWritableSetup, FilesInReadonlySetup
 	}
 };
 
-BOOST_FIXTURE_TEST_CASE(configdir__Path, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(configdir__Path, ConfigdirSetup)
 {
 	DataPath data_path(temp_readonlydir);
 
 	BOOST_CHECK_EQUAL(data_path.configdir(), temp_configdir);
 }
 
-BOOST_FIXTURE_TEST_CASE(configdir__CreateFile, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(configdir__CreateFile, ConfigdirSetup)
 {
 	string configfile_path;
 	fstream configfile;
@@ -150,7 +157,7 @@ BOOST_FIXTURE_TEST_CASE(configdir__CreateFile, DirectorySetup)
 	BOOST_CHECK(configfile.is_open());
 }
 
-BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists__Error, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists__Error, ConfigdirSetup)
 {
 	DataPath data_path(temp_readonlydir);
 
@@ -175,7 +182,7 @@ BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists__Path_Nocopy, FilesInReadonlySetup)
 	BOOST_CHECK(!lieroexe_wrong.is_open());
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, DirectorySetup)
+BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, ConfigdirSetup)
 {
 	DataPath data_path(temp_readonlydir);
 
