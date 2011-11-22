@@ -68,14 +68,14 @@ struct FilesInReadonlySetup : virtual DirectorySetup
 //		cout << "begin FilesInReadonlySetup" << endl;
 		// create all files with content "readonly FILENAME"
 		for (file_access_pair = file_access_map.begin();
-				file_access_pair != file_access_map.end();
-				file_access_pair++) {
+					file_access_pair != file_access_map.end();
+					file_access_pair++) {
 			filepath = temp_readonlydir + '/'
 				 + file_access_pair->first;
 			file.open(filepath.c_str(), ios::out);
 			if (file.is_open()) {
 				file << "readonly "
-					<< file_access_pair->first << endl;
+						<< file_access_pair->first << endl;
 				file.close();
 			} else {
 				cout << "Can't write to file: " << file << endl;
@@ -95,12 +95,12 @@ struct FilesInWritableSetup : virtual DirectorySetup
 //		cout << "begin FilesInWritableSetup" << endl;
 		// create all writable files with content "writable FILENAME"
 		for (file_access_pair = file_access_map.begin();
-			file_access_pair != file_access_map.end();
-			file_access_pair++) {
+					file_access_pair != file_access_map.end();
+					file_access_pair++) {
 			if (file_access_pair->second) {
 				// file should be writable
 				filepath = temp_configdir + '/'
-					+ file_access_pair->first;
+							+ file_access_pair->first;
 				file.open(filepath.c_str(), ios::out);
 				if(file.is_open()) {
 					file << "writable "
@@ -182,7 +182,8 @@ BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, DirectorySetup)
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), "ENOFILE");
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents, FilesInReadonlySetup)
+BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
+						FilesInReadonlySetup)
 {
 	string lierodat_ro_path;
 	string lierodat_rw_path;
