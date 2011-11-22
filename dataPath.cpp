@@ -6,12 +6,22 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-DataPath::DataPath(string a_readonly_path) {
+DataPath::DataPath(string a_readonly_path)
+{
 	readonly_path = a_readonly_path;
 	delimitor = '/';
+	// Map of files we may want to return path to
+	// should be read from plaintext file
+	// true means writable, false read-only
+	file_access_map.insert(std::pair<string, bool>("LIERO.EXE", false));
+	file_access_map.insert(std::pair<string, bool>("LIERO.CHR", false));
+	file_access_map.insert(std::pair<string, bool>("LIERO.SND", false));
+	file_access_map.insert(std::pair<string, bool>("LIERO.OPT", true));
+	file_access_map.insert(std::pair<string, bool>("LIERO.DAT", true));
 }
 
-string DataPath::file(string a_filename) {
+string DataPath::file(string a_filename)
+{
 	string filename = a_filename;
 	string filename_path;
 
@@ -24,7 +34,8 @@ string DataPath::file(string a_filename) {
 	// }
 }
 
-string DataPath::configdir(void) {
+string DataPath::configdir(void)
+{
 	const string home = "HOME";
 	const string homedir = getenv(home.c_str());
 	const string lierodir = ".liero";
