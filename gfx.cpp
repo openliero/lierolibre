@@ -1798,13 +1798,13 @@ void Gfx::mainLoop()
 
 void Gfx::saveSettings()
 {
-	settings->save(data_path->file("LIERO.DAT"));
+	settings->save(data_path->file(settingsFile + ".DAT"));
 }
 
 bool Gfx::loadSettings()
 {
 	settings.reset(new Settings);
-	return settings->load(data_path->file("LIERO.DAT"));
+	return settings->load(data_path->file(settingsFile + ".DAT"));
 }
 
 void Gfx::drawBasicMenu(/*int curSel*/)
