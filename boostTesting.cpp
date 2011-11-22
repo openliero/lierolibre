@@ -41,6 +41,7 @@
 #include "dataPath.hpp"
 
 using namespace boost::filesystem;
+using namespace std;
 
 struct DirectorySetup
 {

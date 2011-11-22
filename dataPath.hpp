@@ -49,23 +49,21 @@
 
 #include <string>
 #include <map>
-using namespace std;
-
 
 class DataPath
 {
 public:
-	DataPath(string a_readonly_path);
+	DataPath(std::string a_readonly_path);
 
-	string file(string filename);
+	std::string file(std::string filename);
 
-	string configdir(void);
+	std::string configdir(void);
 
 private:
-	string readonly_path;
-	string configdotdir;
+	std::string readonly_path;
+	std::string configdotdir;
 	// map: <filename, writable?>
-	map<string, bool> file_access_map;
+	std::map<std::string, bool> file_access_map;
 };
 
 #endif //DATA_PATH_HPP

@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <cerrno>
+using namespace std;
 
 string create_configdir(string directory)
 {
