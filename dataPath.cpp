@@ -45,7 +45,7 @@ string DataPath::file(string filename)
 
 	if (file_shouldbe_writable) {
 		file_writable.open(filepath_writable.c_str(),
-							ios::binary | ios::in);
+						ios::binary | ios::in);
 		if (file_writable.is_open()) {
 			// File exists in configdir
 			return filepath_writable;
@@ -61,11 +61,11 @@ string DataPath::file(string filename)
 					// throw meep
 					return "ECONFIGDIR";
 				}
-				file_writable.open(
-					filepath_writable.c_str(),
-							ios::binary | ios::out);
+				file_writable.open( filepath_writable.c_str(),
+						ios::binary | ios::out);
 				if (file_writable.is_open()) {
-					file_writable << file_readonly.rdbuf();
+					file_writable
+						<< file_readonly.rdbuf();
 					// error handling
 					return filepath_writable;
 				} else {
