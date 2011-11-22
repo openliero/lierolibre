@@ -19,6 +19,16 @@ const char *lierodat_fname = "/LIERO.DAT";
 const char *lieroexe_fname = "/LIERO.EXE";
 const char template_string[] = "/tmp/liero_tmp_XXXXXX";
 
+map<string, bool> mfile_access_map;
+mfile_access_map.insert(pair<string, bool>("LIERO.EXE", false));
+mfile_access_map.insert(pair<string, bool>("LIERO.CHR", false));
+mfile_access_map.insert(pair<string, bool>("LIERO.SND", false));
+mfile_access_map.insert(pair<string, bool>("LIERO.OPT", true));
+mfile_access_map.insert(pair<string, bool>("LIERO.DAT", true));
+
+map<string, bool>:iterator file_access_pair;
+
+
 BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
 {
 	char configdir[FILENAME_MAX];
@@ -90,3 +100,37 @@ BOOST_AUTO_TEST_CASE(lieroexe_return_correct_path)
 
 	printf("### end test lieroexe_return_correct_path\n\n");
 }
+
+BOOST_AUTO_TEST_CASE(files_in_map)
+{
+	char temp_readonlydir[FILENAME_MAX];
+	char temp_configdir[FILENAME_MAX];
+	char filepath_readonly[FILENAME_MAX];
+	char filepath_writable[FILENAME_MAX];
+        FILE *file_readonly;
+        FILE *file_writable;
+
+	strcpy(temp_readonlydir, template_string);
+	strcpy(temp_configdir, template_string);
+	mkdtemp(temp_readonlydir);
+	mkdtemp(temp_configdir);
+
+	for(file_access_pair = file_access_map.begin(), file_access_pair != file_access_map.end(), file_access_pair++) {
+		strcpy(filepath_readonly, temp_readonlydir);
+		strcat(filepath_readonly, file_access_pair->first);
+		if(file_access_pair->second) {
+			// file should be writable
+			setenv(home, temp_configdir, 1);
+			strcpy(filepath_writable, temp_configdir);
+			strcat(filepath_writable, '/');
+			strcat(filepath_writable, file_access_pair->first.c_str());
+		} else {
+			// file should not be writable
+		}
+	}
+
+	remove_all(tempdir);
+
+	printf("### end test files_in_map\n\n");
+}
+

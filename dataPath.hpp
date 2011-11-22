@@ -21,7 +21,7 @@ private:
 	string configdotdir;
 	char delimitor;
 	// map: <filename, writable?>
-	std::map<string, bool> file_access_map;
+	map<string, bool> file_access_map;
 };
 
 #endif //DATA_PATH_HPP

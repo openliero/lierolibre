@@ -36,7 +36,6 @@ string DataPath::file(string filename)
 		file_writable.open(filepath_writable.c_str(), ios::in);
 		if(file_writable.is_open()) {
 			// File exists in configdir
-			file_writable.close();
 			return filepath_writable;
 		} else {
 			// file does not exist in configdir
@@ -47,8 +46,6 @@ string DataPath::file(string filename)
 				file_writable.open(
 					filepath_writable.c_str(), ios::out);
 				file_writable << file_readonly.rdbuf();
-				file_readonly.close();
-				file_writable.close();
 				return filepath_writable;
 			} else {
 				// file does not exist anywhere
