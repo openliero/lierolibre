@@ -8,14 +8,16 @@ using namespace std;
 class DataPath
 {
 public:
-	DataPath(string a_lieroexe);
+	DataPath(string a_readonly_path);
 
-	string file(string filename);
+	string file(string a_filename);
 
 	string configdir(void);
 
 private:
-	string lieroexe;
+	string a_readonly_path;
+	string readonly_path;
+	char delimitor;
 };
 
 #endif //DATA_PATH_HPP
