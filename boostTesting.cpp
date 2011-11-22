@@ -139,14 +139,25 @@ struct AllFilesSetup : FilesInWritableSetup, FilesInReadonlySetup
 	}
 };
 
-BOOST_FIXTURE_TEST_CASE(configdir__Path, ConfigdirSetup)
+BOOST_FIXTURE_TEST_CASE(configdir_exists__Path, ConfigdirSetup)
 {
 	DataPath data_path(temp_readonlydir);
 
 	BOOST_CHECK_EQUAL(data_path.configdir(), temp_configdir);
 }
 
-BOOST_FIXTURE_TEST_CASE(configdir__CreateFile, ConfigdirSetup)
+BOOST_FIXTURE_TEST_CASE(configdir_exists__CreateFile, ConfigdirSetup)
+{
+	string configfile_path;
+	fstream configfile;
+	DataPath data_path(temp_readonlydir);
+
+	configfile_path = data_path.configdir() + '/' + "W";
+	configfile.open(configfile_path.c_str(), ios::out);
+	BOOST_CHECK(configfile.is_open());
+}
+
+BOOST_FIXTURE_TEST_CASE(configdir_no_exists__CreateFile, DirectorySetup)
 {
 	string configfile_path;
 	fstream configfile;
