@@ -17,18 +17,18 @@ using namespace boost::filesystem;
 
 struct DirectorySetup
 {
-	public:
-		map<string, bool> file_access_map;
 		string template_string;
 		char c_temp_homedir[FILENAME_MAX];
 		char c_temp_readonlydir[FILENAME_MAX];
-		char c_temp_configdir[FILENAME_MAX];
-
 		string temp_homedir;
 		string temp_readonlydir;
-
 		string temp_configdir;
 		string original_home;
+
+		map<string, bool> file_access_map;
+		map<string, bool>::iterator file_access_pair;
+		fstream file;
+		string filepath;
 	DirectorySetup()
 	{
 //		cout << "begin DirectorySetup" << endl;
@@ -39,10 +39,8 @@ struct DirectorySetup
 		file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 
 		template_string = "/tmp/liero_tmp_XXXXXX";
-
 		strcpy(c_temp_homedir, template_string.c_str());
 		strcpy(c_temp_readonlydir, template_string.c_str());
-
 
 		temp_homedir = mkdtemp(c_temp_homedir);
 		temp_readonlydir = mkdtemp(c_temp_readonlydir);
@@ -50,8 +48,8 @@ struct DirectorySetup
 		temp_configdir = temp_homedir + '/' + ".liero";
 		create_directory(temp_configdir);
 
+		original_home = getenv("HOME");
 		setenv("HOME", temp_homedir.c_str(), 1);
-
 	}
 
 	~DirectorySetup()
@@ -65,10 +63,6 @@ struct DirectorySetup
 
 struct FilesInReadonlySetup : virtual DirectorySetup
 {
-	public:
-		map<string, bool>::iterator file_access_pair;
-		fstream file;
-		string filepath;
 	FilesInReadonlySetup()
 	{
 //		cout << "begin FilesInReadonlySetup" << endl;
@@ -95,10 +89,6 @@ struct FilesInReadonlySetup : virtual DirectorySetup
 
 struct FilesInWritableSetup : virtual DirectorySetup
 {
-	public:
-		map<string, bool>::iterator file_access_pair;
-		fstream file;
-		string filepath;
 	FilesInWritableSetup()
 	{
 //		cout << "begin FilesInWritableSetup" << endl;
@@ -152,17 +142,15 @@ BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
 	fstream configfile;
 	DataPath data_path(temp_readonlydir);
 
-	configfile_path = data_path.configdir() + '/' + "RW";
+	configfile_path = data_path.configdir() + '/' + "W";
 	configfile.open(configfile_path.c_str(), ios::out);
 	BOOST_CHECK(configfile.is_open());
 }
 
 BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists, DirectorySetup)
 {
-	string lieroexe_path;
 	DataPath data_path(temp_readonlydir);
 
-	lieroexe_path = temp_readonlydir + '/' + "LIERO.EXE";
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), "ENOFILE");
 }
 
@@ -183,10 +171,8 @@ BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists, FilesInReadonlySetup)
 
 BOOST_FIXTURE_TEST_CASE(lierodat_no_exists, DirectorySetup)
 {
-	string lierodat_path;
 	DataPath data_path(temp_readonlydir);
 
-	lierodat_path = temp_configdir + '/' + "LIERO.DAT";
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), "ENOFILE");
 }
 
@@ -214,16 +200,3 @@ BOOST_FIXTURE_TEST_CASE(lierodat_rw_exists, FilesInWritableSetup)
 	BOOST_CHECK(lierodat.is_open());
 }
 
-/*
-	map<string, bool>::iterator file_access_pair;
-	for(file_access_pair = file_access_map.begin(); file_access_pair != file_access_map.end(); file_access_pair++) {
-		strcpy(filepath_readonly, temp_readonlydir);
-		strcat(filepath_readonly, file_access_pair->first.c_str());
-		if(file_access_pair->second) {
-			// file should be writable
-		} else {
-			// file should not be writable
-		}
-	}
-//	printf("### end test files_in_map\n");
-*/
