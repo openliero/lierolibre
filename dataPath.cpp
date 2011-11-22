@@ -1,11 +1,10 @@
 // Compile via ~$ g++ -c dataPath.cpp
 #include "dataPath.hpp"
-//#include <iostream>
 #include <fstream>
-//#include <cstdio>
 #include <cstdlib>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <stdexcept>
 #include <cerrno>
 using namespace std;
 
@@ -16,7 +15,8 @@ string create_configdir(string directory)
 	} else if (errno == EEXIST) {
 		return directory;
 	} else {
-		return "ECONFIGDIR";
+		throw runtime_error("Unable to create configdir '"
+						 + directory + "'");
 	}
 }
 
@@ -42,6 +42,9 @@ string DataPath::file(string filename)
 
 	string filepath_readonly = readonly_path + '/' + filename;
 	string filepath_writable = configdotdir + '/' + filename;
+	if (file_access_map.count(filename) == 0) {
+		throw runtime_error("Unknown file '" + filename + "'");
+	}
 	bool file_shouldbe_writable = file_access_map.find(filename)->second;
 
 	if (file_shouldbe_writable) {
@@ -56,12 +59,7 @@ string DataPath::file(string filename)
 								ios::binary);
 			if (file_readonly.is_open()) {
 				// file exists in readonly
-				if (create_configdir(configdotdir)
-							== "ECONFIGDIR") {
-					// could not get configdir
-					// throw meep
-					return "ECONFIGDIR";
-				}
+				create_configdir(configdotdir);
 				file_writable.open( filepath_writable.c_str(),
 						ios::binary | ios::out);
 				if (file_writable.is_open()) {
@@ -71,13 +69,14 @@ string DataPath::file(string filename)
 					return filepath_writable;
 				} else {
 				// couldn't open writable file
-				// throw meep
-				return "ENOTOPEN";
+				throw runtime_error("Could not open file '"
+							+ filepath_writable
+							+ "' for writing");
 				}
 			} else {
 				// file does not exist anywhere
-				// throw meep
-				return "ENOFILE";
+				throw runtime_error("Could not open file '"
+					+ filepath_writable + "'");
 			}
 		}
 	} else {
@@ -88,8 +87,8 @@ string DataPath::file(string filename)
 			return filepath_readonly;
 		} else {
 			// file does not exist anywhere
-			// throw meep
-			return "ENOFILE";
+			throw runtime_error("Could not open file '"
+					+ filepath_readonly + "'");
 		}
 	}
 }
