@@ -2,11 +2,11 @@
 #include <string>
 
 
-string DataPath::path_readonly(string filename);
+std::string DataPath::path_readonly(std::string filename);
 {
-return "p/r"
+return "";
 }
-string DataPath::path_configdir(void);
+std::string DataPath::path_configdir(void);
 {
-return "p/c"
+return "";
 }
