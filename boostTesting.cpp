@@ -6,12 +6,136 @@
 #include <boost/test/unit_test.hpp>
 #include "boost/filesystem.hpp"
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
+#include <fstream>
 
 #include "dataPath.hpp"
 
 using namespace boost::filesystem;
+
+struct DirectorySetup
+{
+	public:
+		map<string, bool> file_access_map;
+		string template_string;
+		char c_temp_homedir[FILENAME_MAX];
+		char c_temp_readonlydir[FILENAME_MAX];
+		char c_temp_configdir[FILENAME_MAX];
+
+		string temp_homedir;
+		string temp_readonlydir;
+
+		string temp_configdir;
+		string original_home;
+	DirectorySetup()
+	{
+//		cout << "begin DirectorySetup" << endl;
+		file_access_map.insert(pair<string, bool>("LIERO.EXE", false));
+		file_access_map.insert(pair<string, bool>("LIERO.CHR", false));
+		file_access_map.insert(pair<string, bool>("LIERO.SND", false));
+		file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
+		file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
+
+		template_string = "/tmp/liero_tmp_XXXXXX";
+
+		strcpy(c_temp_homedir, template_string.c_str());
+		strcpy(c_temp_readonlydir, template_string.c_str());
+
+
+		temp_homedir = mkdtemp(c_temp_homedir);
+		temp_readonlydir = mkdtemp(c_temp_readonlydir);
+
+		temp_configdir = temp_homedir + '/' + ".liero";
+		create_directory(temp_configdir);
+
+		setenv("HOME", temp_homedir.c_str(), 1);
+
+	}
+
+	~DirectorySetup()
+	{
+//	cout << "teardown DirectorySetup" << endl;
+	setenv("HOME", original_home.c_str(), 1);
+	remove_all(temp_homedir);
+	remove_all(temp_readonlydir);
+	}
+};
+
+struct FilesInReadonlySetup : virtual DirectorySetup
+{
+	public:
+		map<string, bool>::iterator file_access_pair;
+		fstream file;
+		string filepath;
+	FilesInReadonlySetup()
+	{
+//		cout << "begin FilesInReadonlySetup" << endl;
+		for(file_access_pair = file_access_map.begin();
+			file_access_pair != file_access_map.end();
+			file_access_pair++) {
+			filepath = temp_readonlydir + '/'
+				 + file_access_pair->first;
+			file.open(filepath.c_str(), ios::out);
+			if(file.is_open()) {
+				file << "readonly "
+					<< file_access_pair->first << endl;
+			} else {
+				cout << "Can't write to file: " << file << endl;
+			}
+		}
+	}
+	~FilesInReadonlySetup()
+	{
+//		cout << "teardown FilesInReadonlySetup" << endl;
+	}
+};
+
+struct FilesInWritableSetup : virtual DirectorySetup
+{
+	public:
+		map<string, bool>::iterator file_access_pair;
+		fstream file;
+		string filepath;
+	FilesInWritableSetup()
+	{
+//		cout << "begin FilesInWritableSetup" << endl;
+		for(file_access_pair = file_access_map.begin();
+			file_access_pair != file_access_map.end();
+			file_access_pair++) {
+			if(file_access_pair->second) {
+				filepath = temp_configdir + '/'
+					+ file_access_pair->first;
+				file.open(filepath.c_str(), ios::out);
+				if(file.is_open()) {
+					file << "writable "
+						<< file_access_pair->first
+						<< endl;
+				} else {
+					cout << "Can't write to file: "
+						 << file << endl;
+				}
+			}
+		}
+	}
+	~FilesInWritableSetup()
+	{
+//		cout << "teardown FilesInWritableSetup" << endl;
+	}
+};
+
+struct AllFilesSetup : FilesInWritableSetup, FilesInReadonlySetup
+{
+	AllFilesSetup()
+	{
+//		cout << "begin AllFilesSetup" << endl;
+	}
+	~AllFilesSetup()
+	{
+//		cout << "teardown AllFilesSetup" << endl;
+	}
+};
 
 const char *home = "HOME";
 const char *dotdir = "/.liero";
@@ -32,51 +156,28 @@ file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 map<string, bool>::iterator file_access_pair;
 
 
-BOOST_AUTO_TEST_CASE(configdir_return_correct_path)
+BOOST_FIXTURE_TEST_CASE(configdir_return_correct_path, DirectorySetup)
 {
-	char configdir[FILENAME_MAX];
-	char tempdir[FILENAME_MAX];
+	DataPath data_path(temp_readonlydir);
 
-	strcpy(tempdir, template_string);
-	mkdtemp(tempdir);
-	setenv(home, tempdir, 1);
+	BOOST_CHECK_EQUAL(data_path.configdir(), temp_configdir);
 
-        strcpy(configdir, tempdir);
-	strcat(configdir, dotdir);
-
-	DataPath data_path("/usr/lib/liero");
-
-	BOOST_CHECK(strcmp(data_path.configdir().c_str(), configdir) == 0);
-//	printf("data_path.configdir().c_str() = %s and configdir = %s\n\n", data_path.configdir().c_str(), configdir);
-
-	remove_all(tempdir);
-
-	printf("### end test configdir_return_correct_path\n\n");
+//	printf("### end test configdir_return_correct_path\n");
 }
 
-BOOST_AUTO_TEST_CASE(configdir_can_create_file)
+BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
 {
-	const char *configdir;
-	char configfile_path[FILENAME_MAX];
-	char tempdir[FILENAME_MAX];
-        FILE *configfile;
+	string configfile_path;
+	fstream configfile;
 
-	strcpy(tempdir, template_string);
-	mkdtemp(tempdir);
-	setenv(home, tempdir, 1);
+	DataPath data_path(temp_readonlydir);
 
-	DataPath data_path("/usr/lib/liero");
-	configdir = data_path.configdir().c_str();
+	configfile_path = data_path.configdir() + '/' + "CONF";
+	configfile.open(configfile_path.c_str(), ios::out);
 
-	strcpy(configfile_path, configdir);
-	strcat(configfile_path, lierodat_fname);
+	BOOST_CHECK(configfile.is_open());
 
-	BOOST_CHECK(configfile = fopen(configfile_path, "w+"));
-	fclose(configfile);
-
-	remove_all(tempdir);
-
-	printf("### end test configdir_can_create_file\n\n");
+//	printf("### end test configdir_can_create_file\n");
 }
 
 BOOST_AUTO_TEST_CASE(lieroexe_return_correct_path)
@@ -101,7 +202,7 @@ BOOST_AUTO_TEST_CASE(lieroexe_return_correct_path)
 
 	remove_all(tempdir);
 
-	printf("### end test lieroexe_return_correct_path\n\n");
+//	printf("### end test lieroexe_return_correct_path\n");
 }
 
 BOOST_AUTO_TEST_CASE(files_in_map)
@@ -136,6 +237,6 @@ BOOST_AUTO_TEST_CASE(files_in_map)
 	remove_all(temp_readonlydir);
 	remove_all(temp_configdir);
 
-	printf("### end test files_in_map\n\n");
+//	printf("### end test files_in_map\n");
 }
 
