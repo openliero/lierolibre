@@ -40,7 +40,7 @@ void WormSettings::saveProfile(std::string const& newProfileName)
 {
 	try
 	{
-		std::string path(joinPath(/*FIXME*/lieroEXERoot, newProfileName) + ".lpf");
+		std::string path(joinPath(data_path.configdir(), newProfileName) + ".lpf");
 		gvl::stream_ptr str(new gvl::fstream(path.c_str(), "wb"));
 		
 		gvl::octet_stream_writer writer(str);
@@ -60,7 +60,7 @@ void WormSettings::loadProfile(std::string const& newProfileName)
 	int oldColor = color;
 	try
 	{
-		std::string path(joinPath(/*FIXME*/lieroEXERoot, newProfileName) + ".lpf");
+		std::string path(joinPath(data_path.configdir(), newProfileName) + ".lpf");
 		gvl::stream_ptr str(new gvl::fstream(path.c_str(), "rb"));
 		
 		gvl::octet_stream_reader reader(str);

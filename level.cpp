@@ -269,7 +269,7 @@ void Level::generateFromSettings(Common& common, Settings const& settings, Rand&
 	else
 	{
 		// TODO: Check .LEV as well as .lev
-		if(!load(common, settings, joinPath(/*FIXME*/lieroEXERoot, settings.levelFile + ".lev")))
+		if(!load(common, settings, joinPath(data_path.configdir(), settings.levelFile + ".lev")))
 			generateRandom(common, settings, rand);
 
 	}

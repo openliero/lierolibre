@@ -1,11 +1,13 @@
 #include "reader.hpp"
 #include "filesystem.hpp"
+#include "dataPath.hpp"
 #include <SDL/SDL.h>
 #include <map>
 #include <stdexcept>
 
 std::string lieroOPT;
-std::string lieroEXERoot;
+
+// DATAPATH std::string lieroEXERoot;
 
 namespace
 {
@@ -17,7 +19,7 @@ struct ReaderFile
 };
 
 typedef std::map<std::string, ReaderFile> ReaderFileMap;
-/*FIXME*/
+
 std::string lieroEXE;
 std::string lieroCHR;
 std::string lieroSND;
@@ -94,11 +96,13 @@ void closeAllCachedFiles()
 void setLieroEXE(std::string const& path)
 {
 	//TODO: Close cached files
-	
-	lieroEXE = path;
-	lieroCHR = changeLeaf(path, "LIERO.CHR");
-	lieroSND = changeLeaf(path, "LIERO.SND");
-	lieroOPT = changeLeaf(path, "LIERO.OPT");
-	
-	lieroEXERoot = getRoot(lieroEXE);
+
+	DataPath data_path(getRoot(path));
+
+	lieroEXE = data_path("LIERO.EXE");
+	lieroCHR = data_path("LIERO.CHR");
+	lieroSND = data_path("LIERO.SND");
+	lieroOPT = data_path("LIERO.OPT");
+
+// DATAPATH	lieroEXERoot = getRoot(lieroEXE);
 }

@@ -127,7 +127,7 @@ void Settings::save(std::string const& path)
 
 void Settings::generateName(WormSettings& ws)
 {
-	FILE* f = fopen(joinPath(/*FIXME*/lieroEXERoot, "NAMES.DAT").c_str(), "rb");
+	FILE* f = fopen(data_path.file("NAMES.DAT").c_str(), "rb");
 	
 	if(!f)
 		return;

@@ -238,7 +238,7 @@ void Gfx::loadPalette()
 
 void Gfx::loadMenus()
 {
-	FILE* exe = /*FIXME?*/openLieroEXE();
+	FILE* exe = openLieroEXE();
 	
 	fseek(exe, 0x1B08A, SEEK_SET);
 	mainMenu.readItems(exe, 14, 4, true);
@@ -953,7 +953,7 @@ struct LevelSelectBehavior : ItemBehavior
 	
 	void onUpdate(Menu& menu, int item)
 	{
-		std::string levelPath = joinPath(/*FIXME*/lieroEXERoot, gfx.settings->levelFile + ".lev");
+		std::string levelPath = joinPath(data_path.configdir(), gfx.settings->levelFile + ".lev");
 		if(!gfx.settings->randomLevel && fileExists(levelPath))
 		{
 			menu.items[Settings::SiLevel].value = '"' + gfx.settings->levelFile + '"';
@@ -1109,7 +1109,7 @@ void Gfx::selectLevel()
 	
 	bool altName = settings->extensions ? false : true;
 	
-	DirectoryIterator di(joinPath(/*FIXME*/lieroEXERoot, ".")); // TODO: Fix lieroEXERoot to be "." instead of ""
+	DirectoryIterator di(joinPath(data_path.confidir(), ".")); // TODO: Fix lieroEXERoot to be "." instead of ""
 	
 	std::vector<std::pair<std::string, std::string> > levels;
 	
@@ -1226,7 +1226,7 @@ void Gfx::selectProfile(WormSettings& ws)
 	
 	profileMenu.setHeight(14);
 		
-	DirectoryIterator di(joinPath(/*FIXME*/lieroEXERoot, ".")); // TODO: Fix lieroEXERoot to be "." instead of ""
+	DirectoryIterator di(joinPath(data_path.configdir(), ".")); // TODO: Fix lieroEXERoot to be "." instead of ""
 	
 	std::vector<std::string> profiles;
 	
@@ -1315,7 +1315,7 @@ int Gfx::selectReplay()
 	
 	replayMenu.setHeight(14);
 		
-	DirectoryIterator di(joinPath(/*FIXME*/lieroEXERoot, ".")); // TODO: Fix lieroEXERoot to be "." instead of ""
+	DirectoryIterator di(joinPath(data_path.configdir(), ".")); // TODO: Fix lieroEXERoot to be "." instead of ""
 	
 	std::vector<std::string> replays;
 	
@@ -1367,7 +1367,7 @@ int Gfx::selectReplay()
 			if(replayMenu.isSelectionValid())
 			{
 				std::string replayName = replayMenu.items[replayMenu.selection()].string + ".lrp";			
-				std::string fullPath = joinPath(/*FIXME*/lieroEXERoot, replayName);
+				std::string fullPath = joinPath(data_path.configdir(), replayName);
 				
 				// Reset controller before opening the replay, since we may be recording it
 				controller.reset();
@@ -1798,13 +1798,13 @@ void Gfx::mainLoop()
 
 void Gfx::saveSettings()
 {
-	settings->save(joinPath(/*FIXME*/lieroEXERoot, settingsFile + ".DAT"));
+	settings->save(data_path("LIERO.DAT"));
 }
 
 bool Gfx::loadSettings()
 {
 	settings.reset(new Settings);
-	return settings->load(joinPath(/*FIXME*/lieroEXERoot, settingsFile + ".DAT"));
+	return settings->load(data_path("LIERO.DAT"));
 }
 
 void Gfx::drawBasicMenu(/*int curSel*/)
