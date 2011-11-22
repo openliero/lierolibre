@@ -139,94 +139,91 @@ struct AllFilesSetup : FilesInWritableSetup, FilesInReadonlySetup
 	}
 };
 
-const char *home = "HOME";
-const char *dotdir = "/.liero";
-const char *lierodat_fname = "/LIERO.DAT";
-const char *lieroexe_fname = "/LIERO.EXE";
-const char template_string[] = "/tmp/liero_tmp_XXXXXX";
-
-map<string, bool> file_access_map;
-void init_map()
-{
-file_access_map.insert(pair<string, bool>("LIERO.EXE", false));
-file_access_map.insert(pair<string, bool>("LIERO.CHR", false));
-file_access_map.insert(pair<string, bool>("LIERO.SND", false));
-file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
-file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
-}
-
-map<string, bool>::iterator file_access_pair;
-
-
 BOOST_FIXTURE_TEST_CASE(configdir_return_correct_path, DirectorySetup)
 {
 	DataPath data_path(temp_readonlydir);
 
 	BOOST_CHECK_EQUAL(data_path.configdir(), temp_configdir);
-
-//	printf("### end test configdir_return_correct_path\n");
 }
 
 BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
 {
 	string configfile_path;
 	fstream configfile;
-
 	DataPath data_path(temp_readonlydir);
 
 	configfile_path = data_path.configdir() + '/' + "RW";
 	configfile.open(configfile_path.c_str(), ios::out);
-
 	BOOST_CHECK(configfile.is_open());
-
-//	printf("### end test configdir_can_create_file\n");
 }
 
-BOOST_FIXTURE_TEST_CASE(lieroexe_return_correct_path, FilesInReadonlySetup)
+BOOST_FIXTURE_TEST_CASE(lieroexe_no_exists, DirectorySetup)
 {
 	string lieroexe_path;
-
 	DataPath data_path(temp_readonlydir);
 
 	lieroexe_path = temp_readonlydir + '/' + "LIERO.EXE";
-
-	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), lieroexe_path);
-
-//	printf("### end test lieroexe_return_correct_path\n");
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), "ENOFILE");
 }
 
-BOOST_AUTO_TEST_CASE(files_in_map)
+BOOST_FIXTURE_TEST_CASE(lieroexe_ro_exists, FilesInReadonlySetup)
 {
-	char temp_readonlydir[FILENAME_MAX];
-	char temp_configdir[FILENAME_MAX];
-	char filepath_readonly[FILENAME_MAX];
-	char filepath_writable[FILENAME_MAX];
-        FILE *file_readonly;
-        FILE *file_writable;
-	init_map();
+	string lieroexe_path;
+	string lieroexe_wrong_path;
+	fstream lieroexe_wrong;
+	DataPath data_path(temp_readonlydir);
 
-	strcpy(temp_readonlydir, template_string);
-	strcpy(temp_configdir, template_string);
-	mkdtemp(temp_readonlydir);
-	mkdtemp(temp_configdir);
+	lieroexe_path = temp_readonlydir + '/' + "LIERO.EXE";
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), lieroexe_path);
 
+	lieroexe_wrong_path = temp_configdir + '/' + "LIERO.EXE";
+	lieroexe_wrong.open(lieroexe_wrong_path.c_str(), ios::out|ios::in);
+	BOOST_CHECK(!lieroexe_wrong.is_open());
+}
+
+BOOST_FIXTURE_TEST_CASE(lierodat_no_exists, DirectorySetup)
+{
+	string lierodat_path;
+	DataPath data_path(temp_readonlydir);
+
+	lierodat_path = temp_configdir + '/' + "LIERO.DAT";
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), "ENOFILE");
+}
+
+BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists, FilesInReadonlySetup)
+{
+	string lierodat_path;
+	fstream lierodat;
+	DataPath data_path(temp_readonlydir);
+
+	lierodat_path = temp_configdir + '/' + "LIERO.DAT";
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), lierodat_path);
+	lierodat.open(lierodat_path.c_str(), ios::out|ios::in);
+	BOOST_CHECK(lierodat.is_open());
+}
+
+BOOST_FIXTURE_TEST_CASE(lierodat_rw_exists, FilesInWritableSetup)
+{
+	string lierodat_path;
+	fstream lierodat;
+	DataPath data_path(temp_readonlydir);
+
+	lierodat_path = temp_configdir + '/' + "LIERO.DAT";
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), lierodat_path);
+	lierodat.open(lierodat_path.c_str(), ios::out|ios::in);
+	BOOST_CHECK(lierodat.is_open());
+}
+
+/*
+	map<string, bool>::iterator file_access_pair;
 	for(file_access_pair = file_access_map.begin(); file_access_pair != file_access_map.end(); file_access_pair++) {
 		strcpy(filepath_readonly, temp_readonlydir);
 		strcat(filepath_readonly, file_access_pair->first.c_str());
 		if(file_access_pair->second) {
 			// file should be writable
-			setenv(home, temp_configdir, 1);
-			strcpy(filepath_writable, temp_configdir);
-			strcat(filepath_writable, "/");
-			strcat(filepath_writable, file_access_pair->first.c_str());
 		} else {
 			// file should not be writable
 		}
 	}
-
-	remove_all(temp_readonlydir);
-	remove_all(temp_configdir);
-
 //	printf("### end test files_in_map\n");
-}
-
+*/
