@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <cerrno>
 
 DataPath::DataPath(string a_readonly_path)
 {
@@ -77,7 +78,9 @@ string DataPath::file(string filename)
 
 string DataPath::configdir(void)
 {
-	mkdir(configdotdir.c_str(), 0777);
-	// error handling
-	return configdotdir;
+	if (mkdir(configdotdir.c_str(), 0777)) {
+		return configdotdir;
+	} else {
+		return "ECONFIGDIR";
+	}
 }
