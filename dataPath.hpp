@@ -20,6 +20,8 @@ private:
 	string configdotdir;
 	// map: <filename, writable?>
 	map<string, bool> file_access_map;
+
+	string create_configdir(string directory);
 };
 
 #endif //DATA_PATH_HPP

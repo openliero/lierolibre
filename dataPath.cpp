@@ -8,6 +8,19 @@
 #include <sys/types.h>
 #include <cerrno>
 
+string DataPath::create_configdir(string directory)
+{
+	if (mkdir(directory.c_str(), 0777) == 0) {
+		return directory;
+	} else if (errno == EEXIST) {
+		return directory;
+	} else {
+		return "ECONFIGDIR";
+	}
+}
+
+
+
 DataPath::DataPath(string a_readonly_path)
 {
 	readonly_path = a_readonly_path;
@@ -42,7 +55,10 @@ string DataPath::file(string filename)
 			file_readonly.open(filepath_readonly.c_str(), ios::binary);
 			if (file_readonly.is_open()) {
 				// file exists in readonly
-				mkdir(configdotdir.c_str(), 0777);
+				if (DataPath::create_configdir(configdotdir)
+								== "ECONFIGDIR") {
+					return "ECONFIGDIR";
+				}
 				// error handling
 				file_writable.open(
 					filepath_writable.c_str(),
@@ -78,12 +94,14 @@ string DataPath::file(string filename)
 
 string DataPath::configdir(void)
 {
+	return DataPath::create_configdir(configdotdir);
+/*
 	if (mkdir(configdotdir.c_str(), 0777) == 0) {
 		return configdotdir;
 	} else if (errno == EEXIST) {
 		return configdotdir;
 	} else {
 		return "ECONFIGDIR";
-//		}
 	}
+*/
 }
