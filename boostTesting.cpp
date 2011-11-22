@@ -317,3 +317,8 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 	}
 }
 
+BOOST_FIXTURE_TEST_CASE(all_exists__IncompleteFilename, AllFilesSetup)
+{
+	DataPath data_path(temp_readonlydir);
+	BOOST_CHECK_EQUAL(data_path.file("LIE"), "ENOFILE");
+}
