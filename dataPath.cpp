@@ -19,8 +19,6 @@ string create_configdir(string directory)
 	}
 }
 
-
-
 DataPath::DataPath(string a_readonly_path)
 {
 	readonly_path = a_readonly_path;
@@ -46,23 +44,26 @@ string DataPath::file(string filename)
 	bool file_shouldbe_writable = file_access_map.find(filename)->second;
 
 	if (file_shouldbe_writable) {
-		file_writable.open(filepath_writable.c_str(), ios::binary | ios::in);
+		file_writable.open(filepath_writable.c_str(),
+							ios::binary | ios::in);
 		if (file_writable.is_open()) {
 			// File exists in configdir
 			return filepath_writable;
 		} else {
 			// file does not exist in configdir
-			file_readonly.open(filepath_readonly.c_str(), ios::binary);
+			file_readonly.open(filepath_readonly.c_str(),
+								ios::binary);
 			if (file_readonly.is_open()) {
 				// file exists in readonly
-				if (create_configdir(configdotdir) == "ECONFIGDIR") {
+				if (create_configdir(configdotdir)
+							== "ECONFIGDIR") {
 					// could not get configdir
 					// throw meep
 					return "ECONFIGDIR";
 				}
 				file_writable.open(
 					filepath_writable.c_str(),
-								ios::binary | ios::out);
+							ios::binary | ios::out);
 				if (file_writable.is_open()) {
 					file_writable << file_readonly.rdbuf();
 					// error handling
