@@ -31,6 +31,7 @@ DataPath::DataPath(string a_readonly_path)
 	file_access_map.insert(pair<string, bool>("LIERO.EXE", false));
 	file_access_map.insert(pair<string, bool>("LIERO.CHR", false));
 	file_access_map.insert(pair<string, bool>("LIERO.SND", false));
+	file_access_map.insert(pair<string, bool>("NAMES.DAT", false));
 	file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
 	file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 }
