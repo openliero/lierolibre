@@ -67,13 +67,13 @@ struct FilesInReadonlySetup : virtual DirectorySetup
 	{
 //		cout << "begin FilesInReadonlySetup" << endl;
 		// create all files with content "readonly FILENAME"
-		for(file_access_pair = file_access_map.begin();
-			file_access_pair != file_access_map.end();
-			file_access_pair++) {
+		for (file_access_pair = file_access_map.begin();
+				file_access_pair != file_access_map.end();
+				file_access_pair++) {
 			filepath = temp_readonlydir + '/'
 				 + file_access_pair->first;
 			file.open(filepath.c_str(), ios::out);
-			if(file.is_open()) {
+			if (file.is_open()) {
 				file << "readonly "
 					<< file_access_pair->first << endl;
 				file.close();
@@ -94,10 +94,10 @@ struct FilesInWritableSetup : virtual DirectorySetup
 	{
 //		cout << "begin FilesInWritableSetup" << endl;
 		// create all writable files with content "writable FILENAME"
-		for(file_access_pair = file_access_map.begin();
+		for (file_access_pair = file_access_map.begin();
 			file_access_pair != file_access_map.end();
 			file_access_pair++) {
-			if(file_access_pair->second) {
+			if (file_access_pair->second) {
 				// file should be writable
 				filepath = temp_configdir + '/'
 					+ file_access_pair->first;
@@ -182,8 +182,7 @@ BOOST_FIXTURE_TEST_CASE(lierodat_no_exists__Path, DirectorySetup)
 	BOOST_CHECK_EQUAL(data_path.file("LIERO.DAT"), "ENOFILE");
 }
 
-BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
-	FilesInReadonlySetup)
+BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents, FilesInReadonlySetup)
 {
 	string lierodat_ro_path;
 	string lierodat_rw_path;
@@ -195,7 +194,7 @@ BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
 	// save readonly contents to buffer
 	lierodat_ro_path = temp_readonlydir + '/' + "LIERO.DAT";
 	lierodat_ro.open(lierodat_ro_path.c_str(), ios::in);
-	if(lierodat_ro.is_open()) {
+	if (lierodat_ro.is_open()) {
 		lierodat_ro_buffer << lierodat_ro.rdbuf();
 		lierodat_ro.close();
 	} else {
@@ -212,7 +211,7 @@ BOOST_FIXTURE_TEST_CASE(lierodat_ro_exists__Path_Writable_Contents,
 	lierodat_rw.open(lierodat_rw_path.c_str(), ios::out|ios::in);
 	BOOST_CHECK(lierodat_rw.is_open());
 
-	if(lierodat_rw.is_open()) {
+	if (lierodat_rw.is_open()) {
 		lierodat_rw_buffer << lierodat_rw.rdbuf();
 		// convert both buffers to strings and compare
 		BOOST_CHECK_EQUAL(lierodat_ro_buffer.str(), lierodat_rw_buffer.str());
@@ -248,7 +247,7 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 	// save readonly file content
 	lierodat_ro_path = temp_readonlydir + '/' + "LIERO.DAT";
 	lierodat_ro.open(lierodat_ro_path.c_str(), ios::in);
-	if(lierodat_ro.is_open()) {
+	if (lierodat_ro.is_open()) {
 		lierodat_buffer << lierodat_ro.rdbuf();
 		lierodat_ro.close();
 		lierodat_ro_orig_content = lierodat_buffer.str();
@@ -275,7 +274,7 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 	data_path.file("LIERO.DAT");
 
 	lierodat_ro.open(lierodat_ro_path.c_str(), ios::in);
-	if(lierodat_ro.is_open()) {
+	if (lierodat_ro.is_open()) {
 		lierodat_buffer << lierodat_ro.rdbuf();
 		lierodat_ro.close();
 		// check that file is unchanged
@@ -287,7 +286,7 @@ BOOST_FIXTURE_TEST_CASE(all_exists__NoOverwrite, AllFilesSetup)
 	}
 
 	lierodat_rw.open(lierodat_rw_path.c_str(), ios::in);
-	if(lierodat_rw.is_open()) {
+	if (lierodat_rw.is_open()) {
 		lierodat_buffer << lierodat_rw.rdbuf();
 		lierodat_rw.close();
 		// check that file is unchanged
