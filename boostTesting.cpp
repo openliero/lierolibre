@@ -72,6 +72,7 @@ struct DirectorySetup
 		file_access_map.insert(pair<string, bool>("LIERO.CHR",
 								false));
 		file_access_map.insert(pair<string, bool>("LIERO.SND",
+								false));
 		file_access_map.insert(pair<string, bool>("NAMES.DAT",
 								false));
 		file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
