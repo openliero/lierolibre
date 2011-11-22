@@ -1,5 +1,5 @@
 // Compile & run with:
-// ~$ g++ -lboost_unit_test_framework -lboost_filesystem dataPath.o -oboosttest boostTesting.cpp && ./boosttest
+// ~$ g++ -lboost_unit_test_framework -lboost_filesystem dataPath.o -oboosttest boostTesting.cpp && ./boosttest --loglevel=test_suite
 
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE DataPath
@@ -81,6 +81,7 @@ struct FilesInReadonlySetup : virtual DirectorySetup
 			if(file.is_open()) {
 				file << "readonly "
 					<< file_access_pair->first << endl;
+				file.close();
 			} else {
 				cout << "Can't write to file: " << file << endl;
 			}
@@ -112,6 +113,7 @@ struct FilesInWritableSetup : virtual DirectorySetup
 					file << "writable "
 						<< file_access_pair->first
 						<< endl;
+					file.close();
 				} else {
 					cout << "Can't write to file: "
 						 << file << endl;
@@ -172,7 +174,7 @@ BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
 
 	DataPath data_path(temp_readonlydir);
 
-	configfile_path = data_path.configdir() + '/' + "CONF";
+	configfile_path = data_path.configdir() + '/' + "RW";
 	configfile.open(configfile_path.c_str(), ios::out);
 
 	BOOST_CHECK(configfile.is_open());
@@ -180,27 +182,15 @@ BOOST_FIXTURE_TEST_CASE(configdir_can_create_file, DirectorySetup)
 //	printf("### end test configdir_can_create_file\n");
 }
 
-BOOST_AUTO_TEST_CASE(lieroexe_return_correct_path)
+BOOST_FIXTURE_TEST_CASE(lieroexe_return_correct_path, FilesInReadonlySetup)
 {
-	char tempdir[FILENAME_MAX];
-	char lieroexe_path[FILENAME_MAX];
-        FILE *lieroexe;
+	string lieroexe_path;
 
-	strcpy(tempdir, template_string);
-	mkdtemp(tempdir);
-//	printf("tempdir: %s\n", tempdir);
-	strcpy(lieroexe_path, tempdir);
-	strcat(lieroexe_path, lieroexe_fname);
-//	printf("lieroexe_path: %s\n", lieroexe_path);
-	lieroexe = fopen(lieroexe_path, "w+");
-	fclose(lieroexe);
+	DataPath data_path(temp_readonlydir);
 
-	DataPath data_path(tempdir);
+	lieroexe_path = temp_readonlydir + '/' + "LIERO.EXE";
 
-//	printf("data_path.file(\"LIERO.EXE\").c_str(): %s\n", data_path.file("LIERO.EXE").c_str());
-	BOOST_CHECK(strcmp(data_path.file("LIERO.EXE").c_str(), lieroexe_path) == 0);
-
-	remove_all(tempdir);
+	BOOST_CHECK_EQUAL(data_path.file("LIERO.EXE"), lieroexe_path);
 
 //	printf("### end test lieroexe_return_correct_path\n");
 }
