@@ -184,7 +184,7 @@ try
 	gfx.mainLoop();
 	
 	gfx.settingsFile = "LIERO";
-	gfx.settings->save(data_path.file("LIERO.DAT"));
+	gfx.settings->save(data_path->file("LIERO.DAT"));
 	
 	FILE* f = fopen(lieroOPT.c_str(), "wb");
 	fwrite(gfx.settingsFile.data(), 1, gfx.settingsFile.size(), f);

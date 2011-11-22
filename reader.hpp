@@ -7,6 +7,8 @@
 #include <stdexcept>
 #include <SDL/SDL.h>
 
+DataPath* data_path = NULL;
+
 extern std::string lieroEXERoot;
 extern std::string lieroOPT;
 

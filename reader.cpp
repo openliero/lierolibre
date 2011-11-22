@@ -96,12 +96,12 @@ void setLieroEXE(std::string const& path)
 {
 	//TODO: Close cached files
 
-	DataPath data_path(getRoot(path));
+	data_path = new DataPath(getRoot(path));
 
-	lieroEXE = data_path("LIERO.EXE");
-	lieroCHR = data_path("LIERO.CHR");
-	lieroSND = data_path("LIERO.SND");
-	lieroOPT = data_path("LIERO.OPT");
+	lieroEXE = data_path->file("LIERO.EXE");
+	lieroCHR = data_path->file("LIERO.CHR");
+	lieroSND = data_path->file("LIERO.SND");
+	lieroOPT = data_path->file("LIERO.OPT");
 
 // DATAPATH	lieroEXERoot = getRoot(lieroEXE);
 }
