@@ -164,6 +164,7 @@ int stuff(void)
 
 	fclose(exe);
 	cout << "copyright1: " << copyright1 << endl;
+	cout << "materials: ";
 	for(int i = 0; i < 256; ++i)
 		cout << materials[i].flags << " ";
 	cout << endl;
