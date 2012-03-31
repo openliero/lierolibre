@@ -1,10 +1,15 @@
 // Compile & run via: g++ -oplainreader plainreader.cpp && ./plainreader
+
 #include <iostream>
 #include <stdexcept>
 #include <cstdlib>
 #include <cstdio>
+
+// Needed for cross-platform *int32 definitions
 #include <SDL/SDL.h>
+
 #include "plainreader.hpp"
+
 using namespace std;
 
 void checkedFread(void* ptr, size_t size, size_t count, FILE* f)
