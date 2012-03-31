@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <SDL/SDL.h>
 
+#include "varreader.hpp"
+
 extern std::string lieroEXERoot;
 extern std::string lieroOPT;
 
@@ -119,3 +121,4 @@ void processReader();
 void closeAllCachedFiles();
 
 #endif // LIERO_READER_HPP
+
