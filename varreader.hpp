@@ -4,15 +4,13 @@
 #include <SDL/SDL.h>
 #include <string>
 
-using namespace std;
-
 void checkedFread(void* ptr, size_t size, size_t count, FILE* f);
 
-string readPascalString(FILE* f);
-string readPascalString(FILE* f, unsigned char fieldLen);
-string readPascalStringAt(FILE* f, int location);
+std::string readPascalString(FILE* f);
+std::string readPascalString(FILE* f, unsigned char fieldLen);
+std::string readPascalStringAt(FILE* f, int location);
 
-void writePascalString(FILE* f, string const& str, unsigned char fieldLen);
+void writePascalString(FILE* f, std::string const& str, unsigned char fieldLen);
 
 Uint32 readUint8(FILE* f);
 Sint32 readSint8(FILE* f);
