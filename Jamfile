@@ -12,7 +12,7 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	ninjarope.cpp nobject.cpp rand.cpp
 	reader.cpp sdlmain.cpp replay.cpp settings.cpp sfx.cpp
 	sobject.cpp sys.cpp text.cpp viewport.cpp weapon.cpp
-	weapsel.cpp worm.cpp dataPath.cpp
+	weapsel.cpp worm.cpp dataPath.cpp varreader.cpp
 	
 	controller/commonController.cpp
 	controller/localController.cpp

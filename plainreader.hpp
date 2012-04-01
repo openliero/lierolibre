@@ -1,0 +1,6 @@
+#ifndef PLAIN_READER_HPP
+#define PLAIN_READER_HPP
+
+
+
+#endif //PLAIN_READER_HPP
