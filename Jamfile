@@ -1,7 +1,7 @@
-SubDir TOP liero ;
+SubDir TOP ;
 
-C++FLAGS = -Wall -I$(TOP) -DNDEBUG ;
-CFLAGS = -Wall -I$(TOP) -DNDEBUG ;
+C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG ;
+CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG ;
 OPTIM = -O3 ;
 LINK = "g++" ;
 LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt ;
@@ -33,7 +33,7 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	menu/timeBehavior.cpp
 	;
 	
-MakeLocate openliero$(SUFEXE) : $(TOP)/liero/_bin ;
+MakeLocate openliero$(SUFEXE) : $(TOP)/_bin ;
 	
 LinkLibraries openliero : libgvl ;
 
