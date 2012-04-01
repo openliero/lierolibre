@@ -1,3 +1,6 @@
 [submodule "data"]
 	path = data
 	url = git@gitorious.org:liero/liero-data.git
+[submodule "gvl"]
+	path = gvl
+	url = git@gitorious.org:liero/gvl.git
