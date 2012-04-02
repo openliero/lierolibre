@@ -2,51 +2,40 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <cstdlib>
-#include <cstdio>
 
 // Needed for cross-platform *int32 definitions
 #include <SDL/SDL.h>
 
+// INI config file
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+
+//int->string conversion
+#include <sstream>
+
 #include "plainreader.hpp"
 #include "varreader.hpp"
 
-using namespace std;
+bool Material::dirt() { return (flags & Dirt) != 0; }
+bool Material::dirt2() { return (flags & Dirt2) != 0; }
+bool Material::rock() { return (flags & Rock) != 0; }
+bool Material::background() { return (flags & Background) != 0; }
+bool Material::seeShadow() { return (flags & SeeShadow) != 0; }
 
-struct Material
-{
-	enum {
-		Dirt = 1<<0,
-		Dirt2 = 1<<1,
-		Rock = 1<<2,
-		Background = 1<<3,
-		SeeShadow = 1<<4,
-		WormM = 1<<5
-	};
-
-	bool dirt() { return (flags & Dirt) != 0; }
-	bool dirt2() { return (flags & Dirt2) != 0; }
-	bool rock() { return (flags & Rock) != 0; }
-	bool background() { return (flags & Background) != 0; }
-	bool seeShadow() { return (flags & SeeShadow) != 0; }
-
-	// Constructed
-	bool dirtRock() { return (flags & (Dirt | Dirt2 | Rock)) != 0; }
-	bool anyDirt() { return (flags & (Dirt | Dirt2)) != 0; }
-	bool dirtBack() { return (flags & (Dirt | Dirt2 | Background)) != 0; }
-	bool worm() { return (flags & WormM) != 0; }
-
-	int flags;
-};
+// Constructed
+bool Material::dirtRock() { return (flags & (Dirt | Dirt2 | Rock)) != 0; }
+bool Material::anyDirt() { return (flags & (Dirt | Dirt2)) != 0; }
+bool Material::dirtBack() { return (flags & (Dirt | Dirt2 | Background)) != 0; }
+bool Material::worm() { return (flags & WormM) != 0; }
 
 int stuff(void)
 {
 
 	FILE* exe = fopen("../liero-data/LIERO.EXE", "rb");
 	if (exe == NULL)
-		throw runtime_error("unable to open LIERO.EXE");
+		throw std::runtime_error("unable to open LIERO.EXE");
 
-	string copyright1 = readPascalStringAt(exe, 0xFB60);
+	std::string copyright1 = readPascalStringAt(exe, 0xFB60);
 
 	Material materials[256];
 	fseek(exe, 0x01C2E0, SEEK_SET);
@@ -73,11 +62,33 @@ int stuff(void)
 	}
 
 	fclose(exe);
-	cout << "copyright1 =  " << copyright1 << endl;
-	cout << "materials = ";
+
+	namespace bpt = boost::property_tree;
+	bpt::ptree root;
+	bpt::ptree stuff;
+	bpt::ptree cfgmaterials;
+
+	stuff.put("copyright1", copyright1);
+
+	for (int i = 0; i < 256; ++i) {
+		std::stringstream ss;
+		std::string number;
+		ss << i;
+		number = ss.str();
+		cfgmaterials.put(number, materials[i].flags);
+	}
+
+	root.push_front(bpt::ptree::value_type("stuff", stuff));
+	root.push_front(bpt::ptree::value_type("cfgmaterials",
+							cfgmaterials));
+
+	write_ini(std::cout, root);
+
+	std::cout << "copyright1 =  " << copyright1 << std::endl;
+	std::cout << "materials = ";
 	for(int i = 0; i < 256; ++i)
-		cout << materials[i].flags << " ";
-	cout << endl;
+		std::cout << materials[i].flags << " ";
+	std::cout << std::endl;
 	return 1;
 }
 
