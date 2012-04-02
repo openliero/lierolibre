@@ -69,12 +69,14 @@ int stuff(void)
 	bpt::ptree stuff;
 	bpt::ptree mapmaterials;
 
+	std::stringstream ss; // int<->string conversion
+
 	stuff.put("copyright1", copyright1);
 
+	std::string number;
 	for (int i = 0; i < 256; ++i) {
 		if(materials[i].flags != 0) {
-			std::stringstream ss;
-			std::string number;
+			ss.str("");
 			ss << i;
 			number = ss.str();
 			mapmaterials.put(number, materials[i].flags);
