@@ -99,15 +99,26 @@ int stuff(void)
 	cfgfile2.open("config.ini");
 	bpt::ptree root2;
 	read_ini(cfgfile2, root2);
-	std::cout << "copyright1=" << root2.get<std::string>("stuff.copyright1") << std::endl;
+	std::cout << "copyright1="
+			<< root2.get<std::string>("stuff.copyright1")
+			<< std::endl;
 
-	/*
-	std::cout << "copyright1 =  " << copyright1 << std::endl;
-	std::cout << "materials = ";
-	for(int i = 0; i < 256; ++i)
-		std::cout << materials[i].flags << " ";
+	for(int j = 0; j < 256; ++j)
+		materials[j].flags = 0;
+
+	std::cout << "mapmaterials=";
+
+	std::string number2;
+	for(int k = 0; k < 256; ++k) {
+		ss.str("");
+		ss << k;
+		number2 = ss.str();
+		materials[k].flags = root2.get<int>("mapmaterials."
+							+ number2, 0);
+		std::cout << materials[k].flags << " ";
+	}
 	std::cout << std::endl;
-	*/
+
 	return 0;
 }
 
