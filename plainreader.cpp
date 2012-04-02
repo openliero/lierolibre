@@ -1,5 +1,6 @@
 // Compile & run via: g++ varreader plainreader.cpp -oplainreader && ./plainreader
 
+#include <fstream>
 #include <iostream>
 #include <stdexcept>
 
@@ -31,7 +32,7 @@ bool Material::worm() { return (flags & WormM) != 0; }
 int stuff(void)
 {
 
-	FILE* exe = fopen("../liero-data/LIERO.EXE", "rb");
+	FILE* exe = fopen("data/LIERO.EXE", "rb");
 	if (exe == NULL)
 		throw std::runtime_error("unable to open LIERO.EXE");
 
@@ -66,30 +67,46 @@ int stuff(void)
 	namespace bpt = boost::property_tree;
 	bpt::ptree root;
 	bpt::ptree stuff;
-	bpt::ptree cfgmaterials;
+	bpt::ptree mapmaterials;
 
 	stuff.put("copyright1", copyright1);
 
 	for (int i = 0; i < 256; ++i) {
-		std::stringstream ss;
-		std::string number;
-		ss << i;
-		number = ss.str();
-		cfgmaterials.put(number, materials[i].flags);
+		if(materials[i].flags != 0) {
+			std::stringstream ss;
+			std::string number;
+			ss << i;
+			number = ss.str();
+			mapmaterials.put(number, materials[i].flags);
+		}
 	}
 
 	root.push_front(bpt::ptree::value_type("stuff", stuff));
-	root.push_front(bpt::ptree::value_type("cfgmaterials",
-							cfgmaterials));
+	root.push_front(bpt::ptree::value_type("mapmaterials",
+							mapmaterials));
 
+	std::ofstream cfgfile;
+	cfgfile.open("config.ini");
+	if (!cfgfile.is_open())
+		throw std::runtime_error("unable to open cfgfile.ini");
+	write_ini(cfgfile, root);
+	cfgfile.close();
 	write_ini(std::cout, root);
 
+	std::ifstream cfgfile2;
+	cfgfile2.open("config.ini");
+	bpt::ptree root2;
+	read_ini(cfgfile2, root2);
+	std::cout << "copyright1=" << root2.get<std::string>("stuff.copyright1") << std::endl;
+
+	/*
 	std::cout << "copyright1 =  " << copyright1 << std::endl;
 	std::cout << "materials = ";
 	for(int i = 0; i < 256; ++i)
 		std::cout << materials[i].flags << " ";
 	std::cout << std::endl;
-	return 1;
+	*/
+	return 0;
 }
 
 
