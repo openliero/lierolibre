@@ -1,5 +1,5 @@
 // Compile & run with:
-// ~$ g++ -lboost_unit_test_framework -lboost_filesystem dataPath.o -oboosttest boostTesting.cpp && ./boosttest --loglevel=test_suite
+// ~$ g++ -lboost_unit_test_framework -lboost_system -lboost_filesystem dataPath.o -oboosttest boostTesting.cpp && ./boosttest --loglevel=test_suite
 
 /*
  These are unit tests for dataPath.
@@ -27,11 +27,10 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
 */
-
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE DataPath
 #include <boost/test/unit_test.hpp>
-#include "boost/filesystem.hpp"
+#include <boost/filesystem.hpp>
 
 #include <cstdlib>
 #include <cstdio>
