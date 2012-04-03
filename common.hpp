@@ -25,19 +25,19 @@ struct Material
 		SeeShadow = 1<<4,
 		WormM = 1<<5
 	};
-	
+
 	bool dirt() { return (flags & Dirt) != 0; }
 	bool dirt2() { return (flags & Dirt2) != 0; }
 	bool rock() { return (flags & Rock) != 0; }
 	bool background() { return (flags & Background) != 0; }
 	bool seeShadow() { return (flags & SeeShadow) != 0; }
-		
+
 	// Constructed
 	bool dirtRock() { return (flags & (Dirt | Dirt2 | Rock)) != 0; }
 	bool anyDirt() { return (flags & (Dirt | Dirt2)) != 0; }
 	bool dirtBack() { return (flags & (Dirt | Dirt2 | Background)) != 0; }
 	bool worm() { return (flags & WormM) != 0; }
-	
+
 	int flags;
 };
 
@@ -53,20 +53,20 @@ struct Texts
 {
 	void loadFromEXE();
 
-	std::string copyright1;	
+	std::string copyright1;
 	std::string copyright2;
 	std::string loadoptions;
 	std::string saveoptions;
 	std::string curOptNoFile;
 	std::string curOpt;
-	
+
 	std::string gameModes[4];
 	std::string gameModeSpec[3];
 	std::string onoff[2];
 	std::string controllers[2];
-	
+
 	std::string keyNames[177];
-	
+
 	std::string random;
 	std::string random2;
 	std::string reloadLevel;
@@ -77,23 +77,23 @@ struct Texts
 	std::string levelIs2;
 	std::string randomize;
 	std::string done;
-	
+
 	std::string kills;
 	std::string lives;
-	
+
 	std::string suicide;
 	std::string reloading;
 	std::string pressFire;
 	std::string selLevel;
-	
+
 	std::string noWeaps;
 	std::string weapon;
 	std::string availability;
 	std::string weapStates[3];
-	
-	
+
+
 	int copyrightBarFormat;
-	
+
 };
 
 struct ColourAnim
@@ -112,9 +112,9 @@ struct Common : gvl::shared
 	Common()
 	{
 	}
-	
+
 	static int fireConeOffset[2][7][2];
-	
+
 	void loadMaterials();
 	void loadWeapons();
 	void loadTextures();
@@ -123,17 +123,17 @@ struct Common : gvl::shared
 	void loadGfx();
 	void loadPalette();
 	void drawTextSmall(char const* str, int x, int y);
-	
+
 	PalIdx* wormSprite(int f, int dir, int w)
 	{
 		return wormSprites.spritePtr(f + dir*7*3 + w*2*7*3);
 	}
-	
+
 	PalIdx* fireConeSprite(int f, int dir)
 	{
 		return fireConeSprites.spritePtr(f + dir*7);
 	}
-	
+
 	Material materials[256];
 	Texts texts;
 	Texture textures[9];
@@ -153,7 +153,7 @@ struct Common : gvl::shared
 	SpriteSet fireConeSprites;
 	Palette exepal;
 	Font font;
-	
+
 	int C[MaxC];
 	std::string S[MaxS];
 	bool H[MaxH];
