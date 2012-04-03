@@ -1,4 +1,4 @@
-// Compile & run via: g++ varreader plainreader.cpp -oplainreader && ./plainreader
+// Compile & run via: g++ binreader plainreader.cpp -oplainreader && ./plainreader
 
 #include <fstream>
 #include <iostream>
@@ -15,7 +15,7 @@
 #include <sstream>
 
 #include "plainreader.hpp"
-#include "varreader.hpp"
+#include "binreader.hpp"
 
 bool Material::dirt() { return (flags & Dirt) != 0; }
 bool Material::dirt2() { return (flags & Dirt2) != 0; }

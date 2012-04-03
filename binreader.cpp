@@ -1,11 +1,11 @@
-// Compile via: g++ -c -ovarreader -lSDL varreader.cpp
+// Compile via: g++ -c -obinreader -lSDL binreader.cpp
 
 #include <stdexcept>
 
 // Needed for cross-platform *int32 definitions
 #include <SDL/SDL.h>
 
-#include "varreader.hpp"
+#include "binreader.hpp"
 
 using namespace std;
 
