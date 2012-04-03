@@ -1,4 +1,4 @@
-// Compile & run via: g++ binreader plainreader.cpp -oplainreader && ./plainreader
+// Compile & run via: g++ to_string binreader plainreader.cpp -oplainreader && ./plainreader
 
 #include <fstream>
 #include <iostream>
@@ -11,11 +11,11 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
-//int->string conversion
-#include <sstream>
-
 #include "plainreader.hpp"
 #include "binreader.hpp"
+
+//int->string conversion, this is available in c++11
+#include "to_string.hpp"
 
 bool Material::dirt() { return (flags & Dirt) != 0; }
 bool Material::dirt2() { return (flags & Dirt2) != 0; }
@@ -69,17 +69,11 @@ int stuff(void)
 	bpt::ptree stuff;
 	bpt::ptree mapmaterials;
 
-	std::stringstream ss; // int<->string conversion
-
 	stuff.put("copyright1", copyright1);
 
-	std::string number;
 	for (int i = 0; i < 256; ++i) {
 		if(materials[i].flags != 0) {
-			ss.str("");
-			ss << i;
-			number = ss.str();
-			mapmaterials.put(number, materials[i].flags);
+			mapmaterials.put(to_string(i), materials[i].flags);
 		}
 	}
 
@@ -108,13 +102,9 @@ int stuff(void)
 
 	std::cout << "mapmaterials=";
 
-	std::string number2;
 	for(int k = 0; k < 256; ++k) {
-		ss.str("");
-		ss << k;
-		number2 = ss.str();
 		materials[k].flags = root2.get<int>("mapmaterials."
-							+ number2, 0);
+							+ to_string(k), 0);
 		std::cout << materials[k].flags << " ";
 	}
 	std::cout << std::endl;
