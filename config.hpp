@@ -33,11 +33,11 @@
 class Config
 {
 public:
-	Config(std::string a_configfile);
+	Config(std::string a_configFile);
 
 	void writeOut(void);
 
-	void writeOut(std::string a_configfile);
+	void writeOut(std::string a_configFile);
 
 	std::string getString(std::string variable);
 
@@ -51,7 +51,7 @@ public:
 
 	void put(std::string variable, int value);
 private:
-	std::fstream configFile;
+	std::string configFilePath;
 
 	boost::property_tree::ptree configPtree;
 };

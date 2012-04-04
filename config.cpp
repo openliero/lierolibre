@@ -22,26 +22,35 @@
 using namespace std;
 namespace bpt = boost::property_tree;
 
-Config::Config(string a_configfile)
+Config::Config(string a_configFile)
 {
-	configFile.open(a_configfile.c_str());
-	if (!configFile.is_open())
-		throw runtime_error("unable to open " + a_configfile);
+	// Save for writeOut()
+	configFilePath = a_configFile;
 
-	read_ini(configFile, configPtree);
+	fstream configFile(configFilePath.c_str());
+	if (configFile.is_open()) {
+		read_ini(configFile, configPtree);
+	} else {
+		// Create empty
+		configFile.close();
+		configFile.open(configFilePath.c_str(), ios::out | ios::trunc);
+		if (!configFile.is_open())
+			throw runtime_error("unable to open " + a_configFile);
+	}
 }
 
 void Config::writeOut()
 {
+	fstream configFile(configFilePath.c_str());
 	write_ini(configFile, configPtree);
 }
 
-void Config::writeOut(std::string a_configfile)
+void Config::writeOut(std::string a_configFile)
 {
 	ofstream configFileOut;
-	configFileOut.open(a_configfile.c_str(), ios::out);
+	configFileOut.open(a_configFile.c_str(), ios::out);
 	if (!configFileOut.is_open())
-		throw runtime_error("unable to open " + a_configfile);
+		throw runtime_error("unable to open " + a_configFile);
 
 	write_ini(configFileOut, configPtree);
 }
