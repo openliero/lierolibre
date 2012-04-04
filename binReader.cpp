@@ -5,7 +5,7 @@
 // Needed for cross-platform *int32 definitions
 #include <SDL/SDL.h>
 
-#include "binreader.hpp"
+#include "binReader.hpp"
 
 using namespace std;
 
