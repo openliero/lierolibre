@@ -15,7 +15,7 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	weapsel.cpp worm.cpp
 
 	dataPath.cpp
-	binreader.cpp
+	binReader.cpp
 
 	controller/commonController.cpp
 	controller/localController.cpp
@@ -38,7 +38,7 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 
 Main plainreader :
 	to_string.cpp
-	binreader.cpp
+	binReader.cpp
 	plainreader.cpp ;
 
 MakeLocate openliero$(SUFEXE) : $(TOP)/_bin ;

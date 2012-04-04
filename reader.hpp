@@ -7,7 +7,7 @@
 #include <SDL/SDL.h>
 
 #include "dataPath.hpp"
-#include "binreader.hpp"
+#include "binReader.hpp"
 
 extern DataPath* data_path;
 

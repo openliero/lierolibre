@@ -1,4 +1,4 @@
-// Compile via: g++ -c -obinreader -lSDL binreader.cpp
+// Compile via: g++ -c -lSDL binReader.cpp
 
 #include <stdexcept>
 

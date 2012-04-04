@@ -1,5 +1,5 @@
 // Compile using:
-// g++ -c -o to_string to_string.cpp
+// g++ -c to_string.cpp
 #include <sstream>
 #include <string>
 

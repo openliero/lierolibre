@@ -1,4 +1,4 @@
-// Compile & run via: g++ to_string binreader plainreader.cpp -oplainreader && ./plainreader
+// Compile & run via: g++ to_string.o binreader.o plainreader.cpp -oplainreader && ./plainreader
 
 #include <fstream>
 #include <iostream>
@@ -12,7 +12,7 @@
 #include <boost/property_tree/ini_parser.hpp>
 
 #include "plainreader.hpp"
-#include "binreader.hpp"
+#include "binReader.hpp"
 
 //int->string conversion, this is available in c++11
 #include "to_string.hpp"
