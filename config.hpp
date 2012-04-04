@@ -28,27 +28,32 @@
 
 #include <string>
 #include <fstream>
+#include <boost/property_tree/ptree.hpp>
 
 class Config
 {
 public:
 	Config(std::string a_configfile);
 
-	std::string getstring(std::string variable);
+	void writeOut(void);
 
-	std::string getstring(std::string variable, std::string default_value);
+	void writeOut(std::string a_configfile);
 
-	int getint(std::string variable);
+	std::string getString(std::string variable);
 
-	int getint(std::string variable, int default_vaue);
+	std::string getString(std::string variable, std::string defaultValue);
+
+	int getInt(std::string variable);
+
+	int getInt(std::string variable, int defaultValue);
 
 	void put(std::string variable, std::string value);
 
 	void put(std::string variable, int value);
 private:
-	std::fstream configfile;
+	std::fstream configFile;
 
-	boost::property_tree::ptree config_ptree;
+	boost::property_tree::ptree configPtree;
 };
 
 #endif // CONFIG_HPP

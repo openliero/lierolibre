@@ -15,7 +15,7 @@
 //#include "to_string.hpp"
 
 // getRoot
-#include "filesystem.hpp"
+//#include "filesystem.hpp"
 
 #include "dataPath.hpp"
 
@@ -24,40 +24,55 @@ namespace bpt = boost::property_tree;
 
 Config::Config(string a_configfile)
 {
-	configfile.open(a_configfile.c_str());
-	if (!configfile.is_open())
+	configFile.open(a_configfile.c_str());
+	if (!configFile.is_open())
 		throw runtime_error("unable to open " + a_configfile);
 
-	read_ini(configfile, config_ptree);
+	read_ini(configFile, configPtree);
 }
 
-string Config::getstring(string variable)
+void Config::writeOut()
 {
-	return config_ptree.get<std::string>(variable);
+	write_ini(configFile, configPtree);
 }
 
-string Config::getstring(string variable, string default_value)
+void Config::writeOut(std::string a_configfile)
 {
-	return config_ptree.get(variable, default_value);
+	ofstream configFileOut;
+	configFileOut.open(a_configfile.c_str(), ios::out);
+	if (!configFileOut.is_open())
+		throw runtime_error("unable to open " + a_configfile);
+
+	write_ini(configFileOut, configPtree);
 }
 
-int Config::getint(string variable)
+string Config::getString(string variable)
 {
-	return config_ptree.get<int>(variable);
+	return configPtree.get<std::string>(variable);
 }
 
-int Config::getint(string variable, int default_value)
+string Config::getString(string variable, string defaultValue)
 {
-	return config_ptree.get(variable, default_value);
+	return configPtree.get(variable, defaultValue);
+}
+
+int Config::getInt(string variable)
+{
+	return configPtree.get<int>(variable);
+}
+
+int Config::getInt(string variable, int defaultValue)
+{
+	return configPtree.get(variable, defaultValue);
 }
 
 void Config::put(string variable, string value)
 {
-	config_ptree.put(variable, value);
+	configPtree.put(variable, value);
 }
 
 void Config::put(string variable, int value)
 {
-	config_ptree.put(variable, value);
+	configPtree.put(variable, value);
 }
 
