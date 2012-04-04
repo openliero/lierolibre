@@ -37,9 +37,11 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	;
 
 Main plainreader :
+	plainreader.cpp
 	to_string.cpp
 	binReader.cpp
-	plainreader.cpp ;
+	config.cpp
+	;
 
 MakeLocate openliero$(SUFEXE) : $(TOP)/_bin ;
 
