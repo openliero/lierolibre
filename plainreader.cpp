@@ -7,12 +7,11 @@
 // Needed for cross-platform *int32 definitions
 #include <SDL/SDL.h>
 
-// INI config file
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-
 #include "plainreader.hpp"
 #include "binReader.hpp"
+
+// INI config file
+#include "config.hpp"
 
 //int->string conversion, this is available in c++11
 #include "to_string.hpp"
@@ -64,37 +63,24 @@ int stuff(void)
 
 	fclose(exe);
 
-	namespace bpt = boost::property_tree;
-	bpt::ptree root;
-	bpt::ptree stuff;
-	bpt::ptree mapmaterials;
+	Config configfile("config.ini");
 
-	stuff.put("copyright1", copyright1);
+	configfile.put("stuff.copyright1", copyright1);
 
 	for (int i = 0; i < 256; ++i) {
 		if(materials[i].flags != 0) {
-			mapmaterials.put(to_string(i), materials[i].flags);
+			configfile.put("mapmaterials." + to_string(i), materials[i].flags);
 		}
 	}
 
-	root.push_front(bpt::ptree::value_type("stuff", stuff));
-	root.push_front(bpt::ptree::value_type("mapmaterials",
-							mapmaterials));
+	configfile.writeOut();
+	std::cout << "writeOut" << std::endl;
+	std::cout << configfile.getString("stuff.copyright1") << std::endl;
 
-	std::ofstream cfgfile;
-	cfgfile.open("config.ini");
-	if (!cfgfile.is_open())
-		throw std::runtime_error("unable to open cfgfile.ini");
-	write_ini(cfgfile, root);
-	cfgfile.close();
-	write_ini(std::cout, root);
+	Config configfile2("config.ini");
 
-	std::ifstream cfgfile2;
-	cfgfile2.open("config.ini");
-	bpt::ptree root2;
-	read_ini(cfgfile2, root2);
 	std::cout << "copyright1="
-			<< root2.get<std::string>("stuff.copyright1")
+			<< configfile2.getString("stuff.copyright1", "NOPE")
 			<< std::endl;
 
 	for(int j = 0; j < 256; ++j)
@@ -103,7 +89,7 @@ int stuff(void)
 	std::cout << "mapmaterials=";
 
 	for(int k = 0; k < 256; ++k) {
-		materials[k].flags = root2.get<int>("mapmaterials."
+		materials[k].flags = configfile2.getInt("mapmaterials."
 							+ to_string(k), 0);
 		std::cout << materials[k].flags << " ";
 	}
