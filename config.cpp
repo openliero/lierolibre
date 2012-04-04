@@ -36,9 +36,19 @@ string Config::getstring(string variable)
 	return config_ptree.get<std::string>(variable);
 }
 
+string Config::getstring(string variable, string default_value)
+{
+	return config_ptree.get(variable, default_value);
+}
+
 int Config::getint(string variable)
 {
 	return config_ptree.get<int>(variable);
+}
+
+int Config::getint(string variable, int default_value)
+{
+	return config_ptree.get(variable, default_value);
 }
 
 void Config::put(string variable, string value)

@@ -36,7 +36,11 @@ public:
 
 	std::string getstring(std::string variable);
 
+	std::string getstring(std::string variable, std::string default_value);
+
 	int getint(std::string variable);
+
+	int getint(std::string variable, int default_vaue);
 
 	void put(std::string variable, std::string value);
 
