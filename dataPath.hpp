@@ -23,7 +23,7 @@
 
  Unit tests for this object are avaialble in boostTesting.cpp
 
- Copyright (c) 2011, Martin Erik Werner <martinerikwerner@gmail.com>
+ Copyright (c) 2012, Martin Erik Werner <martinerikwerner@gmail.com>
  This software is released under the The BSD-2-Clause License:
 
  Redistribution and use in source and binary forms, with or without
