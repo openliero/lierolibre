@@ -16,6 +16,8 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 
 	dataPath.cpp
 	binReader.cpp
+	config.cpp
+	to_string.cpp
 
 	controller/commonController.cpp
 	controller/localController.cpp

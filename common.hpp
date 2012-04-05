@@ -52,6 +52,7 @@ struct Texture
 struct Texts
 {
 	void loadFromEXE();
+	void loadFromINI();
 
 	std::string copyright1;
 	std::string copyright2;

@@ -3,6 +3,8 @@
 #include "reader.hpp"
 #include "rand.hpp"
 #include "gfx.hpp"
+#include "to_string.hpp"
+#include "config.hpp"
 
 int Common::fireConeOffset[2][7][2] =
 {
@@ -82,6 +84,69 @@ void Texts::loadFromEXE()
 
 	fseek(exe, 0xFC5B, SEEK_SET);
 	copyrightBarFormat = readUint8(exe);
+}
+
+void Texts::loadFromINI()
+{
+	Config config("config.ini");
+
+	random = config.getString("texts.random");
+	random2 = config.getString("texts.random2");
+	regenLevel = config.getString("texts.regenLevel");
+	reloadLevel = config.getString("texts.reloadLevel");
+
+	copyright1 = config.getString("texts.copyright1");
+	copyright2 = config.getString("texts.copyright2");
+	saveoptions = config.getString("texts.saveoptions");
+	loadoptions = config.getString("texts.loadoptions");
+	curOptNoFile = config.getString("texts.curOptNoFile");
+	curOpt = config.getString("texts.curOpt");
+
+	for(int i = 0; i < 4; ++i)
+	{
+		gameModes[i] = config.getInt("texts.gameModes." + to_string(i));
+	}
+
+	gameModeSpec[0] = config.getInt("texts.gameModeSpec.0");
+	gameModeSpec[1] = config.getInt("texts.gameModeSpec.1");
+	gameModeSpec[2] = config.getInt("texts.gameModeSpec.2");
+
+	onoff[0] = config.getInt("texts.onoff.0");
+	onoff[1] = config.getInt("texts.onoff.1");
+
+	controllers[0] = config.getInt("texts.controllers.0");
+	controllers[1] = config.getInt("texts.controllers.1");
+
+	for(int i = 0; i < 3; ++i)
+	{
+		weapStates[i] = config.getInt("texts.weapStates." + to_string(i));
+	}
+
+	for(int i = 1; i < 177; ++i) // First key starts at 1
+	{
+		keyNames[i] = config.getInt("texts.keyNames." + to_string(i));
+	}
+
+	selWeap = config.getString("texts.selWeap");
+	levelRandom = config.getString("texts.levelRandom");
+	levelIs1 = config.getString("texts.levelIs1");
+	levelIs2 = config.getString("texts.levelIs2");
+	randomize = config.getString("texts.randomize");
+	done = config.getString("texts.done");
+
+	reloading = config.getString("texts.reloading");
+	pressFire = config.getString("texts.pressFire");
+
+	kills = config.getString("texts.kills");
+	lives = config.getString("texts.lives");
+
+	selLevel = config.getString("texts.selLevel");
+
+	weapon = config.getString("texts.weapon");
+	availability = config.getString("texts.availability");
+	noWeaps = config.getString("texts.noWeaps");
+
+	copyrightBarFormat = config.getInt("texts.copyrightBarFormat");
 }
 
 void Common::loadPalette()
