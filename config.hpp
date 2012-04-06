@@ -35,9 +35,11 @@ class Config
 public:
 	Config(std::string a_configFile);
 
-	void writeOut(void);
+	void read(void);
 
-	void writeOut(std::string a_configFile);
+	void write(void);
+
+	void write(std::string a_configFile);
 
 	std::string getString(std::string variable);
 

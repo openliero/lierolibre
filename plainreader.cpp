@@ -73,11 +73,12 @@ int stuff(void)
 		}
 	}
 
-	configfile.writeOut();
+	configfile.write();
 	std::cout << "writeOut" << std::endl;
 	std::cout << configfile.getString("stuff.copyright1") << std::endl;
 
 	Config configfile2("config.ini");
+	configfile2.read();
 
 	std::cout << "copyright1="
 			<< configfile2.getString("stuff.copyright1", "NOPE")

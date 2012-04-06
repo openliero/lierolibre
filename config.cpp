@@ -1,5 +1,5 @@
 // Compile via:
-// g++ -c to_string.o config.cpp
+// g++ -c config.cpp
 
 #include <fstream>
 #include <iostream>
@@ -17,42 +17,47 @@
 // getRoot
 //#include "filesystem.hpp"
 
-#include "dataPath.hpp"
+//#include "dataPath.hpp"
 
 using namespace std;
 namespace bpt = boost::property_tree;
 
 Config::Config(string a_configFile)
 {
-	// Save for writeOut()
 	configFilePath = a_configFile;
+}
 
-	fstream configFile(configFilePath.c_str());
+void Config::read()
+{
+	ifstream configFile(configFilePath.c_str());
 	if (configFile.is_open()) {
 		read_ini(configFile, configPtree);
 	} else {
-		// Create empty
 		configFile.close();
-		configFile.open(configFilePath.c_str(), ios::out | ios::trunc);
-		if (!configFile.is_open())
-			throw runtime_error("unable to open " + a_configFile);
+		throw runtime_error("unable to open " + configFilePath + " for reading");
 	}
 }
 
-void Config::writeOut()
+void Config::write()
 {
-	fstream configFile(configFilePath.c_str());
-	write_ini(configFile, configPtree);
+	ofstream configFile(configFilePath.c_str());
+	if (configFile.is_open()) {
+		write_ini(configFile, configPtree);
+	} else {
+		configFile.close();
+		throw runtime_error("unable to open " + configFilePath + " for writing");
+	}
 }
 
-void Config::writeOut(std::string a_configFile)
+void Config::write(std::string a_configFilePath)
 {
-	ofstream configFileOut;
-	configFileOut.open(a_configFile.c_str(), ios::out);
-	if (!configFileOut.is_open())
-		throw runtime_error("unable to open " + a_configFile);
-
-	write_ini(configFileOut, configPtree);
+	ofstream configFile(a_configFilePath.c_str(), ios::out);
+	if (configFile.is_open()) {
+		write_ini(configFile, configPtree);
+	} else {
+		configFile.close();
+		throw runtime_error("unable to open " + a_configFilePath + " for writing");
+	}
 }
 
 string Config::getString(string variable)
