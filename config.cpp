@@ -38,17 +38,6 @@ void Config::read()
 	}
 }
 
-void Config::write()
-{
-	ofstream configFile(configFilePath.c_str());
-	if (configFile.is_open()) {
-		write_ini(configFile, configPtree);
-	} else {
-		configFile.close();
-		throw runtime_error("unable to open " + configFilePath + " for writing");
-	}
-}
-
 void Config::write(std::string a_configFilePath)
 {
 	ofstream configFile(a_configFilePath.c_str(), ios::out);
@@ -58,6 +47,11 @@ void Config::write(std::string a_configFilePath)
 		configFile.close();
 		throw runtime_error("unable to open " + a_configFilePath + " for writing");
 	}
+}
+
+void Config::write(void)
+{
+	write(configFilePath);
 }
 
 string Config::getString(string variable)
