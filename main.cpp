@@ -80,7 +80,7 @@ try
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
 
-	common->texts.loadFromEXE();
+	common->texts.loadFromCFG();
 
 	//common.texts.loadFromEXE();
 	initKeys();
