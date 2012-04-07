@@ -37,13 +37,6 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	menu/timeBehavior.cpp
 	;
 
-Main plainreader :
-	plainreader.cpp
-	to_string.cpp
-	binReader.cpp
-	config.cpp
-	;
-
 MakeLocate openliero$(SUFEXE) : $(TOP)/_bin ;
 
 LinkLibraries openliero : libgvl ;
