@@ -85,10 +85,6 @@ struct Texts
 	void writeToCFG();
 	void writeToCFG(std::string cfgFilePath);
 
-	void setVariable(libconfig::Setting &root, std::string variable, std::string value);
-	void setVariable(libconfig::Setting &root, std::string variable, int value);
-	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);
-
 	std::string copyright1;
 	std::string copyright2;
 	std::string loadoptions;

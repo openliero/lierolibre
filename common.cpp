@@ -5,6 +5,7 @@
 #include "rand.hpp"
 #include "gfx.hpp"
 #include "to_string.hpp"
+#include "configHelper.hpp"
 
 int Common::fireConeOffset[2][7][2] =
 {
@@ -157,110 +158,77 @@ void Texts::loadFromCFG()
 	texts.lookupValue("copyrightBarFormat", copyrightBarFormat);
 }
 
-// TODO: Separate these out to libconfigHelper module.
-void Texts::setVariable(libconfig::Setting &node, std::string variable, std::string value)
-{
-	if(!node.exists(variable))
-	{
-		node.add(variable, libconfig::Setting::TypeString)
-							= value;
-	} else {
-		libconfig::Setting &var = node[variable];
-		var = value;
-	}
-}
-
-void Texts::setVariable(libconfig::Setting &node, std::string variable, int value)
-{
-	if(!node.exists(variable))
-	{
-		node.add(variable, libconfig::Setting::TypeInt)
-							= value;
-	} else {
-		libconfig::Setting &var = node[variable];
-		var = value;
-	}
-}
-
-libconfig::Setting& Texts::getSubgroup(libconfig::Setting &node, std::string groupName)
-{
-	if(!node.exists(groupName))
-	{
-		node.add(groupName, libconfig::Setting::TypeGroup);
-	}
-	return node[groupName];
-}
-
 void Texts::writeToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
 	cfg.readFile(cfgFilePath.c_str());
 	libconfig::Setting &root = cfg.getRoot();
-	libconfig::Setting &texts = getSubgroup(root, "texts");
+	libconfig::Setting &texts = cfgHelp.getSubgroup(root, "texts");
 
-	setVariable(texts, "random", random);
-	setVariable(texts, "random2", random2);
-	setVariable(texts, "regenLevel", regenLevel);
-	setVariable(texts, "reloadLevel", reloadLevel);
+	cfgHelp.put(texts, "random", random);
+	cfgHelp.put(texts, "random2", random2);
+	cfgHelp.put(texts, "regenLevel", regenLevel);
+	cfgHelp.put(texts, "reloadLevel", reloadLevel);
 
-	setVariable(texts, "copyright1", copyright1);
-	setVariable(texts, "copyright2", copyright2);
-	setVariable(texts, "saveoptions", saveoptions);
-	setVariable(texts, "loadoptions", loadoptions);
-	setVariable(texts, "curOptNoFile", curOptNoFile);
-	setVariable(texts, "curOpt", curOpt);
+	cfgHelp.put(texts, "copyright1", copyright1);
+	cfgHelp.put(texts, "copyright2", copyright2);
+	cfgHelp.put(texts, "saveoptions", saveoptions);
+	cfgHelp.put(texts, "loadoptions", loadoptions);
+	cfgHelp.put(texts, "curOptNoFile", curOptNoFile);
+	cfgHelp.put(texts, "curOpt", curOpt);
 
-	libconfig::Setting &sgmodes = getSubgroup(texts, "gameModes");
+	libconfig::Setting &sgmodes = cfgHelp.getSubgroup(texts, "gameModes");
 	for(int i = 0; i < 4; ++i)
 	{
-		setVariable(sgmodes, "gameModes" + to_string(i), gameModes[i]);
+		cfgHelp.put(sgmodes, "gameModes" + to_string(i), gameModes[i]);
 	}
 
-	libconfig::Setting &sgmspec = getSubgroup(texts, "gameModeSpec");
-	setVariable(sgmspec, "gameModeSpec0", gameModeSpec[0]);
-	setVariable(sgmspec, "gameModeSpec1", gameModeSpec[1]);
-	setVariable(sgmspec, "gameModeSpec2", gameModeSpec[2]);
+	libconfig::Setting &sgmspec = cfgHelp.getSubgroup(texts, "gameModeSpec");
+	cfgHelp.put(sgmspec, "gameModeSpec0", gameModeSpec[0]);
+	cfgHelp.put(sgmspec, "gameModeSpec1", gameModeSpec[1]);
+	cfgHelp.put(sgmspec, "gameModeSpec2", gameModeSpec[2]);
 
-	libconfig::Setting &sonoff = getSubgroup(texts, "onoff");
-	setVariable(sonoff, "onoff0", onoff[0]);
-	setVariable(sonoff, "onoff1", onoff[1]);
+	libconfig::Setting &sonoff = cfgHelp.getSubgroup(texts, "onoff");
+	cfgHelp.put(sonoff, "onoff0", onoff[0]);
+	cfgHelp.put(sonoff, "onoff1", onoff[1]);
 
-	libconfig::Setting &scontrollers = getSubgroup(texts, "controllers");
-	setVariable(scontrollers, "controllers0", controllers[0]);
-	setVariable(scontrollers, "controllers1", controllers[1]);
+	libconfig::Setting &scontrollers = cfgHelp.getSubgroup(texts, "controllers");
+	cfgHelp.put(scontrollers, "controllers0", controllers[0]);
+	cfgHelp.put(scontrollers, "controllers1", controllers[1]);
 
-	libconfig::Setting &swstates = getSubgroup(texts, "weapStates");
+	libconfig::Setting &swstates = cfgHelp.getSubgroup(texts, "weapStates");
 	for(int i = 0; i < 3; ++i)
 	{
-		setVariable(swstates, "weapStates" + to_string(i), weapStates[i]);
+		cfgHelp.put(swstates, "weapStates" + to_string(i), weapStates[i]);
 	}
 
-	libconfig::Setting &sknames = getSubgroup(texts, "keyNames");
+	libconfig::Setting &sknames = cfgHelp.getSubgroup(texts, "keyNames");
 	for(int i = 1; i < 177; ++i) // First key starts at 1
 	{
-		setVariable(sknames, "keyNames" + to_string(i), keyNames[i]);
+		cfgHelp.put(sknames, "keyNames" + to_string(i), keyNames[i]);
 	}
 
-	setVariable(texts, "selWeap", selWeap);
-	setVariable(texts, "levelRandom", levelRandom);
-	setVariable(texts, "levelIs1", levelIs1);
-	setVariable(texts, "levelIs2", levelIs2);
-	setVariable(texts, "randomize", randomize);
-	setVariable(texts, "done", done);
+	cfgHelp.put(texts, "selWeap", selWeap);
+	cfgHelp.put(texts, "levelRandom", levelRandom);
+	cfgHelp.put(texts, "levelIs1", levelIs1);
+	cfgHelp.put(texts, "levelIs2", levelIs2);
+	cfgHelp.put(texts, "randomize", randomize);
+	cfgHelp.put(texts, "done", done);
 
-	setVariable(texts, "reloading", reloading);
-	setVariable(texts, "pressFire", pressFire);
+	cfgHelp.put(texts, "reloading", reloading);
+	cfgHelp.put(texts, "pressFire", pressFire);
 
-	setVariable(texts, "kills", kills);
-	setVariable(texts, "lives", lives);
+	cfgHelp.put(texts, "kills", kills);
+	cfgHelp.put(texts, "lives", lives);
 
-	setVariable(texts, "selLevel", selLevel);
+	cfgHelp.put(texts, "selLevel", selLevel);
 
-	setVariable(texts, "weapon", weapon);
-	setVariable(texts, "availability", availability);
-	setVariable(texts, "noWeaps", noWeaps);
+	cfgHelp.put(texts, "weapon", weapon);
+	cfgHelp.put(texts, "availability", availability);
+	cfgHelp.put(texts, "noWeaps", noWeaps);
 
-	setVariable(texts, "copyrightBarFormat", copyrightBarFormat);
+	cfgHelp.put(texts, "copyrightBarFormat", copyrightBarFormat);
 
 	cfg.writeFile(cfgFilePath.c_str());
 }
