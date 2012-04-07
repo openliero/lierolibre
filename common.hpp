@@ -11,6 +11,8 @@
 #include <string>
 #include <gvl/resman/shared_ptr.hpp>
 
+#include <libconfig.h++>
+
 
 extern int stoneTab[3][4];
 
@@ -52,7 +54,13 @@ struct Texture
 struct Texts
 {
 	void loadFromEXE();
-	void loadFromINI();
+	void loadFromCFG();
+	void writeToCFG();
+	void writeToCFG(std::string cfgFilePath);
+
+	void setVariable(libconfig::Setting &root, std::string variable, std::string value);
+	void setVariable(libconfig::Setting &root, std::string variable, int value);
+	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);
 
 	std::string copyright1;
 	std::string copyright2;
@@ -91,7 +99,6 @@ struct Texts
 	std::string weapon;
 	std::string availability;
 	std::string weapStates[3];
-
 
 	int copyrightBarFormat;
 

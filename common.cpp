@@ -1,10 +1,10 @@
 #include "common.hpp"
+#include <libconfig.h++>
 
 #include "reader.hpp"
 #include "rand.hpp"
 #include "gfx.hpp"
 #include "to_string.hpp"
-#include "config.hpp"
 
 int Common::fireConeOffset[2][7][2] =
 {
@@ -86,67 +86,188 @@ void Texts::loadFromEXE()
 	copyrightBarFormat = readUint8(exe);
 }
 
-void Texts::loadFromINI()
+void Texts::loadFromCFG()
 {
-	Config config("config.ini");
+	libconfig::Config cfg;
+	cfg.readFile("liero.cfg");
+	const libconfig::Setting &texts = cfg.lookup("texts");
 
-	random = config.getString("texts.random");
-	random2 = config.getString("texts.random2");
-	regenLevel = config.getString("texts.regenLevel");
-	reloadLevel = config.getString("texts.reloadLevel");
+	texts.lookupValue("random", random);
+	texts.lookupValue("random2", random2);
+	texts.lookupValue("regenLevel", regenLevel);
+	texts.lookupValue("reloadLevel", reloadLevel);
 
-	copyright1 = config.getString("texts.copyright1");
-	copyright2 = config.getString("texts.copyright2");
-	saveoptions = config.getString("texts.saveoptions");
-	loadoptions = config.getString("texts.loadoptions");
-	curOptNoFile = config.getString("texts.curOptNoFile");
-	curOpt = config.getString("texts.curOpt");
+	texts.lookupValue("copyright1", copyright1);
+	texts.lookupValue("copyright2", copyright2);
+	texts.lookupValue("saveoptions", saveoptions);
+	texts.lookupValue("loadoptions", loadoptions);
+	texts.lookupValue("curOptNoFile", curOptNoFile);
+	texts.lookupValue("curOpt", curOpt);
 
+	libconfig::Setting &sgmodes = texts["gameModes"];
 	for(int i = 0; i < 4; ++i)
 	{
-		gameModes[i] = config.getInt("texts.gameModes." + to_string(i));
+		sgmodes.lookupValue("gameModes" + to_string(i), gameModes[i]);
 	}
 
-	gameModeSpec[0] = config.getInt("texts.gameModeSpec.0");
-	gameModeSpec[1] = config.getInt("texts.gameModeSpec.1");
-	gameModeSpec[2] = config.getInt("texts.gameModeSpec.2");
+	libconfig::Setting &sgmspec = texts["gameModeSpec"];
+	sgmspec.lookupValue("gameModeSpec0", gameModeSpec[0]);
+	sgmspec.lookupValue("gameModeSpec1", gameModeSpec[1]);
+	sgmspec.lookupValue("gameModeSpec2", gameModeSpec[2]);
 
-	onoff[0] = config.getInt("texts.onoff.0");
-	onoff[1] = config.getInt("texts.onoff.1");
+	libconfig::Setting &sonoff = texts["onoff"];
+	sonoff.lookupValue("onoff0", onoff[0]);
+	sonoff.lookupValue("onoff1", onoff[1]);
 
-	controllers[0] = config.getInt("texts.controllers.0");
-	controllers[1] = config.getInt("texts.controllers.1");
+	libconfig::Setting &scontrollers = texts["controllers"];
+	scontrollers.lookupValue("controllers0", controllers[0]);
+	scontrollers.lookupValue("controllers1", controllers[1]);
 
+	libconfig::Setting &swstates = texts["weapStates"];
 	for(int i = 0; i < 3; ++i)
 	{
-		weapStates[i] = config.getInt("texts.weapStates." + to_string(i));
+		 swstates.lookupValue("weapStates" + to_string(i), weapStates[i]);
 	}
 
+	libconfig::Setting &sknames = texts["keyNames"];
 	for(int i = 1; i < 177; ++i) // First key starts at 1
 	{
-		keyNames[i] = config.getInt("texts.keyNames." + to_string(i));
+		 sknames.lookupValue("keyNames" + to_string(i), keyNames[i]);
 	}
 
-	selWeap = config.getString("texts.selWeap");
-	levelRandom = config.getString("texts.levelRandom");
-	levelIs1 = config.getString("texts.levelIs1");
-	levelIs2 = config.getString("texts.levelIs2");
-	randomize = config.getString("texts.randomize");
-	done = config.getString("texts.done");
+	texts.lookupValue("selWeap", selWeap);
+	texts.lookupValue("levelRandom", levelRandom);
+	texts.lookupValue("levelIs1", levelIs1);
+	texts.lookupValue("levelIs2", levelIs2);
+	texts.lookupValue("randomize", randomize);
+	texts.lookupValue("done", done);
 
-	reloading = config.getString("texts.reloading");
-	pressFire = config.getString("texts.pressFire");
+	texts.lookupValue("reloading", reloading);
+	texts.lookupValue("pressFire", pressFire);
 
-	kills = config.getString("texts.kills");
-	lives = config.getString("texts.lives");
+	texts.lookupValue("kills", kills);
+	texts.lookupValue("lives", lives);
 
-	selLevel = config.getString("texts.selLevel");
+	texts.lookupValue("selLevel", selLevel);
 
-	weapon = config.getString("texts.weapon");
-	availability = config.getString("texts.availability");
-	noWeaps = config.getString("texts.noWeaps");
+	texts.lookupValue("weapon", weapon);
+	texts.lookupValue("availability", availability);
+	texts.lookupValue("noWeaps", noWeaps);
 
-	copyrightBarFormat = config.getInt("texts.copyrightBarFormat");
+	texts.lookupValue("copyrightBarFormat", copyrightBarFormat);
+}
+
+// TODO: Separate these out to libconfigHelper module.
+void Texts::setVariable(libconfig::Setting &node, std::string variable, std::string value)
+{
+	if(!node.exists(variable))
+	{
+		node.add(variable, libconfig::Setting::TypeString)
+							= value;
+	} else {
+		libconfig::Setting &var = node[variable];
+		var = value;
+	}
+}
+
+void Texts::setVariable(libconfig::Setting &node, std::string variable, int value)
+{
+	if(!node.exists(variable))
+	{
+		node.add(variable, libconfig::Setting::TypeInt)
+							= value;
+	} else {
+		libconfig::Setting &var = node[variable];
+		var = value;
+	}
+}
+
+libconfig::Setting& Texts::getSubgroup(libconfig::Setting &node, std::string groupName)
+{
+	if(!node.exists(groupName))
+	{
+		node.add(groupName, libconfig::Setting::TypeGroup);
+	}
+	return node[groupName];
+}
+
+void Texts::writeToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &texts = getSubgroup(root, "texts");
+
+	setVariable(texts, "random", random);
+	setVariable(texts, "random2", random2);
+	setVariable(texts, "regenLevel", regenLevel);
+	setVariable(texts, "reloadLevel", reloadLevel);
+
+	setVariable(texts, "copyright1", copyright1);
+	setVariable(texts, "copyright2", copyright2);
+	setVariable(texts, "saveoptions", saveoptions);
+	setVariable(texts, "loadoptions", loadoptions);
+	setVariable(texts, "curOptNoFile", curOptNoFile);
+	setVariable(texts, "curOpt", curOpt);
+
+	libconfig::Setting &sgmodes = getSubgroup(texts, "gameModes");
+	for(int i = 0; i < 4; ++i)
+	{
+		setVariable(sgmodes, "gameModes" + to_string(i), gameModes[i]);
+	}
+
+	libconfig::Setting &sgmspec = getSubgroup(texts, "gameModeSpec");
+	setVariable(sgmspec, "gameModeSpec0", gameModeSpec[0]);
+	setVariable(sgmspec, "gameModeSpec1", gameModeSpec[1]);
+	setVariable(sgmspec, "gameModeSpec2", gameModeSpec[2]);
+
+	libconfig::Setting &sonoff = getSubgroup(texts, "onoff");
+	setVariable(sonoff, "onoff0", onoff[0]);
+	setVariable(sonoff, "onoff1", onoff[1]);
+
+	libconfig::Setting &scontrollers = getSubgroup(texts, "controllers");
+	setVariable(scontrollers, "controllers0", controllers[0]);
+	setVariable(scontrollers, "controllers1", controllers[1]);
+
+	libconfig::Setting &swstates = getSubgroup(texts, "weapStates");
+	for(int i = 0; i < 3; ++i)
+	{
+		setVariable(swstates, "weapStates" + to_string(i), weapStates[i]);
+	}
+
+	libconfig::Setting &sknames = getSubgroup(texts, "keyNames");
+	for(int i = 1; i < 177; ++i) // First key starts at 1
+	{
+		setVariable(sknames, "keyNames" + to_string(i), keyNames[i]);
+	}
+
+	setVariable(texts, "selWeap", selWeap);
+	setVariable(texts, "levelRandom", levelRandom);
+	setVariable(texts, "levelIs1", levelIs1);
+	setVariable(texts, "levelIs2", levelIs2);
+	setVariable(texts, "randomize", randomize);
+	setVariable(texts, "done", done);
+
+	setVariable(texts, "reloading", reloading);
+	setVariable(texts, "pressFire", pressFire);
+
+	setVariable(texts, "kills", kills);
+	setVariable(texts, "lives", lives);
+
+	setVariable(texts, "selLevel", selLevel);
+
+	setVariable(texts, "weapon", weapon);
+	setVariable(texts, "availability", availability);
+	setVariable(texts, "noWeaps", noWeaps);
+
+	setVariable(texts, "copyrightBarFormat", copyrightBarFormat);
+
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Texts::writeToCFG(void)
+{
+	writeToCFG("liero.cfg");
 }
 
 void Common::loadPalette()
