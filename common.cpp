@@ -104,32 +104,32 @@ void Texts::loadFromCFG()
 	texts.lookupValue("curOptNoFile", curOptNoFile);
 	texts.lookupValue("curOpt", curOpt);
 
-	libconfig::Setting &sgmodes = texts["gameModes"];
+	const libconfig::Setting &sgmodes = texts["gameModes"];
 	for(int i = 0; i < 4; ++i)
 	{
 		sgmodes.lookupValue("gameModes" + to_string(i), gameModes[i]);
 	}
 
-	libconfig::Setting &sgmspec = texts["gameModeSpec"];
+	const libconfig::Setting &sgmspec = texts["gameModeSpec"];
 	sgmspec.lookupValue("gameModeSpec0", gameModeSpec[0]);
 	sgmspec.lookupValue("gameModeSpec1", gameModeSpec[1]);
 	sgmspec.lookupValue("gameModeSpec2", gameModeSpec[2]);
 
-	libconfig::Setting &sonoff = texts["onoff"];
+	const libconfig::Setting &sonoff = texts["onoff"];
 	sonoff.lookupValue("onoff0", onoff[0]);
 	sonoff.lookupValue("onoff1", onoff[1]);
 
-	libconfig::Setting &scontrollers = texts["controllers"];
+	const libconfig::Setting &scontrollers = texts["controllers"];
 	scontrollers.lookupValue("controllers0", controllers[0]);
 	scontrollers.lookupValue("controllers1", controllers[1]);
 
-	libconfig::Setting &swstates = texts["weapStates"];
+	const libconfig::Setting &swstates = texts["weapStates"];
 	for(int i = 0; i < 3; ++i)
 	{
 		 swstates.lookupValue("weapStates" + to_string(i), weapStates[i]);
 	}
 
-	libconfig::Setting &sknames = texts["keyNames"];
+	const libconfig::Setting &sknames = texts["keyNames"];
 	for(int i = 1; i < 177; ++i) // First key starts at 1
 	{
 		 sknames.lookupValue("keyNames" + to_string(i), keyNames[i]);
