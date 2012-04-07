@@ -4,7 +4,7 @@ C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG ;
 CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG ;
 OPTIM = -O3 ;
 LINK = "g++" ;
-LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt ;
+LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ ;
 
 Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	constants.cpp filesystem.cpp game.cpp
@@ -16,7 +16,6 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 
 	dataPath.cpp
 	binReader.cpp
-	config.cpp
 	to_string.cpp
 
 	controller/commonController.cpp
