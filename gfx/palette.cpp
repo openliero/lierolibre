@@ -8,14 +8,14 @@
 void Palette::activate()
 {
 	SDL_Color realPal[256];
-	
+
 	for(int i = 0; i < 256; ++i)
 	{
 		realPal[i].r = entries[i].r << 2;
 		realPal[i].g = entries[i].g << 2;
 		realPal[i].b = entries[i].b << 2;
 	}
-	
+
 	SDL_SetColors(gfx.back, realPal, 0, 256);
 	SDL_SetColors(gfx.screen, realPal, 0, 256);
 }
@@ -39,7 +39,7 @@ void Palette::fade(int amount)
 {
 	if(amount >= 32)
 		return;
-		
+
 	for(int i = 0; i < 256; ++i)
 	{
 		entries[i].r = fadeValue(entries[i].r, amount);
@@ -79,7 +79,7 @@ void Palette::read(FILE* f)
 	{
 		unsigned char rgb[3];
 		checkedFread(rgb, 1, 3, f);
-		
+
 		entries[i].r = rgb[0] & 63;
 		entries[i].g = rgb[1] & 63;
 		entries[i].b = rgb[2] & 63;
@@ -89,16 +89,16 @@ void Palette::read(FILE* f)
 void Palette::setWormColour(int i, WormSettings const& settings)
 {
 	int const b[2] = {0x58, 0x78}; // TODO: Read from EXE?
-	
+
 	int idx = settings.color;
-	
+
 	setWormColoursSpan(idx, settings.rgb);
-	
+
 	for(int j = 0; j < 6; ++j)
 	{
 		entries[b[i] + j] = entries[idx + (j % 3) - 1];
 	}
-	
+
 	for(int j = 0; j < 3; ++j)
 	{
 		entries[129 + i * 4 + j] = entries[idx + j];
