@@ -29,11 +29,19 @@
 #include <string>
 #include <libconfig.h++>
 
+// Fixed-width integer types
+#include <SDL/SDL.h>
+
 class ConfigHelper
 {
 public:
+	void lookupValue(const libconfig::Setting &node, std::string variable, Uint8 &destVariable);
+	void lookupValue(libconfig::Setting &node, std::string variable, Uint8 &destVariable);
+
 	void put(libconfig::Setting &node, std::string variable, std::string value);
 	void put(libconfig::Setting &node, std::string variable, int value);
+	void put(libconfig::Setting &node, std::string variable, Uint8 value);
+
 	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);
 };
 
