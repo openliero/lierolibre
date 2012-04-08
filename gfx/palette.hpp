@@ -46,6 +46,10 @@ struct Palette
 	void lightUp(int amount);
 	void rotate(int from, int to);
 	void read(FILE* f);
+	void readFromCFG(std::string);
+	void readFromCFG(void);
+	void writeToCFG(std::string);
+	void writeToCFG(void);
 
 	void scaleAdd(int dest, int const(&c)[3], int scale, int add)
 	{

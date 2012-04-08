@@ -4,6 +4,9 @@
 #include "../reader.hpp"
 #include "../gfx.hpp"
 #include <SDL/SDL.h>
+#include <libconfig.h++>
+#include "to_string.hpp"
+#include "configHelper.hpp"
 
 void Palette::activate()
 {
@@ -84,6 +87,49 @@ void Palette::read(FILE* f)
 		entries[i].g = rgb[1] & 63;
 		entries[i].b = rgb[2] & 63;
 	}
+}
+
+void Palette::readFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &spentries = cfg.lookup("Palette.entries");
+
+	for(int i = 0; i < 256; ++i)
+	{
+		cfgHelp.lookupValue(spentries, "entries" + to_string(i) + "r", entries[i].r);
+		cfgHelp.lookupValue(spentries, "entries" + to_string(i) + "g", entries[i].g);
+		cfgHelp.lookupValue(spentries, "entries" + to_string(i) + "b", entries[i].b);
+	}
+}
+
+void Palette::readFromCFG(void)
+{
+	readFromCFG("liero.cfg");
+}
+
+void Palette::writeToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &palette = cfgHelp.getSubgroup(root, "Palette");
+	libconfig::Setting &spentries = cfgHelp.getSubgroup(palette, "entries");
+
+	for(int i = 0; i < 256; ++i)
+	{
+		cfgHelp.put(spentries, "entries" + to_string(i) + "r", entries[i].r);
+		cfgHelp.put(spentries, "entries" + to_string(i) + "g", entries[i].g);
+		cfgHelp.put(spentries, "entries" + to_string(i) + "b", entries[i].b);
+	}
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Palette::writeToCFG()
+{
+	writeToCFG("liero.cfg");
 }
 
 void Palette::setWormColour(int i, WormSettings const& settings)
