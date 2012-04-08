@@ -82,8 +82,8 @@ struct Texts
 {
 	void loadFromEXE();
 	void loadFromCFG();
-	void writeToCFG();
 	void writeToCFG(std::string cfgFilePath);
+	void writeToCFG();
 
 	std::string copyright1;
 	std::string copyright2;
@@ -153,6 +153,10 @@ struct Common : gvl::shared
 	void loadConstantsFromEXE();
 	void loadGfx();
 	void loadPalette();
+	void loadPaletteFromCFG(std::string cfgFilePath);
+	void loadPaletteFromCFG();
+	void writePaletteToCFG(std::string cfgFilePath);
+	void writePaletteToCFG();
 	void drawTextSmall(char const* str, int x, int y);
 
 	PalIdx* wormSprite(int f, int dir, int w)

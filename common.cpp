@@ -91,7 +91,7 @@ void Texts::loadFromCFG()
 {
 	libconfig::Config cfg;
 	cfg.readFile("liero.cfg");
-	const libconfig::Setting &texts = cfg.lookup("texts");
+	const libconfig::Setting &texts = cfg.lookup("Texts");
 
 	texts.lookupValue("random", random);
 	texts.lookupValue("random2", random2);
@@ -164,7 +164,7 @@ void Texts::writeToCFG(std::string cfgFilePath)
 	ConfigHelper cfgHelp;
 	cfg.readFile(cfgFilePath.c_str());
 	libconfig::Setting &root = cfg.getRoot();
-	libconfig::Setting &texts = cfgHelp.getSubgroup(root, "texts");
+	libconfig::Setting &texts = cfgHelp.getSubgroup(root, "Texts");
 
 	cfgHelp.put(texts, "random", random);
 	cfgHelp.put(texts, "random2", random2);
@@ -255,6 +255,51 @@ void Common::loadPalette()
 	}
 }
 
+void Common::loadPaletteFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &palette = cfg.lookup("Palette");
+
+	exepal.readFromCFG(cfgFilePath);
+
+	const libconfig::Setting &scanim = palette["colorAnim"];
+	for(int i = 0; i < 4; ++i)
+	{
+		scanim.lookupValue("colorAnim" + to_string(i) + "from", colorAnim[i].from);
+		scanim.lookupValue("colorAnim" + to_string(i) + "to", colorAnim[i].to);
+	}
+}
+
+void Common::loadPaletteFromCFG()
+{
+	loadPaletteFromCFG("liero.cfg");
+}
+
+void Common::writePaletteToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+
+	exepal.writeToCFG(cfgFilePath);
+
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &palette = cfgHelp.getSubgroup(root, "Palette");
+	libconfig::Setting &scanim = cfgHelp.getSubgroup(palette, "colorAnim");
+	for(int i = 0; i < 4; ++i)
+	{
+		cfgHelp.put(scanim, "colorAnim" + to_string(i) + "from", colorAnim[i].from);
+		cfgHelp.put(scanim, "colorAnim" + to_string(i) + "to", colorAnim[i].to);
+
+	cfg.writeFile(cfgFilePath.c_str());
+	}
+}
+
+void Common::writePaletteToCFG()
+{
+	writePaletteToCFG("liero.cfg");
+}
 
 void Common::loadMaterials()
 {
