@@ -140,7 +140,9 @@ try
 	Console::writeLine(common->S[OK2]);
 
 	Console::writeLine("");
+#if GVL_WIN32
 	Console::write(common->S[PressAnyKey]);
+#endif
 	Console::waitForAnyKey();
 	Console::clear();
 
