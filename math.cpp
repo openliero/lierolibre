@@ -27,3 +27,46 @@ void loadTablesFromEXE()
 		sinTable[i] = readSint32(exe);
 	}
 }
+
+void loadTablesFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath);
+	const libconfig::Setting &tables = cfg.lookup("Tables");
+
+	for(int i = 0; i < 128; ++i)
+	{
+		sinTable[i] = tables["sinTable"][i];
+		cosTable[i] = tables["cosTable"][i];
+	}
+}
+void loadTablesFromCFG()
+{
+	loadTablesFromCFG("liero.cfg");
+}
+
+void writeTablesToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath);
+	ConfigHelper cfgHelp;
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &tables = cfgHelp.getSubgroup(root, "Tables");
+
+	libconfig::Setting &sintables = cfgHelp.getArray(tables, "sinTable");
+	for(int i = 0; i < 128; ++i)
+	{
+		sintables.add(Setting::TypeInt) = sinTable[i];
+	}
+
+	libconfig::Setting &costables = cfgHelp.getArray(tables, "cosTable");
+	for(int i = 0; i < 128; ++i)
+	{
+		costables.add(Setting::TypeInt) = cosTable[i];
+	}
+}
+void writeTablesToCFG()
+{
+	writeTablesToCFG("liero.cfg")
+}
+
