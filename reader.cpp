@@ -75,7 +75,7 @@ void processReader()
 	{
 		ReaderFileMap::iterator cur = i;
 		++i;
-		
+
 		if((now - cur->second.lastTouch) > 5000)
 		{
 			closeReaderFile(cur);
