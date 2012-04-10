@@ -3,6 +3,8 @@
 #include <cmath>
 #include <gvl/math/ieee.hpp>
 
+#include "configHelper.hpp"
+
 
 // TODO: Move to Common or hardcode, I don't think any TC is or would like to change these tables
 fixed sinTable[128];
@@ -31,7 +33,7 @@ void loadTablesFromEXE()
 void loadTablesFromCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
-	cfg.readFile(cfgFilePath);
+	cfg.readFile(cfgFilePath.c_str());
 	const libconfig::Setting &tables = cfg.lookup("Tables");
 
 	for(int i = 0; i < 128; ++i)
@@ -48,7 +50,7 @@ void loadTablesFromCFG()
 void writeTablesToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
-	cfg.readFile(cfgFilePath);
+	cfg.readFile(cfgFilePath.c_str());
 	ConfigHelper cfgHelp;
 	libconfig::Setting &root = cfg.getRoot();
 	libconfig::Setting &tables = cfgHelp.getSubgroup(root, "Tables");
@@ -56,17 +58,19 @@ void writeTablesToCFG(std::string cfgFilePath)
 	libconfig::Setting &sintables = cfgHelp.getArray(tables, "sinTable");
 	for(int i = 0; i < 128; ++i)
 	{
-		sintables.add(Setting::TypeInt) = sinTable[i];
+		sintables.add(libconfig::Setting::TypeInt) = sinTable[i];
 	}
 
 	libconfig::Setting &costables = cfgHelp.getArray(tables, "cosTable");
 	for(int i = 0; i < 128; ++i)
 	{
-		costables.add(Setting::TypeInt) = cosTable[i];
+		costables.add(libconfig::Setting::TypeInt) = cosTable[i];
 	}
+
+	cfg.writeFile(cfgFilePath.c_str());
 }
 void writeTablesToCFG()
 {
-	writeTablesToCFG("liero.cfg")
+	writeTablesToCFG("liero.cfg");
 }
 
