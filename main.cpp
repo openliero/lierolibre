@@ -85,7 +85,7 @@ try
 	//common.texts.loadFromEXE();
 	initKeys();
 	//game.rand.seed(Uint32(std::time(0)));
-	common->loadConstantsFromEXE();
+	common->loadConstantsFromCFG();
 	loadTablesFromEXE();
 
 	Console::clear();
