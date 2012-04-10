@@ -4,6 +4,151 @@
 
 #include <iostream>
 
+#include "configHelper.hpp"
+
+std::string valueConstantsNames[] =
+{
+	"NRInitialLength",
+	"NRAttachLength",
+
+	"MinBounceUp",
+	"MinBounceDown",
+	"MinBounceLeft",
+	"MinBounceRight",
+	"WormGravity",
+	"WalkVelLeft",
+	"MaxVelLeft",
+	"WalkVelRight",
+	"MaxVelRight",
+	"JumpForce",
+	"MaxAimVelLeft",
+	"AimAccLeft",
+	"MaxAimVelRight",
+	"AimAccRight",
+	"NinjaropeGravity",
+	"NRMinLength",
+	"NRMaxLength",
+
+	"BonusGravity",
+	"BObjGravity",
+
+	// WormFloat hack
+	"WormFloatPower",
+
+	"BloodLimit",
+
+	"WormFricMult",
+	"WormFricDiv",
+	"WormMinSpawnDistLast",
+	"WormMinSpawnDistEnemy",
+	"WormSpawnRectX",
+	"WormSpawnRectY",
+	"WormSpawnRectW",
+	"WormSpawnRectH",
+	"AimFricMult",
+	"AimFricDiv",
+
+	"NRThrowVelX",
+	"NRThrowVelY",
+	"NRForceShlX",
+	"NRForceDivX",
+	"NRForceShlY",
+	"NRForceDivY",
+	"NRForceLenShl",
+
+	"BonusBounceMul",
+	"BonusBounceDiv",
+	"BonusFlickerTime",
+
+	"BonusDropChance",
+	"SplinterLarpaVelDiv",
+	"SplinterCracklerVelDiv",
+
+
+	// WormFloat hack
+	"WormFloatLevel",
+
+	// BonusSpawnRect hack
+	"BonusSpawnRectX",
+	"BonusSpawnRectY",
+	"BonusSpawnRectW",
+	"BonusSpawnRectH",
+
+	"AimMaxRight",
+	"AimMinRight",
+	"AimMaxLeft",
+	"AimMinLeft",
+	"NRColourBegin",
+	"NRColourEnd",
+	"BonusExplodeRisk",
+	"BonusHealthVar",
+	"BonusMinHealth",
+	"LaserWeapon",
+
+	"FirstBloodColour",
+	"NumBloodColours",
+
+	"RemExpObject",
+
+	"NRPullVel",
+	"NRReleaseVel",
+
+	// FallDamage hack
+	"FallDamageRight",
+	"FallDamageLeft",
+	"FallDamageDown",
+	"FallDamageUp",
+
+	"BloodStepUp",
+	"BloodStepDown"
+
+};
+
+std::string stringConstantsNames[] =
+{
+	"InitSound",
+	"LoadingSounds",
+
+	"Init_BaseIO",
+	"Init_IRQ",
+	"Init_DMA8",
+	"Init_DMA16",
+
+	"Init_DSPVersion",
+	"Init_Colon",
+	"Init_16bit",
+	"Init_Autoinit",
+
+	"Init_XMSSucc",
+
+	"Init_FreeXMS",
+	"Init_k",
+
+	"LoadingAndThinking",
+	"OK",
+	"OK2",
+	"PressAnyKey",
+
+	"CommittedSuicideMsg",
+	"KilledMsg",
+	"YoureIt"
+};
+
+std::string hackConstantsNames[] =
+{
+	"HFallDamage",
+	"HBonusReloadOnly",
+	"HBonusSpawnRect",
+	"HWormFloat",
+	"HBonusOnlyHealth",
+	"HBonusOnlyWeapon",
+	"HBonusDisable",
+	"HRemExp",
+	"HSignedRecoil",
+	"HAirJump",
+	"HMultiJump",
+};
+
 int CSint32desc[][3] =
 {
 	{NRInitialLength, 0x32D7, 0x32DD},
@@ -348,3 +493,68 @@ void Common::loadConstantsFromEXE()
 		H[Hhackdesc[i].which] = active;
 	}
 }
+
+void Common::loadConstantsFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &constants = cfg.lookup("Constants");
+
+	const libconfig::Setting &vconstants = constants["Values"];
+	for(int i = 0; i < MaxC; ++i)
+	{
+		vconstants.lookupValue(valueConstantsNames[i], C[i]);
+	}
+
+	const libconfig::Setting &sconstants = constants["Strings"];
+	for(int i = 0; i < MaxS; ++i)
+	{
+		sconstants.lookupValue(stringConstantsNames[i], S[i]);
+	}
+
+	const libconfig::Setting &hconstants = constants["Hacks"];
+	for(int i = 0; i < MaxH; ++i)
+	{
+		hconstants.lookupValue(hackConstantsNames[i], H[i]);
+	}
+}
+
+void Common::loadConstantsFromCFG()
+{
+	loadConstantsFromCFG("liero.cfg");
+}
+
+void Common::writeConstantsToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelper;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &constants = cfgHelper.getSubgroup(root, "Constants");
+
+	libconfig::Setting &vconstants = cfgHelper.getSubgroup(constants, "Values");
+	for(int i = 0; i < MaxC; ++i)
+	{
+		cfgHelper.put(vconstants, valueConstantsNames[i], C[i]);
+	}
+
+	libconfig::Setting &sconstants = cfgHelper.getSubgroup(constants, "Strings");
+	for(int i = 0; i < MaxS; ++i)
+	{
+		cfgHelper.put(sconstants, stringConstantsNames[i], S[i]);
+	}
+
+	libconfig::Setting &hconstants = cfgHelper.getSubgroup(constants, "Hacks");
+	for(int i = 0; i < MaxH; ++i)
+	{
+		cfgHelper.put(hconstants, hackConstantsNames[i], H[i]);
+	}
+
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Common::writeConstantsToCFG()
+{
+	writeConstantsToCFG("liero.cfg");
+}
+
