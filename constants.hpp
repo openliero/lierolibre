@@ -26,7 +26,7 @@ enum
 	NRMinLength,
 	NRMaxLength,
 	BonusGravity,
-	
+
 	WormFricMult,
 	WormFricDiv,
 	WormMinSpawnDistLast,
@@ -47,16 +47,16 @@ enum
 	BonusBounceMul,
 	BonusBounceDiv,
 	BonusFlickerTime,
-	
-	
+
+
 	AimMaxRight,
 	AimMinRight,
 	AimMaxLeft,
 	AimMinLeft,
-	
+
 	NRPullVel,
 	NRReleaseVel,
-	
+
 	NRColourBegin,
 	NRColourEnd,
 	BonusExplodeRisk,
@@ -71,30 +71,30 @@ enum
 	BonusDropChance,
 	SplinterLarpaVelDiv,
 	SplinterCracklerVelDiv,
-	
+
 	BloodStepUp,
 	BloodStepDown,
 	BloodLimit,
-	
+
 	// FallDamage hack
 	FallDamageRight,
 	FallDamageLeft,
 	FallDamageDown,
 	FallDamageUp,
-	
+
 	// WormFloat hack
 	WormFloatLevel,
 	WormFloatPower,
-	
+
 	// BonusSpawn hack
 	BonusSpawnRectX,
 	BonusSpawnRectY,
 	BonusSpawnRectW, // This is used even when the hack isn't enabled
 	BonusSpawnRectH, // -==-
-	
+
 	// RemExp hack
 	RemExpObject,
-	
+
 	MaxC
 };
 
@@ -109,22 +109,22 @@ enum
 	CommittedSuicideMsg,
 	KilledMsg,
 	YoureIt,
-	
+
 	Init_BaseIO,
 	Init_IRQ,
 	Init_DMA8,
 	Init_DMA16,
-	
+
 	Init_DSPVersion,
 	Init_Colon,
 	Init_16bit,
 	Init_Autoinit,
-	
+
 	Init_XMSSucc,
-	
+
 	Init_FreeXMS,
 	Init_k,
-	
+
 	MaxS
 };
 
@@ -139,12 +139,12 @@ enum
 	HWormFloat,
 	HRemExp,
 	HSignedRecoil,
-	
+
 	HAirJump,
 	HMultiJump,
-	
-	
-	
+
+
+
 	MaxH
 };
 
