@@ -86,7 +86,7 @@ try
 	initKeys();
 	//game.rand.seed(Uint32(std::time(0)));
 	common->loadConstantsFromCFG();
-	loadTablesFromEXE();
+	loadTablesFromEXE(); // TODO: switch to CFG
 
 	Console::clear();
 	Console::writeTextBar(common->texts.copyright1, common->texts.copyrightBarFormat);
@@ -94,15 +94,15 @@ try
 	Console::writeLine("");
 
 	Console::write(common->S[LoadingAndThinking]);
-	common->font.loadFromEXE();
+	common->font.loadFromEXE(); // TODO: switch to CFG
 	common->loadPaletteFromCFG();
 	gfx.loadPalette(); // This gets the palette from common
-	gfx.loadMenus();
-	common->loadGfx();
-	common->loadMaterials();
-	common->loadWeapons();
-	common->loadTextures();
-	common->loadOthers();
+	gfx.loadMenus(); // TODO: switch to CFG
+	common->loadGfx(); // TODO: switch to CFG
+	common->loadMaterials(); // TODO: switch to CFG
+	common->loadWeapons(); // TODO: switch to CFG
+	common->loadTextures(); // TODO: switch to CFG
+	common->loadOthers(); // TODO: switch to CFG
 	Console::writeLine(common->S[OK]);
 
 	Console::writeLine(common->S[InitSound]);
