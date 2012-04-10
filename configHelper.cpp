@@ -75,6 +75,15 @@ void ConfigHelper::put(Setting &node, string variable, bool value)
 	}
 }
 
+Setting& ConfigHelper::getArray(Setting &node, string arrayName)
+{
+	if(node.exists(arrayName))
+	{
+		node.remove(arrayName);
+	}
+	return node.add(arrayName, Setting::TypeArray);
+}
+
 Setting& ConfigHelper::getSubgroup(Setting &node, string groupName)
 {
 	if(!node.exists(groupName))
