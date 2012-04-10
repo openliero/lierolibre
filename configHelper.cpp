@@ -64,6 +64,17 @@ void ConfigHelper::put(Setting &node, string variable, Uint8 value)
 	}
 }
 
+void ConfigHelper::put(Setting &node, string variable, bool value)
+{
+	if(!node.exists(variable))
+	{
+		node.add(variable, Setting::TypeBoolean) = value;
+	} else {
+		Setting &var = node[variable];
+		var = value;
+	}
+}
+
 Setting& ConfigHelper::getSubgroup(Setting &node, string groupName)
 {
 	if(!node.exists(groupName))

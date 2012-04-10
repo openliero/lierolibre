@@ -41,6 +41,7 @@ public:
 	void put(libconfig::Setting &node, std::string variable, std::string value);
 	void put(libconfig::Setting &node, std::string variable, int value);
 	void put(libconfig::Setting &node, std::string variable, Uint8 value);
+	void put(libconfig::Setting &node, std::string variable, bool value);
 
 	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);
 };
