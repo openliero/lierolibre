@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2010, Erik Lindroos <gliptic@gmail.com>
+ Copyright (c) 2012, Martin Erik Werner <martinerikwerner@gmail.com>
  This software is released under the The BSD-2-Clause License:
 
  Redistribution and use in source and binary forms, with or without
