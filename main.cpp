@@ -86,7 +86,7 @@ try
 	initKeys();
 	//game.rand.seed(Uint32(std::time(0)));
 	common->loadConstantsFromCFG();
-	loadTablesFromEXE(); // TODO: switch to CFG
+	loadTablesFromCFG();
 
 	Console::clear();
 	Console::writeTextBar(common->texts.copyright1, common->texts.copyrightBarFormat);
