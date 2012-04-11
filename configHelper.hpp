@@ -43,7 +43,7 @@ public:
 	void put(libconfig::Setting &node, std::string variable, Uint8 value);
 	void put(libconfig::Setting &node, std::string variable, bool value);
 
-	libconfig::Setting& getArray(libconfig::Setting &node, std::string arrayName);
+	libconfig::Setting& mkArray(libconfig::Setting &node, std::string arrayName);
 	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);
 };
 

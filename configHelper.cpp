@@ -75,7 +75,7 @@ void ConfigHelper::put(Setting &node, string variable, bool value)
 	}
 }
 
-Setting& ConfigHelper::getArray(Setting &node, string arrayName)
+Setting& ConfigHelper::mkArray(Setting &node, string arrayName)
 {
 	if(node.exists(arrayName))
 	{

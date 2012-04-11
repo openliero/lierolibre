@@ -55,13 +55,13 @@ void writeTablesToCFG(std::string cfgFilePath)
 	libconfig::Setting &root = cfg.getRoot();
 	libconfig::Setting &tables = cfgHelp.getSubgroup(root, "Tables");
 
-	libconfig::Setting &sintables = cfgHelp.getArray(tables, "sinTable");
+	libconfig::Setting &sintables = cfgHelp.mkArray(tables, "sinTable");
 	for(int i = 0; i < 128; ++i)
 	{
 		sintables.add(libconfig::Setting::TypeInt) = sinTable[i];
 	}
 
-	libconfig::Setting &costables = cfgHelp.getArray(tables, "cosTable");
+	libconfig::Setting &costables = cfgHelp.mkArray(tables, "cosTable");
 	for(int i = 0; i < 128; ++i)
 	{
 		costables.add(libconfig::Setting::TypeInt) = cosTable[i];
