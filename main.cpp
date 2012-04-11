@@ -94,7 +94,7 @@ try
 	Console::writeLine("");
 
 	Console::write(common->S[LoadingAndThinking]);
-	common->font.loadFromEXE(); // TODO: switch to CFG
+	common->font.loadFromCFG();
 	common->loadPaletteFromCFG();
 	gfx.loadPalette(); // This gets the palette from common
 	gfx.loadMenus(); // TODO: switch to CFG
