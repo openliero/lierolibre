@@ -43,6 +43,7 @@ try
 	gfx.rand.seed(Uint32(std::time(0)));
 
 	bool exeSet = false;
+	bool triggerCFG = false;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
 	//common->loadPowerlevelPalette = true;
@@ -61,6 +62,10 @@ try
 			case 'r':
 				common->loadPowerlevelPalette = false;
 			break;*/
+
+			case 'c':
+				triggerCFG = true;
+			break;
 			}
 		}
 		else
