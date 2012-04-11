@@ -97,7 +97,7 @@ try
 	common->font.loadFromCFG();
 	common->loadPaletteFromCFG();
 	gfx.loadPalette(); // This gets the palette from common
-	gfx.loadMenus(); // TODO: switch to CFG
+	gfx.loadMenusFromCFG();
 	common->loadGfx(); // TODO: switch to CFG
 	common->loadMaterials(); // TODO: switch to CFG
 	common->loadWeapons(); // TODO: switch to CFG
