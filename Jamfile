@@ -1,7 +1,7 @@
 SubDir TOP ;
 
-C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG ;
-CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG ;
+C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG  -g ;
+CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 OPTIM = -O3 ;
 LINK = "g++" ;
 LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ ;
