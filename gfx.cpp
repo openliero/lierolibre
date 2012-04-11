@@ -25,6 +25,9 @@
 
 #include "menu/arrayEnumBehavior.hpp"
 
+#include "configHelper.hpp"
+#include "to_string.hpp"
+
 /*
 ds:0000 is 0x 1AE80
 */
@@ -287,6 +290,146 @@ void Gfx::loadMenus()
 	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen height"));
 	hiddenMenu.addItem(MenuItem(48, 7, "TESTING 32-bit mode"));
 	hiddenMenu.valueOffsetX = 100;
+}
+
+void Gfx::loadMenusFromCFG(std::string cfgFilePath)
+{
+	// Menus { SomeMenu { items0 { color, disColour, string }
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &smenus = cfg.lookup("Menus");
+
+	libconfig::Setting &smmain = smenus["MainMenu"];
+	for(int i = 0; i < 4; ++i)
+	{
+		libconfig::Setting &smmitem = smmain[i];
+
+		Uint8 col;
+		Uint8 dCol;
+
+		cfgHelp.getValue(smmitem, "color", col);
+		cfgHelp.getValue(smmitem, "disColour", dCol);
+		std::string str = smmitem["string"];
+
+		mainMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
+	}
+	mainMenu.setTop(0);
+
+	libconfig::Setting &smsettings = smenus["SettingsMenu"];
+	for(int i = 0; i < 17; ++i)
+	{
+		libconfig::Setting &smsitem = smsettings[i];
+
+		Uint8 col;
+		Uint8 dCol;
+
+		cfgHelp.getValue(smsitem, "color", col);
+		cfgHelp.getValue(smsitem, "disColour", dCol);
+		std::string str = smsitem["string"];
+
+		settingsMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
+	}
+	settingsMenu.setTop(0);
+
+	settingsMenu.valueOffsetX = 100;
+
+	settingsMenu.items[Settings::SiLives].string = common->texts.gameModeSpec[0];
+
+	// First 14 items have values
+	for(int i = 0; i < Settings::SiPlayer1Options; ++i)
+	{
+		settingsMenu.items[i].hasValue = true;
+	}
+
+	libconfig::Setting &smplayer = smenus["PlayerMenu"];
+	for(int i = 0; i < 14; ++i)
+	{
+		libconfig::Setting &smpitem = smplayer[i];
+
+		Uint8 col;
+		Uint8 dCol;
+
+		cfgHelp.getValue(smpitem, "color", col);
+		cfgHelp.getValue(smpitem, "disColour", dCol);
+		std::string str = smpitem["string"];
+
+		playerMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
+		if(i == 12)
+		{
+		playerMenu.setTop(0);
+		}
+	}
+	playerMenu.setTop(0);
+
+	playerMenu.valueOffsetX = 95;
+
+	playerMenu.addItem(MenuItem(3, 7, "SAVE PROFILE"));
+	playerMenu.addItem(MenuItem(3, 7, "SAVE PROFILE AS..."));
+	playerMenu.addItem(MenuItem(3, 7, "LOAD PROFILE"));
+
+	for(int i = 0; i < 14; ++i)
+	{
+		playerMenu.items[i].hasValue = true;
+	}
+
+	hiddenMenu.addItem(MenuItem(48, 7, "Extensions"));
+	hiddenMenu.addItem(MenuItem(48, 7, "Record replays"));
+	hiddenMenu.addItem(MenuItem(48, 7, "Load replay..."));
+	hiddenMenu.addItem(MenuItem(48, 7, "PowerLevel palettes"));
+	hiddenMenu.addItem(MenuItem(48, 7, "Scaling filter"));
+	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen width"));
+	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen height"));
+	hiddenMenu.addItem(MenuItem(48, 7, "TESTING 32-bit mode"));
+	hiddenMenu.valueOffsetX = 100;
+}
+
+void Gfx::loadMenusFromCFG()
+{
+	loadMenusFromCFG("liero.cfg");
+}
+
+void Gfx::writeMenusToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &smenus = cfgHelp.getSubgroup(root, "Menus");
+
+	libconfig::Setting &smmenu = cfgHelp.getSubgroup(smenus, "MainMenu");
+	for(int i = 0; i < 4; ++i)
+	{
+		libconfig::Setting &smmitems = cfgHelp.getSubgroup(smmenu, "items" + to_string(i));
+		cfgHelp.put(smmitems, "color", static_cast<int>(mainMenu.items[i].color));
+		cfgHelp.put(smmitems, "disColour", static_cast<int>(mainMenu.items[i].disColour));
+		cfgHelp.put(smmitems, "string", mainMenu.items[i].string);
+	}
+
+	libconfig::Setting &smsettings = cfgHelp.getSubgroup(smenus, "SettingsMenu");
+	for(int i = 0; i < 17; ++i)
+	{
+		libconfig::Setting &smsitems = cfgHelp.getSubgroup(smsettings, "items" + to_string(i));
+		cfgHelp.put(smsitems, "color", static_cast<int>(settingsMenu.items[i].color));
+		cfgHelp.put(smsitems, "disColour", static_cast<int>(settingsMenu.items[i].disColour));
+		cfgHelp.put(smsitems, "string", settingsMenu.items[i].string);
+	}
+
+	libconfig::Setting &smplayer = cfgHelp.getSubgroup(smenus, "PlayerMenu");
+	for(int i = 0; i < 14; ++i)
+	{
+		libconfig::Setting &smpitems = cfgHelp.getSubgroup(smplayer, "items" + to_string(i));
+		cfgHelp.put(smpitems, "color", static_cast<int>(playerMenu.items[i].color));
+		cfgHelp.put(smpitems, "disColour", static_cast<int>(playerMenu.items[i].disColour));
+		cfgHelp.put(smpitems, "string", playerMenu.items[i].string);
+	}
+
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Gfx::writeMenusToCFG()
+{
+	writeMenusToCFG("liero.cfg");
 }
 
 void Gfx::updateSettingsMenu()
