@@ -29,6 +29,28 @@ void ConfigHelper::getValue(libconfig::Setting &node, std::string variable, Uint
 	}
 }
 
+void ConfigHelper::getValue(const libconfig::Setting &node, int index, Uint8 &destVariable)
+{
+	int value = node[index];
+	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
+	{
+		destVariable = static_cast<Uint8>(value);
+	} else {
+		throw overflow_error("Config value from index is too big");
+	}
+}
+
+void ConfigHelper::getValue(libconfig::Setting &node, int index, Uint8 &destVariable)
+{
+	int value = node[index];
+	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
+	{
+		destVariable = static_cast<Uint8>(value);
+	} else {
+		throw overflow_error("Config value from index is too big");
+	}
+}
+
 void ConfigHelper::put(Setting &node, string variable, string value)
 {
 	if(!node.exists(variable))
