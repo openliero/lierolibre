@@ -54,7 +54,7 @@ struct Key
 	: sym(sym), ch(ch)
 	{
 	}
-	
+
 	int sym;
 	char ch;
 };
@@ -71,11 +71,11 @@ struct PlayerMenu : Menu
 	: Menu(x, y)
 	{
 	}
-	
+
 	virtual void drawItemOverlay(Common& common, int item, int x, int y, bool selected, bool disabled);
-	
+
 	virtual ItemBehavior* getItemBehavior(Common& common, int item);
-	
+
 	gvl::shared_ptr<WormSettings> ws;
 };
 
@@ -85,7 +85,7 @@ struct SettingsMenu : Menu
 	: Menu(x, y)
 	{
 	}
-	
+
 	virtual ItemBehavior* getItemBehavior(Common& common, int item);
 };
 
@@ -101,7 +101,7 @@ enum
 struct Joystick {
 	SDL_Joystick *sdlJoystick;
 	bool btnState[MaxJoyButtons];
-	
+
 	void clearState() {
 		for ( int i = 0; i < MaxJoyButtons; ++i ) btnState[i] = false;
 	}
@@ -110,24 +110,24 @@ struct Joystick {
 struct Gfx
 {
 	Gfx();
-		
+
 	void init();
 	void setVideoMode();
 	void loadPalette();
 	void loadMenus();
-	
+
 	void process(Controller* controller = 0);
 	void flip();
-	
+
 	void clear();
 	void clearKeys();
-	
+
 	unsigned char& getScreenPixel(int x, int y)
 	{
 		return (static_cast<unsigned char*>(screenPixels) + y*screenPitch)[x];
 	}
-	
-	
+
+
 	/*
 	bool testKeyOnce(int key)
 	{
@@ -135,77 +135,77 @@ struct Gfx
 		keys[key] = false;
 		return state;
 	}
-	
+
 	bool testKey(int key)
 	{
 		return keys[key];
 	}
-	
+
 	void releaseKey(int key)
 	{
 		keys[key] = false;
 	}*/
-	
+
 	bool testKeyOnce(Uint32 key)
 	{
 		bool state = dosKeys[key];
 		dosKeys[key] = false;
 		return state;
 	}
-	
+
 	bool testKey(Uint32 key)
 	{
 		return dosKeys[key];
 	}
-	
+
 	void releaseKey(Uint32 key)
 	{
 		dosKeys[key] = false;
 	}
-	
+
 	void pressKey(Uint32 key)
 	{
 		dosKeys[key] = true;
 	}
-	
+
 	void setKey(Uint32 key, bool state)
 	{
 		dosKeys[key] = state;
 	}
-	
+
 	void toggleKey(Uint32 key)
 	{
 		dosKeys[key] = !dosKeys[key];
 	}
-	
+
 	bool testSDLKeyOnce(SDLKey key)
 	{
 		Uint32 k = SDLToDOSKey(key);
 		return k ? testKeyOnce(k) : false;
 	}
-	
+
 	bool testSDLKey(SDLKey key)
 	{
 		Uint32 k = SDLToDOSKey(key);
 		return k ? testKey(k) : false;
 	}
-	
+
 	void releaseSDLKey(SDLKey key)
 	{
 		Uint32 k = SDLToDOSKey(key);
 		if(k)
 			dosKeys[k] = false;
 	}
-	
-	
-	
+
+
+
 	SDL_keysym waitForKey();
 	uint32_t waitForKeyEx();
 	std::string getKeyName( uint32_t key );
-	
+
 	void saveSettings();
 	bool loadSettings();
-	
+
 	void processEvent(SDL_Event& ev, Controller* controller = 0);
 	//void settingEnter(int item);
 	//void settingLeftRight(int change, int item);
@@ -230,14 +230,14 @@ struct Gfx
 	SettingsMenu settingsMenu;
 	PlayerMenu playerMenu;
 	HiddenMenu hiddenMenu;
-	
+
 	Menu* curMenu;
 	std::string settingsFile; // Currently loaded settings file
 	gvl::shared_ptr<Settings> settings;
-	
+
 	Palette pal;
 	Palette origpal;
-	
+
 	//bool keys[SDLK_LAST];
 	bool dosKeys[177];
 	SDL_Surface* screen;
@@ -245,7 +245,7 @@ struct Gfx
 	std::vector<PalIdx> frozenScreen;
 	unsigned char* screenPixels;
 	unsigned int screenPitch;
-	
+
 
 	bool running;
 	bool fullscreen;
@@ -258,7 +258,7 @@ struct Gfx
 	Rand rand; // PRNG for things that don't affect the game
 	gvl::shared_ptr<Common> common;
 	std::auto_ptr<Controller> controller;
-	
+
 	std::vector<Joystick> joysticks;
 };
 
