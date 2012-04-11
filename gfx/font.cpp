@@ -5,6 +5,10 @@
 #include "color.hpp"
 #include <iostream>
 
+#include <libconfig.h++>
+#include "configHelper.hpp"
+#include "to_string.hpp"
+
 void Font::loadFromEXE()
 {
 	chars.resize(250);
@@ -32,6 +36,64 @@ void Font::loadFromEXE()
 
 		chars[i].width = ptr[63];
 	}
+}
+
+void Font::loadFromCFG(std::string cfgFilePath)
+{
+	chars.resize(250);
+
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &sfont = cfg.lookup("Font");
+
+	for(int i = 0; i < 250; ++i)
+	{
+		const libconfig::Setting &sfchar = sfont[i];
+		for(int j = 0; j < 56; ++j)
+		{
+			// Font { char0 { data[]
+			const libconfig::Setting &sfcdata = sfchar["data"];
+			Uint8 temp;
+			cfgHelp.getValue(sfcdata, j, temp);
+			chars[i].data[j] = static_cast<unsigned char>(temp);
+		}
+		// Font { char0 { width
+		chars[i].width = sfchar["width"];
+	}
+}
+
+void Font::loadFromCFG()
+{
+	loadFromCFG("liero.cfg");
+}
+
+void Font::writeToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &sfont = cfgHelp.getSubgroup(root, "Font");
+
+	for(int i = 0; i < 250; ++i)
+	{
+		libconfig::Setting &sfchar = cfgHelp.getSubgroup(sfont, "char" + to_string(i));
+		libconfig::Setting &sfcdata = cfgHelp.mkArray(sfchar, "data");
+		for(int j = 0; j < 56; ++j)
+		{
+			// convert from Uint8 to int for config
+			sfcdata.add(libconfig::Setting::TypeInt) = static_cast<int>(chars[i].data[j]);
+		}
+		// Font { char0 { width
+		cfgHelp.put(sfchar, "width", chars[i].width);
+	}
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Font::writeToCFG()
+{
+	writeToCFG("liero.cfg");
 }
 
 void Font::drawChar(unsigned char c, int x, int y, int color)
