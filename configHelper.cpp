@@ -7,10 +7,9 @@
 using namespace std;
 using namespace libconfig;
 
-void ConfigHelper::lookupValue(const libconfig::Setting &node, std::string variable, Uint8 &destVariable)
+void ConfigHelper::getValue(const libconfig::Setting &node, std::string variable, Uint8 &destVariable)
 {
-	int value;
-	node.lookupValue(variable, value);
+	int value = node[variable];
 	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
 	{
 		destVariable = static_cast<Uint8>(value);
@@ -19,10 +18,9 @@ void ConfigHelper::lookupValue(const libconfig::Setting &node, std::string varia
 	}
 }
 
-void ConfigHelper::lookupValue(libconfig::Setting &node, std::string variable, Uint8 &destVariable)
+void ConfigHelper::getValue(libconfig::Setting &node, std::string variable, Uint8 &destVariable)
 {
-	int value;
-	node.lookupValue(variable, value);
+	int value = node[variable];
 	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
 	{
 		destVariable = static_cast<Uint8>(value);
