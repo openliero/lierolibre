@@ -503,19 +503,19 @@ void Common::loadConstantsFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &vconstants = constants["Values"];
 	for(int i = 0; i < MaxC; ++i)
 	{
-		vconstants.lookupValue(valueConstantsNames[i], C[i]);
+		C[i] = (int)vconstants[valueConstantsNames[i]];
 	}
 
 	const libconfig::Setting &sconstants = constants["Strings"];
 	for(int i = 0; i < MaxS; ++i)
 	{
-		sconstants.lookupValue(stringConstantsNames[i], S[i]);
+		S[i]= (char const*)sconstants[stringConstantsNames[i]];
 	}
 
 	const libconfig::Setting &hconstants = constants["Hacks"];
 	for(int i = 0; i < MaxH; ++i)
 	{
-		hconstants.lookupValue(hackConstantsNames[i], H[i]);
+		H[i] = (bool)hconstants[hackConstantsNames[i]];
 	}
 }
 

@@ -96,69 +96,69 @@ void Texts::loadFromCFG()
 	cfg.readFile("liero.cfg");
 	const libconfig::Setting &texts = cfg.lookup("Texts");
 
-	texts.lookupValue("random", random);
-	texts.lookupValue("random2", random2);
-	texts.lookupValue("regenLevel", regenLevel);
-	texts.lookupValue("reloadLevel", reloadLevel);
+	random = (char const*)texts["random"];
+	random2 = (char const*)texts["random2"];
+	regenLevel = (char const*)texts["regenLevel"];
+	reloadLevel = (char const*)texts["reloadLevel"];
 
-	texts.lookupValue("copyright1", copyright1);
-	texts.lookupValue("copyright2", copyright2);
-	texts.lookupValue("saveoptions", saveoptions);
-	texts.lookupValue("loadoptions", loadoptions);
-	texts.lookupValue("curOptNoFile", curOptNoFile);
-	texts.lookupValue("curOpt", curOpt);
+	copyright1 = (char const*)texts["copyright1"];
+	copyright2 = (char const*)texts["copyright2"];
+	saveoptions = (char const*)texts["saveoptions"];
+	loadoptions = (char const*)texts["loadoptions"];
+	curOptNoFile = (char const*)texts["curOptNoFile"];
+	curOpt = (char const*)texts["curOpt"];
 
 	const libconfig::Setting &sgmodes = texts["gameModes"];
 	for(int i = 0; i < 4; ++i)
 	{
-		sgmodes.lookupValue("gameModes" + to_string(i), gameModes[i]);
+		gameModes[i] = (char const*)sgmodes["gameModes" + to_string(i)];
 	}
 
 	const libconfig::Setting &sgmspec = texts["gameModeSpec"];
-	sgmspec.lookupValue("gameModeSpec0", gameModeSpec[0]);
-	sgmspec.lookupValue("gameModeSpec1", gameModeSpec[1]);
-	sgmspec.lookupValue("gameModeSpec2", gameModeSpec[2]);
+	gameModeSpec[0] = (char const*)sgmspec["gameModeSpec0"];
+	gameModeSpec[1] = (char const*)sgmspec["gameModeSpec1"];
+	gameModeSpec[2] = (char const*)sgmspec["gameModeSpec2"];
 
 	const libconfig::Setting &sonoff = texts["onoff"];
-	sonoff.lookupValue("onoff0", onoff[0]);
-	sonoff.lookupValue("onoff1", onoff[1]);
+	onoff[0] = (char const*)sonoff["onoff0"];
+	onoff[1] = (char const*)sonoff["onoff1"];
 
 	const libconfig::Setting &scontrollers = texts["controllers"];
-	scontrollers.lookupValue("controllers0", controllers[0]);
-	scontrollers.lookupValue("controllers1", controllers[1]);
+	controllers[0] = (char const*)scontrollers["controllers0"];
+	controllers[1] = (char const*)scontrollers["controllers1"];
 
 	const libconfig::Setting &swstates = texts["weapStates"];
 	for(int i = 0; i < 3; ++i)
 	{
-		 swstates.lookupValue("weapStates" + to_string(i), weapStates[i]);
+		 weapStates[i] = (char const*)swstates["weapStates" + to_string(i)];
 	}
 
 	const libconfig::Setting &sknames = texts["keyNames"];
 	for(int i = 1; i < 177; ++i) // First key starts at 1
 	{
-		 sknames.lookupValue("keyNames" + to_string(i), keyNames[i]);
+		keyNames[i] = (char const*)sknames["keyNames" + to_string(i)];
 	}
 
-	texts.lookupValue("selWeap", selWeap);
-	texts.lookupValue("levelRandom", levelRandom);
-	texts.lookupValue("levelIs1", levelIs1);
-	texts.lookupValue("levelIs2", levelIs2);
-	texts.lookupValue("randomize", randomize);
-	texts.lookupValue("done", done);
+	selWeap = (char const*)texts["selWeap"];
+	levelRandom = (char const*)texts["levelRandom"];
+	levelIs1 = (char const*)texts["levelIs1"];
+	levelIs2 = (char const*)texts["levelIs2"];
+	randomize = (char const*)texts["randomize"];
+	done = (char const*)texts["done"];
 
-	texts.lookupValue("reloading", reloading);
-	texts.lookupValue("pressFire", pressFire);
+	reloading = (char const*)texts["reloading"];
+	pressFire = (char const*)texts["pressFire"];
 
-	texts.lookupValue("kills", kills);
-	texts.lookupValue("lives", lives);
+	kills = (char const*)texts["kills"];
+	lives = (char const*)texts["lives"];
 
-	texts.lookupValue("selLevel", selLevel);
+	selLevel = (char const*)texts["selLevel"];
 
-	texts.lookupValue("weapon", weapon);
-	texts.lookupValue("availability", availability);
-	texts.lookupValue("noWeaps", noWeaps);
+	weapon = (char const*)texts["weapon"];
+	availability = (char const*)texts["availability"];
+	noWeaps = (char const*)texts["noWeaps"];
 
-	texts.lookupValue("copyrightBarFormat", copyrightBarFormat);
+	copyrightBarFormat = (int)texts["copyrightBarFormat"];
 }
 
 void Texts::writeToCFG(std::string cfgFilePath)
@@ -269,8 +269,8 @@ void Common::loadPaletteFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &scanim = palette["colorAnim"];
 	for(int i = 0; i < 4; ++i)
 	{
-		scanim.lookupValue("colorAnim" + to_string(i) + "from", colorAnim[i].from);
-		scanim.lookupValue("colorAnim" + to_string(i) + "to", colorAnim[i].to);
+		colorAnim[i].from = (int)scanim["colorAnim" + to_string(i) + "from"];
+		colorAnim[i].to = (int)scanim["colorAnim" + to_string(i) + "to"];
 	}
 }
 
