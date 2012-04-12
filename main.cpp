@@ -84,14 +84,25 @@ try
 	char buf[256];
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
-
-	common->texts.loadFromCFG();
+	if(triggerCFG) {
+		common->texts.loadFromCFG();
+	} else {
+		common->texts.loadFromEXE();
+		common->texts.writeToCFG();
+	}
 
 	//common.texts.loadFromEXE();
 	initKeys();
 	//game.rand.seed(Uint32(std::time(0)));
-	common->loadConstantsFromCFG();
-	loadTablesFromCFG();
+	if(triggerCFG) {
+		common->loadConstantsFromCFG();
+		loadTablesFromCFG();
+	} else {
+		common->loadConstantsFromEXE();
+		common->writeConstantsToCFG();
+		loadTablesFromEXE();
+		writeTablesToCFG();
+	}
 
 	Console::clear();
 	Console::writeTextBar(common->texts.copyright1, common->texts.copyrightBarFormat);
@@ -99,19 +110,23 @@ try
 	Console::writeLine("");
 
 	Console::write(common->S[LoadingAndThinking]);
-	common->font.loadFromCFG();
-	common->loadPaletteFromCFG();
-	gfx.loadPalette(); // This gets the palette from common
-	gfx.loadMenusFromCFG();
-	common->loadGfxFromCFG();
-	/*
 	if(triggerCFG) {
+		common->font.loadFromCFG();
+		common->loadPaletteFromCFG();
+		gfx.loadPalette(); // This gets the palette from common
+		gfx.loadMenusFromCFG();
 		common->loadGfxFromCFG();
 	} else {
+		common->font.loadFromEXE();
+		common->font.writeToCFG();
+		common->loadPalette();
+		common->writePaletteToCFG();
+		gfx.loadPalette(); // This gets the palette from common
+		gfx.loadMenus();
+		gfx.writeMenusToCFG();
 		common->loadGfx();
 		common->writeGfxToCFG();
 	}
-	*/
 	common->loadMaterials(); // TODO: switch to CFG
 	common->loadWeapons(); // TODO: switch to CFG
 	common->loadTextures(); // TODO: switch to CFG
