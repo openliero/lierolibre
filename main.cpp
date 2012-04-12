@@ -116,6 +116,7 @@ try
 		gfx.loadPalette(); // This gets the palette from common
 		gfx.loadMenusFromCFG();
 		common->loadGfxFromCFG();
+		common->loadMaterialsFromCFG();
 	} else {
 		common->font.loadFromEXE();
 		common->font.writeToCFG();
@@ -126,8 +127,9 @@ try
 		gfx.writeMenusToCFG();
 		common->loadGfx();
 		common->writeGfxToCFG();
+		common->loadMaterials();
+		common->writeMaterialsToCFG();
 	}
-	common->loadMaterials(); // TODO: switch to CFG
 	common->loadWeapons(); // TODO: switch to CFG
 	common->loadTextures(); // TODO: switch to CFG
 	common->loadOthers(); // TODO: switch to CFG
