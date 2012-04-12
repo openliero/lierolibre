@@ -582,11 +582,8 @@ void Common::loadGfxFromCHR()
 	textSprites.read(gfx, 4, 4, 26);
 }
 
-void Common::loadGfx()
+void Common::loadGfxExtra()
 {
-	loadGfxFromEXE();
-	loadGfxFromCHR();
-
 	Rand rand;
 
 	for(int y = 0; y < 16; ++y)
@@ -648,6 +645,13 @@ void Common::loadGfx()
 
 		}
 	}
+}
+
+void Common::loadGfx()
+{
+	loadGfxFromEXE();
+	loadGfxFromCHR();
+	loadGfxExtra();
 }
 
 void Common::drawTextSmall(char const* str, int x, int y)
