@@ -654,6 +654,44 @@ void Common::loadGfx()
 	loadGfxExtra();
 }
 
+void Common::loadGfxFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &sgfx = cfg.lookup("Gfx");
+
+	bonusFrames[0] = static_cast<int>(sgfx["bonusFrames"][0]);
+	bonusFrames[1] = static_cast<int>(sgfx["bonusFrames"][1]);
+
+	loadGfxFromCHR();
+	loadGfxExtra();
+}
+
+void Common::loadGfxFromCFG()
+{
+	loadGfxFromCFG("liero.cfg");
+}
+
+void Common::writeGfxToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &sgfx = cfgHelp.getSubgroup(root, "Gfx");
+
+	libconfig::Setting &sgbframes = cfgHelp.mkArray(sgfx, "bonusFrames");
+	sgbframes.add(libconfig::Setting::TypeInt) = bonusFrames[0];
+	sgbframes.add(libconfig::Setting::TypeInt) = bonusFrames[1];
+
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Common::writeGfxToCFG()
+{
+	writeGfxToCFG("liero.cfg");
+}
+
 void Common::drawTextSmall(char const* str, int x, int y)
 {
 	for(; *str; ++str)
