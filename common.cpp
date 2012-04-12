@@ -558,14 +558,17 @@ void Common::loadOthers()
 		bonusSObjects[i] = readUint8(exe) - 1;
 }
 
-void Common::loadGfx()
+void Common::loadGfxFromEXE()
 {
 	FILE* exe = openLieroEXE();
 
 	fseek(exe, 0x1C1DE, SEEK_SET);
 	bonusFrames[0] = readUint8(exe);
 	bonusFrames[1] = readUint8(exe);
+}
 
+void Common::loadGfxFromCHR()
+{
 	FILE* gfx = openLieroCHR();
 
 	fseek(gfx, 10, SEEK_SET); // Skip some header
@@ -577,6 +580,12 @@ void Common::loadGfx()
 	fseek(gfx, 4, SEEK_CUR); // Extra stuff
 
 	textSprites.read(gfx, 4, 4, 26);
+}
+
+void Common::loadGfx()
+{
+	loadGfxFromEXE();
+	loadGfxFromCHR();
 
 	Rand rand;
 

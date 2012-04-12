@@ -155,6 +155,8 @@ struct Common : gvl::shared
 	void loadConstantsFromCFG();
 	void writeConstantsToCFG(std::string cfgFilePath);
 	void writeConstantsToCFG();
+	void loadGfxFromEXE();
+	void loadGfxFromCHR();
 	void loadGfx();
 	void loadPalette();
 	void loadPaletteFromCFG(std::string cfgFilePath);
