@@ -317,6 +317,7 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	mainMenu.setTop(0);
 
 	libconfig::Setting &smsettings = smenus["SettingsMenu"];
+	// 15 + 2 since we are incuding the non-exe TimeToLose and FlagsToWin (inserted afterwards when reading from exe)
 	for(int i = 0; i < 17; ++i)
 	{
 		libconfig::Setting &smsitem = smsettings[i];
@@ -343,6 +344,7 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	}
 
 	libconfig::Setting &smplayer = smenus["PlayerMenu"];
+	// 12 + DIG + 1 since including the non-exe entry out of iteration convenience
 	for(int i = 0; i < 14; ++i)
 	{
 		libconfig::Setting &smpitem = smplayer[i];
@@ -355,6 +357,7 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 		std::string str = smpitem["string"];
 
 		playerMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
+		// This is done when loading from exe, uncertain if necessary
 		if(i == 12)
 		{
 		playerMenu.setTop(0);
@@ -407,6 +410,7 @@ void Gfx::writeMenusToCFG(std::string cfgFilePath)
 	}
 
 	libconfig::Setting &smsettings = cfgHelp.getSubgroup(smenus, "SettingsMenu");
+	// 15 + 2 since we are incuding the non-exe TimeToLose and FlagsToWin (inserted afterwards when reading from exe)
 	for(int i = 0; i < 17; ++i)
 	{
 		libconfig::Setting &smsitems = cfgHelp.getSubgroup(smsettings, "items" + to_string(i));
