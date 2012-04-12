@@ -35,15 +35,18 @@
 class ConfigHelper
 {
 public:
-	void getValue(const libconfig::Setting &node, std::string variable, Uint8 &destVariable);
-	void getValue(libconfig::Setting &node, std::string variable, Uint8 &destVariable);
-	void getValue(const libconfig::Setting &node, int index, Uint8 &destVariable);
-	void getValue(libconfig::Setting &node, int index, Uint8 &destVariable);
+	template<typename N, typename I, typename D>
+	void getValue(N &node, I index, D &destVariable);
 
-	void put(libconfig::Setting &node, std::string variable, std::string value);
-	void put(libconfig::Setting &node, std::string variable, int value);
-	void put(libconfig::Setting &node, std::string variable, Uint8 value);
+/* nice templates, but they expose too many arguments
+	template<typename V>
+	void put(libconfig::Setting &node, std::string variable, libconfig::Setting::Type type, V value);
+*/
+
 	void put(libconfig::Setting &node, std::string variable, bool value);
+	void put(libconfig::Setting &node, std::string variable, Uint8 value);
+	void put(libconfig::Setting &node, std::string variable, int value);
+	void put(libconfig::Setting &node, std::string variable, std::string value);
 
 	libconfig::Setting& mkArray(libconfig::Setting &node, std::string arrayName);
 	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);

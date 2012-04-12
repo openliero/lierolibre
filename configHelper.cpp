@@ -7,49 +7,51 @@
 using namespace std;
 using namespace libconfig;
 
-void ConfigHelper::getValue(const libconfig::Setting &node, std::string variable, Uint8 &destVariable)
-{
-	int value = node[variable];
-	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
-	{
-		destVariable = static_cast<Uint8>(value);
-	} else {
-		throw overflow_error("Config value '" + variable + "' is too big");
-	}
-}
-
-void ConfigHelper::getValue(libconfig::Setting &node, std::string variable, Uint8 &destVariable)
-{
-	int value = node[variable];
-	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
-	{
-		destVariable = static_cast<Uint8>(value);
-	} else {
-		throw overflow_error("Config value '" + variable + "' is too big");
-	}
-}
-
-void ConfigHelper::getValue(const libconfig::Setting &node, int index, Uint8 &destVariable)
+template<typename N, typename I, typename D>
+void ConfigHelper::getValue(N &node, I index, D &destVariable)
 {
 	int value = node[index];
-	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
+	if(value <= numeric_limits<D>::max() && value >= numeric_limits<D>::min())
 	{
-		destVariable = static_cast<Uint8>(value);
+		destVariable = static_cast<D>(value);
 	} else {
-		throw overflow_error("Config value from index is too big");
+		throw overflow_error("Config value is too big");
 	}
 }
 
-void ConfigHelper::getValue(libconfig::Setting &node, int index, Uint8 &destVariable)
+template void ConfigHelper::getValue<const libconfig::Setting, int, Uint8>(const libconfig::Setting &node, int index, Uint8 &destVariable);
+
+template void ConfigHelper::getValue<const libconfig::Setting, char const*, Uint8>(const libconfig::Setting &node, char const* variable, Uint8 &destVariable);
+
+template void ConfigHelper::getValue<const libconfig::Setting, std::string, Uint8>(const libconfig::Setting &node, std::string variable, Uint8 &destVariable);
+
+
+template void ConfigHelper::getValue<libconfig::Setting, int, Uint8>(libconfig::Setting &node, int index, Uint8 &destVariable);
+
+template void ConfigHelper::getValue<libconfig::Setting, char const*, Uint8>(libconfig::Setting &node, char const* variable, Uint8 &destVariable);
+
+template void ConfigHelper::getValue<libconfig::Setting, std::string, Uint8>(libconfig::Setting &node, std::string variable, Uint8 &destVariable);
+
+/* nice templates, but they expose too many arguments
+template<typename V>
+void ConfigHelper::put(Setting &node, string variable, Setting::Type type, V value)
 {
-	int value = node[index];
-	if(value <= numeric_limits<Uint8>::max() && value >= numeric_limits<Uint8>::min())
+	if(!node.exists(variable))
 	{
-		destVariable = static_cast<Uint8>(value);
+		node.add(variable, type) = value;
 	} else {
-		throw overflow_error("Config value from index is too big");
+		node[variable] = value;
 	}
 }
+
+template void ConfigHelper::put<bool>(Setting &node, string variable, Setting::Type type, bool value);
+
+template void ConfigHelper::put<Uint8>(Setting &node, string variable, Setting::Type type, Uint8 value);
+
+template void ConfigHelper::put<int>(Setting &node, string variable, Setting::Type type, int value);
+
+template void ConfigHelper::put<string>(Setting &node, string variable, Setting::Type type, string value);
+*/
 
 void ConfigHelper::put(Setting &node, string variable, string value)
 {
