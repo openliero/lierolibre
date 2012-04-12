@@ -147,6 +147,10 @@ struct Common : gvl::shared
 	static int fireConeOffset[2][7][2];
 
 	void loadMaterials();
+	void loadMaterialsFromCFG(std::string);
+	void loadMaterialsFromCFG();
+	void writeMaterialsToCFG(std::string);
+	void writeMaterialsToCFG();
 	void loadWeapons();
 	void loadTextures();
 	void loadOthers();

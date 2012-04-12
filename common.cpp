@@ -339,6 +339,44 @@ void Common::loadMaterials()
 	}
 }
 
+void Common::loadMaterialsFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &smaterials = cfg.lookup("Materials");
+
+	for(int i = 0; i < 256; ++i)
+	{
+		const libconfig::Setting &smflags = smaterials["flags" + to_string(i)];
+		materials[i].flags = smflags;
+	}
+}
+
+void Common::loadMaterialsFromCFG()
+{
+	loadMaterialsFromCFG("liero.cfg");
+}
+
+void Common::writeMaterialsToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &smaterials = cfgHelp.getSubgroup(root, "Materials");
+
+	for(int i = 0; i < 256; ++i)
+	{
+		cfgHelp.put(smaterials, "flags" + to_string(i), materials[i].flags);
+	}
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Common::writeMaterialsToCFG()
+{
+	writeMaterialsToCFG("liero.cfg");
+}
+
 struct Read32
 {
 	static inline int run(FILE* f)
