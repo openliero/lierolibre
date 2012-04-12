@@ -30,6 +30,9 @@ void Texts::loadFromEXE()
 	reloadLevel = readPascalStringAt(exe, 0xD42D);
 
 	copyright1 = readPascalStringAt(exe, 0xFB60);
+	// Get rid of NULL + 2 garbage bytes...
+	copyright1.erase(0, 3);
+
 	copyright2 = readPascalStringAt(exe, 0xE693);
 	saveoptions = readPascalStringAt(exe, 0xE6BB);
 	loadoptions = readPascalStringAt(exe, 0xE6CC);
