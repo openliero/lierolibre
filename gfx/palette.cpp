@@ -98,9 +98,9 @@ void Palette::readFromCFG(std::string cfgFilePath)
 
 	for(int i = 0; i < 256; ++i)
 	{
-		cfgHelp.getValue(spentries, "entries" + to_string(i) + "r", entries[i].r);
-		cfgHelp.getValue(spentries, "entries" + to_string(i) + "g", entries[i].g);
-		cfgHelp.getValue(spentries, "entries" + to_string(i) + "b", entries[i].b);
+		entries[i].r = cfgHelp.getValue<Uint8>(spentries, "entries" + to_string(i) + "r");
+		entries[i].g = cfgHelp.getValue<Uint8>(spentries, "entries" + to_string(i) + "g");
+		entries[i].b = cfgHelp.getValue<Uint8>(spentries, "entries" + to_string(i) + "b");
 	}
 }
 

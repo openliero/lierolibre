@@ -54,9 +54,7 @@ void Font::loadFromCFG(std::string cfgFilePath)
 		{
 			// Font { char0 { data[]
 			const libconfig::Setting &sfcdata = sfchar["data"];
-			Uint8 temp;
-			cfgHelp.getValue(sfcdata, j, temp);
-			chars[i].data[j] = static_cast<unsigned char>(temp);
+			chars[i].data[j] = cfgHelp.getValue<Uint8>(sfcdata, j);
 		}
 		// Font { char0 { width
 		chars[i].width = sfchar["width"];

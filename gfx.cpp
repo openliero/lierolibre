@@ -300,16 +300,13 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	cfg.readFile(cfgFilePath.c_str());
 	libconfig::Setting &smenus = cfg.lookup("Menus");
 
-	libconfig::Setting &smmain = smenus["MainMenu"];
+	const libconfig::Setting &smmain = smenus["MainMenu"];
 	for(int i = 0; i < 4; ++i)
 	{
-		libconfig::Setting &smmitem = smmain[i];
+		const libconfig::Setting &smmitem = smmain[i];
 
-		Uint8 col;
-		Uint8 dCol;
-
-		cfgHelp.getValue(smmitem, "color", col);
-		cfgHelp.getValue(smmitem, "disColour", dCol);
+		Uint8 col = cfgHelp.getValue<Uint8>(smmitem, "color");
+		Uint8 dCol = cfgHelp.getValue<Uint8>(smmitem, "disColour");
 		std::string str = smmitem["string"];
 
 		mainMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
@@ -322,11 +319,8 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	{
 		libconfig::Setting &smsitem = smsettings[i];
 
-		Uint8 col;
-		Uint8 dCol;
-
-		cfgHelp.getValue(smsitem, "color", col);
-		cfgHelp.getValue(smsitem, "disColour", dCol);
+		Uint8 col = cfgHelp.getValue<Uint8>(smsitem, "color");
+		Uint8 dCol = cfgHelp.getValue<Uint8>(smsitem, "disColour");
 		std::string str = smsitem["string"];
 
 		settingsMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
@@ -349,11 +343,8 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	{
 		libconfig::Setting &smpitem = smplayer[i];
 
-		Uint8 col;
-		Uint8 dCol;
-
-		cfgHelp.getValue(smpitem, "color", col);
-		cfgHelp.getValue(smpitem, "disColour", dCol);
+		Uint8 col = cfgHelp.getValue<Uint8>(smpitem, "color");
+		Uint8 dCol = cfgHelp.getValue<Uint8>(smpitem, "disColour");
 		std::string str = smpitem["string"];
 
 		playerMenu.addItem(MenuItem(static_cast<unsigned char>(col), static_cast<unsigned char>(dCol), str));
