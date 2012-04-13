@@ -565,7 +565,7 @@ void Common::loadWeapons()
 
 // This is some serious cargo-culting
 template<typename T, int N, typename U>
-inline void cfgReadMembers(const libconfig::Setting &node, std::string variable, T(&arr)[N], U (T::*mem))
+void cfgReadMembers(const libconfig::Setting &node, std::string variable, T(&arr)[N], U (T::*mem))
 {
 	for(int i = 0; i < N; ++i)
 	{
