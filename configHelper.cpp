@@ -7,52 +7,35 @@
 using namespace std;
 using namespace libconfig;
 
-template<typename N, typename I, typename D>
-void ConfigHelper::getValue(N &node, I index, D &destVariable)
+// This templateification is somewhat unnecessay, could just use getUint8()
+template<typename Dest, typename Node, typename Idx>
+Dest ConfigHelper::getValue(Node &node, Idx index)
 {
 	int value = node[index];
-	if(value <= numeric_limits<D>::max() && value >= numeric_limits<D>::min())
+	if(value <= numeric_limits<Dest>::max() && value >= numeric_limits<Dest>::min())
 	{
-		destVariable = static_cast<D>(value);
+		return static_cast<Dest>(value);
 	} else {
 		throw overflow_error("Config value is too big");
 	}
 }
 
-template void ConfigHelper::getValue<const libconfig::Setting, int, Uint8>(const libconfig::Setting &node, int index, Uint8 &destVariable);
+template Uint8 ConfigHelper::getValue<Uint8, const Setting, int>(const Setting &node, int index);
 
-template void ConfigHelper::getValue<const libconfig::Setting, char const*, Uint8>(const libconfig::Setting &node, char const* variable, Uint8 &destVariable);
+template Uint8 ConfigHelper::getValue<Uint8, const Setting, char const*>(const Setting &node, char const* index);
 
-template void ConfigHelper::getValue<const libconfig::Setting, std::string, Uint8>(const libconfig::Setting &node, std::string variable, Uint8 &destVariable);
+template Uint8 ConfigHelper::getValue<Uint8, const Setting, string>(const Setting &node, string index);
+
+// Non-const
+template Uint8 ConfigHelper::getValue<Uint8, Setting, int>(Setting &node, int index);
+
+template Uint8 ConfigHelper::getValue<Uint8, Setting, char const*>(Setting &node, char const* index);
+
+template Uint8 ConfigHelper::getValue<Uint8, Setting, string>(Setting &node, string index);
 
 
-template void ConfigHelper::getValue<libconfig::Setting, int, Uint8>(libconfig::Setting &node, int index, Uint8 &destVariable);
-
-template void ConfigHelper::getValue<libconfig::Setting, char const*, Uint8>(libconfig::Setting &node, char const* variable, Uint8 &destVariable);
-
-template void ConfigHelper::getValue<libconfig::Setting, std::string, Uint8>(libconfig::Setting &node, std::string variable, Uint8 &destVariable);
-
-/* nice templates, but they expose too many arguments
-template<typename V>
-void ConfigHelper::put(Setting &node, string variable, Setting::Type type, V value)
-{
-	if(!node.exists(variable))
-	{
-		node.add(variable, type) = value;
-	} else {
-		node[variable] = value;
-	}
-}
-
-template void ConfigHelper::put<bool>(Setting &node, string variable, Setting::Type type, bool value);
-
-template void ConfigHelper::put<Uint8>(Setting &node, string variable, Setting::Type type, Uint8 value);
-
-template void ConfigHelper::put<int>(Setting &node, string variable, Setting::Type type, int value);
-
-template void ConfigHelper::put<string>(Setting &node, string variable, Setting::Type type, string value);
-*/
-
+// Since we still need specialisation per value type (Setting::Type),
+// no need to templateify these
 void ConfigHelper::put(Setting &node, string variable, string value)
 {
 	if(!node.exists(variable))
@@ -96,6 +79,7 @@ void ConfigHelper::put(Setting &node, string variable, bool value)
 		var = value;
 	}
 }
+
 
 Setting& ConfigHelper::mkArray(Setting &node, string arrayName)
 {

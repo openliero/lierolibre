@@ -35,13 +35,8 @@
 class ConfigHelper
 {
 public:
-	template<typename N, typename I, typename D>
-	void getValue(N &node, I index, D &destVariable);
-
-/* nice templates, but they expose too many arguments
-	template<typename V>
-	void put(libconfig::Setting &node, std::string variable, libconfig::Setting::Type type, V value);
-*/
+	template<typename Dest, typename Node, typename Idx>
+	Dest getValue(Node &node, Idx index);
 
 	void put(libconfig::Setting &node, std::string variable, bool value);
 	void put(libconfig::Setting &node, std::string variable, Uint8 value);
