@@ -153,6 +153,7 @@ struct Common : gvl::shared
 	void writeMaterialsToCFG();
 	void loadWeapons();
 	void loadWeaponsFromCFG(std::string cfgFilePath);
+	void loadWeaponsFromCFG();
 	void loadTextures();
 	void loadOthers();
 	void loadConstantsFromEXE();

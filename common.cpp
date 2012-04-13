@@ -563,13 +563,28 @@ void Common::loadWeapons()
 	}
 }
 
+// This is some serious cargo-culting
+template<typename T, int N, typename U>
+inline void cfgReadMembers(const libconfig::Setting &node, std::string variable, T(&arr)[N], U (T::*mem))
+{
+	for(int i = 0; i < N; ++i)
+	{
+		(arr[i].*mem) = node[i][variable];
+	}
+}
+
 void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 {
 	FILE* exe = openLieroEXE();
 
-	fseek(exe, 112806, SEEK_SET);
+	fseek(exe, 112846, SEEK_SET);
 
-	readMembers<Read8>(exe, weapons, &Weapon::detectDistance);
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &sweapons = cfg.lookup("Weapons");
+
+	cfgReadMembers(sweapons, "detectDistance", weapons, &Weapon::detectDistance);
+
 	readMembers<ReadBool>(exe, weapons, &Weapon::affectByWorm);
 	readMembers<Read8>(exe, weapons, &Weapon::blowAway);
 
@@ -697,6 +712,11 @@ void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 	{
 		nobjectTypes[i].id = i;
 	}
+}
+
+void Common::loadWeaponsFromCFG()
+{
+	loadWeaponsFromCFG("liero.cfg");
 }
 
 void Common::loadTextures()
