@@ -563,6 +563,142 @@ void Common::loadWeapons()
 	}
 }
 
+void Common::loadWeaponsFromCFG(std::string cfgFilePath)
+{
+	FILE* exe = openLieroEXE();
+
+	fseek(exe, 112806, SEEK_SET);
+
+	readMembers<Read8>(exe, weapons, &Weapon::detectDistance);
+	readMembers<ReadBool>(exe, weapons, &Weapon::affectByWorm);
+	readMembers<Read8>(exe, weapons, &Weapon::blowAway);
+
+	for(int i = 0; i < 40; ++i)
+	{
+		weapOrder[i + 1] = readUint8(exe) - 1;
+	}
+
+	readMembers<Read16>(exe, weapons, &Weapon::gravity);
+	readMembers<ReadBool>(exe, weapons, &Weapon::shadow);
+	readMembers<ReadBool>(exe, weapons, &Weapon::laserSight);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::launchSound);
+	readMembers<ReadBool>(exe, weapons, &Weapon::loopSound);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::exploSound);
+	readMembers<Read16>(exe, weapons, &Weapon::speed);
+	readMembers<Read16>(exe, weapons, &Weapon::addSpeed);
+	readMembers<Read16>(exe, weapons, &Weapon::distribution);
+	readMembers<Read8>(exe, weapons, &Weapon::parts);
+	readMembers<Read8>(exe, weapons, &Weapon::recoil);
+	readMembers<Read16>(exe, weapons, &Weapon::multSpeed);
+	readMembers<Read16>(exe, weapons, &Weapon::delay);
+	readMembers<Read16>(exe, weapons, &Weapon::loadingTime);
+	readMembers<Read8>(exe, weapons, &Weapon::ammo);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::createOnExp);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::dirtEffect);
+	readMembers<Read8>(exe, weapons, &Weapon::leaveShells);
+	readMembers<Read8>(exe, weapons, &Weapon::leaveShellDelay);
+	readMembers<ReadBool>(exe, weapons, &Weapon::playReloadSound);
+	readMembers<ReadBool>(exe, weapons, &Weapon::wormExplode);
+	readMembers<ReadBool>(exe, weapons, &Weapon::explGround);
+	readMembers<ReadBool>(exe, weapons, &Weapon::wormCollide);
+	readMembers<Read8>(exe, weapons, &Weapon::fireCone);
+	readMembers<ReadBool>(exe, weapons, &Weapon::collideWithObjects);
+	readMembers<ReadBool>(exe, weapons, &Weapon::affectByExplosions);
+	readMembers<Read8>(exe, weapons, &Weapon::bounce);
+	readMembers<Read16>(exe, weapons, &Weapon::timeToExplo);
+	readMembers<Read16>(exe, weapons, &Weapon::timeToExploV);
+	readMembers<Read8>(exe, weapons, &Weapon::hitDamage);
+	readMembers<Read8>(exe, weapons, &Weapon::bloodOnHit);
+	readMembers<Read16>(exe, weapons, &Weapon::startFrame);
+	readMembers<Read8>(exe, weapons, &Weapon::numFrames);
+	readMembers<ReadBool>(exe, weapons, &Weapon::loopAnim);
+	readMembers<Read8>(exe, weapons, &Weapon::shotType);
+	readMembers<Read8>(exe, weapons, &Weapon::colorBullets);
+	readMembers<Read8>(exe, weapons, &Weapon::splinterAmount);
+	readMembers<Read8>(exe, weapons, &Weapon::splinterColour);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::splinterType);
+	readMembers<Read8>(exe, weapons, &Weapon::splinterScatter);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::objTrailType);
+	readMembers<Read8>(exe, weapons, &Weapon::objTrailDelay);
+	readMembers<Read8>(exe, weapons, &Weapon::partTrailType);
+	readMembers<Dec<Read8> >(exe, weapons, &Weapon::partTrailObj);
+	readMembers<Read8>(exe, weapons, &Weapon::partTrailDelay);
+
+	fseek(exe, 0x1B676, SEEK_SET);
+	for(int i = 0; i < 40; ++i)
+	{
+		weapons[i].name = readPascalString(exe, 14);
+		weapons[i].id = i;
+	}
+
+	// Special objects
+	fseek(exe, 115218, SEEK_SET);
+	readMembers<Dec<Read8> >(exe, sobjectTypes, &SObjectType::startSound);
+	//fseek(exe, 115232, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::numSounds);
+	//fseek(exe, 115246, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::animDelay);
+	//fseek(exe, 115260, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::startFrame);
+	//fseek(exe, 115274, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::numFrames);
+	//fseek(exe, 115288, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::detectRange);
+	//fseek(exe, 115302, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::damage);
+	//fseek(exe, 0x1C274, SEEK_SET);
+	readMembers<Read32>(exe, sobjectTypes, &SObjectType::blowAway); // blowAway has 13 slots, not 14. The last value will overlap with shadow.
+	fseek(exe, 115368, SEEK_SET);
+	readMembers<ReadBool>(exe, sobjectTypes, &SObjectType::shadow);
+	//fseek(exe, 115382, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::shake);
+	//fseek(exe, 115396, SEEK_SET);
+	readMembers<Read8>(exe, sobjectTypes, &SObjectType::flash);
+	//fseek(exe, 115410, SEEK_SET); // Was 115409
+	readMembers<Dec<Read8> >(exe, sobjectTypes, &SObjectType::dirtEffect);
+
+	for(int i = 0; i < 14; ++i) // TODO: Unhardcode
+	{
+		sobjectTypes[i].id = i;
+	}
+
+	fseek(exe, 111430, SEEK_SET);
+
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::detectDistance);
+	readMembers<Read16>(exe, nobjectTypes, &NObjectType::gravity);
+	readMembers<Read16>(exe, nobjectTypes, &NObjectType::speed);
+	readMembers<Read16>(exe, nobjectTypes, &NObjectType::speedV);
+	readMembers<Read16>(exe, nobjectTypes, &NObjectType::distribution);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::blowAway);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::bounce);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::hitDamage);
+	readMembers<ReadBool>(exe, nobjectTypes, &NObjectType::wormExplode);
+	readMembers<ReadBool>(exe, nobjectTypes, &NObjectType::explGround);
+	readMembers<ReadBool>(exe, nobjectTypes, &NObjectType::wormDestroy);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::bloodOnHit);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::startFrame);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::numFrames);
+	readMembers<ReadBool>(exe, nobjectTypes, &NObjectType::drawOnMap);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::colorBullets);
+	readMembers<Dec<Read8> >(exe, nobjectTypes, &NObjectType::createOnExp);
+	readMembers<ReadBool>(exe, nobjectTypes, &NObjectType::affectByExplosions);
+	readMembers<Dec<Read8> >(exe, nobjectTypes, &NObjectType::dirtEffect);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::splinterAmount);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::splinterColour);
+	readMembers<Dec<Read8> >(exe, nobjectTypes, &NObjectType::splinterType);
+	readMembers<ReadBool>(exe, nobjectTypes, &NObjectType::bloodTrail);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::bloodTrailDelay);
+	readMembers<Dec<Read8> >(exe, nobjectTypes, &NObjectType::leaveObj);
+	readMembers<Read8>(exe, nobjectTypes, &NObjectType::leaveObjDelay);
+	readMembers<Read16>(exe, nobjectTypes, &NObjectType::timeToExplo);
+	readMembers<Read16>(exe, nobjectTypes, &NObjectType::timeToExploV);
+
+	for(int i = 0; i < 24; ++i) // TODO: Unhardcode
+	{
+		nobjectTypes[i].id = i;
+	}
+}
+
 void Common::loadTextures()
 {
 	FILE* exe = openLieroEXE();
