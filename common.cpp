@@ -962,8 +962,8 @@ void Common::loadGfxFromCFG(std::string cfgFilePath)
 	cfg.readFile(cfgFilePath.c_str());
 	const libconfig::Setting &sgfx = cfg.lookup("Gfx");
 
-	bonusFrames[0] = static_cast<int>(sgfx["bonusFrames"][0]);
-	bonusFrames[1] = static_cast<int>(sgfx["bonusFrames"][1]);
+	bonusFrames[0] = (int)sgfx["bonusFrames"][0];
+	bonusFrames[1] = (int)sgfx["bonusFrames"][1];
 
 	loadGfxFromCHR();
 	loadGfxExtra();
