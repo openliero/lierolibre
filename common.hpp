@@ -151,18 +151,27 @@ struct Common : gvl::shared
 	void loadMaterialsFromCFG();
 	void writeMaterialsToCFG(std::string);
 	void writeMaterialsToCFG();
+
 	void loadWeapons();
 	void loadWeaponsFromCFG(std::string cfgFilePath);
 	void loadWeaponsFromCFG();
 	void writeWeaponsToCFG(std::string cfgFilePath);
 	void writeWeaponsToCFG();
+
 	void loadTextures();
+	void loadTexturesFromCFG(std::string cfgFilePath);
+	void loadTexturesFromCFG();
+	void writeTexturesToCFG(std::string cfgFilePath);
+	void writeTexturesToCFG();
+
 	void loadOthers();
+
 	void loadConstantsFromEXE();
 	void loadConstantsFromCFG(std::string cfgFilePath);
 	void loadConstantsFromCFG();
 	void writeConstantsToCFG(std::string cfgFilePath);
 	void writeConstantsToCFG();
+
 	void loadGfxFromEXE();
 	void loadGfxFromCHR();
 	void loadGfxExtra();
@@ -171,11 +180,13 @@ struct Common : gvl::shared
 	void loadGfxFromCFG();
 	void writeGfxToCFG(std::string cfgFilePath);
 	void writeGfxToCFG();
+
 	void loadPalette();
 	void loadPaletteFromCFG(std::string cfgFilePath);
 	void loadPaletteFromCFG();
 	void writePaletteToCFG(std::string cfgFilePath);
 	void writePaletteToCFG();
+
 	void drawTextSmall(char const* str, int x, int y);
 
 	PalIdx* wormSprite(int f, int dir, int w)

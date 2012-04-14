@@ -838,6 +838,50 @@ void Common::loadTextures()
 	readMembers<Read8>(exe, textures, &Texture::rFrame);
 }
 
+void Common::loadTexturesFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &stextures = cfg.lookup("Textures");
+
+	for(int i = 0; i < 9; ++i)
+	{
+		// Textures { textures0 { property
+		textures[i].nDrawBack = (bool)sttextures[i]["nDrawBack"];
+		textures[i].mFrame = (int)sttextures[i]["mFrame"];
+		textures[i].sFrame = (int)sttextures[i]["sFrame"];
+		textures[i].rFrame = (int)sttextures[i]["rFrame"];
+	}
+}
+
+void Common::loadTexturesFromCFG()
+{
+	loadTexturesFromCFG("liero.cfg");
+}
+
+void Common::writeTexturesToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &stextures = cfgHelp.getSubgroup(root, "Textures");
+
+	for(int i = 0; i < 9; ++i)
+	{
+		libconfig::Setting &sttextures = cfgHelp.getSubgroup(sstextures, "textures" + to_string(i));
+		cfgHelp.put(sttextures, "nDrawBack", textures[i].nDrawBack);
+		cfgHelp.put(sttextures, "mFrame", textures[i].mFrame);
+		cfgHelp.put(sttextures, "sFrame", textures[i].sFrame);
+		cfgHelp.put(sttextures, "rFrame", textures[i].rFrame);
+	}
+	cfg.writeFile(cfgFilePath.c_str());
+}
+void Common::writeTexturesToCFG()
+{
+	writeTexturesToCFG("liero.cfg");
+}
+
 void Common::loadOthers()
 {
 	FILE* exe = openLieroEXE();
