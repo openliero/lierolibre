@@ -118,6 +118,7 @@ try
 		common->loadGfxFromCFG();
 		common->loadMaterialsFromCFG();
 		common->loadWeaponsFromCFG();
+		common->loadTexturesFromCFG(); // TODO
 	} else {
 		common->font.loadFromEXE();
 		common->font.writeToCFG();
@@ -132,8 +133,9 @@ try
 		common->writeMaterialsToCFG();
 		common->loadWeapons();
 		common->writeWeaponsToCFG();
+		common->loadTextures(); // TODO
+		common->writeTexturesToCFG(); // TODO
 	}
-	common->loadTextures(); // TODO: switch to CFG
 	common->loadOthers(); // TODO: switch to CFG
 	Console::writeLine(common->S[OK]);
 
