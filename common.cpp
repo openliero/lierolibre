@@ -847,10 +847,10 @@ void Common::loadTexturesFromCFG(std::string cfgFilePath)
 	for(int i = 0; i < 9; ++i)
 	{
 		// Textures { textures0 { property
-		textures[i].nDrawBack = (bool)sttextures[i]["nDrawBack"];
-		textures[i].mFrame = (int)sttextures[i]["mFrame"];
-		textures[i].sFrame = (int)sttextures[i]["sFrame"];
-		textures[i].rFrame = (int)sttextures[i]["rFrame"];
+		textures[i].nDrawBack = (bool)stextures[i]["nDrawBack"];
+		textures[i].mFrame = (int)stextures[i]["mFrame"];
+		textures[i].sFrame = (int)stextures[i]["sFrame"];
+		textures[i].rFrame = (int)stextures[i]["rFrame"];
 	}
 }
 
@@ -869,7 +869,7 @@ void Common::writeTexturesToCFG(std::string cfgFilePath)
 
 	for(int i = 0; i < 9; ++i)
 	{
-		libconfig::Setting &sttextures = cfgHelp.getSubgroup(sstextures, "textures" + to_string(i));
+		libconfig::Setting &sttextures = cfgHelp.getSubgroup(stextures, "textures" + to_string(i));
 		cfgHelp.put(sttextures, "nDrawBack", textures[i].nDrawBack);
 		cfgHelp.put(sttextures, "mFrame", textures[i].mFrame);
 		cfgHelp.put(sttextures, "sFrame", textures[i].sFrame);
