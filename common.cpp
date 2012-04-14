@@ -582,122 +582,119 @@ void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &swworder = sweapons["weapOrder"];
 	for(int i = 0; i < 40; ++i)
 	{
+		// Weapons { weapOrder { weapOrder1
 		weapOrder[i + 1] = swworder[i];
 	}
 
 	const libconfig::Setting &swweapons = sweapons["weapons"];
-
 	for(int i = 0; i < 40; ++i)
 	{
-		// Weapons { weapons { weapon0 { variable
+		// Weapons { weapons { weapon0 { property
 		weapons[i].name = (const char*)swweapons[i]["name"];
-		weapons[i].id = i;
+		weapons[i].id = i; // Not in config
+		weapons[i].detectDistance = (int)swweapons[i]["detectDistance"];
+		weapons[i].affectByWorm = (bool)swweapons[i]["affectByWorm"];
+		weapons[i].blowAway = (int)swweapons[i]["blowAway"];
+		weapons[i].gravity = (fixed)swweapons[i]["gravity"];
+		weapons[i].shadow = (bool)swweapons[i]["shadow"];
+		weapons[i].laserSight = (bool)swweapons[i]["laserSight"];
+		weapons[i].launchSound = (int)swweapons[i]["launchSound"];
+		weapons[i].loopSound = (int)swweapons[i]["loopSound"];
+		weapons[i].exploSound = (int)swweapons[i]["exploSound"];
+		weapons[i].speed = (int)swweapons[i]["speed"];
+		weapons[i].addSpeed = (fixed)swweapons[i]["addSpeed"];
+		weapons[i].distribution = (int)swweapons[i]["distribution"];
+		weapons[i].parts = (int)swweapons[i]["parts"];
+		weapons[i].recoil = (int)swweapons[i]["recoil"];
+		weapons[i].multSpeed = (int)swweapons[i]["multSpeed"];
+		weapons[i].delay = (int)swweapons[i]["delay"];
+		weapons[i].loadingTime = (int)swweapons[i]["loadingTime"];
+		weapons[i].ammo = (int)swweapons[i]["ammo"];
+		weapons[i].createOnExp = (int)swweapons[i]["createOnExp"];
+		weapons[i].dirtEffect = (int)swweapons[i]["dirtEffect"];
+		weapons[i].leaveShells = (int)swweapons[i]["leaveShells"];
+		weapons[i].leaveShellDelay = (int)swweapons[i]["leaveShellDelay"];
+		weapons[i].playReloadSound = (bool)swweapons[i]["playReloadSound"];
+		weapons[i].wormExplode = (bool)swweapons[i]["wormExplode"];
+		weapons[i].explGround = (bool)swweapons[i]["explGround"];
+		weapons[i].wormCollide = (bool)swweapons[i]["wormCollide"];
+		weapons[i].fireCone = (int)swweapons[i]["fireCone"];
+		weapons[i].collideWithObjects = (bool)swweapons[i]["collideWithObjects"];
+		weapons[i].affectByExplosions = (bool)swweapons[i]["affectByExplosions"];
+		weapons[i].bounce = (int)swweapons[i]["bounce"];
+		weapons[i].timeToExplo = (int)swweapons[i]["timeToExplo"];
+		weapons[i].timeToExploV = (int)swweapons[i]["timeToExploV"];
+		weapons[i].hitDamage = (int)swweapons[i]["hitDamage"];
+		weapons[i].bloodOnHit = (int)swweapons[i]["bloodOnHit"];
+		weapons[i].startFrame = (int)swweapons[i]["startFrame"];
+		weapons[i].numFrames = (int)swweapons[i]["numFrames"];
+		weapons[i].loopAnim = (bool)swweapons[i]["loopAnim"];
+		weapons[i].shotType = (int)swweapons[i]["shotType"];
+		weapons[i].colorBullets = (int)swweapons[i]["colorBullets"];
+		weapons[i].splinterAmount = (int)swweapons[i]["splinterAmount"];
+		weapons[i].splinterColour = (int)swweapons[i]["splinterColour"];
+		weapons[i].splinterType = (int)swweapons[i]["splinterType"];
+		weapons[i].splinterScatter = (int)swweapons[i]["splinterScatter"];
+		weapons[i].objTrailType = (int)swweapons[i]["objTrailType"];
+		weapons[i].objTrailDelay = (int)swweapons[i]["objTrailDelay"];
+		weapons[i].partTrailType = (int)swweapons[i]["partTrailType"];
+		weapons[i].partTrailObj = (int)swweapons[i]["partTrailObj"];
+		weapons[i].partTrailDelay = (int)swweapons[i]["partTrailDelay"];
 	}
-
-	cfgReadMembers(swweapons, "detectDistance", weapons, &Weapon::detectDistance);
-	cfgReadMembers(swweapons, "affectByWorm", weapons, &Weapon::affectByWorm);
-	cfgReadMembers(swweapons, "blowAway", weapons, &Weapon::blowAway);
-	cfgReadMembers(swweapons, "gravity", weapons, &Weapon::gravity);
-	cfgReadMembers(swweapons, "shadow", weapons, &Weapon::shadow);
-	cfgReadMembers(swweapons, "laserSight", weapons, &Weapon::laserSight);
-	cfgReadMembers(swweapons, "launchSound", weapons, &Weapon::launchSound);
-	cfgReadMembers(swweapons, "loopSound", weapons, &Weapon::loopSound);
-	cfgReadMembers(swweapons, "exploSound", weapons, &Weapon::exploSound);
-	cfgReadMembers(swweapons, "speed", weapons, &Weapon::speed);
-	cfgReadMembers(swweapons, "addSpeed", weapons, &Weapon::addSpeed);
-	cfgReadMembers(swweapons, "distribution", weapons, &Weapon::distribution);
-	cfgReadMembers(swweapons, "parts", weapons, &Weapon::parts);
-	cfgReadMembers(swweapons, "recoil", weapons, &Weapon::recoil);
-	cfgReadMembers(swweapons, "multSpeed", weapons, &Weapon::multSpeed);
-	cfgReadMembers(swweapons, "delay", weapons, &Weapon::delay);
-	cfgReadMembers(swweapons, "loadingTime", weapons, &Weapon::loadingTime);
-	cfgReadMembers(swweapons, "ammo", weapons, &Weapon::ammo);
-	cfgReadMembers(swweapons, "createOnExp", weapons, &Weapon::createOnExp);
-	cfgReadMembers(swweapons, "dirtEffect", weapons, &Weapon::dirtEffect);
-	cfgReadMembers(swweapons, "leaveShells", weapons, &Weapon::leaveShells);
-	cfgReadMembers(swweapons, "leaveShellDelay", weapons, &Weapon::leaveShellDelay);
-	cfgReadMembers(swweapons, "playReloadSound", weapons, &Weapon::playReloadSound);
-	cfgReadMembers(swweapons, "wormExplode", weapons, &Weapon::wormExplode);
-	cfgReadMembers(swweapons, "explGround", weapons, &Weapon::explGround);
-	cfgReadMembers(swweapons, "wormCollide", weapons, &Weapon::wormCollide);
-	cfgReadMembers(swweapons, "fireCone", weapons, &Weapon::fireCone);
-	cfgReadMembers(swweapons, "collideWithObjects", weapons, &Weapon::collideWithObjects);
-	cfgReadMembers(swweapons, "affectByExplosions", weapons, &Weapon::affectByExplosions);
-	cfgReadMembers(swweapons, "bounce", weapons, &Weapon::bounce);
-	cfgReadMembers(swweapons, "timeToExplo", weapons, &Weapon::timeToExplo);
-	cfgReadMembers(swweapons, "timeToExploV", weapons, &Weapon::timeToExploV);
-	cfgReadMembers(swweapons, "hitDamage", weapons, &Weapon::hitDamage);
-	cfgReadMembers(swweapons, "bloodOnHit", weapons, &Weapon::bloodOnHit);
-	cfgReadMembers(swweapons, "startFrame", weapons, &Weapon::startFrame);
-	cfgReadMembers(swweapons, "numFrames", weapons, &Weapon::numFrames);
-	cfgReadMembers(swweapons, "loopAnim", weapons, &Weapon::loopAnim);
-	cfgReadMembers(swweapons, "shotType", weapons, &Weapon::shotType);
-	cfgReadMembers(swweapons, "colorBullets", weapons, &Weapon::colorBullets);
-	cfgReadMembers(swweapons, "splinterAmount", weapons, &Weapon::splinterAmount);
-	cfgReadMembers(swweapons, "splinterColour", weapons, &Weapon::splinterColour);
-	cfgReadMembers(swweapons, "splinterType", weapons, &Weapon::splinterType);
-	cfgReadMembers(swweapons, "splinterScatter", weapons, &Weapon::splinterScatter);
-	cfgReadMembers(swweapons, "objTrailType", weapons, &Weapon::objTrailType);
-	cfgReadMembers(swweapons, "objTrailDelay", weapons, &Weapon::objTrailDelay);
-	cfgReadMembers(swweapons, "partTrailType", weapons, &Weapon::partTrailType);
-	cfgReadMembers(swweapons, "partTrailObj", weapons, &Weapon::partTrailObj);
-	cfgReadMembers(swweapons, "partTrailDelay", weapons, &Weapon::partTrailDelay);
 
 	// Special objects
+	const libconfig::Setting &swsotypes = sweapons["sobjectTypes"];
 	for(int i = 0; i < 14; ++i)
 	{
-		sobjectTypes[i].id = i;
+		sobjectTypes[i].id = i; // Not in config
+		sobjectTypes[i].startSound = (int)swsotypes[i]["startSound"];
+		sobjectTypes[i].numSounds = (int)swsotypes[i]["numSounds"];
+		sobjectTypes[i].animDelay = (int)swsotypes[i]["animDelay"];
+		sobjectTypes[i].startFrame = (int)swsotypes[i]["startFrame"];
+		sobjectTypes[i].numFrames = (int)swsotypes[i]["numFrames"];
+		sobjectTypes[i].detectRange = (int)swsotypes[i]["detectRange"];
+		sobjectTypes[i].damage = (int)swsotypes[i]["damage"];
+		sobjectTypes[i].blowAway = (int)swsotypes[i]["blowAway"];
+		sobjectTypes[i].shadow = (bool)swsotypes[i]["shadow"];
+		sobjectTypes[i].shake = (int)swsotypes[i]["shake"];
+		sobjectTypes[i].flash = (int)swsotypes[i]["flash"];
+		sobjectTypes[i].dirtEffect = (int)swsotypes[i]["dirtEffect"];
 	}
-
-	const libconfig::Setting &swsotypes = sweapons["sobjectTypes"];
-	cfgReadMembers(swsotypes, "startSound", sobjectTypes, &SObjectType::startSound);
-	cfgReadMembers(swsotypes, "numSounds", sobjectTypes, &SObjectType::numSounds);
-	cfgReadMembers(swsotypes, "animDelay", sobjectTypes, &SObjectType::animDelay);
-	cfgReadMembers(swsotypes, "startFrame", sobjectTypes, &SObjectType::startFrame);
-	cfgReadMembers(swsotypes, "numFrames", sobjectTypes, &SObjectType::numFrames);
-	cfgReadMembers(swsotypes, "detectRange", sobjectTypes, &SObjectType::detectRange);
-	cfgReadMembers(swsotypes, "damage", sobjectTypes, &SObjectType::damage);
-	cfgReadMembers(swsotypes, "blowAway", sobjectTypes, &SObjectType::blowAway); // blowAway has 13 slots, not 14. The last value will overlap with shadow.
-	cfgReadMembers(swsotypes, "shadow", sobjectTypes, &SObjectType::shadow);
-	cfgReadMembers(swsotypes, "shake", sobjectTypes, &SObjectType::shake);
-	cfgReadMembers(swsotypes, "flash", sobjectTypes, &SObjectType::flash);
-	cfgReadMembers(swsotypes, "dirtEffect", sobjectTypes, &SObjectType::dirtEffect);
 
 	// Normal objects
+	const libconfig::Setting &swnotypes = sweapons["nobjectTypes"];
 	for(int i = 0; i < 24; ++i)
 	{
-		nobjectTypes[i].id = i;
+		nobjectTypes[i].id = i; // Not in config
+		nobjectTypes[i].detectDistance = (int)swnotypes[i]["detectDistance"];
+		nobjectTypes[i].gravity = (fixed)swnotypes[i]["gravity"];
+		nobjectTypes[i].speed = (int)swnotypes[i]["speed"];
+		nobjectTypes[i].speedV = (int)swnotypes[i]["speedV"];
+		nobjectTypes[i].distribution = (int)swnotypes[i]["distribution"];
+		nobjectTypes[i].blowAway = (int)swnotypes[i]["blowAway"];
+		nobjectTypes[i].bounce = (int)swnotypes[i]["bounce"];
+		nobjectTypes[i].hitDamage = (int)swnotypes[i]["hitDamage"];
+		nobjectTypes[i].wormExplode = (bool)swnotypes[i]["wormExplode"];
+		nobjectTypes[i].explGround = (bool)swnotypes[i]["explGround"];
+		nobjectTypes[i].wormDestroy = (bool)swnotypes[i]["wormDestroy"];
+		nobjectTypes[i].bloodOnHit = (int)swnotypes[i]["bloodOnHit"];
+		nobjectTypes[i].startFrame = (int)swnotypes[i]["startFrame"];
+		nobjectTypes[i].numFrames = (int)swnotypes[i]["numFrames"];
+		nobjectTypes[i].drawOnMap = (bool)swnotypes[i]["drawOnMap"];
+		nobjectTypes[i].colorBullets = (int)swnotypes[i]["colorBullets"];
+		nobjectTypes[i].createOnExp = (int)swnotypes[i]["createOnExp"];
+		nobjectTypes[i].affectByExplosions = (bool)swnotypes[i]["affectByExplosions"];
+		nobjectTypes[i].dirtEffect = (int)swnotypes[i]["dirtEffect"];
+		nobjectTypes[i].splinterAmount = (int)swnotypes[i]["splinterAmount"];
+		nobjectTypes[i].splinterColour = (int)swnotypes[i]["splinterColour"];
+		nobjectTypes[i].splinterType = (int)swnotypes[i]["splinterType"];
+		nobjectTypes[i].bloodTrail = (bool)swnotypes[i]["bloodTrail"];
+		nobjectTypes[i].bloodTrailDelay = (int)swnotypes[i]["bloodTrailDelay"];
+		nobjectTypes[i].leaveObj = (int)swnotypes[i]["leaveObj"];
+		nobjectTypes[i].leaveObjDelay = (int)swnotypes[i]["leaveObjDelay"];
+		nobjectTypes[i].timeToExplo = (int)swnotypes[i]["timeToExplo"];
+		nobjectTypes[i].timeToExploV = (int)swnotypes[i]["timeToExploV"];
 	}
-
-	const libconfig::Setting &swnotypes = sweapons["nobjectTypes"];
-	cfgReadMembers(swnotypes, "detectDistance", nobjectTypes, &NObjectType::detectDistance);
-	cfgReadMembers(swnotypes, "gravity", nobjectTypes, &NObjectType::gravity);
-	cfgReadMembers(swnotypes, "speed", nobjectTypes, &NObjectType::speed);
-	cfgReadMembers(swnotypes, "speedV", nobjectTypes, &NObjectType::speedV);
-	cfgReadMembers(swnotypes, "distribution", nobjectTypes, &NObjectType::distribution);
-	cfgReadMembers(swnotypes, "blowAway", nobjectTypes, &NObjectType::blowAway);
-	cfgReadMembers(swnotypes, "bounce", nobjectTypes, &NObjectType::bounce);
-	cfgReadMembers(swnotypes, "hitDamage", nobjectTypes, &NObjectType::hitDamage);
-	cfgReadMembers(swnotypes, "wormExplode", nobjectTypes, &NObjectType::wormExplode);
-	cfgReadMembers(swnotypes, "explGround", nobjectTypes, &NObjectType::explGround);
-	cfgReadMembers(swnotypes, "wormDestroy", nobjectTypes, &NObjectType::wormDestroy);
-	cfgReadMembers(swnotypes, "bloodOnHit", nobjectTypes, &NObjectType::bloodOnHit);
-	cfgReadMembers(swnotypes, "startFrame", nobjectTypes, &NObjectType::startFrame);
-	cfgReadMembers(swnotypes, "numFrames", nobjectTypes, &NObjectType::numFrames);
-	cfgReadMembers(swnotypes, "drawOnMap", nobjectTypes, &NObjectType::drawOnMap);
-	cfgReadMembers(swnotypes, "colorBullets", nobjectTypes, &NObjectType::colorBullets);
-	cfgReadMembers(swnotypes, "createOnExp", nobjectTypes, &NObjectType::createOnExp);
-	cfgReadMembers(swnotypes, "affectByExplosions", nobjectTypes, &NObjectType::affectByExplosions);
-	cfgReadMembers(swnotypes, "dirtEffect", nobjectTypes, &NObjectType::dirtEffect);
-	cfgReadMembers(swnotypes, "splinterAmount", nobjectTypes, &NObjectType::splinterAmount);
-	cfgReadMembers(swnotypes, "splinterColour", nobjectTypes, &NObjectType::splinterColour);
-	cfgReadMembers(swnotypes, "splinterType", nobjectTypes, &NObjectType::splinterType);
-	cfgReadMembers(swnotypes, "bloodTrail", nobjectTypes, &NObjectType::bloodTrail);
-	cfgReadMembers(swnotypes, "bloodTrailDelay", nobjectTypes, &NObjectType::bloodTrailDelay);
-	cfgReadMembers(swnotypes, "leaveObj", nobjectTypes, &NObjectType::leaveObj);
-	cfgReadMembers(swnotypes, "leaveObjDelay", nobjectTypes, &NObjectType::leaveObjDelay);
-	cfgReadMembers(swnotypes, "timeToExplo", nobjectTypes, &NObjectType::timeToExplo);
-	cfgReadMembers(swnotypes, "timeToExploV", nobjectTypes, &NObjectType::timeToExploV);
 }
 
 void Common::loadWeaponsFromCFG()
