@@ -563,16 +563,6 @@ void Common::loadWeapons()
 	}
 }
 
-// This is some serious cargo-culting, but it works like a charm!
-template<typename T, int N, typename U>
-void cfgReadMembers(const libconfig::Setting &node, std::string variable, T(&arr)[N], U (T::*mem))
-{
-	for(int i = 0; i < N; ++i)
-	{
-		(arr[i].*mem) = node[i][variable];
-	}
-}
-
 void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
