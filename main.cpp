@@ -117,8 +117,7 @@ try
 		gfx.loadMenusFromCFG();
 		common->loadGfxFromCFG();
 		common->loadMaterialsFromCFG();
-
-		common->loadWeaponsFromCFG(); // TODO
+		common->loadWeaponsFromCFG();
 	} else {
 		common->font.loadFromEXE();
 		common->font.writeToCFG();
@@ -131,8 +130,8 @@ try
 		common->writeGfxToCFG();
 		common->loadMaterials();
 		common->writeMaterialsToCFG();
-
-		common->loadWeapons(); // TODO
+		common->loadWeapons();
+		common->writeWeaponsToCFG();
 	}
 	common->loadTextures(); // TODO: switch to CFG
 	common->loadOthers(); // TODO: switch to CFG
