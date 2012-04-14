@@ -563,7 +563,7 @@ void Common::loadWeapons()
 	}
 }
 
-// This is some serious cargo-culting
+// This is some serious cargo-culting, but it works like a charm!
 template<typename T, int N, typename U>
 void cfgReadMembers(const libconfig::Setting &node, std::string variable, T(&arr)[N], U (T::*mem))
 {
@@ -589,6 +589,7 @@ void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 
 	for(int i = 0; i < 40; ++i)
 	{
+		// Weapons { weapons { weapon0 { variable
 		weapons[i].name = (const char*)swweapons[i]["name"];
 		weapons[i].id = i;
 	}
@@ -643,7 +644,7 @@ void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 	cfgReadMembers(swweapons, "partTrailDelay", weapons, &Weapon::partTrailDelay);
 
 	// Special objects
-	for(int i = 0; i < 14; ++i) // TODO: Unhardcode
+	for(int i = 0; i < 14; ++i)
 	{
 		sobjectTypes[i].id = i;
 	}
@@ -702,6 +703,138 @@ void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 void Common::loadWeaponsFromCFG()
 {
 	loadWeaponsFromCFG("liero.cfg");
+}
+
+void Common::writeWeaponsToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &sweapons = cfgHelp.getSubgroup(root, "Weapons");
+
+	libconfig::Setting &swworder = cfgHelp.getSubgroup(sweapons, "weapOrder");
+	for(int i = 0; i < 40; ++i)
+	{
+		cfgHelp.put(swworder, "weapOrder" + to_string(i + 1), weapOrder[i + 1]);
+	}
+
+	libconfig::Setting &swweapons = cfgHelp.getSubgroup(sweapons, "weapons");
+	for(int i = 0; i < 40; ++i)
+	{
+		libconfig::Setting &swwweapons = cfgHelp.getSubgroup(swweapons, "weapons" + to_string(i));
+		cfgHelp.put(swwweapons, "name", weapons[i].name);
+		cfgHelp.put(swwweapons, "detectDistance", weapons[i].detectDistance);
+		cfgHelp.put(swwweapons, "affectByWorm", weapons[i].affectByWorm);
+		cfgHelp.put(swwweapons, "blowAway", weapons[i].blowAway);
+		cfgHelp.put(swwweapons, "gravity", weapons[i].gravity);
+		cfgHelp.put(swwweapons, "shadow", weapons[i].shadow);
+		cfgHelp.put(swwweapons, "laserSight", weapons[i].laserSight);
+		cfgHelp.put(swwweapons, "launchSound", weapons[i].launchSound);
+		cfgHelp.put(swwweapons, "loopSound", weapons[i].loopSound);
+		cfgHelp.put(swwweapons, "exploSound", weapons[i].exploSound);
+		cfgHelp.put(swwweapons, "speed", weapons[i].speed);
+		cfgHelp.put(swwweapons, "addSpeed", weapons[i].addSpeed);
+		cfgHelp.put(swwweapons, "distribution", weapons[i].distribution);
+		cfgHelp.put(swwweapons, "parts", weapons[i].parts);
+		cfgHelp.put(swwweapons, "recoil", weapons[i].recoil);
+		cfgHelp.put(swwweapons, "multSpeed", weapons[i].multSpeed);
+		cfgHelp.put(swwweapons, "delay", weapons[i].delay);
+		cfgHelp.put(swwweapons, "loadingTime", weapons[i].loadingTime);
+		cfgHelp.put(swwweapons, "ammo", weapons[i].ammo);
+		cfgHelp.put(swwweapons, "createOnExp", weapons[i].createOnExp);
+		cfgHelp.put(swwweapons, "dirtEffect", weapons[i].dirtEffect);
+		cfgHelp.put(swwweapons, "leaveShells", weapons[i].leaveShells);
+		cfgHelp.put(swwweapons, "leaveShellDelay", weapons[i].leaveShellDelay);
+		cfgHelp.put(swwweapons, "playReloadSound", weapons[i].playReloadSound);
+		cfgHelp.put(swwweapons, "wormExplode", weapons[i].wormExplode);
+		cfgHelp.put(swwweapons, "explGround", weapons[i].explGround);
+		cfgHelp.put(swwweapons, "wormCollide", weapons[i].wormCollide);
+		cfgHelp.put(swwweapons, "fireCone", weapons[i].fireCone);
+		cfgHelp.put(swwweapons, "collideWithObjects", weapons[i].collideWithObjects);
+		cfgHelp.put(swwweapons, "affectByExplosions", weapons[i].affectByExplosions);
+		cfgHelp.put(swwweapons, "bounce", weapons[i].bounce);
+		cfgHelp.put(swwweapons, "timeToExplo", weapons[i].timeToExplo);
+		cfgHelp.put(swwweapons, "timeToExploV", weapons[i].timeToExploV);
+		cfgHelp.put(swwweapons, "hitDamage", weapons[i].hitDamage);
+		cfgHelp.put(swwweapons, "bloodOnHit", weapons[i].bloodOnHit);
+		cfgHelp.put(swwweapons, "startFrame", weapons[i].startFrame);
+		cfgHelp.put(swwweapons, "numFrames", weapons[i].numFrames);
+		cfgHelp.put(swwweapons, "loopAnim", weapons[i].loopAnim);
+		cfgHelp.put(swwweapons, "shotType", weapons[i].shotType);
+		cfgHelp.put(swwweapons, "colorBullets", weapons[i].colorBullets);
+		cfgHelp.put(swwweapons, "splinterAmount", weapons[i].splinterAmount);
+		cfgHelp.put(swwweapons, "splinterColour", weapons[i].splinterColour);
+		cfgHelp.put(swwweapons, "splinterType", weapons[i].splinterType);
+		cfgHelp.put(swwweapons, "splinterScatter", weapons[i].splinterScatter);
+		cfgHelp.put(swwweapons, "objTrailType", weapons[i].objTrailType);
+		cfgHelp.put(swwweapons, "objTrailDelay", weapons[i].objTrailDelay);
+		cfgHelp.put(swwweapons, "partTrailType", weapons[i].partTrailType);
+		cfgHelp.put(swwweapons, "partTrailObj", weapons[i].partTrailObj);
+		cfgHelp.put(swwweapons, "partTrailDelay", weapons[i].partTrailDelay);
+	}
+
+	// Special objects
+	libconfig::Setting &swsotypes = cfgHelp.getSubgroup(sweapons, "sobjectTypes");
+	for(int i = 0; i < 14; ++i)
+	{
+		libconfig::Setting &swssotypes = cfgHelp.getSubgroup(swsotypes, "sobjectTypes" + to_string(i));
+
+		cfgHelp.put(swssotypes, "startSound", sobjectTypes[i].startSound);
+		cfgHelp.put(swssotypes, "numSounds", sobjectTypes[i].numSounds);
+		cfgHelp.put(swssotypes, "animDelay", sobjectTypes[i].animDelay);
+		cfgHelp.put(swssotypes, "startFrame", sobjectTypes[i].startFrame);
+		cfgHelp.put(swssotypes, "numFrames", sobjectTypes[i].numFrames);
+		cfgHelp.put(swssotypes, "detectRange", sobjectTypes[i].detectRange);
+		cfgHelp.put(swssotypes, "damage", sobjectTypes[i].damage);
+		cfgHelp.put(swssotypes, "blowAway", sobjectTypes[i].blowAway); // blowAway has 13 slots, not 14. The last value will overlap with shadow.
+		cfgHelp.put(swssotypes, "shadow", sobjectTypes[i].shadow);
+		cfgHelp.put(swssotypes, "shake", sobjectTypes[i].shake);
+		cfgHelp.put(swssotypes, "flash", sobjectTypes[i].flash);
+		cfgHelp.put(swssotypes, "dirtEffect", sobjectTypes[i].dirtEffect);
+	}
+
+	// Normal objects
+	libconfig::Setting &swnotypes = cfgHelp.getSubgroup(sweapons, "nobjectTypes");
+	for(int i = 0; i < 24; ++i)
+	{
+		libconfig::Setting &swnnotypes = cfgHelp.getSubgroup(swnotypes, "nobjectTypes" + to_string(i));
+
+		cfgHelp.put(swnnotypes, "detectDistance", nobjectTypes[i].detectDistance);
+		cfgHelp.put(swnnotypes, "gravity", nobjectTypes[i].gravity);
+		cfgHelp.put(swnnotypes, "speed", nobjectTypes[i].speed);
+		cfgHelp.put(swnnotypes, "speedV", nobjectTypes[i].speedV);
+		cfgHelp.put(swnnotypes, "distribution", nobjectTypes[i].distribution);
+		cfgHelp.put(swnnotypes, "blowAway", nobjectTypes[i].blowAway);
+		cfgHelp.put(swnnotypes, "bounce", nobjectTypes[i].bounce);
+		cfgHelp.put(swnnotypes, "hitDamage", nobjectTypes[i].hitDamage);
+		cfgHelp.put(swnnotypes, "wormExplode", nobjectTypes[i].wormExplode);
+		cfgHelp.put(swnnotypes, "explGround", nobjectTypes[i].explGround);
+		cfgHelp.put(swnnotypes, "wormDestroy", nobjectTypes[i].wormDestroy);
+		cfgHelp.put(swnnotypes, "bloodOnHit", nobjectTypes[i].bloodOnHit);
+		cfgHelp.put(swnnotypes, "startFrame", nobjectTypes[i].startFrame);
+		cfgHelp.put(swnnotypes, "numFrames", nobjectTypes[i].numFrames);
+		cfgHelp.put(swnnotypes, "drawOnMap", nobjectTypes[i].drawOnMap);
+		cfgHelp.put(swnnotypes, "colorBullets", nobjectTypes[i].colorBullets);
+		cfgHelp.put(swnnotypes, "createOnExp", nobjectTypes[i].createOnExp);
+		cfgHelp.put(swnnotypes, "affectByExplosions", nobjectTypes[i].affectByExplosions);
+		cfgHelp.put(swnnotypes, "dirtEffect", nobjectTypes[i].dirtEffect);
+		cfgHelp.put(swnnotypes, "splinterAmount", nobjectTypes[i].splinterAmount);
+		cfgHelp.put(swnnotypes, "splinterColour", nobjectTypes[i].splinterColour);
+		cfgHelp.put(swnnotypes, "splinterType", nobjectTypes[i].splinterType);
+		cfgHelp.put(swnnotypes, "bloodTrail", nobjectTypes[i].bloodTrail);
+		cfgHelp.put(swnnotypes, "bloodTrailDelay", nobjectTypes[i].bloodTrailDelay);
+		cfgHelp.put(swnnotypes, "leaveObj", nobjectTypes[i].leaveObj);
+		cfgHelp.put(swnnotypes, "leaveObjDelay", nobjectTypes[i].leaveObjDelay);
+		cfgHelp.put(swnnotypes, "timeToExplo", nobjectTypes[i].timeToExplo);
+		cfgHelp.put(swnnotypes, "timeToExploV", nobjectTypes[i].timeToExploV);
+	}
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Common::writeWeaponsToCFG()
+{
+	writeWeaponsToCFG("liero.cfg");
 }
 
 void Common::loadTextures()
