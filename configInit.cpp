@@ -1,51 +1,24 @@
-#include <SDL/SDL.h>
-//#if !SDL13
-//#include <SDL/SDL_getenv.h>
-//#endif
+#include "configInit.hpp"
 
-#include "gfx.hpp"
-#include "sfx.hpp"
-#include "sys.hpp"
-#include "game.hpp"
-#include "viewport.hpp"
-#include "worm.hpp"
-#include "reader.hpp"
-#include "filesystem.hpp"
-#include "text.hpp"
-#include "keys.hpp"
-#include "constants.hpp"
-#include "common.hpp"
-#include "math.hpp"
-#include "console.hpp"
-#include <gvl/support/platform.hpp>
-
-#include <iostream>
-#include <ctime>
+#include <string>
+#include <fstream>
 #include <exception>
-#include <gvl/math/ieee.hpp>
-
-#include <gvl/math/cmwc.hpp>
-
-#include <gvl/support/log.hpp> // TEMP
-
-#include "init.hpp"
 #include <boost/filesystem.hpp>
-
 #if GVL_LINUX
 #define BOOST_FILESYSTEM_DYN_LINK
 #endif
 
-#include <string>
-#include <fstream>
+#include "gfx.hpp"
+#include "common.hpp"
+#include "console.hpp"
 
 using namespace std;
-namespace bfs = boost::filesystem;
 
 ConfigInit::ConfigInit(string a_filePath, gvl::shared_ptr<Common> a_common)
 {
 	common = a_common;
 
-	bfs::path filePath(a_filePath);
+	boost::filesystem::path filePath(a_filePath);
 
 	if(filePath.extension() == ".EXE" || filePath.extension() == ".exe")
 		loadFromEXE(filePath.native());
@@ -117,7 +90,7 @@ void ConfigInit::write(string filePath)
 	Console::writeLine("Saving variables to file '" + filePath +"'");
 
 	// Create empty if nonexistant
-	if(!bfs::exists(filePath)) {
+	if(!boost::filesystem::exists(filePath)) {
 		ofstream f(filePath.c_str());
 		f << flush;
 		f.close();
