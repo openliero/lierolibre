@@ -31,6 +31,8 @@
 //#include <gvl/support/profile.hpp> // TEMP
 #include <gvl/support/log.hpp> // TEMP
 
+#include "configInit.hpp"
+
 //#undef main
 
 int gameEntry(int argc, char* argv[])
@@ -89,69 +91,17 @@ try
 	char buf[256];
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
-	if(triggerCFG) {
-		common->texts.loadFromCFG();
-	} else {
-		common->texts.loadFromEXE();
 
+	if(triggerCFG) {
+		ConfigInit cfgInit("liero.cfg", common);
 		if(writeTriggerCFG)
-			common->texts.writeToCFG();
-	}
-
-	//common.texts.loadFromEXE();
-	initKeys();
-	//game.rand.seed(Uint32(std::time(0)));
-	if(triggerCFG) {
-		common->loadConstantsFromCFG();
-		loadTablesFromCFG();
+			cfgInit.write("liero.cfg");
 	} else {
-		common->loadConstantsFromEXE();
-		loadTablesFromEXE();
-
-		if(writeTriggerCFG) {
-			common->writeConstantsToCFG();
-			writeTablesToCFG();
-		}
+		ConfigInit cfgInit("LIERO.EXE", common);
+		if(writeTriggerCFG)
+			cfgInit.write("liero.cfg");
 	}
 
-	Console::clear();
-	Console::writeTextBar(common->texts.copyright1, common->texts.copyrightBarFormat);
-	Console::setAttributes(0x07);
-	Console::writeLine("");
-
-	Console::write(common->S[LoadingAndThinking]);
-	if(triggerCFG) {
-		common->font.loadFromCFG();
-		common->loadPaletteFromCFG();
-		gfx.loadPalette(); // This gets the palette from common
-		gfx.loadMenusFromCFG();
-		common->loadGfxFromCFG();
-		common->loadMaterialsFromCFG();
-		common->loadWeaponsFromCFG();
-		common->loadTexturesFromCFG();
-		common->loadOthersFromCFG();
-	} else {
-		common->font.loadFromEXE();
-		common->loadPalette();
-		gfx.loadPalette(); // This gets the palette from common
-		gfx.loadMenus();
-		common->loadGfx();
-		common->loadMaterials();
-		common->loadWeapons();
-		common->loadTextures();
-		common->loadOthers();
-
-		if(writeTriggerCFG) {
-			common->font.writeToCFG();
-			common->writePaletteToCFG();
-			gfx.writeMenusToCFG();
-			common->writeGfxToCFG();
-			common->writeMaterialsToCFG();
-			common->writeWeaponsToCFG();
-			common->writeTexturesToCFG();
-			common->writeOthersToCFG();
-		}
-	}
 
 	Console::writeLine(common->S[OK]);
 
