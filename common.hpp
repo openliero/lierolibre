@@ -81,6 +81,7 @@ struct Texture
 struct Texts
 {
 	void loadFromEXE();
+	void loadFromCFG(std::string cfgFilePath);
 	void loadFromCFG();
 	void writeToCFG(std::string cfgFilePath);
 	void writeToCFG();

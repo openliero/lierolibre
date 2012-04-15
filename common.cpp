@@ -90,10 +90,10 @@ void Texts::loadFromEXE()
 	copyrightBarFormat = readUint8(exe);
 }
 
-void Texts::loadFromCFG()
+void Texts::loadFromCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
-	cfg.readFile("liero.cfg");
+	cfg.readFile(cfgFilePath.c_str());
 	const libconfig::Setting &texts = cfg.lookup("Texts");
 
 	random = (char const*)texts["random"];
@@ -159,6 +159,11 @@ void Texts::loadFromCFG()
 	noWeaps = (char const*)texts["noWeaps"];
 
 	copyrightBarFormat = (int)texts["copyrightBarFormat"];
+}
+
+void Texts::loadFromCFG()
+{
+	loadFromCFG("liero.cfg");
 }
 
 void Texts::writeToCFG(std::string cfgFilePath)
