@@ -44,6 +44,7 @@ try
 
 	bool exeSet = false;
 	bool triggerCFG = false;
+	bool writeTriggerCFG = false;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
 	//common->loadPowerlevelPalette = true;
@@ -65,6 +66,10 @@ try
 
 			case 'c':
 				triggerCFG = true;
+			break;
+
+			case 'w':
+				writeTriggerCFG = true;
 			break;
 			}
 		}
@@ -88,7 +93,9 @@ try
 		common->texts.loadFromCFG();
 	} else {
 		common->texts.loadFromEXE();
-		common->texts.writeToCFG();
+
+		if(writeTriggerCFG)
+			common->texts.writeToCFG();
 	}
 
 	//common.texts.loadFromEXE();
@@ -99,9 +106,12 @@ try
 		loadTablesFromCFG();
 	} else {
 		common->loadConstantsFromEXE();
-		common->writeConstantsToCFG();
 		loadTablesFromEXE();
-		writeTablesToCFG();
+
+		if(writeTriggerCFG) {
+			common->writeConstantsToCFG();
+			writeTablesToCFG();
+		}
 	}
 
 	Console::clear();
@@ -122,23 +132,27 @@ try
 		common->loadOthersFromCFG();
 	} else {
 		common->font.loadFromEXE();
-		common->font.writeToCFG();
 		common->loadPalette();
-		common->writePaletteToCFG();
 		gfx.loadPalette(); // This gets the palette from common
 		gfx.loadMenus();
-		gfx.writeMenusToCFG();
 		common->loadGfx();
-		common->writeGfxToCFG();
 		common->loadMaterials();
-		common->writeMaterialsToCFG();
 		common->loadWeapons();
-		common->writeWeaponsToCFG();
 		common->loadTextures();
-		common->writeTexturesToCFG();
 		common->loadOthers();
-		common->writeOthersToCFG();
+
+		if(writeTriggerCFG) {
+			common->font.writeToCFG();
+			common->writePaletteToCFG();
+			gfx.writeMenusToCFG();
+			common->writeGfxToCFG();
+			common->writeMaterialsToCFG();
+			common->writeWeaponsToCFG();
+			common->writeTexturesToCFG();
+			common->writeOthersToCFG();
+		}
 	}
+
 	Console::writeLine(common->S[OK]);
 
 	Console::writeLine(common->S[InitSound]);
