@@ -90,6 +90,15 @@ Setting& ConfigHelper::mkArray(Setting &node, string arrayName)
 	return node.add(arrayName, Setting::TypeArray);
 }
 
+Setting& ConfigHelper::mkList(Setting &node, string listName)
+{
+	if(node.exists(listName))
+	{
+		node.remove(listName);
+	}
+	return node.add(listName, Setting::TypeList);
+}
+
 Setting& ConfigHelper::getSubgroup(Setting &node, string groupName)
 {
 	if(!node.exists(groupName))

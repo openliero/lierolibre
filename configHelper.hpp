@@ -44,6 +44,7 @@ public:
 	void put(libconfig::Setting &node, std::string variable, std::string value);
 
 	libconfig::Setting& mkArray(libconfig::Setting &node, std::string arrayName);
+	libconfig::Setting& mkList(libconfig::Setting &node, std::string listName);
 	libconfig::Setting& getSubgroup(libconfig::Setting &node, std::string groupName);
 };
 
