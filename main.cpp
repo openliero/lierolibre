@@ -45,8 +45,8 @@ try
 	gfx.rand.seed(Uint32(std::time(0)));
 
 	bool exeSet = false;
-	bool triggerCFG = false;
-	bool writeTriggerCFG = false;
+	bool cfgSet = false;
+	bool cfgWriteSet = false;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
 
@@ -66,11 +66,11 @@ try
 			break;*/
 
 			case 'c':
-				triggerCFG = true;
+				cfgSet = true;
 			break;
 
 			case 'w':
-				writeTriggerCFG = true;
+				cfgWriteSet = true;
 			break;
 			}
 		}
@@ -91,13 +91,13 @@ try
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
 
-	if(triggerCFG) {
+	if(cfgSet) {
 		ConfigInit cfgInit("liero.cfg", common);
-		if(writeTriggerCFG)
+		if(cfgWriteSet)
 			cfgInit.write("liero.cfg");
 	} else {
 		ConfigInit cfgInit(".EXE", common);
-		if(writeTriggerCFG)
+		if(cfgWriteSet)
 			cfgInit.write("liero.cfg");
 	}
 
