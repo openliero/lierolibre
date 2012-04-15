@@ -119,6 +119,7 @@ try
 		common->loadMaterialsFromCFG();
 		common->loadWeaponsFromCFG();
 		common->loadTexturesFromCFG();
+		common->loadOthersFromCFG();
 	} else {
 		common->font.loadFromEXE();
 		common->font.writeToCFG();
@@ -135,8 +136,9 @@ try
 		common->writeWeaponsToCFG();
 		common->loadTextures();
 		common->writeTexturesToCFG();
+		common->loadOthers();
+		common->writeOthersToCFG();
 	}
-	common->loadOthers(); // TODO: switch to CFG
 	Console::writeLine(common->S[OK]);
 
 	Console::writeLine(common->S[InitSound]);
