@@ -904,6 +904,74 @@ void Common::loadOthers()
 		bonusSObjects[i] = readUint8(exe) - 1;
 }
 
+void Common::loadOthersFromCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	cfg.readFile(cfgFilePath.c_str());
+	const libconfig::Setting &sothers = cfg.lookup("Others");
+
+	const libconfig::Setting &sobrtimer = sothers["bonusRandTimer"];
+	for(int i = 0; i < 2; ++i)
+		for(int j = 0; j < 2; ++j)
+		{
+			// Others { bonusRandTimer ( array[j], array[j]
+			bonusRandTimer[i][j] = (int)sobrtimer[i][j];
+		}
+
+	const libconfig::Setting &soaparams = sothers["aiParams"];
+	for(int i = 0; i < 2; ++i)
+		for(int j = 0; j < 7; ++j)
+			aiParams.k[i][j] = (int)soaparams[i][j];
+
+	for(int i = 0; i < 2; ++i)
+		bonusSObjects[i] = (int)sothers["bonusSObjects"][i];
+}
+
+void Common::loadOthersFromCFG()
+{
+	loadOthersFromCFG("liero.cfg");
+}
+
+void Common::writeOthersToCFG(std::string cfgFilePath)
+{
+	libconfig::Config cfg;
+	ConfigHelper cfgHelp;
+	cfg.readFile(cfgFilePath.c_str());
+	libconfig::Setting &root = cfg.getRoot();
+	libconfig::Setting &sothers = cfgHelp.getSubgroup(root, "Others");
+
+	libconfig::Setting &sobrtimer = cfgHelp.mkList(sothers, "bonusRandTimer");
+	for(int i = 0; i < 2; ++i)
+	{
+		// Adding new since above list is created empty
+		libconfig::Setting &sobarray = sobrtimer.add(libconfig::Setting::TypeArray);
+		for(int j = 0; j < 2; ++j)
+		{
+			// Others { bonusRandTimer ( array[j], array[j]
+			sobarray.add(libconfig::Setting::TypeInt) = bonusRandTimer[i][j];
+		}
+	}
+
+	libconfig::Setting &soaparams = cfgHelp.mkList(sothers, "aiParams");
+	for(int i = 0; i < 2; ++i)
+	{
+		libconfig::Setting &soaarray = soaparams.add(libconfig::Setting::TypeArray);
+		for(int j = 0; j < 7; ++j)
+			soaarray.add(libconfig::Setting::TypeInt) = aiParams.k[i][j];
+	}
+
+	libconfig::Setting &sobsobjects = cfgHelp.mkArray(sothers, "bonusSObjects");
+	for(int i = 0; i < 2; ++i)
+		sobsobjects.add(libconfig::Setting::TypeInt) = bonusSObjects[i];
+
+	cfg.writeFile(cfgFilePath.c_str());
+}
+
+void Common::writeOthersToCFG()
+{
+	writeOthersToCFG("liero.cfg");
+}
+
 void Common::loadGfxFromEXE()
 {
 	FILE* exe = openLieroEXE();

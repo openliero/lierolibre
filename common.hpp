@@ -165,6 +165,10 @@ struct Common : gvl::shared
 	void writeTexturesToCFG();
 
 	void loadOthers();
+	void loadOthersFromCFG(std::string cfgFilePath);
+	void loadOthersFromCFG();
+	void writeOthersToCFG(std::string cfgFilePath);
+	void writeOthersToCFG();
 
 	void loadConstantsFromEXE();
 	void loadConstantsFromCFG(std::string cfgFilePath);
