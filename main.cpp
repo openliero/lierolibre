@@ -49,7 +49,6 @@ try
 	bool writeTriggerCFG = false;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
-	//common->loadPowerlevelPalette = true;
 
 	for(int i = 1; i < argc; ++i)
 	{
@@ -97,7 +96,7 @@ try
 		if(writeTriggerCFG)
 			cfgInit.write("liero.cfg");
 	} else {
-		ConfigInit cfgInit("LIERO.EXE", common);
+		ConfigInit cfgInit(".EXE", common);
 		if(writeTriggerCFG)
 			cfgInit.write("liero.cfg");
 	}
