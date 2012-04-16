@@ -3,12 +3,16 @@ AC_PREREQ([2.59])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([1.10 -Wall no-define subdir-objects])
-AC_CONFIG_FILES([Makefile])
-AC_PROG_CXX
 
 dnl Need libtool for boost.m4 :(
-AC_PROG_LIBTOOL
+LT_INIT
+AM_INIT_AUTOMAKE([1.10 -Wall no-define subdir-objects])
+
+AC_CONFIG_FILES([Makefile])
+AC_PROG_CPP
+AC_PROG_CC
+AC_PROG_CXX
+AM_PROG_CC_C_O
 
 dnl Check for SDL
 SDL_VERSION=1.2.0
@@ -21,18 +25,19 @@ BOOST_FILESYSTEM
 BOOST_SYSTEM
 
 PKG_CHECK_MODULES([DEPS], [libconfig++ SDL_mixer])
+PKG_CHECK_MODULES([GVL_DEPS], [zlib])
 
 dnl Get libgvl library and include locations
 AC_ARG_WITH([gvl-include-path],
   [AS_HELP_STRING([--with-gvl-include-path],
     [location of the gvl headers, defaults to ./glv/])],
-  [GVL_CFLAGS="-I$withval"],
-  [GVL_CFLAGS='-I./gvl/'])
+  [GVL_CPPFLAGS="-I$withval"],
+  [GVL_CPPFLAGS='-I./gvl/'])
 AC_SUBST([GVL_CFLAGS])
 AC_ARG_WITH([gvl-lib-path],
-  [AS_HELP_STRING([--with-gvl-lib-path], [location of the gvl libraries, defaults to ./gvl/_bin/])],
+  [AS_HELP_STRING([--with-gvl-lib-path], [location of the gvl libraries, defaults to ./gvl/])],
   [GVL_LIBS="-L$withval -lgvl"],
-  [GVL_LIBS='-L./gvl/_bin/ -lgvl'])
+  [GVL_LIBS='-L./gvl/ -lgvl'])
 AC_SUBST([GVL_LIBS])
 
 AC_OUTPUT
