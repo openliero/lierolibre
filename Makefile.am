@@ -8,7 +8,7 @@ bin_PROGRAMS = liero
 LIBS = $(DEPS_LIBS) $(GVL_LIBS) $(SDL_LIBS) $(BOOST_FILESYSTEM_LIBS) \
 	$(BOOST_SYSTEM_LIBS)
 
-AM_CPPFLAGS = $(DEPS_CFLAGS) $(GVL_CFLAGS) $(SDL_CXXFLAGS) $(BOOST_CPPFLAGS)
+AM_CPPFLAGS = $(DEPS_CFLAGS) $(GVL_CFLAGS) $(SDL_CXXFLAGS) $(BOOST_CPPFLAGS) -g
 
 AM_LDFLAGS = $(BOOST_FILESYSTEM_LDFLAGS) $(BOOST_SYSTEM_LDFLAGS)
 
@@ -20,9 +20,9 @@ liero_SOURCES = \
 	weapon.cpp weapsel.cpp worm.cpp \
 	bobject.hpp bonus.hpp common.hpp console.hpp constants.hpp \
 	filesystem.hpp game.hpp gfx.hpp keys.hpp level.hpp math.hpp \
-	ninjarope.hpp nobject.hpp rand.hpp reader.hpp sdlmain.hpp replay.hpp \
-	settings.hpp sfx.hpp sobject.hpp sys.hpp text.hpp viewport.hpp \
-	weapon.hpp weapsel.hpp worm.hpp \
+	nobject.hpp rand.hpp reader.hpp replay.hpp settings.hpp sfx.hpp \
+	sobject.hpp sys.hpp text.hpp viewport.hpp weapon.hpp weapsel.hpp \
+	worm.hpp \
 	\
 	dataPath.cpp  binReader.cpp to_string.cpp configHelper.cpp \
 	configInit.cpp \
@@ -44,3 +44,4 @@ liero_SOURCES = \
 	menu/hiddenMenu.hpp menu/integerBehavior.hpp menu/itemBehavior.hpp \
 	menu/menu.hpp menu/menuItem.hpp menu/timeBehavior.hpp
 
+EXTRA_DIST = Jamfile

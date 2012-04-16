@@ -1,6 +1,13 @@
 AC_INIT([Liero C++], [1.40], [martinerikwerner@gmail.com], [liero], [https://gitorious.org/liero])
 AC_PREREQ([2.59])
 AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([1.10 -Wall no-define subdir-objects])
+AC_CONFIG_FILES([Makefile])
+AC_PROG_CXX
+
+dnl Need libtool for boost.m4 :(
 AC_PROG_LIBTOOL
 
 dnl Check for SDL
@@ -28,8 +35,4 @@ AC_ARG_WITH([gvl-lib-path],
   [GVL_LIBS='-L./gvl/_bin/ -lgvl'])
 AC_SUBST([GVL_LIBS])
 
-AM_INIT_AUTOMAKE([1.10 -Wall no-define])
-AC_CONFIG_HEADERS([config.h])
-AC_PROG_CXX
-AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
