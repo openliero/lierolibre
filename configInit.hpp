@@ -23,14 +23,15 @@
  POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LIERO_INIT_HPP
-#define LIERO_INIT_HPP
+#ifndef LIERO_CONFIG_INIT_HPP
+#define LIERO_CONFIG_INIT_HPP
+
+#include "configHelper.hpp"
 
 #include <string>
-#include "configHelper.hpp"
 #include <gvl/resman/shared_ptr.hpp>
-#include "common.hpp"
 
+#include "common.hpp"
 
 class ConfigInit
 {
@@ -45,7 +46,6 @@ private:
 	void consoleBlurb();
 
 	gvl::shared_ptr<Common> common;
-
 };
 
-#endif // LIERO_INIT_HPP
+#endif // LIERO_CONFIG_INIT_HPP
