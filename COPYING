@@ -1,0 +1,113 @@
+Liero, the gvl library, and the data helper scripts are released under the
+BDS-2-Clause License
+
+The original graphics for Liero, the new replacement sounds, and the
+configuration variables extracted from the original game are released under
+the WTFPL license.
+
+One of the items included in the uthread module (and therefore the whole
+module) is GPLv2+ however this module is not used in the gvl library.
+
+The included copy of Zlib is licensed under the Zlib license.
+
+The type_info header is licensed under the Boost Software License 1.0, and
+is included in the gvl library.
+
+Content without a specified license is assumed to be released under the
+BSD-2-Clause license.
+
+The following section is written in the 'machine-readable copyright format'
+as specified by the Debian project.
+
+     -----//-----
+
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://gitorious.org/liero
+Upstream-Contact: Martin Erik Werner <martinerikwerner@gmail.com>
+
+Files: *
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2010, "basro"
+License: BSD-2-Clause
+
+Files: console.* exactObjectList.hpp fastObjectList.hpp lfs.hpp rand.*
+       rect.hpp sdlmain.cpp sfx.* sobject.* sys.* text.*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+License: BSD-2-Clause
+
+Files: binReader.* constants.* main.cpp math.* reader.*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: BSD-2-Clause
+
+Files: common.* controller/localController.cpp gfx.* gfx/font.* Jamfile
+       level.* menu/menu.* settings.* worm.*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2010, "basro"
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: BSD-2-Clause
+
+Files: boostTesting.cpp configHelper.* configInit.* dataPath.*  to_string.*
+Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: BSD-2-Clause
+
+Files: gvl/*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+License: BSD-2-Clause
+
+Files: liero.cfg
+Copyright: 1998-1999 Joosa Reikkinen
+           2012 Martin Erik Werner <martinerikwerner@gmail.com>
+License: WTFPL
+
+Files: data/*
+Copyright: 1998-1999 Joosa Reikkinen
+License: WTFPL
+
+Files: data/sounds/*.wav
+Copyright: 2012, "sea"
+License: WTFPL
+
+Files: data/sounds/extractsounds data/sounds/packsounds
+       data/graphics/extractgfx data/graphics/packgfx
+       data/levels/extractlev data/levels/packlev
+Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: BSD-2-Clause
+
+License: BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+License: WTFPL
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
+ .
+ Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+ .
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
+ .
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ .
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+
+
