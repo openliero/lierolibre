@@ -31,7 +31,7 @@ Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
 License: BSD-2-Clause
 
 Files: console.* exactObjectList.hpp fastObjectList.hpp lfs.hpp rand.*
-       rect.hpp sdlmain.cpp sfx.* sobject.* sys.* text.*
+       rect.hpp sdlmain.cpp sfx.* sobject.* sys.* text.* _build/*
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
 License: BSD-2-Clause
 
