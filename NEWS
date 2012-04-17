@@ -1,0 +1,25 @@
+Liero NEWS - History of user-visible changes.
+
+Version 1.## - Somemonth 2012, by Martin Erik Werner
+
+ * The gvl library is now included in the source release of liero
+
+ * Several non-free items were removed from the gvl library
+
+ * Extracted variables from LIERO.EXE
+   + It is now possible to run Liero independently of LIERO.EXE using a text
+     config file
+   + Variables may be edited directly in the text file
+   + Variables may be extracted from a modded LIERO.EXE into a new text file
+
+ * Updated gvl library to build and work with Liero
+
+ * Replaced original sounds with completely free content
+
+ * Added scripts for extracting and repacking sounds, graphics, and levels
+   + sounds and graphics are kept in unpacked format and must be packed prior
+     to running the game
+
+ * DataPath module for integration into a nix-like system
+   + Ability to handle separation between a writable home directory and a
+     read-only data directory
