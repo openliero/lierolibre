@@ -31,9 +31,15 @@
 #define TO_STRING_HPP
 
 #include <string>
+#include <stdexcept>
 
-namespace liero
+class BadConversion : public std::runtime_error
 {
-	std::string to_string(int value);
-}
+public:
+	BadConversion(std::string const& s)
+		: std::runtime_error(s) { }
+};
+
+std::string to_string(int value);
+
 #endif // TO_STRING_HPP

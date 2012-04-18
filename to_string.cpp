@@ -1,12 +1,14 @@
-// Compile using:
-// g++ -c to_string.cpp
+#include "to_string.hpp"
+
 #include <sstream>
 #include <string>
+#include <stdexcept>
 
 std::string to_string(int value)
 {
 	std::ostringstream result;
-	result << value;
+	if (!(result << value))
+		throw  BadConversion("to_string()");
+
 	return result.str();
 }
-
