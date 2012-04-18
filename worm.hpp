@@ -26,14 +26,14 @@ struct Ninjarope
 	, anchor(0)
 	{
 	}
-	
+
 	bool out;            //Is the ninjarope out?
 	bool attached;
 	Worm* anchor;			// If non-zero, the worm the ninjarope is attached to
 	fixed x, y, velX, velY; //Ninjarope props
 	// Not needed as far as I can tell: fixed forceX, forceY;
 	int length, curLen;
-	
+
 	void process(Worm& owner);
 };
 
@@ -54,12 +54,12 @@ struct WormWeapon
 	, available(true)
 	{
 	}
-	
+
 	int id;
 	int ammo;
 	int delayLeft;
 	int loadingLeft;
-	bool available;			
+	bool available;
 };
 
 struct WormSettingsExtensions
@@ -73,7 +73,7 @@ struct WormSettingsExtensions
 		MaxControlEx
 	};
 	//static const int MaxControl = Dig;
-	
+
 	uint32_t controlsEx[MaxControlEx];
 };
 
@@ -88,27 +88,27 @@ struct WormSettings : gvl::shared, WormSettingsExtensions
 		rgb[0] = 26;
 		rgb[1] = 26;
 		rgb[2] = 62;
-		
+
 		std::memset(weapons, 0, sizeof(weapons));
 	}
-	
+
 	gvl::gash::value_type& updateHash();
-	
+
 	void saveProfile(std::string const& newProfileName);
 	void loadProfile(std::string const& newProfileName);
-	
+
 	int health;
 	uint32_t controller; // CPU / Human
-	uint32_t controls[MaxControl];
+	uint32_t controls[MaxControlEx];
 	int weapons[5]; // TODO: Adjustable
 	std::string name;
 	int rgb[3];
 	bool randomName;
-	
+
 	int color;
-	
+
 	std::string profileName;
-	
+
 	gvl::gash::value_type hash;
 };
 
@@ -143,7 +143,7 @@ void archive(Archive ar, WormSettings& ws)
 			.ui8(dummy, 255)
 			.ui8(dummy, 255);
 	}
-	
+
 	for(int c = 0; c < WormSettings::MaxControlEx; ++c)
 	{
 		gvl::enable_when(ar, wsVersion >= 3)
@@ -188,9 +188,9 @@ struct WormAI
 	: worm(worm)
 	{
 	}
-	
+
 	virtual void process() = 0;
-	
+
 	Worm& worm;
 };
 
@@ -200,9 +200,9 @@ struct DumbLieroAI : WormAI
 	: WormAI(worm)
 	{
 	}
-	
+
 	void process();
-	
+
 	Rand rand;
 };
 
@@ -215,7 +215,7 @@ struct Worm : gvl::shared
 		RFUp,
 		RFRight
 	};
-	
+
 	enum Control
 	{
 		Left = WormSettings::Left,
@@ -229,40 +229,40 @@ struct Worm : gvl::shared
 		//Dig = WormSettings::Dig
 	};
 	//static const unsigned int MaxControl = Dig;
-	
-	
+
+
 	struct ControlState
 	{
 		ControlState()
 		: istate(0)
 		{
 		}
-		
+
 		bool operator==(ControlState const& b) const
 		{
 			return istate == b.istate;
 		}
-		
+
 		uint32_t pack() const
 		{
 			return istate; // & ((1 << MaxControl)-1);
 		}
-		
+
 		void unpack(uint32_t state)
 		{
 			istate = state & 0x7f;
 		}
-				
+
 		bool operator!=(ControlState const& b) const
 		{
 			return !operator==(b);
 		}
-		
+
 		bool operator[](std::size_t n) const
 		{
 			return ((istate >> n) & 1) != 0;
 		}
-		
+
 		void set(std::size_t n, bool v)
 		{
 			if(v)
@@ -270,10 +270,10 @@ struct Worm : gvl::shared
 			else
 				istate &= ~(uint32_t(1u) << n);
 		}
-		
+
 		uint32_t istate;
 	};
-		
+
 	Worm(/*gvl::shared_ptr<WormSettings> settings, int index, int wormSoundID, */Game& game)
 	: x(0), y(0), velX(0), velY(0)
 	, hotspotX(0), hotspotY(0)
@@ -304,51 +304,51 @@ struct Worm : gvl::shared
 	, game(game)
 	{
 		//std::memset(controlStates, 0, sizeof(controlStates));
-		
+
 		makeSightGreen = false;
-		
+
 		ready = true;
 		movable = true;
-		
+
 		//health = settings->health;
 		visible = false;
 		killedTimer = 150;
-		
+
 		//currentWeapon = 1; // This is later changed to 0, why is it here?
 	}
-	
+
 	bool pressed(Control control) const
 	{
 		return controlStates[control];
 	}
-	
+
 	bool pressedOnce(Control control)
 	{
 		bool state = controlStates[control];
 		controlStates.set(control, false);
 		return state;
 	}
-	
+
 	void release(Control control)
 	{
 		controlStates.set(control, false);
 	}
-	
+
 	void press(Control control)
 	{
 		controlStates.set(control, true);
 	}
-	
+
 	void setControlState(Control control, bool state)
 	{
 		controlStates.set(control, state);
 	}
-	
+
 	void toggleControlState(Control control)
 	{
 		controlStates.set(control, !controlStates[control]);
 	}
-	
+
 	void beginRespawn();
 	void doRespawning();
 	void process();
@@ -364,20 +364,20 @@ struct Worm : gvl::shared
 	void calculateReactionForce(int newX, int newY, int dir);
 	void initWeapons();
 	int angleFrame() const;
-	
-	fixed x, y;                    //Worm position    
+
+	fixed x, y;                    //Worm position
 	fixed velX, velY;              //Worm velocity
 
 	int logicRespawnX, logicRespawnY;
-	
+
 	int hotspotX, hotspotY;      //Hotspots for laser, laser sight, etc.
 	fixed aimingAngle, aimingSpeed;
- 
+
 	//Controls controls;
 	bool ableToJump, ableToDig;   //The previous state of some keys
 	bool keyChangePressed;
 	bool movable;
- 
+
 	bool animate;                 //Should the worm be animated?
 	bool visible;                 //Is the worm visible?
 	bool ready;                   //Is the worm ready to play?
@@ -386,37 +386,37 @@ struct Worm : gvl::shared
 	int health;                  //Health left
 	int lives;                   //lives left
 	int kills;                   //Kills made
-	
+
 	int timer;                   //Timer for GOT
 	int killedTimer;             //Time until worm respawns
 	int currentFrame;
- 
+
 	int flags;                   //How many flags does this worm have?
 
 	Ninjarope ninjarope;
-	
+
 	int currentWeapon;           //The selected weapon
 	bool fireConeActive;          //Is the firecone showing
 	Worm* lastKilledBy;          // What worm that last killed this worm
 	int fireCone;                //How much is left of the firecone
 	int leaveShellTimer;         //Time until next shell drop
-	
+
 	gvl::shared_ptr<WormSettings> settings; // !CLONING
 	//Viewport* viewport; // !CLONING
 	int index; // 0 or 1
-	
+
 	std::auto_ptr<WormAI> ai;
-	
+
 	int reacts[4];
 	WormWeapon weapons[5];
 	int direction;
 	ControlState controlStates;
 	ControlState prevControlStates;
 	Game& game; // !CLONING
-	
+
 	// Data for LocalController
 	ControlState cleanControlStates; // This contains the real state of real and extended controls
-	
+
 };
 
 bool checkForWormHit(int x, int y, int dist, Worm* ownWorm);
