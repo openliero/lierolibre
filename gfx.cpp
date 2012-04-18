@@ -56,7 +56,7 @@ struct KeyBehavior : ItemBehavior
 		}
 		while(!extended && isEx);
 
-		if(k != DkEscape)
+		if(k != (unsigned char)DkEscape)
 		{
 			if(!isEx)
 				key = k;
