@@ -7,7 +7,6 @@
 std::string lieroOPT;
 
 DataPath* data_path = NULL;
-// DATAPATH std::string lieroEXERoot;
 
 namespace
 {
@@ -103,6 +102,12 @@ void setLieroEXE(std::string const& path)
 	lieroCHR = data_path->file("LIERO.CHR");
 	lieroSND = data_path->file("LIERO.SND");
 	lieroOPT = data_path->file("LIERO.OPT");
+}
+void setLieroPath(std::string const& path)
+{
+	data_path = new DataPath(getRoot(path));
 
-// DATAPATH	lieroEXERoot = getRoot(lieroEXE);
+	lieroCHR = data_path->file("LIERO.CHR");
+	lieroSND = data_path->file("LIERO.SND");
+	lieroOPT = data_path->file("LIERO.OPT");
 }
