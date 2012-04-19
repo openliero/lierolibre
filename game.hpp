@@ -24,7 +24,7 @@ struct Game
 {
 	Game(gvl::shared_ptr<Common> common, gvl::shared_ptr<Settings> settings);
 	~Game();
-	
+
 	void onKey(Uint32 key, bool state);
 	Worm* findControlForKey(uint32_t key, Worm::Control& control);
 	void releaseControls();
@@ -32,10 +32,10 @@ struct Game
 	void gameLoop();
 	void focus();
 	void updateSettings();
-	
+
 	void createBObject(fixed x, fixed y, fixed velX, fixed velY);
 	void createBonus();
-	
+
 	void clearViewports();
 	void addViewport(Viewport*);
 	void processViewports();
@@ -47,14 +47,14 @@ struct Game
 	void startGame();
 	bool isGameOver();
 	void createDefaults();
-		
+
 	Material pixelMat(int x, int y)
 	{
 		return common->materials[level.pixel(x, y)];
 	}
-	
+
 	Level level;
-	
+
 	gvl::shared_ptr<Common> common;
 	gvl::shared_ptr<SoundPlayer> soundPlayer;
 	gvl::shared_ptr<Settings> settings;
@@ -64,10 +64,10 @@ struct Game
 	bool paused;
 	int cycles;
 	Rand rand;
-	
+
 	std::vector<Viewport*> viewports;
 	std::vector<Worm*> worms;
-	
+
 	typedef ExactObjectList<Bonus, 99> BonusList;
 	typedef ExactObjectList<WObject, 600> WObjectList;
 	typedef ExactObjectList<SObject, 700> SObjectList;
