@@ -1,21 +1,12 @@
 #include "game.hpp"
-#include "reader.hpp"
 #include "viewport.hpp"
 #include "worm.hpp"
-#include "filesystem.hpp"
 #include "gfx.hpp"
 #include "sfx.hpp"
 #include "weapsel.hpp"
 #include "constants.hpp"
 #include <cstdlib>
-#include "text.hpp" // TEMP
 #include <ctime>
-
-#include <iostream>
-#include <gvl/support/log.hpp> // TEMP
-
-//Game game;
-
 
 void Game::createDefaults()
 {
