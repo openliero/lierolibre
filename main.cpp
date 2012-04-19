@@ -141,8 +141,8 @@ try
 	Console::writeLine("");
 #if GVL_WINDOWS
 	Console::write(common->S[PressAnyKey]);
-#endif
 	Console::waitForAnyKey();
+#endif
 	Console::clear();
 
 	gfx.init();
@@ -202,8 +202,10 @@ catch(std::exception& ex)
 	SDL_Quit();
 	Console::setAttributes(0x2f);
 	Console::writeLine(std::string("EXCEPTION: ") + ex.what());
+#if GVL_WINDOWS
 	Console::writeLine("Press any key to quit");
 	Console::waitForAnyKey();
+#endif
 	return 1;
 }
 
