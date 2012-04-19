@@ -44,9 +44,8 @@ try
 	Console::init();
 	gfx.rand.seed(Uint32(std::time(0)));
 
-	std::string inputFile = "./liero.cfg";
-	std::string outputFile = "new_liero.cfg";
-	bool inFileSet = false;
+	bool exeSet = false;
+	bool cfgSet = false;
 	bool cfgWriteSet = false;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
@@ -66,6 +65,8 @@ try
 				common->loadPowerlevelPalette = false;
 			break;*/
 
+			case 'c':
+				cfgSet = true;
 			break;
 
 			case 'w':
@@ -73,16 +74,15 @@ try
 			break;
 			}
 		}
-		else if(!inFileSet)
-		{
-			inputFile = argv[i];
-			inFileSet = true;
-		}
 		else
 		{
-			outputFile = argv[i];
+			setLieroEXE(argv[i]);
+			exeSet = true;
 		}
 	}
+
+	if(!exeSet)
+		setLieroEXE("LIERO.EXE");
 
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 
@@ -91,9 +91,16 @@ try
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
 
-	ConfigInit cfgInit(inputFile, common);
-	if(cfgWriteSet)
-		cfgInit.write(outputFile);
+	if(cfgSet) {
+		ConfigInit cfgInit("liero.cfg", common);
+		if(cfgWriteSet)
+			cfgInit.write("liero.cfg");
+	} else {
+		ConfigInit cfgInit(".EXE", common);
+		if(cfgWriteSet)
+			cfgInit.write("liero.cfg");
+	}
+
 
 	Console::writeLine(common->S[OK]);
 

@@ -8,7 +8,6 @@
 #include "gfx.hpp"
 #include "common.hpp"
 #include "console.hpp"
-#include "reader.hpp"
 
 using namespace std;
 
@@ -16,13 +15,10 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 {
 	common = a_common;
 
-	if(getExtension(filePath) == "EXE" || getExtension(filePath) == "exe") {
-		setLieroEXE(filePath);
+	if(getExtension(filePath) == "EXE" || getExtension(filePath) == "exe")
 		loadFromEXE(filePath);
-	} else {
-		setLieroEXE(filePath); // This only needs the path
+	else
 		loadFromCFG(filePath);
-	}
 }
 
 void ConfigInit::consoleBlurb()
