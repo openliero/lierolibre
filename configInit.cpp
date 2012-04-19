@@ -3,27 +3,22 @@
 #include <string>
 #include <fstream>
 #include <exception>
-#include <boost/filesystem.hpp>
-#if GVL_LINUX
-#define BOOST_FILESYSTEM_DYN_LINK
-#endif
 
+#include "filesystem.hpp"
 #include "gfx.hpp"
 #include "common.hpp"
 #include "console.hpp"
 
 using namespace std;
 
-ConfigInit::ConfigInit(string a_filePath, gvl::shared_ptr<Common> a_common)
+ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 {
 	common = a_common;
 
-	boost::filesystem::path filePath(a_filePath);
-
-	if(filePath.extension() == ".EXE" || filePath.extension() == ".exe")
-		loadFromEXE(filePath.native());
+	if(getExtension(filePath) == "EXE" || getExtension(filePath) == "exe")
+		loadFromEXE(filePath);
 	else
-		loadFromCFG(filePath.native());
+		loadFromCFG(filePath);
 }
 
 void ConfigInit::consoleBlurb()
@@ -90,7 +85,7 @@ void ConfigInit::write(string filePath)
 	Console::writeLine("Saving variables to file '" + filePath +"'");
 
 	// Create empty if nonexistant
-	if(!boost::filesystem::exists(filePath)) {
+	if(!fileExists(filePath)) {
 		ofstream f(filePath.c_str());
 		f << flush;
 		f.close();

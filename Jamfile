@@ -1,10 +1,10 @@
 SubDir TOP ;
 
-C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG  -g ;
+C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 OPTIM = -O3 ;
 LINK = "g++" ;
-LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ -lboost_filesystem -lboost_system ;
+LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ ;
 
 Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	constants.cpp filesystem.cpp game.cpp

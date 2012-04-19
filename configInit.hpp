@@ -36,7 +36,7 @@
 class ConfigInit
 {
 public:
-	ConfigInit(std::string a_filePath, gvl::shared_ptr<Common> a_common);
+	ConfigInit(std::string filePath, gvl::shared_ptr<Common> a_common);
 
 	void write(std::string cfgFilePath);
 
