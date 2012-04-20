@@ -1,4 +1,4 @@
-LieroLibre, the gvl library, and the data helper scripts are released under the
+lierolibre, the gvl library, and the data helper scripts are released under the
 BDS-2-Clause License
 
 The original graphics for Liero, the new replacement sounds, and the
@@ -22,7 +22,7 @@ as specified by the Debian project.
      -----//-----
 
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Source: https://gitorious.org/liero
+Source: https://gitorious.org/lierolibre
 Upstream-Contact: Martin Erik Werner <martinerikwerner@gmail.com>
 
 Files: *
