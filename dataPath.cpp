@@ -34,7 +34,7 @@ DataPath::DataPath(string a_readonly_path)
 	file_access_map.insert(pair<string, bool>("NAMES.DAT", false));
 	file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
 	file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
-	file_access_map.insert(pair<string, bool>("config.ini", true));
+	file_access_map.insert(pair<string, bool>("liero.cfg", true));
 }
 
 string DataPath::file(string filename)
