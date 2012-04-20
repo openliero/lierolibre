@@ -1,6 +1,6 @@
 [submodule "data"]
 	path = data
-	url = git://gitorious.org/liero/liero-data.git
+	url = git://gitorious.org/lierolibre/lierolibre-data.git
 [submodule "gvl"]
 	path = gvl
-	url = git://gitorious.org/liero/gvl.git
+	url = git://gitorious.org/lierolibre/gvl.git
