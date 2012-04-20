@@ -97,6 +97,7 @@ void setLieroEXE(std::string const& path)
 {
 	//TODO: Close cached files
 
+	delete data_path;
 	data_path = new DataPath(getRoot(path));
 
 	lieroEXE = data_path->file("LIERO.EXE");
@@ -106,6 +107,7 @@ void setLieroEXE(std::string const& path)
 }
 void setLieroPath(std::string const& path)
 {
+	delete data_path;
 	data_path = new DataPath(getRoot(path));
 
 	lieroCHR = data_path->file("LIERO.CHR");
