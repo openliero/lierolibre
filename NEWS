@@ -1,4 +1,4 @@
-Liero NEWS - History of user-visible changes.
+LieroLibre NEWS - History of user-visible changes.
 
 Version 1.## - Somemonth 2012, by Martin Erik Werner
 
@@ -7,12 +7,12 @@ Version 1.## - Somemonth 2012, by Martin Erik Werner
  * Several non-free items were removed from the gvl library
 
  * Extracted variables from LIERO.EXE
-   + It is now possible to run Liero independently of LIERO.EXE using a text
+   + It is now possible to run LieroLibre independently of LIERO.EXE using a text
      config file
    + Variables may be edited directly in the text file
    + Variables may be extracted from a modded LIERO.EXE into a new text file
 
- * Updated gvl library to build and work with Liero
+ * Updated gvl library to build and work with Liero and LieroLibre
 
  * Replaced original sounds with completely free content
 

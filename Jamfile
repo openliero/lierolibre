@@ -4,9 +4,9 @@ C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 OPTIM = -O3 ;
 LINK = "g++" ;
-LINKLIBS on openliero$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ ;
+LINKLIBS on lierolibre$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ ;
 
-Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
+Main lierolibre : bobject.cpp bonus.cpp common.cpp console.cpp
 	constants.cpp filesystem.cpp game.cpp
 	gfx.cpp keys.cpp level.cpp main.cpp math.cpp
 	ninjarope.cpp nobject.cpp rand.cpp
@@ -39,8 +39,8 @@ Main openliero : bobject.cpp bonus.cpp common.cpp console.cpp
 	menu/timeBehavior.cpp
 	;
 
-MakeLocate openliero$(SUFEXE) : $(TOP)/_bin ;
+MakeLocate lierolibre$(SUFEXE) : $(TOP)/_bin ;
 
-LinkLibraries openliero : libgvl ;
+LinkLibraries lierolibre : libgvl ;
 
 SubInclude TOP gvl ;
