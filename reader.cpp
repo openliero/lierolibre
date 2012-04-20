@@ -5,6 +5,7 @@
 #include <stdexcept>
 
 std::string lieroOPT;
+std::string lieroCFG;
 
 DataPath* data_path = NULL;
 
@@ -110,4 +111,5 @@ void setLieroPath(std::string const& path)
 	lieroCHR = data_path->file("LIERO.CHR");
 	lieroSND = data_path->file("LIERO.SND");
 	lieroOPT = data_path->file("LIERO.OPT");
+	lieroCFG = data_path->file("liero.cfg");
 }

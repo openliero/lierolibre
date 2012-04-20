@@ -20,8 +20,8 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 		setLieroEXE(filePath);
 		loadFromEXE(filePath);
 	} else {
-		setLieroPath(filePath); // This only needs the path
-		loadFromCFG(filePath);
+		setLieroPath(filePath);
+		loadFromCFG(lieroCFG);
 	}
 }
 

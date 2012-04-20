@@ -39,6 +39,7 @@ extern DataPath* data_path;
 
 extern std::string lieroEXERoot;
 extern std::string lieroOPT;
+extern std::string lieroCFG;
 
 // Return an opened file
 FILE* openFile(std::string const& name);
