@@ -1,0 +1,169 @@
+#!/bin/bash
+#
+# This script is licensed under the BSD-2-Clause license:
+#
+# -----//-----
+#
+# Copyright (c) 2012, Martin Erik Werner <martinerikwerner@gmail.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# -----//-----
+#
+# This script reads a set of 30 name-defined wav files from a given directory
+# and packs them into a SND-file for LIERO, files must be named correctly
+# ("NAME.wav") but may differ in content from the originals.
+#
+# Credit goes to Tim Verweij for information regarding the SND file format:
+# http://lierohell.free.fr/lierohack/docformats/liero-snd.html
+
+usage="Usage: $0 <inputdir> <outputfile.SND>"
+
+if [ $# != 2 ]; then
+	echo >&2 $usage
+	exit 1
+fi
+
+if [ ! -d "$1" ]; then
+	echo >&2 "'"$1"' is not a directory, aborting"
+	exit 1
+fi
+
+if [ ! -r "$1" ]; then
+	echo >&2 "'"$1"' is not readable, aborting"
+	exit 1
+fi
+
+touch "$2" 2>&- || { echo >&2 "Unable to write to file '"$1"', aborting"; exit 1; }
+
+hash sox 2>&- || { echo >&2 "This script requires the "'"SoX"'" audio manipulator, aborting"; exit 1; }
+
+inputdir="$1"
+outputfile="$2"
+names="SHOTGUN SHOT RIFLE BAZOOKA BLASTER THROW LARPA EXP3A EXP3B EXP2 EXP3 EXP4 EXP5 DIRT BUMP DEATH1 DEATH2 DEATH3 HURT1 HURT2 HURT3 ALIVE BEGIN DROPSHEL RELOADED MOVEUP MOVEDOWN SELECT BOING BURNER"
+
+for i in $names; do
+	if [ ! -r "$inputdir"/"$i".wav ]; then
+		echo >&2 "'"$inputdir"/"$i".wav' is not readable or nonexistant, aborting"
+		exit 1
+	fi
+done
+
+sounds=30
+headersize=2
+nameoffset=0
+namesize=8
+offsetoffset=$namesize
+offsetsize=4
+sizeoffset=$(($namesize + offsetsize))
+sizesize=4
+entrysize=$(($namesize + $offsetsize + $sizesize))
+indexsize=$(($headersize + $sounds * $entrysize))
+
+# Output file:
+# header
+# NAME|offset|size
+# NAME|offset|size
+# NAME|offset|size
+# Raw PCM sound data (signed 8bit, 22050 Hz, mono)...
+
+function pad {
+# Write $1 NULL bytes to file
+	pad="$1"
+	p=0
+
+	until [ $p = $pad ]; do
+		printf "\x00" >> $outputfile
+		p=$(expr $p + 1)
+	done
+}
+
+function writedec {
+# write decimal number $1 to file, and pad to $2 bytes
+	dec="$1"
+	decsize="$2"
+	hex="$(printf '%x\n' $1)"
+	d=0
+
+	for h in $(echo "$hex" | rev | fold -b2 | rev); do
+		printf "\x$h" >> $outputfile
+		export d=$(expr $d + 1)
+	done
+
+	if [ $decsize ]; then
+		pad $(($decsize - $d))
+	fi
+}
+
+function writeheader {
+	writedec $sounds $headersize
+}
+
+function writestring () {
+# Write string $1 to file, padding to $2 bytes
+	name="$1"
+	stringsize="$2"
+	s=0
+
+	for c in $(echo $name | fold -b1); do
+		dec=$(printf "%d\n" \'$c)
+		writedec $dec
+		export s=$(expr $s + 1)
+	done
+	if [ $stringsize ]; then
+		pad $(($stringsize - $s))
+	fi
+}
+
+# Main
+
+echo -n "" > $outputfile
+writeheader
+dataoffset="$indexsize"
+datasize=0
+
+# Index
+i=0
+for n in $names; do
+	name="$n"
+	file="$inputdir"/"$n".wav
+	entryoffset="$(($headersize + $i * $entrysize))"
+	dataoffset="$(($dataoffset + datasize))"
+	datasize="$(sox -t wav "$file" \
+		-t raw -b 8 -e signed-integer -r 22050 -B -c 1 - | \
+		dd 2>&1 | sed -n 's/\([0-9]*\)\ bytes\ .*/\1/p')"
+
+	writestring $name $namesize
+	writedec $dataoffset $offsetsize
+	writedec $datasize $sizesize
+	i=$(expr $i + 1)
+done
+
+# Raw data
+for n in $names; do
+	file="$inputdir"/"$n".wav
+
+	sox -t wav "$file" -t raw -b 8 -e signed-integer -r 22050 -B -c 1 - \
+		>> $outputfile
+done
+

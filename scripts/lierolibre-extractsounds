@@ -1,0 +1,102 @@
+#!/bin/bash
+#
+# This script is licensed under the BSD-2-Clause license:
+#
+# -----//-----
+#
+# Copyright (c) 2012, Martin Erik Werner <martinerikwerner@gmail.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# -----//-----
+#
+# This script extracts individual sound files from the LIERO.SND binary blob
+# and dumps them in wav format in the current working directory, use the
+# 'packsounds' script to pack them back up again.
+#
+# Credit goes to Tim Verweij for information regarding the SND file format:
+# http://lierohell.free.fr/lierohack/docformats/liero-snd.html
+
+usage="Usage: $0 <inputfile.SND> <outputdir>"
+
+if [ $# != 2 ]; then
+	echo >&2 $usage
+	exit 1
+fi
+
+if [ ! -r "$1" ]; then
+	echo >&2 "Unable to read file '"$1"', aborting"
+	exit 1
+fi
+
+if [ ! -d "$2" ]; then
+	echo >&2 "'"$2"' is not a directory, aborting"
+	exit 1
+fi
+
+if [ ! -w "$2" ]; then
+	echo >&2 "'"$2"' is not writable, aborting"
+	exit 1
+fi
+
+hash sox 2>&- || { echo >&2 "This script requires the "'"SoX"'" audio manipulator, aborting"; exit 1; }
+
+sndfile="$1"
+outputdir="$2"
+sounds=30
+headersize=2
+entrysize=16
+nameoffset=0
+namesize=8
+offsetoffset=8
+offsetsize=4
+sizeoffset=12
+sizesize=4
+
+# Input file:
+# header
+# NAME|offset|size
+# NAME|offset|size
+# NAME|offset|size
+# Raw PCM sound data (signed 8bit, 22050 Hz, mono)...
+
+# For more info, look at
+# echo "$(dd if=$sndfile ibs=1 skip=2 | xxd -g 4 | head -30)"
+
+# For each entry
+for i in $(seq 0 $(($sounds - 1))); do
+	name="$(dd if=$sndfile ibs=1 \
+		skip=$(($i * $entrysize + $(($headersize + $nameoffset)))) \
+		count=$namesize 2>/dev/null | tr -d ' ')"
+
+	offset="$((0x$(dd if=$sndfile ibs=1 \
+		skip=$(($i * $entrysize + $(($headersize + $offsetoffset)))) \
+		count=$offsetsize 2>/dev/null | od -A n -t x4 | tr -d ' ')))"
+
+	size="$((0x$(dd if=$sndfile ibs=1 \
+		skip=$(($i * $entrysize + $(($headersize + $sizeoffset)))) \
+		count=$sizesize 2>/dev/null | od -A n -t x4 | tr -d ' ')))"
+
+	dd if=$sndfile ibs=1 skip=$offset count=$size 2>/dev/null | \
+		sox -t raw -b 8 -e signed-integer -r 22050 -B -c 1 - -t wav "$outputdir"/"$name".wav
+done
