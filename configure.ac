@@ -1,9 +1,10 @@
-AC_INIT([Liero C++], [1.40], [martinerikwerner@gmail.com], [liero], [https://gitorious.org/liero])
+AC_INIT([lierolibre C++], [0.1], [martinerikwerner@gmail.com], [lierolibre], [https://gitorious.org/lierolibre])
 AC_PREREQ([2.59])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 
+LT_INIT
 AM_INIT_AUTOMAKE([1.10 -Wall no-define subdir-objects])
 
 AC_CONFIG_FILES([Makefile])
@@ -12,7 +13,10 @@ AC_PROG_CC
 AC_PROG_CXX
 AM_PROG_CC_C_O
 
-dnl Check for SDL
+LIBRT=""
+AC_CHECK_LIB(rt, clock_gettime, [LIBRT="-lrt"])
+AC_SUBST(LIBRT)
+
 SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION, :, \
 	 AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
