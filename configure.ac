@@ -4,8 +4,6 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 
-dnl Need libtool for boost.m4 :(
-LT_INIT
 AM_INIT_AUTOMAKE([1.10 -Wall no-define subdir-objects])
 
 AC_CONFIG_FILES([Makefile])
@@ -18,11 +16,6 @@ dnl Check for SDL
 SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION, :, \
 	 AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
-
-dnl Check for Boost
-BOOST_REQUIRE
-BOOST_FILESYSTEM
-BOOST_SYSTEM
 
 PKG_CHECK_MODULES([DEPS], [libconfig++ SDL_mixer])
 PKG_CHECK_MODULES([GVL_DEPS], [zlib])
