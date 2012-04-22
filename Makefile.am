@@ -45,10 +45,26 @@ nodist_pkgdata_DATA = \
 	data/LIERO.SND
 
 dist_doc_DATA = \
-		AUTHORS \
-		COPYING \
-		NEWS \
-		README
+	AUTHORS \
+	COPYING \
+	NEWS \
+	README \
+	doc/lierolibre.6 \
+	doc/lierolibre-extractgfx.6 \
+	doc/lierolibre-packgfx.6 \
+	doc/lierolibre-extractsounds.6 \
+	doc/lierolibre-packsounds.6 \
+	doc/lierolibre-extractlev.6 \
+	doc/lierolibre-packlev.6
+
+dist_noinst_DATA = \
+	doc/lierolibre.6.am \
+	doc/lierolibre-extractgfx.6.am \
+	doc/lierolibre-packgfx.6.am \
+	doc/lierolibre-extractsounds.6.am \
+	doc/lierolibre-packsounds.6.am \
+	doc/lierolibre-extractlev.6.am \
+	doc/lierolibre-packlev.6.am
 
 EXTRA_PROGRAMS = $(GVLTEST)
 gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
@@ -567,7 +583,7 @@ data/LIERO.SND:
 		$(srcdir)/data/sounds/ \
 		data/LIERO.SND
 
-scripts/lierolibre: scripts
+scripts/lierolibre:
 	install -d scripts/
 	sed \
 		-e 's#PKGDATA#$(pkgdatadir)#g' \
@@ -576,6 +592,16 @@ scripts/lierolibre: scripts
 		-e 's#PACKAGE#$(PACKAGE)#g' \
 		$(srcdir)/scripts/lierolibre.am \
 		> scripts/lierolibre
+
+doc/lierolibre.6:
+	install -d doc/
+	sed \
+		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
+		-e 's,#CFGFILE#,$(CFGFILE),g' \
+		-e 's,#LIBEXECDIR#,$(libexecdir),g' \
+		-e 's,#PACKAGE#,$(PACKAGE),g' \
+		$(srcdir)/doc/lierolibre.6.am \
+		> doc/lierolibre.6
 
 clean-local:
 	rm -f \
