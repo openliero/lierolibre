@@ -50,7 +50,7 @@ dist_doc_DATA = \
 	NEWS \
 	README
 
-dist_man_DATA = \
+nodist_man6_MANS = \
 	man/lierolibre.6 \
 	man/lierolibre-extractgfx.6 \
 	man/lierolibre-packgfx.6 \
@@ -59,7 +59,7 @@ dist_man_DATA = \
 	man/lierolibre-extractlev.6 \
 	man/lierolibre-packlev.6
 
-dist_noinst_DATA = \
+dist_noinst_man6_MANS = \
 	man/lierolibre.6.am \
 	man/lierolibre-extractgfx.6.am \
 	man/lierolibre-packgfx.6.am \
@@ -595,7 +595,7 @@ scripts/lierolibre:
 		$(srcdir)/scripts/lierolibre.am \
 		> scripts/lierolibre
 
-man/lierolibre.6:
+man/%.6:
 	install -d man/
 	sed \
 		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
@@ -603,8 +603,8 @@ man/lierolibre.6:
 		-e 's,#LIBEXECDIR#,$(libexecdir),g' \
 		-e 's,#PACKAGE#,$(PACKAGE),g' \
 		-e 's,#UPPERCASE_PACKAGE#,\U$(PACKAGE),g' \
-		$(srcdir)/man/lierolibre.6.am \
-		> man/lierolibre.6
+		$(srcdir)/$@.am \
+		> $@
 
 clean-local:
 	rm -f \
