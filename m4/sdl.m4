@@ -6,7 +6,7 @@
 # Shamelessly stolen from Owen Taylor
 
 # I assume that the SDL license applies to this file...
-# -- Martin Werner (Liero modder) 2012
+# -- Martin Erik Werner (lierolibre author) 2012
 
 #   SDL - Simple DirectMedia Layer
 #   Copyright (C) 1997-2012 Sam Lantinga
