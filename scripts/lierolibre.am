@@ -1,6 +1,6 @@
 #!/bin/sh
 
-defaultpath="PKGDATA/CFGFILE"
+defaultpath="#PKGDATADIR#/#CFGFILE#"
 
 ARGS=""
 
@@ -36,12 +36,12 @@ do
 done
 
 if [ "$manualpath" = "true" ]; then
-	exec LIBEXECDIR/PACKAGE/PACKAGE "$ARGS" "$@"
+	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$ARGS" "$@"
 
 elif [ -z "$ARG" ]; then
-	exec LIBEXECDIR/PACKAGE/PACKAGE "$defaultpath" "$@"
+	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$defaultpath" "$@"
 
 else
-	exec LIBEXECDIR/PACKAGE/PACKAGE "$ARGS" "$defaultpath" "$@"
+	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$ARGS" "$defaultpath" "$@"
 fi
 

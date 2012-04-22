@@ -588,10 +588,10 @@ data/LIERO.SND:
 scripts/lierolibre:
 	install -d scripts/
 	sed \
-		-e 's#PKGDATA#$(pkgdatadir)#g' \
-		-e 's#CFGFILE#$(CFGFILE)#g' \
-		-e 's#LIBEXECDIR#$(libexecdir)#g' \
-		-e 's#PACKAGE#$(PACKAGE)#g' \
+		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
+		-e 's,#CFGFILE#,$(CFGFILE),g' \
+		-e 's,#LIBEXECDIR#,$(libexecdir),g' \
+		-e 's,#PACKAGE#,$(PACKAGE),g' \
 		$(srcdir)/scripts/lierolibre.am \
 		> scripts/lierolibre
 
@@ -602,6 +602,7 @@ man/lierolibre.6:
 		-e 's,#CFGFILE#,$(CFGFILE),g' \
 		-e 's,#LIBEXECDIR#,$(libexecdir),g' \
 		-e 's,#PACKAGE#,$(PACKAGE),g' \
+		-e 's,#UPPERCASE_PACKAGE#,\U$(PACKAGE),g' \
 		$(srcdir)/man/lierolibre.6.am \
 		> man/lierolibre.6
 
