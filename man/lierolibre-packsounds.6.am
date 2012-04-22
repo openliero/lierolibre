@@ -27,6 +27,7 @@ script to extract them again.
 .TP
 .I inputdir
 This directory must contain 30 sound files in wav format, correspondingly named
+.br
 .I SHOTGUN.wav SHOT.wav RIFLE.wav BAZOOKA.wav BLASTER.wav THROW.wav LARPA.wav EXP3A.wav EXP3B.wav EXP2.wav EXP3.wav EXP4.wav EXP5.wav DIRT.wav BUMP.wav DEATH1.wav DEATH2.wav DEATH3.wav HURT1.wav HURT2.wav HURT3.wav ALIVE.wav BEGIN.wav DROPSHEL.wav RELOADED.wav MOVEUP.wav MOVEDOWN.wav SELECT.wav BOING.wav BURNER.wav \fR.
 
 .TP
