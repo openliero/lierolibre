@@ -1,23 +1,22 @@
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
 
-LIEROLIBRE = lierolibre
-LIBGVL = gvl/libgvl.la
-GVLTEST = gvl/gvltest
+appicondir = $(datadir)/icons/hicolor/scalable/apps
+desktopdir = $(datadir)/applications
 
 # For sedding in wrapper script later on
 CFGFILE = liero.cfg
 
-pkglibexec_PROGRAMS = $(LIEROLIBRE)
+pkglibexec_PROGRAMS = lierolibre
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS)
 lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
 lierolibre_LDADD = $(LIBGVL) $(DEPS_LIBS) $(SDL_LIBS)
 
-noinst_LTLIBRARIES = $(LIBGVL)
+noinst_LTLIBRARIES = gvl/libgvl.la
 gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
 gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 
-EXTRA_PROGRAMS = $(GVLTEST)
+EXTRA_PROGRAMS = gvl/gvltest
 gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
 gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
 gvl_gvltest_LDADD = $(LIBGVL)
@@ -39,6 +38,27 @@ dist_noinst_SCRIPTS = \
 	gvl/Jamfile \
 	scripts/lierolibre.am
 
+nodist_man6_MANS = \
+	man/lierolibre.6 \
+	man/lierolibre-extractgfx.6 \
+	man/lierolibre-packgfx.6 \
+	man/lierolibre-extractsounds.6 \
+	man/lierolibre-packsounds.6 \
+	man/lierolibre-extractlev.6 \
+	man/lierolibre-packlev.6
+
+dist_doc_DATA = \
+	AUTHORS \
+	COPYING \
+	NEWS \
+	README
+
+dist_desktop_DATA = \
+	data/lierolibre.desktop
+
+dist_appicon_DATA = \
+	data/lierolibre.svg
+
 dist_pkgdata_DATA = \
 	data/LIERO.DAT \
 	data/LIERO.OPT \
@@ -49,21 +69,6 @@ nodist_pkgdata_DATA = \
 	data/LIERO.CHR \
 	data/LIERO.SND
 
-dist_doc_DATA = \
-	AUTHORS \
-	COPYING \
-	NEWS \
-	README
-
-nodist_man6_MANS = \
-	man/lierolibre.6 \
-	man/lierolibre-extractgfx.6 \
-	man/lierolibre-packgfx.6 \
-	man/lierolibre-extractsounds.6 \
-	man/lierolibre-packsounds.6 \
-	man/lierolibre-extractlev.6 \
-	man/lierolibre-packlev.6
-
 dist_noinst_DATA = \
 	man/lierolibre.6.am \
 	man/lierolibre-extractgfx.6.am \
@@ -72,6 +77,12 @@ dist_noinst_DATA = \
 	man/lierolibre-packsounds.6.am \
 	man/lierolibre-extractlev.6.am \
 	man/lierolibre-packlev.6.am \
+	\
+	\
+	data/lierolibre.desktop
+	\
+	\
+	data/lierolibre.xpm \
 	\
 	\
 	data/graphics/gfx1.xpm \
@@ -573,19 +584,7 @@ EXTRA_DIST = \
 	gvl/zlib/zlib.h \
 	gvl/zlib/zutil.h
 
-data/LIERO.CHR:
-	install -d data/
-	$(srcdir)/scripts/lierolibre-packgfx \
-		$(srcdir)/data/graphics/gfx{1..3}.xpm \
-		$@
-
-data/LIERO.SND:
-	install -d data/
-	$(srcdir)/scripts/lierolibre-packsounds \
-		$(srcdir)/data/sounds/ \
-		$@
-
-scripts/lierolibre:
+$(nodist_bin_SCRIPTS):
 	install -d scripts/
 	sed \
 		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
@@ -605,6 +604,18 @@ $(nodist_man6_MANS):
 		-e 's,#UPPERCASE_PACKAGE#,\U$(PACKAGE),g' \
 		$(srcdir)/$@.am \
 		> $@
+
+data/LIERO.CHR:
+	install -d data/
+	$(srcdir)/scripts/lierolibre-packgfx \
+		$(srcdir)/data/graphics/gfx{1..3}.xpm \
+		$@
+
+data/LIERO.SND:
+	install -d data/
+	$(srcdir)/scripts/lierolibre-packsounds \
+		$(srcdir)/data/sounds/ \
+		$@
 
 clean-local:
 	rm -f \
