@@ -37,11 +37,18 @@ gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 dist_pkgdata_DATA = \
 	data/LIERO.DAT \
 	data/LIERO.OPT \
+	data/NAMES.DAT \
 	data/liero.cfg
 
 nodist_pkgdata_DATA = \
 	data/LIERO.CHR \
 	data/LIERO.SND
+
+dist_doc_DATA = \
+		AUTHORS \
+		COPYING \
+		NEWS \
+		README
 
 EXTRA_PROGRAMS = $(GVLTEST)
 gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
