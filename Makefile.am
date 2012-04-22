@@ -1,25 +1,89 @@
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
 
-dist_noinst_SCRIPTS = autogen.sh Jamfile gvl/Jamfile
-
 LIEROLIBRE = lierolibre
 LIBGVL = gvl/libgvl.la
 GVLTEST = gvl/gvltest
 
-bin_PROGRAMS = $(LIEROLIBRE)
+# For sedding in wrapper script later on
+CFGFILE = liero.cfg
+
+libexec_PROGRAMS = $(LIEROLIBRE)
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS)
 lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
 lierolibre_LDADD = $(LIBGVL) $(DEPS_LIBS) $(SDL_LIBS)
 
+nodist_bin_SCRIPTS = \
+	scripts/lierolibre
+
+dist_bin_SCRIPTS = \
+	scripts/lierolibre-extractgfx \
+	scripts/lierolibre-packgfx \
+	scripts/lierolibre-extractsounds \
+	scripts/lierolibre-packsounds \
+	scripts/lierolibre-extractlev \
+	scripts/lierolibre-packlev
+
+dist_noinst_SCRIPTS = \
+	autogen.sh \
+	Jamfile \
+	gvl/Jamfile \
+	scripts/lierolibre.am
+
 noinst_LTLIBRARIES = $(LIBGVL)
 gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
 gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 
-check_PROGRAMS = $(GVLTEST)
+dist_data_DATA = \
+	data/LIERO.DAT \
+	data/LIERO.OPT \
+	data/liero.cfg
+
+nodist_data_DATA = \
+	data/LIERO.CHR \
+	data/LIERO.SND
+
+EXTRA_PROGRAMS = $(GVLTEST)
 gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
 gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
 gvl_gvltest_LDADD = $(LIBGVL)
+
+EXTRA_DIST = \
+	data/graphics/gfx1.xpm \
+	data/graphics/gfx2.xpm \
+	data/graphics/gfx3.xpm \
+	\
+	\
+	data/sounds/ALIVE.wav \
+	data/sounds/BAZOOKA.wav \
+	data/sounds/BEGIN.wav \
+	data/sounds/BLASTER.wav \
+	data/sounds/BOING.wav \
+	data/sounds/BUMP.wav \
+	data/sounds/BURNER.wav \
+	data/sounds/DEATH1.wav \
+	data/sounds/DEATH2.wav \
+	data/sounds/DEATH3.wav \
+	data/sounds/DIRT.wav \
+	data/sounds/DROPSHEL.wav \
+	data/sounds/EXP2.wav \
+	data/sounds/EXP3.wav \
+	data/sounds/EXP3A.wav \
+	data/sounds/EXP3B.wav \
+	data/sounds/EXP4.wav \
+	data/sounds/EXP5.wav \
+	data/sounds/HURT1.wav \
+	data/sounds/HURT2.wav \
+	data/sounds/HURT3.wav \
+	data/sounds/LARPA.wav \
+	data/sounds/MOVEDOWN.wav \
+	data/sounds/MOVEUP.wav \
+	data/sounds/RELOADED.wav \
+	data/sounds/RIFLE.wav \
+	data/sounds/SELECT.wav \
+	data/sounds/SHOT.wav \
+	data/sounds/SHOTGUN.wav \
+	data/sounds/THROW.wav
 
 lierolibre_SOURCES = \
 	binReader.cpp \
@@ -270,7 +334,7 @@ gvl_gvltest_SOURCES = \
 
 # Just everything in a bunch, some bits are unused currently
 # but I'm ignorant so I'm bloating the archive.
-EXTRA_DIST = \
+EXTRA_DIST += \
 	gvl/containers/buffer.cpp \
 	gvl/containers/critbit.cpp \
 	gvl/containers/list.cpp \
@@ -483,4 +547,35 @@ EXTRA_DIST = \
 	gvl/zlib/zconf.in.h \
 	gvl/zlib/zlib.h \
 	gvl/zlib/zutil.h
+
+datadir:
+	install -d data/
+
+scriptsdir:
+	install -d scripts/
+
+data/LIERO.CHR: datadir
+	$(srcdir)/scripts/lierolibre-packgfx \
+		$(srcdir)/data/graphics/gfx{1..3}.xpm \
+		data/LIERO.CHR
+
+data/LIERO.SND: datadir
+	$(srcdir)/scripts/lierolibre-packsounds \
+		$(srcdir)/data/sounds/ \
+		data/LIERO.SND
+
+scripts/lierolibre: scriptsdir
+	sed \
+		-e 's#PKGDATA#$(pkgdatadir)#g' \
+		-e 's#CFGFILE#$(CFGFILE)#g' \
+		-e 's#LIBEXECDIR#$(libexecdir)#g' \
+		-e 's#PACKAGE#$(PACKAGE)#g' \
+		$(srcdir)/scripts/lierolibre.am \
+		> scripts/lierolibre
+
+clean-local:
+	rm -f \
+		data/LIERO.CHR \
+		data/LIERO.SND \
+		scripts/lierolibre
 
