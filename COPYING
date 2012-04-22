@@ -29,7 +29,7 @@ Upstream-Contact: Martin Erik Werner <martinerikwerner@gmail.com>
 
 Files: *
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2010, "basro"
+           2010, Mario Carbajal "basro"
 License: BSD-2-Clause
 
 Files: console.* exactObjectList.hpp fastObjectList.hpp lfs.hpp rand.*
@@ -45,7 +45,7 @@ License: BSD-2-Clause
 Files: common.* controller/localController.cpp gfx.* gfx/font.* Jamfile
        level.* menu/menu.* settings.* worm.*
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2010, "basro"
+           2010, Mario Carbajal "basro"
            2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 
@@ -67,7 +67,7 @@ Copyright: 1997-2012 Sam Lantinga
 License: LGPL-2.1+
 
 Files: data/*
-Copyright: 1998-1999 Joosa Reikkinen
+Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
 License: WTFPL
 
 Files: data/sounds/*.wav
@@ -75,7 +75,7 @@ Copyright: 2012, "sea"
 License: WTFPL
 
 Files: data/liero.cfg
-Copyright: 1998-1999 Joosa Reikkinen
+Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
            2012 Martin Erik Werner <martinerikwerner@gmail.com>
 License: WTFPL
 
