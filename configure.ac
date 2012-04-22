@@ -5,7 +5,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_HEADERS([config.h])
 
 LT_INIT
-AM_INIT_AUTOMAKE([1.10 -Wall no-define subdir-objects])
+AM_INIT_AUTOMAKE([1.10 -Wall subdir-objects])
 
 AC_CONFIG_FILES([Makefile])
 AC_PROG_CPP
