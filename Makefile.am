@@ -13,6 +13,15 @@ lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
 lierolibre_LDADD = $(LIBGVL) $(DEPS_LIBS) $(SDL_LIBS)
 
+noinst_LTLIBRARIES = $(LIBGVL)
+gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
+gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
+
+EXTRA_PROGRAMS = $(GVLTEST)
+gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
+gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
+gvl_gvltest_LDADD = $(LIBGVL)
+
 nodist_bin_SCRIPTS = \
 	scripts/lierolibre
 
@@ -29,10 +38,6 @@ dist_noinst_SCRIPTS = \
 	Jamfile \
 	gvl/Jamfile \
 	scripts/lierolibre.am
-
-noinst_LTLIBRARIES = $(LIBGVL)
-gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
-gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 
 dist_pkgdata_DATA = \
 	data/LIERO.DAT \
@@ -59,21 +64,16 @@ nodist_man6_MANS = \
 	man/lierolibre-extractlev.6 \
 	man/lierolibre-packlev.6
 
-dist_noinst_man6_MANS = \
+dist_noinst_DATA = \
 	man/lierolibre.6.am \
 	man/lierolibre-extractgfx.6.am \
 	man/lierolibre-packgfx.6.am \
 	man/lierolibre-extractsounds.6.am \
 	man/lierolibre-packsounds.6.am \
 	man/lierolibre-extractlev.6.am \
-	man/lierolibre-packlev.6.am
-
-EXTRA_PROGRAMS = $(GVLTEST)
-gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
-gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
-gvl_gvltest_LDADD = $(LIBGVL)
-
-EXTRA_DIST = \
+	man/lierolibre-packlev.6.am \
+	\
+	\
 	data/graphics/gfx1.xpm \
 	data/graphics/gfx2.xpm \
 	data/graphics/gfx3.xpm \
@@ -359,7 +359,7 @@ gvl_gvltest_SOURCES = \
 
 # Just everything in a bunch, some bits are unused currently
 # but I'm ignorant so I'm bloating the archive.
-EXTRA_DIST += \
+EXTRA_DIST = \
 	gvl/containers/buffer.cpp \
 	gvl/containers/critbit.cpp \
 	gvl/containers/list.cpp \
@@ -577,13 +577,13 @@ data/LIERO.CHR:
 	install -d data/
 	$(srcdir)/scripts/lierolibre-packgfx \
 		$(srcdir)/data/graphics/gfx{1..3}.xpm \
-		data/LIERO.CHR
+		$@
 
 data/LIERO.SND:
 	install -d data/
 	$(srcdir)/scripts/lierolibre-packsounds \
 		$(srcdir)/data/sounds/ \
-		data/LIERO.SND
+		$@
 
 scripts/lierolibre:
 	install -d scripts/
@@ -592,10 +592,10 @@ scripts/lierolibre:
 		-e 's,#CFGFILE#,$(CFGFILE),g' \
 		-e 's,#LIBEXECDIR#,$(libexecdir),g' \
 		-e 's,#PACKAGE#,$(PACKAGE),g' \
-		$(srcdir)/scripts/lierolibre.am \
-		> scripts/lierolibre
+		$(srcdir)/$@.am \
+		> $@
 
-man/%.6:
+$(nodist_man6_MANS):
 	install -d man/
 	sed \
 		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
@@ -608,7 +608,7 @@ man/%.6:
 
 clean-local:
 	rm -f \
-		data/LIERO.CHR \
-		data/LIERO.SND \
-		scripts/lierolibre
+		$(nodist_pkgdata_DATA) \
+		$(nodist_bin_SCRIPTS) \
+		$(nodist_man6_MANS)
 
