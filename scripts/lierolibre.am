@@ -5,12 +5,12 @@ defaultpath="PKGDATA/CFGFILE"
 ARGS=""
 
 # We want to catch the no-path and the help case, and pass on everything else
-# it is known that -v and -w are the only options that take an extra arg
+# it is known that -v and -w are the only options
 while :
 do
 	case "$1" in
 		-h|-help|--help)
-			exec man liero
+			exec man lierolibre
 			;;
 		-v)
 			ARGS = "$ARGS $1 $2"
@@ -24,17 +24,24 @@ do
 			ARGS = "$ARGS $1"
 			shift 1
 			;;
-		*)
-			ARGS = "$ARGS $1"
+		?*)
+			ARGS="$ARGS $1"
 			manualpath="true"
 			shift 1
+			;;
+		*)
+			break
 			;;
 	esac
 done
 
 if [ "$manualpath" = "true" ]; then
-	exec LIBEXECDIR/PACKAGE "$ARGS"
+	exec LIBEXECDIR/PACKAGE/PACKAGE "$ARGS" "$@"
+
+elif [ -z "$ARG" ]; then
+	exec LIBEXECDIR/PACKAGE/PACKAGE "$defaultpath" "$@"
+
 else
-	exec LIBEXECDIR/PACKAGE "$ARGS" "$defaultpath"
+	exec LIBEXECDIR/PACKAGE/PACKAGE "$ARGS" "$defaultpath" "$@"
 fi
 
