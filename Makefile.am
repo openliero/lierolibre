@@ -7,7 +7,7 @@ GVLTEST = gvl/gvltest
 # For sedding in wrapper script later on
 CFGFILE = liero.cfg
 
-libexec_PROGRAMS = $(LIEROLIBRE)
+pkglibexec_PROGRAMS = $(LIEROLIBRE)
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS)
 lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
@@ -34,12 +34,12 @@ noinst_LTLIBRARIES = $(LIBGVL)
 gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
 gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 
-dist_data_DATA = \
+dist_pkgdata_DATA = \
 	data/LIERO.DAT \
 	data/LIERO.OPT \
 	data/liero.cfg
 
-nodist_data_DATA = \
+nodist_pkgdata_DATA = \
 	data/LIERO.CHR \
 	data/LIERO.SND
 
