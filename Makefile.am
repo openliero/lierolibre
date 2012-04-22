@@ -10,7 +10,7 @@ pkglibexec_PROGRAMS = lierolibre
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS)
 lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
-lierolibre_LDADD = $(LIBGVL) $(DEPS_LIBS) $(SDL_LIBS)
+lierolibre_LDADD = gvl/libgvl.la $(DEPS_LIBS) $(SDL_LIBS)
 
 noinst_LTLIBRARIES = gvl/libgvl.la
 gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
@@ -19,7 +19,7 @@ gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 EXTRA_PROGRAMS = gvl/gvltest
 gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
 gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
-gvl_gvltest_LDADD = $(LIBGVL)
+gvl_gvltest_LDADD = gvl/libgvl.la
 
 nodist_bin_SCRIPTS = \
 	scripts/lierolibre
