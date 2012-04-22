@@ -555,23 +555,20 @@ EXTRA_DIST += \
 	gvl/zlib/zlib.h \
 	gvl/zlib/zutil.h
 
-datadir:
+data/LIERO.CHR:
 	install -d data/
-
-scriptsdir:
-	install -d scripts/
-
-data/LIERO.CHR: datadir
 	$(srcdir)/scripts/lierolibre-packgfx \
 		$(srcdir)/data/graphics/gfx{1..3}.xpm \
 		data/LIERO.CHR
 
-data/LIERO.SND: datadir
+data/LIERO.SND:
+	install -d data/
 	$(srcdir)/scripts/lierolibre-packsounds \
 		$(srcdir)/data/sounds/ \
 		data/LIERO.SND
 
-scripts/lierolibre: scriptsdir
+scripts/lierolibre: scripts
+	install -d scripts/
 	sed \
 		-e 's#PKGDATA#$(pkgdatadir)#g' \
 		-e 's#CFGFILE#$(CFGFILE)#g' \
