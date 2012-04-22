@@ -59,8 +59,9 @@ Comment: The full license texts in this document are separate entities with
 
 Files: aclocal.m4 config.h.in configure Makefile.in build-aux/* m4/*
 Copyright: 1992-2011, Free Software Foundation, Inc.
-License: BSD-2-Clause
-Comment: Autotools content is distributed under the lierolibre license
+License: GPL-2+ or BSD-2-Clause
+Comment: Autotools content is distributed under the lierolibre license, if they
+         are used outside of lierolibre the GPL-2+ license applies instead
 
 Files: m4/sdl.m4
 Copyright: 1997-2012 Sam Lantinga
