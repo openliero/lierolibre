@@ -13,8 +13,10 @@ The included copy of Zlib is licensed under the Zlib license.
 The type_info header is licensed under the Boost Software License 1.0, and
 is included in the gvl library.
 
+The SDL m4 script is LGPLv2.1+.
+
 Content without a specified license is assumed to be released under the
-BSD-2-Clause license.
+BSD-2-Clause license, this includes the autotools content.
 
 The following section is written in the 'machine-readable copyright format'
 as specified by the Debian project.
@@ -48,8 +50,21 @@ Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
 License: BSD-2-Clause
 
 Files: boostTesting.cpp configHelper.* configInit.* dataPath.*  to_string.*
+       AUTHORS autogen.sh ChangeLog configure.ac COPYING Makefile.am NEWS
+       README
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
+Comment: The full license texts in this document are separate entities with
+         separate licenses, and not covered under the BSD-2-Clause license
+
+Files: aclocal.m4 config.h.in configure Makefile.in build-aux/* m4/*
+Copyright: Free Software Foundation, Inc.
+License: BSD-2-Clause
+Comment: Autotools content is distributed under the lierolibre license
+
+Files: m4/sdl.m4
+Copyright: 1997-2012 Sam Lantinga
+License: LGPL-2.1+
 
 Files: liero.cfg
 Copyright: 1998-1999 Joosa Reikkinen
