@@ -58,18 +58,13 @@ Comment: The full license texts in this document are separate entities with
          separate licenses, and not covered under the BSD-2-Clause license
 
 Files: aclocal.m4 config.h.in configure Makefile.in build-aux/* m4/*
-Copyright: Free Software Foundation, Inc.
+Copyright: 1992-2011, Free Software Foundation, Inc.
 License: BSD-2-Clause
 Comment: Autotools content is distributed under the lierolibre license
 
 Files: m4/sdl.m4
 Copyright: 1997-2012 Sam Lantinga
 License: LGPL-2.1+
-
-Files: liero.cfg
-Copyright: 1998-1999 Joosa Reikkinen
-           2012 Martin Erik Werner <martinerikwerner@gmail.com>
-License: WTFPL
 
 Files: data/*
 Copyright: 1998-1999 Joosa Reikkinen
@@ -79,9 +74,14 @@ Files: data/sounds/*.wav
 Copyright: 2012, "sea"
 License: WTFPL
 
-Files: data/sounds/extractsounds data/sounds/packsounds
-       data/graphics/extractgfx data/graphics/packgfx
-       data/levels/extractlev data/levels/packlev
+Files: data/liero.cfg
+Copyright: 1998-1999 Joosa Reikkinen
+           2012 Martin Erik Werner <martinerikwerner@gmail.com>
+License: WTFPL
+
+Files: scripts/lierolibre-extractsounds scripts/lierolibre-packsounds
+       scripts/lierolibre-extractgfx scripts/lierolibre-packgfx
+       scripts/lierolibre-extractlev scripts/lierolibre-packlev
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 
