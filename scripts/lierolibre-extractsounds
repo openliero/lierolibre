@@ -31,8 +31,8 @@
 # -----//-----
 #
 # This script extracts individual sound files from the LIERO.SND binary blob
-# and dumps them in wav format in the current working directory, use the
-# 'packsounds' script to pack them back up again.
+# and dumps them as wav files, use the 'packsounds' script to pack them back
+# up again.
 #
 # Credit goes to Tim Verweij for information regarding the SND file format:
 # http://lierohell.free.fr/lierohack/docformats/liero-snd.html
