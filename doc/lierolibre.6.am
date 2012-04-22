@@ -1,0 +1,120 @@
+.TH #PACKAGE# 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
+
+
+.SH NAME
+
+#PACKAGE# \- script to launch lierolibre
+
+
+.SH SYNOPSIS
+
+.SY #PACKAGE#
+.OP \fIinputfile
+.OP \-v videodriver
+.OP \-w outputfile
+
+
+.SH DESCRIPTION
+
+libreliero is an Earthworm simulation game based on a real physical model. It is a direct fork of Liero.
+.TP
+Features:
+2 worms, 40 weapons, great playability, two game modes: Kill'em All and Game of Tag, plus AI-players without true intelligence!
+
+.PP
+.B #PACKAGE#
+is a script which executes the
+.BR #PACKAGE#
+binary from the
+.I #LIBEXECDIR#/#PACKAGE#
+directory. If no
+.I inputfile
+is given it defaults to using
+.IR #PKGDATADIR#/#CFGFILE# .
+
+.PP
+.B #PACKAGE#
+automatically copies the file
+.I #CFGFILE#
+from
+.I #PKGDATADIR#
+to
+.I $HOME/.#PACKAGE#/
+unless already exist, in which case it will read the game variables from there.
+.I #CFGFILE#
+is a plain text file which can be modified, go wild! But don't be surprised if the game crahes ;)
+
+
+.SH OPTIONS
+
+.TP
+.I inputfile
+Reads game variables from
+.I inputfile
+and also sets the directory of this file as the data directory for #PACKAGE#, which must contain the files
+.I LIERO.CHR LIERO.DAT LIERO.SND NAMES.DAT \fR.
+
+.TP
+.BI \-v " videodriver"
+Sets the SDL_VIDEODRIVER environment variable to
+.IR videodriver .
+
+.TP
+.BI \-w " outputfile"
+Writes all game variables to
+.IR outputfile .
+
+
+.SH EXAMPLES
+
+.B #PACKAGE# mymod/LIERO.EXE
+.RS 4
+Reads game variables from a (potentially) modded EXE file and starts the game.
+.RE
+
+.B #PACKAGE# mymod/LIERO.EXE -w mymod_liero.cfg
+.RS 4
+Reads game variables from a (potentially) modded EXE file and writes them to a plain text config file, and starts the game.
+.RE
+
+.B #PACKAGE# mymod_liero.cfg
+.RS 4
+Reads game variables from a custom plain text config file and starts the game.
+.RE
+
+
+.SH AUTHORS
+
+This manual page was written by Martin Erik Werner <martinerikwerner@gmail.com>
+
+
+.SH HISTORY
+
+Joosa Reikkinen "MetsnElimet"
+.br
+created the original Liero game and graphics.
+
+Erik Lindroos "Gliptic", with help from Mario Carbajal "basro"
+.br
+Re-created Liero as OpenLiero, which later became the official version of Liero.
+
+Martin Erik Werner "arand"
+.br
+Created lierolibre as a direct fork from Liero (OpenLiero).
+
+"sea"
+.br
+Created the replacement sounds used in lierolibre.
+
+
+.SH "SEE ALSO"
+
+.BR #PACKAGE#-extractgfx (6)
+.BR #PACKAGE#-packgfx (6)
+.br
+.BR #PACKAGE#-extractsounds (6)
+.BR #PACKAGE#-packsounds (6)
+.br
+.BR #PACKAGE#-extractlev (6)
+.BR #PACKAGE#-packlev (6)
+
