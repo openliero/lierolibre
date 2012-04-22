@@ -1,0 +1,53 @@
+.TH #UPPERCASE_PACKAGE#-PACKSOUNDS 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
+
+
+.SH NAME
+
+#PACKAGE#-packsounds \- script to create LIERO.SND files
+
+
+.SH SYNOPSIS
+
+.SY #PACKAGE#
+.I inputdir
+.I outputfile.SND
+
+
+.SH DESCRIPTION
+
+
+This script creates a LIERO.SND file from 30 sounds files.
+Use the
+.BR #PACKAGE#-extractsounds (6)
+script to extract them again.
+
+
+.SH OPTIONS
+
+.TP
+.I inputdir
+This directory must contain 30 sound files in wav format, correspondingly named
+.I SHOTGUN.wav SHOT.wav RIFLE.wav BAZOOKA.wav BLASTER.wav THROW.wav LARPA.wav EXP3A.wav EXP3B.wav EXP2.wav EXP3.wav EXP4.wav EXP5.wav DIRT.wav BUMP.wav DEATH1.wav DEATH2.wav DEATH3.wav HURT1.wav HURT2.wav HURT3.wav ALIVE.wav BEGIN.wav DROPSHEL.wav RELOADED.wav MOVEUP.wav MOVEDOWN.wav SELECT.wav BOING.wav BURNER.wav \fR.
+
+.TP
+.I outputfile.SND
+This is the resulting file.
+
+
+.SH AUTHORS
+
+The script and this manual page was written by Martin Erik Werner <martinerikwerner@gmail.com>
+
+
+.SH "SEE ALSO"
+
+.BR #PACKAGE# (6)
+.br
+.BR #PACKAGE#-extractgfx (6)
+.BR #PACKAGE#-packgfx (6)
+.br
+.BR #PACKAGE#-extractsounds (6)
+.br
+.BR #PACKAGE#-extractlev (6)
+.BR #PACKAGE#-packlev (6)
+

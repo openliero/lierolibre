@@ -1,0 +1,52 @@
+.TH #UPPERCASE_PACKAGE#-EXTRACTLEV 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
+
+
+.SH NAME
+
+#PACKAGE#-extractlev \- script to extract the image from Liero level files
+
+
+.SH SYNOPSIS
+
+.SY #PACKAGE#
+.I inputfile.lev
+.I outputfile.xpm
+
+
+.SH DESCRIPTION
+
+
+This script extracts the image from a Liero lev file.
+Use the
+.BR #PACKAGE#-packlev (6)
+script to pack it back up again.
+
+
+.SH OPTIONS
+
+.TP
+.I inputfile.lev
+This file must be a valid lev file with dimensions 504x350.
+
+.TP
+.I outputfile.xpm
+The output will be a greyscale xpm file.
+
+
+.SH AUTHORS
+
+The script and this manual page was written by Martin Erik Werner <martinerikwerner@gmail.com>
+
+
+.SH "SEE ALSO"
+
+.BR #PACKAGE# (6)
+.br
+.BR #PACKAGE#-extractgfx (6)
+.BR #PACKAGE#-packgfx (6)
+.br
+.BR #PACKAGE#-extractsounds (6)
+.BR #PACKAGE#-packsounds (6)
+.br
+.BR #PACKAGE#-packlev (6)
+

@@ -1,0 +1,57 @@
+.TH #UPPERCASE_PACKAGE#-EXTRACTGFX 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
+
+
+.SH NAME
+
+#PACKAGE#-extractgfx \- script to extract images from LIERO.CHR files
+
+
+.SH SYNOPSIS
+
+.SY #PACKAGE#
+.I inputfile.CHR
+.I outputdir
+
+
+.SH DESCRIPTION
+
+
+This script extracts the three sprite canvases contained within
+.IR LIERO.CHR ,
+and dumps them as greyscale images in xpm format.
+Use the
+.BR #PACKAGE#-packgfx (6)
+script to pack them back up again.
+
+
+.SH OPTIONS
+
+.TP
+.I inputfile.CHR
+This file must be a valid LIERO.CHR file containing three sprite canvases
+with the exact dimensions 16x1760, 7x910 and 4x120, respectively.
+
+.TP
+.I outputdir
+The script will create the files
+.I gfx1.xpm gfx2.xpm gfx3.xpm
+in this directory.
+
+
+.SH AUTHORS
+
+The script and this manual page was written by Martin Erik Werner <martinerikwerner@gmail.com>
+
+
+.SH "SEE ALSO"
+
+.BR #PACKAGE# (6)
+.br
+.BR #PACKAGE#-packgfx (6)
+.br
+.BR #PACKAGE#-extractsounds (6)
+.BR #PACKAGE#-packsounds (6)
+.br
+.BR #PACKAGE#-extractlev (6)
+.BR #PACKAGE#-packlev (6)
+

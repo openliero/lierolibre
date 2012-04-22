@@ -1,0 +1,58 @@
+.TH #UPPERCASE_PACKAGE#-EXTRACTSOUNDS 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
+
+
+.SH NAME
+
+#PACKAGE#-extractsounds \- script to extract sounds from LIERO.SND files
+
+
+.SH SYNOPSIS
+
+.SY #PACKAGE#
+.I inputfile.SND
+.I outputdir
+
+
+.SH DESCRIPTION
+
+
+This script extracts the 30 sound files contained within
+.IR LIERO.SND ,
+and dumps them as wav files.
+Use the
+.BR #PACKAGE#-packsounds (6)
+script to pack them back up again.
+
+
+.SH OPTIONS
+
+.TP
+.I inputfile.SND
+This file must be a valid
+.I LIERO.SND
+file containing 30 sound files in raw SFX format.
+
+.TP
+.I outputdir
+The script will create the files with filenames
+.I NAME.wav
+in this directory.
+
+
+.SH AUTHORS
+
+The script and this manual page was written by Martin Erik Werner <martinerikwerner@gmail.com>
+
+
+.SH "SEE ALSO"
+
+.BR #PACKAGE# (6)
+.br
+.BR #PACKAGE#-extractgfx (6)
+.BR #PACKAGE#-packgfx (6)
+.br
+.BR #PACKAGE#-packsounds (6)
+.br
+.BR #PACKAGE#-extractlev (6)
+.BR #PACKAGE#-packlev (6)
+

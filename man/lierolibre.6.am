@@ -1,9 +1,9 @@
-.TH #PACKAGE# 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
+.TH #UPPERCASE_PACKAGE# 6 2012-04-22 "#PACKAGE# 0.1" "#PACKAGE# Manual"
 
 
 .SH NAME
 
-#PACKAGE# \- script to launch lierolibre
+#PACKAGE# \- script to launch #PACKAGE#
 
 
 .SH SYNOPSIS
