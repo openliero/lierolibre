@@ -1,0 +1,40 @@
+#!/bin/sh
+
+defaultpath="@PKGDATA@/@CFGFILE@"
+
+ARGS=""
+
+# We want to catch the no-path and the help case, and pass on everything else
+# it is known that -v and -w are the only options that take an extra arg
+while :
+do
+	case "$1" in
+		-h|-help|--help)
+			exec man liero
+			;;
+		-v)
+			ARGS = "$ARGS $1 $2"
+			shift 2
+			;;
+		-w)
+			ARGS = "$ARGS $1 $2"
+			shift 2
+			;;
+		-*)
+			ARGS = "$ARGS $1"
+			shift 1
+			;;
+		*)
+			ARGS = "$ARGS $1"
+			manualpath="true"
+			shift 1
+			;;
+	esac
+done
+
+if [ "$manualpath" = "true" ]; then
+	exec @LIBEXECDIR@/@PACKAGE@ "$ARGS"
+else
+	exec @LIBEXECDIR@/@PACKAGE@ "$ARGS" "$defaultpath"
+fi
+
