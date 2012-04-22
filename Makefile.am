@@ -79,7 +79,7 @@ dist_noinst_DATA = \
 	man/lierolibre-packlev.6.am \
 	\
 	\
-	data/lierolibre.desktop
+	data/lierolibre.desktop \
 	\
 	\
 	data/lierolibre.xpm \
