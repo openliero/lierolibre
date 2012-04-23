@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
 
-appicondir = $(datadir)/icons/hicolor/scalable/apps
-desktopdir = $(datadir)/applications
+appicondir = $(datarootdir)/icons/hicolor/scalable/apps
+desktopdir = $(datarootdir)/applications
 
 # For sedding in wrapper script later on
 CFGFILE = liero.cfg
