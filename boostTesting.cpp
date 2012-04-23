@@ -107,7 +107,7 @@ struct ConfigdirSetup : DirectorySetup
 {
 	ConfigdirSetup()
 	{
-		temp_configdir = temp_homedir + '/' + ".liero";
+		temp_configdir = temp_homedir + '/' + ".lierolibre";
 
 		create_directory(temp_configdir);
 	}

@@ -11,7 +11,7 @@
  *   defined map
  * * If file should be readonly, checks if file exists, then returns its path
  * * If file should be writable, it makes sure the file exits in the
- *   $HOME/.liero directory (by copying if need be), then returns its path
+ *   $HOME/.lierolibre directory (by copying if need be), then returns its path
  * * Throws runtime_error()s if it is unable to provide the path.
 
  * configdir() is used simply for getting the path to the $HOME/.liero

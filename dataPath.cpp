@@ -23,7 +23,7 @@ string create_configdir(string directory)
 DataPath::DataPath(string a_readonly_path)
 {
 	readonly_path = a_readonly_path;
-	configdotdir = string(getenv("HOME")) + '/' + ".liero";
+	configdotdir = string(getenv("HOME")) + '/' + ".lierolibre";
 
 	// Map of files we may want to return path to
 	// should probably be read from plaintext file
