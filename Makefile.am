@@ -51,7 +51,9 @@ dist_doc_DATA = \
 	AUTHORS \
 	COPYING \
 	NEWS \
-	README
+	README \
+	data/LIERO.TXT \
+	data/LIEROENG.TXT \
 
 dist_desktop_DATA = \
 	data/lierolibre.desktop
@@ -79,7 +81,8 @@ dist_noinst_DATA = \
 	man/lierolibre-packlev.6.am \
 	\
 	\
-	data/lierolibre.desktop \
+	data/FILE_ID.DIZ \
+	data/LICENSE.TXT \
 	\
 	\
 	data/lierolibre.xpm \
