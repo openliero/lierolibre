@@ -3,7 +3,8 @@ BDS-2-Clause License
 
 The original graphics for Liero, the new replacement sounds, and the
 configuration variables extracted from the original game are released under
-the WTFPL license.
+the WTFPL license. Note that the old freeware license in data/LIERO(ENG).TXT
+no longer applies.
 
 One of the items included in the uthread module (and therefore the whole
 module) is GPLv2+ however this module is not used in the gvl library.
@@ -70,6 +71,9 @@ License: LGPL-2.1+
 Files: data/*
 Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
 License: WTFPL
+Comment: Note that the old freeware license in data/LIERO(ENG).TXT no longer
+         applies.
+
 
 Files: data/sounds/*.wav
 Copyright: 2012, "sea"
