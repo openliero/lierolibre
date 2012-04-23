@@ -16,7 +16,7 @@
 
 .SH DESCRIPTION
 
-libreliero is an Earthworm simulation game based on a real physical model. It is a direct fork of Liero.
+#PACKAGE# is an  old-school earthworm action game. It is a direct fork of Liero.
 .TP
 Features:
 2 worms, 40 weapons, great playability, two game modes: Kill'em All and Game of Tag, plus AI-players without true intelligence!
