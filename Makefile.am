@@ -53,7 +53,7 @@ dist_doc_DATA = \
 	NEWS \
 	README \
 	data/LIERO.TXT \
-	data/LIEROENG.TXT \
+	data/LIEROENG.TXT
 
 dist_desktop_DATA = \
 	data/lierolibre.desktop
