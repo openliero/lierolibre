@@ -7,7 +7,6 @@ namespace po = boost::program_options;
 ArgParse::ArgParse(int argc, char* argv[])
 {
 	// Declare the supported options.
-	po::options_description desc("Allowed options");
 	desc.add_options()
 	("help,h", "produce help message")
 	("file,f", po::value<string>(), "read game variables from file")
