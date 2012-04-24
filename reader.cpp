@@ -105,6 +105,20 @@ void setLieroEXE(std::string const& path)
 	lieroSND = data_path->file("LIERO.SND");
 	lieroOPT = data_path->file("LIERO.OPT");
 }
+
+// This forces reading from the given CFG
+void setLieroCFG(std::string const& path)
+{
+	delete data_path;
+	data_path = new DataPath(getRoot(path));
+
+	lieroCHR = data_path->file("LIERO.CHR");
+	lieroSND = data_path->file("LIERO.SND");
+	lieroOPT = data_path->file("LIERO.OPT");
+	lieroCFG = path;
+}
+
+// This looks in $HOME for the CFG first
 void setLieroPath(std::string const& path)
 {
 	delete data_path;
