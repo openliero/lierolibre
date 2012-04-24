@@ -46,8 +46,7 @@ try
 	gfx.rand.seed(Uint32(std::time(0)));
 
 	std::string inputFile = "./liero.cfg";
-	std::string outputFile = "new_liero.cfg";
-	bool cfgWriteSet = false;
+	std::string outputFile;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
 
@@ -73,8 +72,7 @@ try
 		std::string inputDir = argParse.vm["dir"].as<std::string>();
 
 	if(argParse.vm.count("write")) {
-		outputFile = argParse.vm["write"].as<std::string>();
-		cfgWriteSet = true;
+		std::string outputFile = argParse.vm["write"].as<std::string>();
 	}
 
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
@@ -85,7 +83,7 @@ try
 */
 
 	ConfigInit cfgInit(inputFile, common);
-	if(cfgWriteSet)
+	if(outputFile != "")
 		cfgInit.write(outputFile);
 
 	Console::writeLine(common->S[OK]);
