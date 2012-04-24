@@ -1,5 +1,18 @@
 lierolibre NEWS - History of user-visible changes.
 
+Version 0.2 - April 2012, by Martin Erik Werner
+
+* Better command-line handling
+  + Generalised options
+    - -f --file : input file
+    - -w --write : output file
+    - -h --help
+    - -v --sdlvideo
+    - arg1 is auto-assigned to input file
+    - arg2 is auto-assigned to output file
+  + Several major bugs with command line handing fixed in the process
+  + New dependency on boost_program_options
+
 Version 0.1 - April 2012, by Martin Erik Werner
 
  * The gvl library is now included in the source release of lierolibre
