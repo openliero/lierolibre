@@ -19,6 +19,7 @@ ArgParse::ArgParse(int argc, char* argv[])
 	p.add("file", 1).add("write", 1);
 
 	// Export to "vm"
-	po::store(po::parse_command_line(argc, argv, desc), vm);
+	po::store(po::command_line_parser(argc, argv)
+		.options(desc).positional(p).run(), vm);
 	po::notify(vm);
 }
