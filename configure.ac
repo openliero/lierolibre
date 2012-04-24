@@ -16,7 +16,6 @@ AM_PROG_CC_C_O
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
 
 AC_CHECK_PROG(HAS_SOX, sox, yes)
 if test x"$HAS_SOX" != x"yes" ; then
@@ -29,6 +28,14 @@ if test x"$HAS_IM" != x"yes" ; then
 fi
 
 # Checks for libraries.
+BOOST_PO_LIBS=""
+AC_LANG_PUSH([C++])
+	AC_CHECK_HEADER([boost/program_options.hpp],
+	[BOOST_PO_LIBS="-lboost_program_options"],
+	[AC_MSG_WARN(boost_program_options header not found, you will need this to compile lierolibre!)])
+AC_LANG_POP([C++])
+AC_SUBST(BOOST_PO_LIBS)
+
 LIBRT=""
 	AC_CHECK_LIB(rt, clock_gettime, [LIBRT="-lrt"])
 AC_SUBST(LIBRT)
@@ -38,9 +45,10 @@ AM_PATH_SDL($SDL_VERSION, :, \
 	 AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
 
 PKG_CHECK_MODULES([DEPS], [libconfig++ SDL_mixer])
+
 PKG_CHECK_MODULES([GVL_DEPS], [zlib])
 
-dnl Get libgvl library and include locations
+# Get libgvl library and include locations
 AC_ARG_WITH([gvl-include-path],
 	[AS_HELP_STRING([--with-gvl-include-path],
     		[location of the gvl headers, defaults to ./glv/])],
