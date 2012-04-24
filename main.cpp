@@ -53,6 +53,11 @@ try
 
 	ArgParse argParse(argc, argv);
 
+	if(argParse.vm.count("help")) {
+		std::cout << argParse.desc << std::endl;
+		return 0;
+	}
+
 	if(argParse.vm.count("sdlvideo")) {
 		// SDL_putenv seems to take char* in linux, STOOPID
 		std::string s = "SDL_VIDEODRIVER=" + argParse.vm["sdlvideo"].as<std::string>();
@@ -61,13 +66,11 @@ try
 		SDL_putenv(sdlvd);
 	}
 
-	if(argParse.vm.count("help")) {
-		std::cout << argParse.desc << std::endl;
-		return 0;
-	}
-
 	if(argParse.vm.count("file"))
 		inputFile = argParse.vm["file"].as<std::string>();
+
+	if(argParse.vm.count("dir"))
+		std::string inputDir = argParse.vm["dir"].as<std::string>();
 
 	if(argParse.vm.count("write")) {
 		outputFile = argParse.vm["write"].as<std::string>();
