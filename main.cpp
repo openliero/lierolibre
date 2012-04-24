@@ -46,18 +46,19 @@ try
 	gfx.rand.seed(Uint32(std::time(0)));
 
 	std::string inputFile = "./liero.cfg";
+	std::string inputDir;
 	std::string outputFile;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
 
 	ArgParse argParse(argc, argv);
 
-	if(argParse.vm.count("help")) {
+	if (argParse.vm.count("help")) {
 		std::cout << argParse.desc << std::endl;
 		return 0;
 	}
 
-	if(argParse.vm.count("sdlvideo")) {
+	if (argParse.vm.count("sdlvideo")) {
 		// SDL_putenv seems to take char* in linux, STOOPID
 		std::string s = "SDL_VIDEODRIVER=" + argParse.vm["sdlvideo"].as<std::string>();
 		char * sdlvd = new char[s.length()+1];
@@ -65,15 +66,11 @@ try
 		SDL_putenv(sdlvd);
 	}
 
-	if(argParse.vm.count("file"))
+	if (argParse.vm.count("file"))
 		inputFile = argParse.vm["file"].as<std::string>();
 
-	if(argParse.vm.count("dir"))
+	if (argParse.vm.count("dir"))
 		std::string inputDir = argParse.vm["dir"].as<std::string>();
-
-	if(argParse.vm.count("write")) {
-		std::string outputFile = argParse.vm["write"].as<std::string>();
-	}
 
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 
@@ -82,9 +79,13 @@ try
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
 
-	ConfigInit cfgInit(inputFile, common);
-	if(outputFile != "")
-		cfgInit.write(outputFile);
+	if (argParse.wm.count("file") && argParse.wm.count("dir"))
+		ConfigInit cfgInit(inputFile, inputDir, common);
+	else
+		ConfigInit cfgInit(inputFile, common);
+
+	if (argParse.vm.count("write"))
+		cfgInit.write(argParse.vm["write"].as<std::string>());
 
 	Console::writeLine(common->S[OK]);
 
