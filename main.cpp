@@ -70,7 +70,7 @@ try
 		inputFile = argParse.vm["file"].as<std::string>();
 
 	if (argParse.vm.count("dir"))
-		std::string inputDir = argParse.vm["dir"].as<std::string>();
+		inputDir = argParse.vm["dir"].as<std::string>();
 
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 
