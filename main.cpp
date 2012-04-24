@@ -79,7 +79,7 @@ try
 	std::cout << SDL_VideoDriverName(buf, 256) << std::endl;
 */
 
-	if (argParse.wm.count("file") && argParse.wm.count("dir"))
+	if (argParse.vm.count("file") && argParse.vm.count("dir"))
 		ConfigInit cfgInit(inputFile, inputDir, common);
 	else
 		ConfigInit cfgInit(inputFile, common);
