@@ -1,5 +1,5 @@
 AC_PREREQ([2.59])
-AC_INIT([lierolibre C++], [0.1], [martinerikwerner@gmail.com], [lierolibre], [https://gitorious.org/lierolibre])
+AC_INIT([lierolibre C++], [0.2], [martinerikwerner@gmail.com], [lierolibre], [https://gitorious.org/lierolibre])
 AC_CONFIG_SRCDIR([worm.cpp])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
