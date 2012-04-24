@@ -8,6 +8,10 @@ AC_CONFIG_HEADERS([config.h])
 LT_INIT
 AM_INIT_AUTOMAKE([1.10 -Wall subdir-objects])
 
+AC_DEFINE_UNQUOTED([PACKAGE_CAPTION],
+	["$PACKAGE_TARNAME $PACKAGE_VERSION"],
+	[Caption for SDL window])
+
 # Checks for programs.
 AC_PROG_CPP
 AC_PROG_CC

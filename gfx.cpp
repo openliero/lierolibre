@@ -27,6 +27,7 @@
 
 #include "configHelper.hpp"
 #include "to_string.hpp"
+#include "config.h" // name and version for window caption
 
 /*
 ds:0000 is 0x 1AE80
@@ -187,7 +188,7 @@ void Gfx::init()
 {
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 	SDL_EnableUNICODE(1);
-	SDL_WM_SetCaption("Liero 1.35b2", 0);
+	SDL_WM_SetCaption(PACKAGE_CAPTION, 0);
 	SDL_ShowCursor(SDL_DISABLE);
 	lastFrame = SDL_GetTicks();
 
