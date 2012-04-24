@@ -1,1 +1,4068 @@
-Dummy file, see NEWS and 'git log'.
+commit cc01f9d8c11f8d13a3023550db250dd5f4581ced
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 22:13:15 2012 +0200
+
+    NEWS: Update and simplify
+
+ NEWS |    9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+commit b7567dd16d0bdc7a636df4341598fa531020ef52
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 21:13:37 2012 +0200
+
+    main: fixup configInit initialisation
+
+ main.cpp |   12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+commit 50baa1ff635a583a594a11e120ee9c5531217c3f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 21:11:16 2012 +0200
+
+    main: typo wm->vm
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a017f91baeb38c952bbcaeffc132f097fe4805c6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 20:54:43 2012 +0200
+
+    main: unneded type spec
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 54615743af60dcc33026d2ff2c22f69ad7c09fdd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 20:46:12 2012 +0200
+
+    configInit: use setLieroPath() only
+    
+    setLieroPath gives us a cfg, but we can ignore it when
+    appropriate, hence there is no need to call anything else.
+    
+    (EXE is never gathered by dataPath since it must be specified
+    manually).
+    
+    Turns out we don't need to modify reader after all
+
+ configInit.cpp |   11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
+
+commit 31104bdabca5e12fd5ebd612a3ec8d70e15d9b46
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 20:34:14 2012 +0200
+
+    configInit: Add possible separation of path and inputfile
+    
+    ConfigInit can now be constructed with dirPath argument, allowing
+    separation of where to find game data and game vars.
+    
+    Needs work in reader for support.
+
+ configInit.cpp |   20 ++++++++++++++++++--
+ configInit.hpp |    1 +
+ 2 files changed, 19 insertions(+), 2 deletions(-)
+
+commit 567d29ee4f400444fd0e43290c73158fb54f5b96
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 19:44:40 2012 +0200
+
+    main: call ConfigInit with inputDir as well
+
+ main.cpp |   23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
+
+commit 215500cac6084f3e34f7528b2491c57258124adc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 19:27:11 2012 +0200
+
+    NEWS: reword and update
+
+ NEWS |    8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+commit 86019e13240b757cb08b121f4108417fe977658d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 19:24:54 2012 +0200
+
+    main: don't set default outfile, and drop cfgWriteSet flag
+
+ main.cpp |    8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+commit 6a7db1cd5161e4b4b947eeb3cd0eddaa7f988be5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 19:17:07 2012 +0200
+
+    main: Add and assign inputdir var
+
+ main.cpp |   13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+commit 08244478c5b554841636e06fbc20e13ffe104a35
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 19:13:25 2012 +0200
+
+    argParse.cpp: add --dir option
+    
+    * Add command line --dir option for specific loading of sound/graphics/names
+    * Change so that positional parameters assign 1:inputfile 2:inputdir 3:outputfile
+
+ argParse.cpp |    8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit 7d97fa02f7d8a413044b5b54b42e26425dda6988
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 18:56:18 2012 +0200
+
+    Update gvl submodule with removal of dtoa
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b7fdaec72baac525280e1ad86c87c3e244c3b0a2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 18:54:42 2012 +0200
+
+    Makefile.am: deinclude dtoa.* and gvl/zlib
+
+ Makefile.am |   31 ++-----------------------------
+ 1 file changed, 2 insertions(+), 29 deletions(-)
+
+commit df3119003a9303fb7a43b77e5e7a4995194979d9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 18:54:34 2012 +0200
+
+    Makefile.am: add argParse to sources
+
+ Makefile.am |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 3c5bddba7d13bc5525059de39c8160e214d4b177
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 18:53:58 2012 +0200
+
+    Makefile.am:link with boost_program_options
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 5e14ae30a2064f6dc3f6feb50cdb879bdaedb91c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 18:52:04 2012 +0200
+
+    configure.ac: add simple header check for boost_program_options
+
+ configure.ac |   12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+commit 8b836086d3be42bdbcb6a1342ffb1d050979004f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 18:51:04 2012 +0200
+
+    argParse: no need to define dynamic boost linking, drop config.h
+
+ argParse.hpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 0030c9f6a8c98bcb7fcc2b92c24098184e51efbb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 17:26:00 2012 +0200
+
+    NEWS: 0.2 with argument parsing
+
+ NEWS |   13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit 7dc0cc1b674124b08421f67a3ddcd131cc6c3999
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:23:46 2012 +0200
+
+    set version 0.2
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 738fbd2774728ca91b7c367f85a7b6a5b840b99c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:17:15 2012 +0200
+
+    main.cpp: add help option; coding style fixes
+
+ main.cpp |   19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
+
+commit ba287347a6ec2f33a5bea0a8ec31a2adabf9809d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:15:57 2012 +0200
+
+    configInit: 3 cases, EXE, CFG or path
+
+ configInit.cpp |   10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+commit 9ac58a67caccf0a96794792308b5c8affc2cbcd2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:14:38 2012 +0200
+
+    reader: Add setLieroCFG() method, forcing to read from given CFG
+
+ reader.cpp |   14 ++++++++++++++
+ reader.hpp |    1 +
+ 2 files changed, 15 insertions(+)
+
+commit b9ad08fbcc191b4052c11cc9026060c486995205
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:13:57 2012 +0200
+
+    argParse: use wm store compatibel with positional parameters
+
+ argParse.cpp |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit d5038cbae1b609f2bde216d60a5a1581f7cf4ebe
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:13:26 2012 +0200
+
+    argParse: make desc outside-accessible
+
+ argParse.cpp |    1 -
+ argParse.hpp |    1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+commit 741718c6625f8104c45ac152dea5e023aeda6aa0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 16:12:57 2012 +0200
+
+    argParse: add help
+
+ argParse.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit a1762ec0872a104026f9932a3ddcc3a2661e859b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 14:12:29 2012 +0200
+
+    Inplements argParse via boost
+
+ Jamfile      |    3 ++-
+ argParse.cpp |   24 ++++++++++++++++++++++++
+ argParse.hpp |   13 +++++++++++++
+ main.cpp     |   54 +++++++++++++++++-------------------------------------
+ 4 files changed, 56 insertions(+), 38 deletions(-)
+
+commit 917fe385ac41af2f08080706a3b54206a6afb573
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 16:44:51 2012 +0200
+
+    update data submodule, tweak desktop file
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1679e60c223b10f3b87f965e19581fa35e337fa0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 16:42:37 2012 +0200
+
+    configure.ac: Add more checks based on autoscan and restructure
+
+ configure.ac |   68 +++++++++++++++++++++++++++++++++++++++++++---------------
+ 1 file changed, 51 insertions(+), 17 deletions(-)
+
+commit 83041784d506c39a319772f4521ec79944478cf5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 15:31:52 2012 +0200
+
+    Set April as release month
+
+ NEWS |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d0163227ff830422daa1a58951f382f89c582e0a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 15:08:12 2012 +0200
+
+    dataPath: change ~/.liero -> ~/.lierolibre
+
+ boostTesting.cpp |    2 +-
+ dataPath.cpp     |    2 +-
+ dataPath.hpp     |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 55f744fe45e5374a9c2e2e778f1e644ab716dc45
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 14:45:03 2012 +0200
+
+    safeguard icon and desktop dir from datadir change
+
+ Makefile.am |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 9d0e07b6c87321f3331f43e3c36a02e5540ea1dc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 14:07:49 2012 +0200
+
+    some libreliero misses
+
+ README              |    2 +-
+ man/lierolibre.6.am |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 706f07ee2194f80e14d6e0fea936c53dea406135
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 13:54:27 2012 +0200
+
+    Makefile.am: extra \
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2da5c879128a0912c003fee1734886e6a7665f5a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 13:52:53 2012 +0200
+
+    update data module, removal of exe files
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e618a347559189ec8d7d0ba51d67f2ed445ca898
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 13:45:31 2012 +0200
+
+    Makefile.am: include original text files
+
+ Makefile.am |    7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 9d8d47c7265788c6b7bef75187db4a619d883f18
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 13:44:26 2012 +0200
+
+    COPYING: note that freeware license doesn't apply
+
+ COPYING |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit 73f9cffbe9c5fcf1fbbec507790f37f61f071793
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 13:15:22 2012 +0200
+
+    README: slight rewording
+
+ README |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit c1d70f8d5f4b45ed1250eaab0b299715fe746c8c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 12:16:03 2012 +0200
+
+    COPYING: add text for LGPL
+
+ COPYING |   45 ++++++++++++++++++++++++++++++---------------
+ 1 file changed, 30 insertions(+), 15 deletions(-)
+
+commit edd13f2a86e3e23a080f145fd61a0dad58746f9d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 01:37:13 2012 +0200
+
+    configure.ac: Add checks for SoX & ImageMagick
+
+ configure.ac |   10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 91d607a3c83fce2e5ce4bcbd0813a3d7d6127586
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 01:36:38 2012 +0200
+
+    autogen.sh add action
+
+ autogen.sh |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 1e2175d1259b26847bdd3ed07ba41417b9f7ac3f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 00:47:07 2012 +0200
+
+    INSTALL: remove since generated
+
+ INSTALL |  370 ---------------------------------------------------------------
+ 1 file changed, 370 deletions(-)
+
+commit a1d8d571125735fac5583e39849fea6131f1255c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 00:45:22 2012 +0200
+
+    Makefile.am: fix missing \ in list
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4d906113f2d35d65233c9dc02af4b38dc9159a15
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 00:44:58 2012 +0200
+
+    Makefile.am: fix gvl/libgvl.la unsubstitution
+
+ Makefile.am |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 7bfe1568878aee50c6144d1d06669c365f31516d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 00:40:52 2012 +0200
+
+    Update data submodule with icons & desktop entry
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7763925e1598fae1d2bbac22d9b7f7babe9567c1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 23 00:38:40 2012 +0200
+
+    Makefile.am: reorganise, add icons
+
+ Makefile.am |   79 ++++++++++++++++++++++++++++++++++-------------------------
+ 1 file changed, 45 insertions(+), 34 deletions(-)
+
+commit 25e6d04ba96edfcdf1550cb863fd908def977b4f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 23:04:16 2012 +0200
+
+    Makefile.am: cleanups, use variables for targets
+
+ Makefile.am |   44 ++++++++++++++++++++++----------------------
+ 1 file changed, 22 insertions(+), 22 deletions(-)
+
+commit 9252a4433211234ec5545af923d0b138a6836943
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 22:33:42 2012 +0200
+
+    man/lierolibre-packsounds.6.am: tweak file list formatting
+
+ man/lierolibre-packsounds.6.am |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 816bb0a23ec311b064db26efd4cef3e38403232e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 22:30:58 2012 +0200
+
+    Makefile.am: make target and install macros for manpages
+
+ Makefile.am |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 5f94f5502d6dd89c749577683036025184ee5cdc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 22:23:01 2012 +0200
+
+    cripts/lierolibre-extractsounds: tweak description
+
+ scripts/lierolibre-extractsounds |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 858098a344e34bd6c2b1d4f0dee27e472c4adadd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 22:20:40 2012 +0200
+
+    Makefile.am & lierolibre.am: unify sedding
+
+ Makefile.am           |    9 +++++----
+ scripts/lierolibre.am |    8 ++++----
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+
+commit 64c6cb7a20f20b5998cfd039b895514729f92ca6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 22:19:35 2012 +0200
+
+    Add manpages for all scripts, tweak ll page to conform
+
+ man/lierolibre-extractgfx.6.am    |   57 ++++++++++++++++++++++++++++++++++++
+ man/lierolibre-extractlev.6.am    |   52 +++++++++++++++++++++++++++++++++
+ man/lierolibre-extractsounds.6.am |   58 +++++++++++++++++++++++++++++++++++++
+ man/lierolibre-packgfx.6.am       |   54 ++++++++++++++++++++++++++++++++++
+ man/lierolibre-packlev.6.am       |   52 +++++++++++++++++++++++++++++++++
+ man/lierolibre-packsounds.6.am    |   53 +++++++++++++++++++++++++++++++++
+ man/lierolibre.6.am               |    4 +--
+ 7 files changed, 328 insertions(+), 2 deletions(-)
+
+commit 1f48db430c6b50317dd480121ff2b472d5420136
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 21:01:31 2012 +0200
+
+    rename doc/ -> man/
+
+ Makefile.am         |   40 +++++++++--------
+ doc/lierolibre.6.am |  120 ---------------------------------------------------
+ man/lierolibre.6.am |  120 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 141 insertions(+), 139 deletions(-)
+
+commit d64d4cdcea2a478079e940016814c56091b7406e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 19:03:31 2012 +0200
+
+    README: Add some content
+
+ README |   16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+commit 511f23ca5d2a35c10f272b11b45bc06fb4f54dc9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 19:02:23 2012 +0200
+
+    Makefile.am: add manpages, including prospective
+
+ Makefile.am |   36 +++++++++++++++++++++++++++++++-----
+ 1 file changed, 31 insertions(+), 5 deletions(-)
+
+commit ee07cadcf49e1caf2fa842279ffcb954dad674ee
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 19:01:50 2012 +0200
+
+    doc/lierolibre.6.am: add template manpage
+
+ doc/lierolibre.6.am |  120 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 120 insertions(+)
+
+commit a5b365711817179e00a69f166c924aa05c41e749
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 17:14:25 2012 +0200
+
+    Makefile.am: fix subdir rules to not make twice
+
+ Makefile.am |   13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+
+commit 2c1e264fc8e69e4aec8ec25fc202d3218735ac4d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 16:22:24 2012 +0200
+
+    Makefile.am: include NAMES.DAT & install docs
+
+ Makefile.am |    7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit e9eb10be0a55c92e5cbbac51f33e3701e0b28114
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 16:19:54 2012 +0200
+
+    COPYING: clarify GPL or BSD for autotools
+
+ COPYING |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit 8a7e59fcd6670020935541e8d35504fa1b2d5c1a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 16:00:18 2012 +0200
+
+    AUTHORS: undummyfy
+
+ AUTHORS |   12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+commit 65977c2873c79316c35165f3e463a638087410a1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 15:46:09 2012 +0200
+
+    COPYING: Add basro's real name and Joosa's alias
+
+ COPYING |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 2b3270e02d6f28358420d57665f573a6f341f503
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 15:38:04 2012 +0200
+
+    COPYING: fix cfg and scripts path, set (C) years for FSF
+
+ COPYING |   18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+commit 927e102bbdd337f46d2019e6a7d7f904ed95ec52
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 15:21:11 2012 +0200
+
+    Update with autotools copyrights
+
+ COPYING |   17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+commit 06e44cd3486345f352c4b093ca41eac82c124d88
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 12:00:50 2012 +0200
+
+    scripts/lierolibre.am: Finalize
+
+ scripts/lierolibre.am |   19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
+
+commit d3c83de4c494b8fc24d7389d91ecc81deee115f2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 12:00:08 2012 +0200
+
+    m4/sdl.m4: Update copyright notice somewhat
+
+ m4/sdl.m4 |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit aba41676516e3a65523be644c765931e84367b45
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 03:32:14 2012 +0200
+
+    Makefile.am: fixup subdirs in data & libexec
+
+ Makefile.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 1cc23a186dc371814b9dee38eb40a980cd372268
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 03:18:28 2012 +0200
+
+    Update data module: script update and move
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 28d24cb3c3b69a636053bfc0b03e3a20bd641549
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 03:14:08 2012 +0200
+
+    Makefile.am: Add data and scripts
+
+ Makefile.am |  105 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 100 insertions(+), 5 deletions(-)
+
+commit 4e60875058e42f3ab318dd8c7cfc7c21d07e2975
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 03:11:46 2012 +0200
+
+    configure.ac: drop no-define in automake init
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 862766df52b0f0158333a0780e50759b14e7732d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 03:10:38 2012 +0200
+
+    scripts/lierolibre.am: Don't use @, collides with automake
+
+ scripts/lierolibre.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit e149b82ceaad1fce64677c410d83718c9685d7de
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 03:07:58 2012 +0200
+
+    Dummy AUTHORS & ChangeLog, set version in NEWS
+
+ AUTHORS   |    1 +
+ ChangeLog |    1 +
+ NEWS      |    2 +-
+ 3 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 9f5dbd00a19cf37ab004078383e9fcc577e74dfe
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 02:16:31 2012 +0200
+
+    New wrappers script template, hopefully working
+
+ scripts/lierolibre.am |   40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+commit 385bc03609548828a5446906f8c6b4dc0fe403a2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 22 01:31:25 2012 +0200
+
+    move scripts to this repo from data
+
+ scripts/lierolibre-extractgfx    |   89 ++++++++++++++++++++
+ scripts/lierolibre-extractlev    |   62 ++++++++++++++
+ scripts/lierolibre-extractsounds |  102 +++++++++++++++++++++++
+ scripts/lierolibre-packgfx       |  149 +++++++++++++++++++++++++++++++++
+ scripts/lierolibre-packlev       |   59 +++++++++++++
+ scripts/lierolibre-packsounds    |  169 ++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 630 insertions(+)
+
+commit e230efbfbba36f54c2ff797347f9cfd481b330b4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 21 21:34:13 2012 +0200
+
+    autotools: more file inclusions, likely excessive
+
+ Makefile.am |  262 +++++++++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 236 insertions(+), 26 deletions(-)
+
+commit bf9b6520470b6fc6ef7fa8707cb439347cab2eb1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 21 20:54:41 2012 +0200
+
+    Further autotools tweaking, add libtool again
+    
+    Should only be file listings and install spec left now
+
+ Makefile.am  |  417 ++++++++++++++++++++++++++++++++++++----------------------
+ configure.ac |    8 +-
+ 2 files changed, 264 insertions(+), 161 deletions(-)
+
+commit 2c9c8fb7a105b7f5455493ac45a73e2563d7284c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 21 13:27:54 2012 +0200
+
+    autotools: remove boost and libtool
+
+ configure.ac |    7 -
+ m4/boost.m4  | 1186 ----------------------------------------------------------
+ 2 files changed, 1193 deletions(-)
+
+commit a26db6a1a6bf359997e3f3aa5b3f9e02f56bc44e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 20:19:42 2012 +0200
+
+    gvl in a subdir for autotools
+
+ Makefile.am  |  148 ++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ configure.ac |   19 +++++---
+ 2 files changed, 151 insertions(+), 16 deletions(-)
+
+commit b38cf128082f06e0d82bfdf65c9424a849500071
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 19:40:55 2012 +0200
+
+    Add some more auto-hell
+
+ INSTALL      |  370 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Makefile.am  |    9 +-
+ configure.ac |   11 +-
+ 3 files changed, 382 insertions(+), 8 deletions(-)
+
+commit 477949048f0e5468a9462309d90b968b617795a4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 16:58:17 2012 +0200
+
+    Add autoconf/automake stuff
+
+ Makefile.am  |   46 +++
+ configure.ac |   35 ++
+ m4/boost.m4  | 1186 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ m4/sdl.m4    |  208 ++++++++++
+ 4 files changed, 1475 insertions(+)
+
+commit 2af4b8ff6642ddc9775550dc322c435774af4041
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 21 10:58:05 2012 +0200
+
+    Update data submodule: icon, move cfg file to data
+
+ data      |    2 +-
+ liero.cfg | 6040 -------------------------------------------------------------
+ 2 files changed, 1 insertion(+), 6041 deletions(-)
+
+commit 1ef4a917817870d7132239fcdd5dcd32e67d870a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 20:06:34 2012 +0200
+
+    more updates and lowercasing to lierolibre
+
+ COPYING |    4 ++--
+ NEWS    |    8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+commit b44566325127ee6d2824bd84c558469bb269c280
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 20:00:44 2012 +0200
+
+    Updated gitmodules with lierolibre urls
+
+ .gitmodules |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 92636a844ebbc1f7709332950fd843b330de0d29
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 18:28:46 2012 +0200
+
+    Rename to LieroLibre
+
+ COPYING |    2 +-
+ Jamfile |    8 ++++----
+ NEWS    |    6 +++---
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+commit 9c4bd49636d340c0282f8c19980855f9702349b2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 18:27:27 2012 +0200
+
+    delete before creating data_path as a sanity precaution
+
+ reader.cpp |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 3e10b2b920531a1c636f054bdc1bbc7a20d1a357
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 16:05:16 2012 +0200
+
+    move cfg to $HOME similar to DAT
+
+ configInit.cpp |    4 ++--
+ reader.cpp     |    2 ++
+ reader.hpp     |    1 +
+ 3 files changed, 5 insertions(+), 2 deletions(-)
+
+commit f4e0ddcb5d011f0d9272a76454eee7d2b2e0022e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 15:22:18 2012 +0200
+
+    Update the boost test case to handle both DAT and liero.cfg
+
+ boostTesting.cpp |  223 ++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 116 insertions(+), 107 deletions(-)
+
+commit 12074163883189b5783c8bebc84ce3c4bd7fb95e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 20 15:22:00 2012 +0200
+
+    dataPath: change config.ini to liero.cfg in acces map
+
+ dataPath.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7a0b1f42284bf139ad3a1c82d6eb0756525e8ddb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 19:39:42 2012 +0200
+
+    make submodule adresses public git://
+
+ .gitmodules |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit afd87c1fd6a8022d96f7d01123c2b0fd128635f5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 19:04:00 2012 +0200
+
+    enable starting without even empty EXE file
+
+ configInit.cpp |    8 ++++++--
+ reader.cpp     |    9 +++++++--
+ reader.hpp     |    1 +
+ 3 files changed, 14 insertions(+), 4 deletions(-)
+
+commit 3b24e74bff263147df4e8e47aa55279e9775bbaa
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 19:02:40 2012 +0200
+
+    Improve file finding from arguments
+    
+    * arg1 is input file
+    * output set via "-w file"
+    * input defaults to "./liero.cfg"
+    * output defaults to "new_liero.cfg"
+    * exe/cfg determined from input file
+    * readonly dir is set based on input file
+
+ main.cpp |   40 +++++++++++++++++++---------------------
+ 1 file changed, 19 insertions(+), 21 deletions(-)
+
+commit 9ff6eab5966f1a34e14df187c54ee8c9ac2e3379
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 19:11:11 2012 +0200
+
+    Revert "Improve file finding from arguments"
+    
+    This reverts commit e3d7cc84908f335496b0d8a7a07cdc2655d10200.
+    Re-do commits in a cleaner way
+
+ configInit.cpp |    8 ++------
+ main.cpp       |   31 +++++++++++++++++++------------
+ 2 files changed, 21 insertions(+), 18 deletions(-)
+
+commit e3d7cc84908f335496b0d8a7a07cdc2655d10200
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 15:13:41 2012 +0200
+
+    Improve file finding from arguments
+    
+    * arg1 is input file, arg2 is output
+    * input defaults to "./liero.cfg"
+    * output defaults to "new_liero.cfg"
+    * exe/cfg determined from input file
+    * readonly dir is set based on input file
+
+ configInit.cpp |    8 ++++++--
+ main.cpp       |   31 ++++++++++++-------------------
+ 2 files changed, 18 insertions(+), 21 deletions(-)
+
+commit a7298f0e6409eb2f1e36b97628d359a3ae4f71cc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 15:13:33 2012 +0200
+
+    main.cpp: ifdef some more "press any key"
+
+ main.cpp |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 420e1e790fd73da2cf8d9d6f46c71eaa87d6c87c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 14:29:54 2012 +0200
+
+    game.hpp: add copyright header
+
+ game.hpp |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+commit e6a30d851b45fb75744de3406cbf9bc9ce6e1187
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 14:26:47 2012 +0200
+
+    game: purge crlf & witespace
+
+ game.cpp |  126 +++++++++++++++++++++++------------------------
+ game.hpp |  166 +++++++++++++++++++++++++++++++-------------------------------
+ 2 files changed, 146 insertions(+), 146 deletions(-)
+
+commit 28c67b9cba969c4875a7f2e2c25779a3f1d90d6b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 14:25:12 2012 +0200
+
+    game.cpp: remove some superfluous includes
+
+ game.cpp |    9 ---------
+ 1 file changed, 9 deletions(-)
+
+commit 478e47f61533c8a8a73103f8b8cd476f97f52c99
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 19 13:58:38 2012 +0200
+
+    remove boost filesystem lib and use existing liero version
+
+ Jamfile        |    4 ++--
+ configInit.cpp |   17 ++++++-----------
+ configInit.hpp |    2 +-
+ 3 files changed, 9 insertions(+), 14 deletions(-)
+
+commit aa87ec9717df94d667d1f095b4c11117bc022ca5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 22:44:59 2012 +0200
+
+    Prettify copyright headers
+
+ binReader.hpp    |   48 ++++++++++++++--------------
+ boostTesting.cpp |   51 +++++++++++++++---------------
+ common.hpp       |   50 +++++++++++++++---------------
+ configHelper.hpp |   44 +++++++++++++-------------
+ configInit.hpp   |   46 +++++++++++++--------------
+ constants.hpp    |   48 ++++++++++++++--------------
+ dataPath.hpp     |   91 ++++++++++++++++++++++++++----------------------------
+ gfx.hpp          |   50 +++++++++++++++---------------
+ gfx/font.hpp     |   50 +++++++++++++++---------------
+ gfx/palette.hpp  |   50 +++++++++++++++---------------
+ menu/menu.hpp    |   50 +++++++++++++++---------------
+ reader.hpp       |   48 ++++++++++++++--------------
+ worm.hpp         |   50 +++++++++++++++---------------
+ 13 files changed, 337 insertions(+), 339 deletions(-)
+
+commit 960cee54b48398f88f7759f496b0a465b0e2e1d0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 22:24:28 2012 +0200
+
+    to_string: add exception throwing
+
+ to_string.cpp |   10 ++++++----
+ to_string.hpp |   12 +++++++++---
+ 2 files changed, 15 insertions(+), 7 deletions(-)
+
+commit 7ad5438020dadd2772ee4614d5e395d342f8c205
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 18:34:07 2012 +0200
+
+    to_string.hpp: add copyright header and comment
+
+ to_string.hpp |   35 +++++++++++++++++++++++++++++++++--
+ 1 file changed, 33 insertions(+), 2 deletions(-)
+
+commit 687654a9c3fa8922db0e8c74c40d8ef7c91ee42c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 18:08:18 2012 +0200
+
+    worm.hpp: add copyright header
+
+ worm.hpp |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+commit 83f630ff27b80b41be836a318479d725f911801e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 18:06:32 2012 +0200
+
+    worm.hpp: purge crlf & witespace
+
+ worm.hpp |  844 +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 422 insertions(+), 422 deletions(-)
+
+commit 2868b590c6590d46e7cfe8551c4802fcf5fb58de
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 02:47:57 2012 +0200
+
+    Fixed compiler warning by casting a 1 to unsigned
+
+ gfx.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0555e6c8bd4e35865ba37c9cd5e588b305703f35
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 18 00:42:36 2012 +0200
+
+    Added NEWS file
+
+ NEWS |   25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+commit 1045cb5558902353984ee92573ab6b46daf8d01e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 17 22:43:34 2012 +0200
+
+    COPYING: added _build dir
+
+ COPYING |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2e5d4985967d8b3ddd3515c684332842c015701e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 17 22:35:16 2012 +0200
+
+    Update gvl submodule: dump fdlibm
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit aa5d6f80470c05fba32f7225968136feac4ba955
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 17 22:33:54 2012 +0200
+
+    COPYING: Add more details for gvl submodule
+
+ COPYING |   81 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 77 insertions(+), 4 deletions(-)
+
+commit 068a8fd01d9f57bc54a06872f8eebe8a63830bff
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 17 22:12:22 2012 +0200
+
+    Add COPYING file with exhaustive copyright information
+
+ COPYING |  113 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 113 insertions(+)
+
+commit cb7c6924ce21af628836b63c55bc6dc5d3dc4e74
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 17 17:07:23 2012 +0200
+
+    Update gvl submodule, no-change
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9a09c193629504cb9e99539522bc180ee02f2444
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 17 17:00:19 2012 +0200
+
+    Revert autotools completely
+    
+    Let's stuff this in a branch for now, might not use it at all
+    
+    Revert "gvl in a subdir for autotools"
+    This reverts commit 93e97f449361d26e09a64c8d01da4e5950d6c48b.
+    
+    Revert "Add some more auto-hell"
+    This reverts commit f11fe1657a14469fd3d59b55c9033088233215fb.
+    
+    Revert "Add autoconf/automake stuff"
+    This reverts commit d35ced0df270debf099f6f4971b761b613d70fce.
+
+ INSTALL      |  370 ------------------
+ Makefile.am  |  177 ---------
+ configure.ac |   43 ---
+ m4/boost.m4  | 1186 ----------------------------------------------------------
+ m4/sdl.m4    |  208 ----------
+ 5 files changed, 1984 deletions(-)
+
+commit 93e97f449361d26e09a64c8d01da4e5950d6c48b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 20:19:42 2012 +0200
+
+    gvl in a subdir for autotools
+
+ Makefile.am  |  148 ++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ configure.ac |   19 +++++---
+ 2 files changed, 151 insertions(+), 16 deletions(-)
+
+commit f11fe1657a14469fd3d59b55c9033088233215fb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 19:40:55 2012 +0200
+
+    Add some more auto-hell
+
+ INSTALL      |  370 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Makefile.am  |    9 +-
+ configure.ac |   11 +-
+ 3 files changed, 382 insertions(+), 8 deletions(-)
+
+commit d35ced0df270debf099f6f4971b761b613d70fce
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 16:58:17 2012 +0200
+
+    Add autoconf/automake stuff
+
+ Makefile.am  |   46 +++
+ configure.ac |   35 ++
+ m4/boost.m4  | 1186 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ m4/sdl.m4    |  208 ++++++++++
+ 4 files changed, 1475 insertions(+)
+
+commit 182c687851fd97e65ccaa16a36c99460174414e9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 12:41:55 2012 +0200
+
+    rm plainreader, old poking module for boost ptree config
+
+ plainreader.cpp |  106 -------------------------------------------------------
+ plainreader.hpp |   30 ----------------
+ 2 files changed, 136 deletions(-)
+
+commit 174096f61e26471b56a1ba33222757fe53ceb93c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 12:39:59 2012 +0200
+
+    rm config, boost ptree helper no longer needed
+
+ config.cpp |   86 ------------------------------------------------------------
+ config.hpp |   61 ------------------------------------------
+ 2 files changed, 147 deletions(-)
+
+commit 8ef95bf1d7e90a61ad178773bcb2f22764f12392
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 16 12:36:45 2012 +0200
+
+    configInit.hpp: cosmetic changes
+
+ configInit.hpp |   12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit b24a726e547a67a0e8912ab3ae34a89a7e03d4ba
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 19:52:34 2012 +0200
+
+    main.cpp: rename triggerCFG->cfgSet, writeTriggerCFG->cfgWriteSet
+
+ main.cpp |   14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit 3b1685eecaaf5eea7b37eaa3248dff6c818a1205
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 19:16:55 2012 +0200
+
+    configInit.cpp: cleanup the includes 'a bit'
+
+ configInit.cpp |   43 ++++++++-----------------------------------
+ 1 file changed, 8 insertions(+), 35 deletions(-)
+
+commit 136ee5ee611d8d872315d5ed0b654c5e631cbbd4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 19:03:19 2012 +0200
+
+    main.cpp: make the non-relevant path more obvious
+
+ main.cpp |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 6cf716be6a853fc610691d5d8b49126f18f4edcb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 19:00:17 2012 +0200
+
+    main.cpp: use GVL_WINDOWS instead of GVL_WIN32
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c03db9db2d538d0bde3a6ad6deabcc0fa7e92d9f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 18:54:13 2012 +0200
+
+    new ConfigInit module, add boostFS
+    
+    * All loading and writing to exe/cfg factored out of main into
+    ConfigInit module
+    * Add boost filesystem library for exists() and extension()
+
+ Jamfile        |    3 +-
+ configInit.cpp |  137 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ configInit.hpp |   51 +++++++++++++++++++++
+ main.cpp       |   66 ++++-----------------------
+ 4 files changed, 198 insertions(+), 59 deletions(-)
+
+commit 473aaf0b6605fdd9c960d30bdb09f4536fdacf16
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 15:20:26 2012 +0200
+
+    common: add text loading from specified path
+
+ common.cpp |    9 +++++++--
+ common.hpp |    1 +
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+commit 1f93ca19e074a7152b9fda8a7009b45c306c77cd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 11:27:42 2012 +0200
+
+    binReader.hpp:add copyright header
+
+ binReader.hpp |   26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+commit a2e1d4912f7b369f3d99bc16426cf16524367edc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 11:23:09 2012 +0200
+
+    main.cpp: add writeTriggerCFG
+
+ main.cpp |   36 +++++++++++++++++++++++++-----------
+ 1 file changed, 25 insertions(+), 11 deletions(-)
+
+commit 8663ede12976e3863a5a44148b67d66e3d821c43
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 04:41:14 2012 +0200
+
+    liero.cfg: add Others
+
+ liero.cfg |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit 7501863bbbefc3f9825c41d7eba31bcb5a251a94
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 04:40:21 2012 +0200
+
+    main.cpp: add trigger for Others
+
+ main.cpp |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 87933f68a4ac6e868ef20da47b6fd217097ccb81
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 04:39:41 2012 +0200
+
+    common: implement load/write cfg Others
+
+ common.cpp |   68 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ common.hpp |    4 ++++
+ 2 files changed, 72 insertions(+)
+
+commit 84f4ab85385a8c23f22240eca01efd595987a32c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 15 04:39:06 2012 +0200
+
+    configHelper: implement getList()
+
+ configHelper.cpp |    9 +++++++++
+ configHelper.hpp |    1 +
+ 2 files changed, 10 insertions(+)
+
+commit 7a9ef14822597225d98c96ddd140c2794998ed00
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 23:39:39 2012 +0200
+
+    remove todo flags from textures
+
+ main.cpp |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit e15ad24529f6f816dbb2972ce16e2ea757a1bd5b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 23:14:34 2012 +0200
+
+    liero.cfg: add Textures
+
+ liero.cfg |   66 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 66 insertions(+)
+
+commit b9e3b8e4e72a539f590f154fde8d8aefe313ea5a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 23:13:26 2012 +0200
+
+    main.cpp: add triggerCFG for textures
+
+ main.cpp |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 5a97eb23b29996a1b41dde0f9c34a40dbdc54c2d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 23:11:54 2012 +0200
+
+    common.cpp: corrections to texture r/w
+
+ common.cpp |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 521df2d02407c74dd028346ee79a5fadeee3462c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 23:07:03 2012 +0200
+
+    texture cfg load/write
+
+ common.cpp |   44 ++++++++++++++++++++++++++++++++++++++++++++
+ common.hpp |   11 +++++++++++
+ 2 files changed, 55 insertions(+)
+
+commit d0ed424fb2478290e14f8605f6b91e20197ce7a7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 02:38:21 2012 +0200
+
+    common.cpp: unify usage of type casting
+
+ common.cpp |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 7a4c86b7f2da7fcf5f06d02db2e29918c17fbba1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 02:17:54 2012 +0200
+
+    liero.cfg: add Weapons
+
+ liero.cfg | 3256 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 3089 insertions(+), 167 deletions(-)
+
+commit b98468ec17093cdce29e234dbbb552ce91721077
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 02:16:31 2012 +0200
+
+    main.cpp: add Weapons to cfg trigger
+
+ main.cpp |    7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+commit 5b74a56f390e5634e2408b8d0fc45276ada4cd55
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 02:14:40 2012 +0200
+
+    common.cpp: cfgReadMembers() removed since obsolete
+
+ common.cpp |   10 ----------
+ 1 file changed, 10 deletions(-)
+
+commit 4cf0e8e7657645ddac188c80feb048b309c82515
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 02:13:17 2012 +0200
+
+    common.cpp: cleaner loading of cfg values
+
+ common.cpp |  193 ++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 95 insertions(+), 98 deletions(-)
+
+commit fccf2611d73f6ebd8552e35011af2ef817411e9a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 14 02:12:22 2012 +0200
+
+    common: read/write Weaons to cfg
+
+ common.cpp |  137 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ common.hpp |    2 +
+ 2 files changed, 137 insertions(+), 2 deletions(-)
+
+commit c4f2936a8372201298e58c7c6728e703e2209741
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 23:45:43 2012 +0200
+
+    common.cpp: Weapon cfg loading presumably complete
+
+ common.cpp |  211 ++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 98 insertions(+), 113 deletions(-)
+
+commit 19ccd559ea9518a1bdc10912beb16548ed144d1b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 22:48:31 2012 +0200
+
+    de-inline
+
+ common.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit ce410643d2f9a4b9bc3168e571dd1f60e02927ab
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 22:14:58 2012 +0200
+
+    Fist test of detectDistance setting load, looks good
+
+ common.cpp |   24 ++++++++-
+ common.hpp |    1 +
+ liero.cfg  |  167 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ main.cpp   |    5 +-
+ 4 files changed, 194 insertions(+), 3 deletions(-)
+
+commit feab5655f2811e065da28e14553ff46b1b22a853
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 21:03:22 2012 +0200
+
+    cp-pasta
+
+ common.cpp |  136 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ common.hpp |    1 +
+ 2 files changed, 137 insertions(+)
+
+commit 79c6e9b4fa7c44ce504df8e2e8cdc86fe307e233
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 20:59:23 2012 +0200
+
+    Switch Uint8 getValues to new version
+
+ gfx.cpp         |   25 ++++++++-----------------
+ gfx/font.cpp    |    4 +---
+ gfx/palette.cpp |    6 +++---
+ 3 files changed, 12 insertions(+), 23 deletions(-)
+
+commit 04f2bbd232c7eda920016b85f446b22322b655cd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 20:57:36 2012 +0200
+
+    configHelper: make getValue an "=" operation
+
+ configHelper.cpp |   46 +++++++++++++++-------------------------------
+ configHelper.hpp |    9 ++-------
+ 2 files changed, 17 insertions(+), 38 deletions(-)
+
+commit 4c7a63c6845266504ee27e4dc9c3936865293604
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 00:58:50 2012 +0200
+
+    Switch all lookupValue() to "=" assignment
+    
+    Use operator "=" assignment and type cast instead of lookupValue()
+    for reading variables from config, this enables automatic error
+    handling via exceptions.
+
+ common.cpp    |   76 ++++++++++++++++++++++++++++-----------------------------
+ constants.cpp |    6 ++---
+ 2 files changed, 41 insertions(+), 41 deletions(-)
+
+commit dbcb163e47c9789dcf5ada6e5a3b9f834d9b70a7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 00:26:14 2012 +0200
+
+    liero.cfg: add Materials
+
+ liero.cfg |  259 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 259 insertions(+)
+
+commit dcef87f4f313b67a3057fcb58b5294b8f6b59f1d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 00:25:17 2012 +0200
+
+    main.cpp: include toggling matials from cfg
+
+ main.cpp |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 40cd2b7d2c2746e7583b7ab237a00c01ed52ccff
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 13 00:24:53 2012 +0200
+
+    common: implement load/write Materials
+
+ common.cpp |   38 ++++++++++++++++++++++++++++++++++++++
+ common.hpp |    4 ++++
+ 2 files changed, 42 insertions(+)
+
+commit 21b923a6906a5c1a91735a9d4ed63dc2da808876
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 23:59:00 2012 +0200
+
+    configHelper: templates for get and put, put template disabled
+    
+    * get template is pretty useful
+    * put template exposes too many arguments, questionable value
+
+ configHelper.cpp |   62 ++++++++++++++++++++++++++++--------------------------
+ configHelper.hpp |   17 +++++++++------
+ 2 files changed, 42 insertions(+), 37 deletions(-)
+
+commit 8f9e3268def15395b508bf7c35bf2c501d6fae64
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 23:17:06 2012 +0200
+
+    reorder liero.cfg based on loading order in main.cpp
+
+ liero.cfg | 1726 ++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 863 insertions(+), 863 deletions(-)
+
+commit 91dc064db5cd3030b9b8b71e036f49377d220c07
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 23:16:09 2012 +0200
+
+    main.cpp: Add some ugly logic for triggering CFG
+
+ main.cpp |   37 ++++++++++++++++++++++++++-----------
+ 1 file changed, 26 insertions(+), 11 deletions(-)
+
+commit 46c77081e2b803ca54a35235b98ae23ecc3a7651
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 23:09:46 2012 +0200
+
+    common.cpp, liero.cfg: get rid of garbage in copyright1 string
+
+ common.cpp |    3 +++
+ liero.cfg  |    2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+commit 63d45b0844fb4723988aac0201e5a8adef6105fc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 19:16:09 2012 +0200
+
+    Update gvl submodule: zlib linking for test
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 16c163a18c697282ea7e395646bd2c705d65157c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 15:12:26 2012 +0200
+
+    Update gvl submodule: zlib de-embed
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0ac1f84810495269e34b0953b0a3275247211d43
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 11:35:53 2012 +0200
+
+    main: switch to loading Gfx from cfg, keep triggerCFG template
+
+ main.cpp |   10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 38cba1d24da3ae8c8b7d09269c4b2b85f4d6c0f6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 11:34:25 2012 +0200
+
+    liero.cfg: add Gfx
+
+ liero.cfg |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 66e686a7d31e6d5f671baa745a878f0a673062b1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 11:33:14 2012 +0200
+
+    common: implement load/write cfg Gfx
+
+ common.cpp |   38 ++++++++++++++++++++++++++++++++++++++
+ common.hpp |    4 ++++
+ 2 files changed, 42 insertions(+)
+
+commit 93ae508098782b83cb8352384001403358be8474
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 10:43:17 2012 +0200
+
+    gfx.cpp: comments regarding non-exe values saved to cfg
+
+ gfx.cpp |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 17838d12944fb5972a408e51ba1315cbd4c9a177
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 10:35:12 2012 +0200
+
+    common: make loadGfxExtras() a separate function as well
+
+ common.cpp |   12 ++++++++----
+ common.hpp |    1 +
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+
+commit bde50d9b002010307e1c334191fd1188effb25d3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 10:23:55 2012 +0200
+
+    common: loadGfx(): factor out EXE and CHR functions
+    
+    loadGfx() previously did the reading of EXE, CHR, and further
+    initialization all in one step, now it calls loadGfxFrom{EXE, CHR}.
+
+ common.cpp |   11 ++++++++++-
+ common.hpp |    2 ++
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+
+commit 40e23c34532f48f4a625c8eb2cdca360f444a4a0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 01:50:49 2012 +0200
+
+    Jamfile: build with debug symbols per default
+
+ Jamfile |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit f129f2eda7657b0f3be17e06a939bfe3e989ca03
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 01:53:54 2012 +0200
+
+    main: add triggerCFG for convenient debug switching
+
+ main.cpp |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit c31d724b4623eafcb2e755a7c10b8cfa1ad3bd11
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 01:53:44 2012 +0200
+
+    main: switch to loading Menus from cfg
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0c81e89ecb6de1b07a86e41488bab3d0b0dd8e9e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 01:46:25 2012 +0200
+
+    liero.cfg: add Menus
+
+ liero.cfg |  222 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 222 insertions(+)
+
+commit 3747d1e4a07c70e009f07b232d216268e1db3fe5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 12 01:40:31 2012 +0200
+
+    gfx: implement cfg read/write Menus
+
+ gfx.cpp |  143 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gfx.hpp |    4 ++
+ 2 files changed, 147 insertions(+)
+
+commit b8f34cee5cec8ff756fadf344bb924880b587dba
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 15:00:28 2012 +0200
+
+    menu/menu.cpp: purge crlf and whitespace
+
+ menu/menu.cpp |  582 ++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 291 insertions(+), 291 deletions(-)
+
+commit 65e19ce62380126940766593c9c069a43e2b90c7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 14:54:55 2012 +0200
+
+    menu/menu.hpp: add copyright header
+
+ menu/menu.hpp |  337 +++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 182 insertions(+), 155 deletions(-)
+
+commit d30e828f7086e46f6e7f8b402e1e282162194d86
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 14:41:54 2012 +0200
+
+    gfx.cpp: purge crlf and whitespace
+
+ gfx.cpp | 4054 +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 2027 insertions(+), 2027 deletions(-)
+
+commit b270362b4b1f8215ddf9b5549610fc6f7aeb3d7d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 14:39:51 2012 +0200
+
+    gfx.hpp: purge crlf and whitespace
+
+ gfx.hpp |  534 +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 267 insertions(+), 267 deletions(-)
+
+commit bfa28dc7fe4259397fcb2b139c9c8f20aeca88b5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 14:39:29 2012 +0200
+
+    gfx.hpp: add copyright header
+
+ gfx.hpp |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+commit af916ce84627b057e8ff1d6590cf0327090cf183
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 05:39:35 2012 +0200
+
+    main: load font data from CFG
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8c2e173cd4b67e46a80c1a252a04ac4fbeb5934a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 05:39:02 2012 +0200
+
+    liero.cfg: add Font data
+
+ liero.cfg | 1253 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 1253 insertions(+)
+
+commit 2481168e5ecc6f1caf57bad5249d3ea2f43834fc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 05:34:43 2012 +0200
+
+    configHelper: add capability to use indexes in getVariable()
+    
+    Make it possible to pass an int instead of a string as the second
+    parameter, thus making it possible to get settings by index,
+    particularly useful for arrays.
+
+ configHelper.cpp |   22 ++++++++++++++++++++++
+ configHelper.hpp |    2 ++
+ 2 files changed, 24 insertions(+)
+
+commit deb34739cbe6aa8083e326b602f791c934d598d2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 05:33:10 2012 +0200
+
+    gfx/font: implement load/write cfg
+
+ gfx/font.cpp |   62 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gfx/font.hpp |    4 ++++
+ 2 files changed, 66 insertions(+)
+
+commit 23c9eb40d9034d71468d0aaad03060ecc5ad96ec
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 03:34:20 2012 +0200
+
+    configHelper: rename lookupValue()->getValue() and use exceptions
+    
+    * Rework ConfigHelper method to use exception-throwing libconfig
+      methods
+    * Rename lookupValue()->getValue() since the similarity to libconfig's
+      lookupValue() is misleading, we return nothing and throw exceptions
+
+ configHelper.cpp |   10 ++++------
+ configHelper.hpp |    4 ++--
+ gfx/palette.cpp  |    6 +++---
+ 3 files changed, 9 insertions(+), 11 deletions(-)
+
+commit c03271265f858978d96c7bc4fae82d1a28dda3fa
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 02:52:58 2012 +0200
+
+    math.cpp, configHelper: rename getArray()->mkArray()
+    
+    Since the method always deletes the old array and creates a new one
+    "get" is somewhat of a misnomer, mkArray is better.
+
+ configHelper.cpp |    2 +-
+ configHelper.hpp |    2 +-
+ math.cpp         |    4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+commit 8e537e40915c65f5ed0258284d8d5264dc22cdd4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 01:58:59 2012 +0200
+
+    gfx/font.cpp: purge crlf and whitespace
+
+ gfx/font.cpp |  240 +++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 120 insertions(+), 120 deletions(-)
+
+commit 0180b5ea55b62c56a625f9d1a674bb7cc9e0e90e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 01:57:46 2012 +0200
+
+    reader.hpp: add copyright header
+
+ reader.hpp |   26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+commit 01da17fdcb9612efb3f97eeb602cbf67aeea9067
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 01:53:05 2012 +0200
+
+    gfx/font.hpp: purge crlf and whitespace
+
+ gfx/font.hpp |   78 +++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 39 insertions(+), 39 deletions(-)
+
+commit bd606f34e7907bd8b469c587bc7796960c196159
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 11 01:51:44 2012 +0200
+
+    gfx/font.hpp: add copyright header
+
+ gfx/font.hpp |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+commit 69da58fd17c3f0893c977d009e872da6de83e4b8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 23:29:28 2012 +0200
+
+    Update gvl submodule
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 01465e281825f8b9e92f8935aa6898f36a24af49
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 21:38:02 2012 +0200
+
+    constants.hpp: Add me (Martin) to copyright header
+
+ constants.hpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 070714a8940923355362ef046b593d5dce888046
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 21:28:50 2012 +0200
+
+    main.cpp: switch to loading tables from CFG
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 68abe689ef10da4a89aa7ec81e923ba8eaa81858
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 21:28:25 2012 +0200
+
+    liero.cfg: Add tables
+
+ liero.cfg |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 56e85f5d5478cde5e62cb3c1becd89357eec4ce0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 21:12:35 2012 +0200
+
+    math.cpp: cleanups for CFGfile
+
+ math.cpp |   14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+commit 336744519307373f4a84aa5058c74a6a24de6a6c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 20:56:34 2012 +0200
+
+    math.cpp: purge crlf
+
+ math.cpp |  144 +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 72 insertions(+), 72 deletions(-)
+
+commit 22d4e767ee0eb434b7155133d1e4feadd0842ecc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 20:55:45 2012 +0200
+
+    math.cpp: read/write tables definitions
+
+ math.cpp |   43 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+
+commit 7b467ee1eb389e3598b5c6242390300019d8f59e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 20:49:52 2012 +0200
+
+    configHelper: implement getArray
+
+ configHelper.cpp |    9 +++++++++
+ configHelper.hpp |    1 +
+ 2 files changed, 10 insertions(+)
+
+commit 78af08a01c951d940f85a06df1bd063d17990886
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 19:21:59 2012 +0200
+
+    constants.hpp: add copright header
+
+ constants.hpp |   25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+commit 2e4f2bea53565c5a812a6ce54fe47761ae1f463e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 19:18:41 2012 +0200
+
+    constants.hpp: purge crlf and whitespace
+
+ constants.hpp |  314 ++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 157 insertions(+), 157 deletions(-)
+
+commit 48dcd7f72d86187c863331e90a684763f8ccb989
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 18:53:53 2012 +0200
+
+    math.hpp: add file-argument load tables func
+
+ math.hpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 3c2af09dc2df3c7e095f51538c674974be48a95a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 18:51:40 2012 +0200
+
+    math.hpp: purge crlf
+
+ math.hpp |   66 +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 33 insertions(+), 33 deletions(-)
+
+commit 73cf09fafc55374515a1b366ae0bdb549eda8e05
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 18:50:30 2012 +0200
+
+    math.hpp: add load/write cfg declarations
+
+ math.hpp |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 167ab392e8a434704510a077319e03ad6e802a36
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 16:08:13 2012 +0200
+
+    main.cpp: mark TODOs
+
+ main.cpp |   16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+commit bba6333800bb434179784242c0b9ffa99f99e76e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 16:07:32 2012 +0200
+
+    reader.cpp: Purge crlf and whitespace
+
+ reader.cpp |  216 ++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 108 insertions(+), 108 deletions(-)
+
+commit edae1e6bd4f5e91f66910a52e44c12df818cae4b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 15:30:28 2012 +0200
+
+    main: Switch to loading constants from CFG by default
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit fa9bcfee82901028deb1650de1ebb6714dbfc631
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 15:28:51 2012 +0200
+
+    liero.cfg: Add all constants to CFG
+
+ liero.cfg |  115 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 115 insertions(+)
+
+commit 94efc862f4d850f35f48d2bcc052169b09214688
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 15:27:29 2012 +0200
+
+    common.hpp: declare load/write cfg constants funcs
+
+ common.hpp |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 9da625abd08300edf47a3ce6ea329adf4ebceda0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 15:23:55 2012 +0200
+
+    constants.cpp: implement load/write cfg constants
+    
+    Implement loading and writing integer constants, string constants,
+    and hack constants from/to CFG file. Added string arrays to access
+    variable names.
+
+ constants.cpp |  210 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 210 insertions(+)
+
+commit 3853fd2737121f064695335eee13b435e115ffca
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 15:22:21 2012 +0200
+
+    configHelper: implement put() for boolean
+
+ configHelper.cpp |   11 +++++++++++
+ configHelper.hpp |    1 +
+ 2 files changed, 12 insertions(+)
+
+commit 1da93d9230c262b649f742f29e83bb43ee2058a7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 10 12:55:59 2012 +0200
+
+    constants.cpp: crlf and whitespace purge
+
+ constants.cpp |  700 ++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 350 insertions(+), 350 deletions(-)
+
+commit 9f7a181d0b0c33ba6d8da630e8ac8e9497cc9f35
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 9 17:16:40 2012 +0200
+
+    Update gvl submodule, again...
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f6e5250d2a7e4120aca54ca02c53b3792a5ecde7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 9 17:10:03 2012 +0200
+
+    main: Only display "Press Any Key..." on Windows
+    
+    Liero outputs "Press Any Key..." on exit, which is quite unnecessary
+    on GNU/Linux (since no key press is required), plus it breaks the
+    terminal prompt.
+
+ main.cpp |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 4a7b64bc0017227acbd89fef6f3f8d0d4be05cbd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Nov 21 23:50:40 2011 +0100
+
+    main.cpp: fix custom settings load/write handling
+    
+    * Make Liero write settings to the currently active settings file
+      on exit, rather that always writing to LIERO.DAT
+      (Closes: http://code.google.com/p/liero/issues/detail?id=3)
+    * Re-enable using LIERO.OPT to get the name of the settings file
+      that should be loaded on start
+
+ main.cpp |   15 +++++----------
+ 1 file changed, 5 insertions(+), 10 deletions(-)
+
+commit 537e12e19d69189eb07f3c412e3cabb1960e333c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 9 15:31:50 2012 +0200
+
+    Update gvl submodule
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 250be59200e5d8d22b21aa0c6a9db806f42f99a5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 9 01:49:47 2012 +0200
+
+    Update data submodule
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b7fc38a44123f22a3eaa83d32ff035944e7a0c08
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 22:05:20 2012 +0200
+
+    Update data submodule
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 15ecb1555a2c5ee3e7388ed5277094aa2e0c70da
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 16:45:28 2012 +0200
+
+    Use gvl HEAD now that it is fixed
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 410256248dc4c06b7083b29b597249e8da375174
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 04:25:04 2012 +0200
+
+    main: Switch to loading from CFG
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 59b24760f1fe80daf06e42c6513c0f2a9129f787
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 04:23:40 2012 +0200
+
+    common: Implement read/write palette from/to CFG
+
+ common.cpp |   49 +++++++++++++++++++++++++++++++++++++++++++++++--
+ common.hpp |    6 +++++-
+ 2 files changed, 52 insertions(+), 3 deletions(-)
+
+commit 4f20fce41b8f01a62f30a0f62ce925747aff1dcd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 04:22:30 2012 +0200
+
+    gfx/palette: Implement read/write CFG
+
+ gfx/palette.cpp |   46 ++++++++++++++++++++++++++++++++++++++++++++++
+ gfx/palette.hpp |    4 ++++
+ 2 files changed, 50 insertions(+)
+
+commit 350e63b9a5bda9c841e3235ce679d5c67c29ef16
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 04:09:29 2012 +0200
+
+    configHelper: Add put and lookupValue for Uint8
+
+ configHelper.cpp |   38 ++++++++++++++++++++++++++++++++++++++
+ configHelper.hpp |    8 ++++++++
+ 2 files changed, 46 insertions(+)
+
+commit eba9849f7a36f6f091fa44e8e1aa3ad2bfab86af
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 8 04:08:33 2012 +0200
+
+    liero.cfg: Palette settings extracted
+
+ liero.cfg |  787 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 786 insertions(+), 1 deletion(-)
+
+commit 8c9ced49b3317cf999c3e95b1366e477860e91de
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 23:58:30 2012 +0200
+
+    palette: Add copyright header, fix whitespace & crlf
+
+ gfx/palette.cpp |  230 +++++++++++++++++++++++++++----------------------------
+ gfx/palette.hpp |  136 +++++++++++++++++++-------------
+ 2 files changed, 197 insertions(+), 169 deletions(-)
+
+commit f86acf5df2b92da55e694e92bb461c19b2ab2f8e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 22:19:05 2012 +0200
+
+    New ConfigHelper module from code in common
+    
+    * Rename setVariable -> put
+
+ Jamfile          |    1 +
+ common.cpp       |  120 ++++++++++++++++++++----------------------------------
+ common.hpp       |    4 --
+ configHelper.cpp |   37 +++++++++++++++++
+ configHelper.hpp |   41 +++++++++++++++++++
+ 5 files changed, 123 insertions(+), 80 deletions(-)
+
+commit 3b00bb4bd54f63d8e05c7db9a3dc48c9b2ea83ca
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 21:48:20 2012 +0200
+
+    common: Add copyright header
+
+ common.hpp |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+commit 139603fc90388ede5a226859e63e0ae9c8c277fb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 21:28:06 2012 +0200
+
+    common: Make read-only Setting instances const
+
+ common.cpp |   12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit 3e603e43ac8a6726c0d66abd390452589343cbd7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 17:45:04 2012 +0200
+
+    jamfile: remove plainreader rules
+
+ Jamfile |    7 -------
+ 1 file changed, 7 deletions(-)
+
+commit 189028fc94bfa21350be8761a5667e41e15d90da
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 17:43:02 2012 +0200
+
+    main: switch to loading Texts from config file
+
+ main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3b16f8f9229c9d61e8645905eca15cfe50d32fab
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 17:42:10 2012 +0200
+
+    config file with all members of Texts struct
+
+ liero.cfg |  236 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 236 insertions(+)
+
+commit 9564c5bbc39815e4f0efa9d2b1d398b42dfb2402
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 17:34:29 2012 +0200
+
+    common: Implement Texts::loadFromCFG() and writeToCFG()
+    
+    * Add functions for loading and writing all members of the Texts struct
+      to and from a libconfig-style file
+    * Also add some helper functions for libconfig++
+      - setVariable(string/int): sets a child variable to given setting node
+      - getSubgroup: creates if need be, and returns a subgroup setting node
+
+ common.cpp |  197 ++++++++++++++++++++++++++++++++++++++++++++++++------------
+ common.hpp |   11 +++-
+ 2 files changed, 168 insertions(+), 40 deletions(-)
+
+commit 74c9876e1f5b5a02678519128fcdb021ce78bb7a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 17:32:41 2012 +0200
+
+    Add .gitignore file, matching existing .hgignore
+
+ .gitignore |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 61f5a6c4a816dbc4b0467085eec619d92c7b0970
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 7 17:27:20 2012 +0200
+
+    jamfile: config module no longer used
+
+ Jamfile |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 1ff6fe517bc3ab0b7cd76802721248ca5e6dc561
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 6 03:51:02 2012 +0200
+
+    main: clean crlf and whitespace
+
+ main.cpp |  414 +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 207 insertions(+), 207 deletions(-)
+
+commit 042351fdb9539cbeaa6edf7d85049de763ec8a56
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 6 03:47:52 2012 +0200
+
+    config: write(void) using write(string)
+
+ config.cpp |   16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
+
+commit c9834232ee621d2b5b0321bb0772a6c2c8034bc7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 6 03:33:52 2012 +0200
+
+    config: Explicit read(), file creation, exceptions
+
+ config.cpp      |   41 +++++++++++++++++++++++------------------
+ config.hpp      |    6 ++++--
+ plainreader.cpp |    3 ++-
+ 3 files changed, 29 insertions(+), 21 deletions(-)
+
+commit 729fe9260f7a5ebaabd667008a45ad4f3251a3b4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 6 00:21:08 2012 +0200
+
+    common: Implement loadFromINI for Texts
+
+ Jamfile    |    2 ++
+ common.cpp |   65 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ common.hpp |    1 +
+ 3 files changed, 68 insertions(+)
+
+commit e442273269783741872d0d93958250ae78ee9c7b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 19:31:40 2012 +0200
+
+    config: make fstreams localised
+    
+    Make fstreams local and only carry configfile path global, since
+    [read,write]_ini closes the streams, egoistical turds.
+
+ config.cpp |   27 ++++++++++++++++++---------
+ config.hpp |    6 +++---
+ 2 files changed, 21 insertions(+), 12 deletions(-)
+
+commit 28231d17b0f78750c98b5adac216a30eb2d2e033
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 16:01:50 2012 +0200
+
+    plainreader: Test using config module for configfile abstraction
+
+ plainreader.cpp |   42 ++++++++++++++----------------------------
+ 1 file changed, 14 insertions(+), 28 deletions(-)
+
+commit 302b0f87e8413142c2b4df5c113b14cf98ccee9e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 15:58:14 2012 +0200
+
+    config: Use camelCase and implement writeOut
+
+ config.cpp |   43 +++++++++++++++++++++++++++++--------------
+ config.hpp |   17 +++++++++++------
+ 2 files changed, 40 insertions(+), 20 deletions(-)
+
+commit e886a946cf4ce9df5e3534f2ec76c5f92c0fac57
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 15:39:05 2012 +0200
+
+    Update jamfile
+
+ Jamfile |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit ed477e92e315dd3018fabe2342c092fc5d202e54
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 15:13:13 2012 +0200
+
+    Missed rename include binreader->binReader
+
+ binReader.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0947e52efd22fde44bd3c1f570878b28b6cf2f42
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 15:09:34 2012 +0200
+
+    Accept default values for config.put
+
+ config.cpp |   10 ++++++++++
+ config.hpp |    4 ++++
+ 2 files changed, 14 insertions(+)
+
+commit 52f51c3b0b55505fef60619616b2a885aa35ddc9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 04:03:55 2012 +0200
+
+    config: configfile & ptree abstraction
+
+ config.cpp |   53 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ config.hpp |   50 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 103 insertions(+)
+
+commit 54f6028e4f51e832568d5dccd9da198410640b88
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 03:39:06 2012 +0200
+
+    Rename binreader -> binReader, use .o for libs
+
+ Jamfile         |    4 +--
+ binReader.cpp   |  107 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ binReader.hpp   |   25 +++++++++++++
+ binreader.cpp   |  107 -------------------------------------------------------
+ binreader.hpp   |   25 -------------
+ dataPath.cpp    |    1 +
+ plainreader.cpp |    4 +--
+ reader.hpp      |    2 +-
+ to_string.cpp   |    2 +-
+ 9 files changed, 139 insertions(+), 138 deletions(-)
+
+commit 442dbb3976c71ed05bb8bc58a8ff0b49c707349f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 4 03:35:20 2012 +0200
+
+    Update copyright dates for dataPath
+
+ boostTesting.cpp |    2 +-
+ dataPath.hpp     |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit a3259c30d5722b8c3fd42efbaecb107037adbd4b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 3 16:04:59 2012 +0200
+
+    add plainreader as a Jamfile target
+
+ Jamfile |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 56f9b507e375d6f2587bb1b9aff4f3ddfe2f3403
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 3 15:51:37 2012 +0200
+
+    Implement to_string module
+
+ plainreader.cpp |   22 ++++++----------------
+ to_string.cpp   |    2 ++
+ 2 files changed, 8 insertions(+), 16 deletions(-)
+
+commit fe69e6b72ff246605e2bd3a57845b5af5073f665
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 3 15:43:56 2012 +0200
+
+    to_string module
+
+ to_string.cpp |   10 ++++++++++
+ to_string.hpp |    8 ++++++++
+ 2 files changed, 18 insertions(+)
+
+commit 00f92156efe1c0abeac3beed60c182eb5b2f3b3b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 3 15:02:46 2012 +0200
+
+    common.?pp: whitespace and crlf purging
+
+ common.cpp |  916 ++++++++++++++++++++++++++++++------------------------------
+ common.hpp |  324 ++++++++++-----------
+ 2 files changed, 620 insertions(+), 620 deletions(-)
+
+commit 2aad999ace3b753929ecba9f40110a3333a4e3c3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 3 14:28:12 2012 +0200
+
+    Rename varreader to binreader
+
+ Jamfile         |   15 ++++----
+ binreader.cpp   |  107 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ binreader.hpp   |   25 +++++++++++++
+ plainreader.cpp |    4 +--
+ reader.hpp      |   48 ++++++++++++-------------
+ varreader.cpp   |  107 -------------------------------------------------------
+ varreader.hpp   |   25 -------------
+ 7 files changed, 167 insertions(+), 164 deletions(-)
+
+commit 48e17d089a16d71abb194717e20a83bc65b1ee34
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 2 21:46:28 2012 +0200
+
+    Read and print materials from ini
+
+ plainreader.cpp |   27 +++++++++++++++++++--------
+ 1 file changed, 19 insertions(+), 8 deletions(-)
+
+commit 518a22cbde895acc4235f2302332264fea69de70
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 2 21:21:21 2012 +0200
+
+    Fixup stringstream conversion
+
+ plainreader.cpp |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 54ad028090efd4afdd14e309e5d16e23e59570a8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 2 19:55:56 2012 +0200
+
+    Try get-write-read-print from cfg
+
+ plainreader.cpp |   39 ++++++++++++++++++++++++++++-----------
+ 1 file changed, 28 insertions(+), 11 deletions(-)
+
+commit 7c26cdb4e9931b004912d6a40480f49ed5efb6e7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 2 16:27:52 2012 +0200
+
+    Use boost ptree, move relevant stuff to header
+    
+    * Move Material definitions to header
+    * Remove some superfluous includes
+    * Use namespaces explicitly
+    * Use Boost for config file handling, INI style
+
+ plainreader.cpp |   79 +++++++++++++++++++++++++++++++------------------------
+ plainreader.hpp |   24 +++++++++++++++++
+ 2 files changed, 69 insertions(+), 34 deletions(-)
+
+commit 790a501645f6f63dff17a2dec760fff2f5e8f265
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 2 16:12:51 2012 +0200
+
+    Fixup lining & compilation for boostTesting
+
+ boostTesting.cpp |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit a97c14d34b58d470096c796598afa05ecccfaf6b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 1 22:10:04 2012 +0200
+
+    Set liero dir as top of project in Jamfile
+
+ Jamfile |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 1d1835db58cc2bfccacab53acfe3551d3739c7dc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 1 21:46:02 2012 +0200
+
+    Add gvl as a submodule
+
+ .gitmodules |    3 +++
+ gvl         |    1 +
+ 2 files changed, 4 insertions(+)
+
+commit 744890aab61d4f50c8bfd30a1adee70fc95f5f49
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 1 21:12:09 2012 +0200
+
+    Add liero-data as a submodule
+
+ .gitmodules |    3 +++
+ data        |    1 +
+ 2 files changed, 4 insertions(+)
+
+commit 3c53101448d5e55986a03566ac00de36a5a99022
+Merge: 669f68b 204de18
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 1 21:09:18 2012 +0200
+
+    Merge branch 'plainreader' of ../liero-debian
+    
+    Merge of dataPath and varreader factorisation, lots of conflicts
+    due to no common ancestors.
+    
+    Conflicts:
+    	Jamfile
+    	controller/localController.cpp
+    	gfx.cpp
+    	level.cpp
+    	main.cpp
+    	reader.cpp
+    	reader.hpp
+    	settings.cpp
+    	worm.cpp
+
+commit 204de18d276c761bc954d49243cee1c50bf2a8a4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Mar 31 18:22:54 2012 +0200
+
+    No global std namespace in varreader
+
+ varreader.hpp |   10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+commit d8603cdaab7bed800c63d1b997be92449169494f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Mar 31 18:16:38 2012 +0200
+
+    Split varreader out into module
+
+ Jamfile         |    2 +-
+ plainreader.cpp |   99 ++------------------------------------------------
+ reader.hpp      |   96 -------------------------------------------------
+ varreader.cpp   |  107 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ varreader.hpp   |   27 ++++++++++++++
+ 5 files changed, 137 insertions(+), 194 deletions(-)
+
+commit dc856b0a1b78efb0ad29e33474c2f22b14bc0a81
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Mar 31 17:34:47 2012 +0200
+
+    crlf->lf in reader.hpp
+
+ reader.hpp |  227 ++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 115 insertions(+), 112 deletions(-)
+
+commit 9dec1eaf65dd6a2ba5dc288265d304a982b78f32
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Mar 31 17:32:44 2012 +0200
+
+    comment why include SDL
+
+ plainreader.cpp |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 65d8c59983fb7f72af5f8e8306efe0203e930e92
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Mar 30 22:42:46 2012 +0200
+
+    use equals sign instead of colon
+
+ plainreader.cpp |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 114176e68aa9116c712e8c463bb3204da6c06d91
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Mar 27 00:15:48 2012 +0200
+
+    add section header for materials
+
+ plainreader.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit b628c7d0a38f10d5c5c41ada2c733bfaa1eb2f3b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Jan 28 01:32:38 2012 +0100
+
+    Bloat plainreader
+
+ plainreader.cpp |  149 +++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 144 insertions(+), 5 deletions(-)
+
+commit b22b882875ddb0f7e8a355812dfd3ab5cbb8c71e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Jan 27 00:15:09 2012 +0100
+
+    sticks & ducttape plainreader
+
+ plainreader.cpp |   38 ++++++++++++++++++++++++++++++++++++++
+ plainreader.hpp |    6 ++++++
+ 2 files changed, 44 insertions(+)
+
+commit 2a116a10427fe1feef426b06ab594e4a2a1dcbeb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Dec 20 19:24:42 2011 +0100
+
+    Imported Upstream version 1.35~b2+20100124.1
+
+ Jamfile                         |   40 +
+ _build/liero.sln                |   47 +
+ _build/liero.vcproj             |  841 ++++++++++++++++
+ bobject.cpp                     |   64 ++
+ bobject.hpp                     |   22 +
+ bonus.cpp                       |   37 +
+ bonus.hpp                       |   27 +
+ common.cpp                      |  458 +++++++++
+ common.hpp                      |  162 +++
+ console.cpp                     |  223 +++++
+ console.hpp                     |   38 +
+ constants.cpp                   |  350 +++++++
+ constants.hpp                   |  157 +++
+ controller/commonController.cpp |   46 +
+ controller/commonController.hpp |   16 +
+ controller/controller.hpp       |   38 +
+ controller/localController.cpp  |  282 ++++++
+ controller/localController.hpp  |   55 ++
+ controller/replayController.cpp |  170 ++++
+ controller/replayController.hpp |   53 +
+ exactObjectList.hpp             |  180 ++++
+ fastObjectList.hpp              |  126 +++
+ filesystem.cpp                  |  358 +++++++
+ filesystem.hpp                  |   78 ++
+ game.cpp                        |  533 ++++++++++
+ game.hpp                        |   88 ++
+ gfx.cpp                         | 2053 +++++++++++++++++++++++++++++++++++++++
+ gfx.hpp                         |  240 +++++
+ gfx/blit.cpp                    |  489 ++++++++++
+ gfx/blit.hpp                    |   38 +
+ gfx/color.hpp                   |    6 +
+ gfx/font.cpp                    |  125 +++
+ gfx/font.hpp                    |   40 +
+ gfx/macros.hpp                  |  175 ++++
+ gfx/palette.cpp                 |  115 +++
+ gfx/palette.hpp                 |   54 +
+ gfx/sprite.cpp                  |   52 +
+ gfx/sprite.hpp                  |   26 +
+ keys.cpp                        |  126 +++
+ keys.hpp                        |   32 +
+ level.cpp                       |  284 ++++++
+ level.hpp                       |   77 ++
+ lfs.hpp                         |   78 ++
+ main.cpp                        |  214 ++++
+ math.cpp                        |   29 +
+ math.hpp                        |   28 +
+ menu/arrayEnumBehavior.hpp      |   30 +
+ menu/booleanSwitchBehavior.cpp  |   34 +
+ menu/booleanSwitchBehavior.hpp  |   24 +
+ menu/enumBehavior.cpp           |   49 +
+ menu/enumBehavior.hpp           |   32 +
+ menu/hiddenMenu.cpp             |   86 ++
+ menu/hiddenMenu.hpp             |   31 +
+ menu/integerBehavior.cpp        |   57 ++
+ menu/integerBehavior.hpp        |   32 +
+ menu/itemBehavior.cpp           |    3 +
+ menu/itemBehavior.hpp           |   23 +
+ menu/menu.cpp                   |  291 ++++++
+ menu/menu.hpp                   |  155 +++
+ menu/menuItem.cpp               |   39 +
+ menu/menuItem.hpp               |   35 +
+ menu/timeBehavior.cpp           |   14 +
+ menu/timeBehavior.hpp           |   20 +
+ ninjarope.cpp                   |  123 +++
+ nobject.cpp                     |  373 +++++++
+ nobject.hpp                     |   60 ++
+ objectList.hpp                  |  167 ++++
+ rand.hpp                        |   10 +
+ reader.cpp                      |  104 ++
+ reader.hpp                      |  121 +++
+ rect.hpp                        |  208 ++++
+ replay.cpp                      |  666 +++++++++++++
+ replay.hpp                      |  111 +++
+ sdlmain.cpp                     |   27 +
+ settings.cpp                    |  165 ++++
+ settings.hpp                    |  313 ++++++
+ sfx.cpp                         |  195 ++++
+ sfx.hpp                         |   96 ++
+ sobject.cpp                     |  273 ++++++
+ sobject.hpp                     |   41 +
+ sys.cpp                         |   19 +
+ sys.hpp                         |   15 +
+ text.cpp                        |   90 ++
+ text.hpp                        |   37 +
+ version.hpp                     |    6 +
+ viewport.cpp                    |  651 +++++++++++++
+ viewport.hpp                    |   82 ++
+ weapon.cpp                      |  442 +++++++++
+ weapon.hpp                      |   96 ++
+ weapsel.cpp                     |  548 +++++++++++
+ weapsel.hpp                     |   31 +
+ worm.cpp                        | 1566 +++++++++++++++++++++++++++++
+ worm.hpp                        |  425 ++++++++
+ 93 files changed, 16786 insertions(+)
+
+commit 669f68b3db53ba3232565b881c7b223802f126e3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:02 2011 +0100
+
+    gfx.cpp: handle different .DAT files
+
+ gfx.cpp |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit ab0bec4cb0826c78d710fa6df18a67e86741cc54
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:02 2011 +0100
+
+    dataPath: return writable path for any .DAT
+
+ dataPath.cpp |    8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+commit eed86ba524887de1d03061586b56f6ef42c50272
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:02 2011 +0100
+
+    boostTesting: Add testcase for arbitrary .DAT
+
+ boostTesting.cpp |   13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit b54f8d05b130c27276cd50ae10093ef09a531ce5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:02 2011 +0100
+
+    boostTesting: missed copy one line
+
+ boostTesting.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 8c55e9a5200b5e1ae3fca3cfed5fd606af59406e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:02 2011 +0100
+
+    dataPath: add NAMES.DAT as a possible file
+
+ dataPath.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 791f7d4b8600b54258f40875210a1afd3f0507cd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    boostTesting: add NAMES.DAT as a possible file
+
+ boostTesting.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 5f3cba992c3d063ecdbda828a6f4b1e0a78fe17c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    remove 01_datapath_object_outline
+
+ 01_datapath_object_outline |   28 ----------------------------
+ 1 file changed, 28 deletions(-)
+
+commit 601cb1f6a691183750121bfc918c1119ee554573
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    dataPath.hpp: describe exception throwing
+
+ dataPath.hpp |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit e5b667ef25e18c1c1999d8736f52f327bdc1e008
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    dataPath: throw exeptions, rm unneeded includes
+
+ dataPath.cpp |   29 ++++++++++++++---------------
+ 1 file changed, 14 insertions(+), 15 deletions(-)
+
+commit d6b5abc76f2a2152ce6d2f734d1636a33051dcb4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    boostTesting: tests for exception messages
+
+ boostTesting.cpp |   30 +++++++++++++++++++++++++-----
+ 1 file changed, 25 insertions(+), 5 deletions(-)
+
+commit 94e376596c1757af2eeff9cfeb446183ef5762fb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    openliero: make data_path extern, and define in cpp
+
+ reader.cpp |    1 +
+ reader.hpp |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+commit c2914211d4f896389c58f55cd10816aae6a2b2b5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    dataPath.hpp: remove usage of namespace std
+    * Add namespace usage to dataPath.cpp and boostTesting instead
+
+ boostTesting.cpp |    1 +
+ dataPath.cpp     |    1 +
+ dataPath.hpp     |   14 ++++++--------
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+commit 9e948a270d9da3fbe140d75210eca55dfe028d09
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:01 2011 +0100
+
+    Use data_path as a pointer
+    * Since we need to expose data_path, but initialise it in a function
+      we define it as a pointer which is updated in the function
+
+ controller/localController.cpp |    2 +-
+ gfx.cpp                        |   14 +++++++-------
+ level.cpp                      |    2 +-
+ main.cpp                       |    2 +-
+ reader.cpp                     |   10 +++++-----
+ reader.hpp                     |    2 ++
+ settings.cpp                   |    2 +-
+ worm.cpp                       |    4 ++--
+ 8 files changed, 20 insertions(+), 18 deletions(-)
+
+commit 61af6f2616d7f07c24331a3afa62a563325896c4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    Include dataPath in reader.hpp instead
+
+ reader.cpp |    1 -
+ reader.hpp |    1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+commit cd4f6c7010fd23d62ab145bb66ea9d9b3e7411e7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    dadd dataPath.cpp to Jamfile
+
+ Jamfile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 69ebcaa4c4e1ac904cddc5648fb0b0d2235a66a2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    openliero: integrate DataPath
+
+ controller/localController.cpp |    2 +-
+ gfx.cpp                        |   16 ++++++++--------
+ level.cpp                      |    2 +-
+ main.cpp                       |    4 ++--
+ reader.cpp                     |   22 +++++++++++++---------
+ settings.cpp                   |    2 +-
+ worm.cpp                       |    4 ++--
+ 7 files changed, 28 insertions(+), 24 deletions(-)
+
+commit 64e55c2d52b240fdc64edb9c0cc6feaac9872e2f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    Add /*FIXME*/ tags to openliero for rewriting with
+     dataPath
+
+ controller/localController.cpp |    2 +-
+ gfx.cpp                        |   16 ++++++++--------
+ level.cpp                      |    2 +-
+ main.cpp                       |    4 ++--
+ reader.cpp                     |    2 +-
+ settings.cpp                   |    2 +-
+ worm.cpp                       |    4 ++--
+ 7 files changed, 16 insertions(+), 16 deletions(-)
+
+commit 401dfa1639928830bdb3cfb0ec598cf7bc4e879d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    dataPath: yet more 80-char layout fixes
+
+ dataPath.cpp |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 4808b90ef6d9640c7c6e22787392aa3e3e21a2b2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    boostTesting: 80-char layout fixes
+
+ boostTesting.cpp |   35 +++++++++++++++++++++--------------
+ 1 file changed, 21 insertions(+), 14 deletions(-)
+
+commit 48ad183231946c8b4603094aef2f18b666fe5c05
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    dataPath & boostTesting: add copyright and description
+
+ boostTesting.cpp |   27 +++++++++++++++++++++++++++
+ dataPath.hpp     |   46 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
+
+commit 2c82e8aff693fc188c5dc8ecb1fa974579bf190e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:46:00 2011 +0100
+
+    dataPath: 80-char layout fixes
+
+ dataPath.cpp |   13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+commit 19ae2239506342803fef1b0828c072adc135b998
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    boostTesting: test for incomplete filename in file()
+
+ boostTesting.cpp |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit a4a230332cd5bf71eaef9c4f921a61b882ab00de
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    dataPath: rm DataPath::; change comments
+    * Don't define create_configdir() in .hpp and thus disable usage of
+      "DataPath::" in calls to it
+    * Remove the unused mkdir error handling
+    * Add some comments with create_configdir() in file()
+
+ dataPath.cpp |   19 +++++--------------
+ dataPath.hpp |    2 --
+ 2 files changed, 5 insertions(+), 16 deletions(-)
+
+commit 40be47f14065b86c18721c28c5dcb3280a242e4a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    dataPath: factor out create_configdir() function
+
+ dataPath.cpp |   22 ++++++++++++++++++++--
+ dataPath.hpp |    2 ++
+ 2 files changed, 22 insertions(+), 2 deletions(-)
+
+commit 4ddb725ac1dcfef8e5e99b1fcbf2b7a464b4ad63
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    boostTesting: test when configdir doesn't exist
+
+ boostTesting.cpp |   15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
+
+commit 08c3d1abc12813e6b6a09d3de3b04a4da93ba503
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    dataPath: error handling that doesn't crash
+
+ dataPath.cpp |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit 85fe7cf6bd646ff56850f89cd6177a066e4f4dac
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    boostTesting: intermediate ConfigdirSetup fixture
+
+ boostTesting.cpp |   25 ++++++++++++++++---------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
+
+commit 41997eae4cbe3b4f5b31cacc9008b2134daf591c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    dataPath: error handling for configdir()w
+
+ dataPath.cpp |    9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+commit 51d14368218f0fe5b02680fbdf440ee5fd10b140
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:59 2011 +0100
+
+    dataPath: open files as ios::binary
+
+ dataPath.cpp |    7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+commit 43af5a78baffb7681436a4d162fadb5d9c39db43
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    boostTesting: more indentation for broken strings
+
+ boostTesting.cpp |   15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+commit aa1f519fbf5920e0fb0d7b9c490cebdc0bc36297
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    space after keywords, for, if...
+
+ boostTesting.cpp |   25 ++++++++++++-------------
+ dataPath.cpp     |   10 +++++-----
+ 2 files changed, 17 insertions(+), 18 deletions(-)
+
+commit b6a3b69cfa31d3e264ca9c7100402f32a3662e68
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    boostTesting: comment; rename cases; content check
+    * Add some logic comments
+    * rename testcases -> condition__Test1_Test2
+    * Add content checking for files, for overwrites, copying, etc.
+
+ boostTesting.cpp |  125 ++++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 112 insertions(+), 13 deletions(-)
+
+commit 89b0ecacad25189512065d73e414dc3a147060a2
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    dataPath: ENOFILE->ENOTOPEN; rewording of comments
+
+ dataPath.cpp |    8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit 9e02a3ce14e80d35156853f9e3809b2c95f34052
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    rm temp fixture testing code
+
+ boostTestingFixtures.cpp |  139 ----------------------------------------------
+ macrosboost.cpp          |   67 ----------------------
+ 2 files changed, 206 deletions(-)
+
+commit d9982cb09dafb65dd272bb55cf831fbdbbabc294
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    dataPath.hpp: no need for iostream unless we cout
+
+ dataPath.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 62951ec1ad8bc83849d5bf5a383eda85e8dd2ba4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    boostTesting: code layout
+    * make variables from r/w setup global, avoid duplicate declaration
+    * save $HOME for recovery
+    * Remove unused, outcommented map loop
+
+ boostTesting.cpp |   41 +++++++----------------------------------
+ 1 file changed, 7 insertions(+), 34 deletions(-)
+
+commit e7151522af9e507a4510a77149ffc293896ad61c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:58 2011 +0100
+
+    All cases with fixtures
+    * All test cases now use fixtures
+    * Saved away looping map code
+    * Separate tests for no/ro/rw files setup
+
+ boostTesting.cpp |   99 ++++++++++++++++++++++++++----------------------------
+ 1 file changed, 48 insertions(+), 51 deletions(-)
+
+commit 89a8617ae80c3df92e1ec1c857d0eed8aff2662e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    temporarily return ENOFILE
+
+ dataPath.cpp |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 0f6aff92f9b0146282b37571ccef1e4689f45e84
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    lieroexe_path with fixtures; use close()
+
+ boostTesting.cpp |   28 +++++++++-------------------
+ 1 file changed, 9 insertions(+), 19 deletions(-)
+
+commit b2b7c756a8a8464a5ff8d25b0113cd4bbb2207dd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    dataPath: drop delimitor, add some erroring shell
+    * Use '/' instead of delimitor var
+    * Some more error handling outlining shell
+
+ dataPath.cpp |   17 +++++++++++------
+ dataPath.hpp |    1 -
+ 2 files changed, 11 insertions(+), 7 deletions(-)
+
+commit af3ba59491c8c37cd880fb551375660f1f6efe59
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    boostTesting: dirs;r;w;all fixtures
+    Create fixtures which initiates
+    * directories + HOME env
+    * ro files
+    * rw files
+    * all files
+    Rework configdir testcases to use fixtures
+    mute most enter/exit output
+
+ boostTesting.cpp |  179 ++++++++++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 140 insertions(+), 39 deletions(-)
+
+commit a59d106f09f17f05cda9a5994c772b8c5e3ae285
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    rm superflous a_ in .hpp, temporary working testcode
+
+ boostTesting.cpp |   11 ++++++-----
+ dataPath.hpp     |    1 -
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+commit d076a193a2ce21c9026ed9908f51c16bc0153fac
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    Init map as fn
+
+ boostTesting.cpp |   16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
+
+commit f4ae2a80eea1f725491da0ecb10d0407f6e0218a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    acrosboost.cpp testing fixture marcos
+
+ macrosboost.cpp |   67 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 67 insertions(+)
+
+commit 0045887e6bfde42591613f2566f6605d7780aedb
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:57 2011 +0100
+
+    Start rewrite boosttesting with fixtures
+
+ boostTestingFixtures.cpp |  139 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 139 insertions(+)
+
+commit e584caa13bc9b061a2e38a9b03e02cc1b3de1ea4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    start writing map access testcase
+
+ boostTesting.cpp |   44 ++++++++++++++++++++++++++++++++++++++++++++
+ dataPath.cpp     |    3 ---
+ dataPath.hpp     |    2 +-
+ 3 files changed, 45 insertions(+), 4 deletions(-)
+
+commit db853846ca2b2b341cff9bbcdfba06b52b0bb745
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    Bulk of file() completed
+    * Some reduction of provate members
+    * Don't use cstdio
+    * Needs testcases!!
+
+ dataPath.cpp |   81 ++++++++++++++++++++++++++++++++++++++--------------------
+ dataPath.hpp |    3 ++-
+ 2 files changed, 55 insertions(+), 29 deletions(-)
+
+commit 7774313cf2e267eb7add83f433f529ca0fc799bc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    Add a filename->r/w map
+
+ dataPath.cpp |   17 ++++++++++++++---
+ dataPath.hpp |    3 +++
+ 2 files changed, 17 insertions(+), 3 deletions(-)
+
+commit 5d4c04ea11c951943ab0da390c608bed18e4fcc2
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    Use FILENAME_MAX for char pointers
+
+ boostTesting.cpp |   19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+commit 4e79aaf36cbb554e39386a72a55faa2734b73f70
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    file(*) for readonly files
+    * Simple implementation of file(*), returning filename path.
+    * Make use of delimitor char in building full path.
+    * input to DataPath is directory of lieroexe, rather than file.
+
+ dataPath.cpp |   25 +++++++++++++++++++------
+ dataPath.hpp |    8 +++++---
+ 2 files changed, 24 insertions(+), 9 deletions(-)
+
+commit 99d3d69f59aa02b6a24c99d006740d02d5c51b89
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    Implement testing for lieroexe
+
+ boostTesting.cpp |   38 +++++++++++++++++++++++++++++++++-----
+ 1 file changed, 33 insertions(+), 5 deletions(-)
+
+commit 27f1b676d0e721c6a27e2e125f16912de13b50ed
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    Implement configdir with a simple mkdir
+
+ dataPath.cpp |   14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+commit 186669c32ef3a2132adf0f831b97af5bf843d5df
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    use *home, correct strcmp check, make tmpdir local
+
+ boostTesting.cpp |   15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+
+commit 56df0bf138560eb285d044f07eea064c584869dd
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:56 2011 +0100
+
+    boostTest: fix allocation, strcpy, type mismatch
+
+ boostTesting.cpp |   27 ++++++++++++++++-----------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
+
+commit 2d571e1b090ca224a9288b6a9cc7eff9ff86bcf7
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    Update datapath object with constructors
+
+ dataPath.cpp |   13 +++++++------
+ dataPath.hpp |    9 +++++++--
+ 2 files changed, 14 insertions(+), 8 deletions(-)
+
+commit 4db49f8ca38d887c19bea6db26a24337f8c8a2a6
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    configdir tests should be complete (const char mess)
+
+ boostTesting.cpp |   23 +++++++++++------------
+ 1 file changed, 11 insertions(+), 12 deletions(-)
+
+commit e033c62d90991a9d09d424b66d0c8edcc21554e5
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    return /tmp to test the test dawg
+
+ dataPath.cpp |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 7f5a0f95224cabece8263245df2a37ab0bc5a366
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    Two configdir test cases
+
+ boostTesting.cpp |   48 ++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 46 insertions(+), 2 deletions(-)
+
+commit 60ece521ea56023c74d1d48d3f2818473bdbfa0b
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    Add boost unit testing template
+
+ boostTesting.cpp |   12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+commit 416f216181daa78914a7328382fe697af4d00ad3
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    fixup string and namespace usage
+
+ dataPath.cpp |    6 +++---
+ dataPath.hpp |    6 ++++--
+ 2 files changed, 7 insertions(+), 5 deletions(-)
+
+commit f9f6d3c280f2b5c9681e11ef8bbf3171603003d4
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    add <string> muck syntax
+
+ dataPath.cpp |    8 ++++----
+ dataPath.hpp |   10 ++++++----
+ 2 files changed, 10 insertions(+), 8 deletions(-)
+
+commit 3ff7142b0e17b480abb703108bd9d40b7fb1fa43
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:55 2011 +0100
+
+    basic skeleton hpp and cpp files for datapath
+
+ dataPath.cpp |   12 ++++++++++++
+ dataPath.hpp |   12 ++++++++++++
+ 2 files changed, 24 insertions(+)
+
+commit 701f499084646a41528ab298a6b365dc91c99ad1
+Author: Arand Nash <ienorand@gmail.com>
+Date:   Tue Nov 22 03:45:54 2011 +0100
+
+    file outlining datapath object
+
+ 01_datapath_object_outline |   28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+commit ca69f8cab5e764c4738e4fee026761a4d086ceef
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Sun Jan 24 01:52:05 2010 +0100
+
+    Fixed Jamfile
+
+ Jamfile |   27 +++++++++++++++++++++++----
+ 1 file changed, 23 insertions(+), 4 deletions(-)
+
+commit 338d9a6644f6a4e97c3b8ae5742aeb84bdfacfa3
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Sun Jan 24 01:09:03 2010 +0100
+
+    Fixes for mingw, style fixes, fix for control issues from dig button hack
+
+ _build/liero.sln                |   10 +-
+ _build/liero.vcproj             |  440 +++++++++++++++++++++++++++++++++++----
+ console.cpp                     |   10 +-
+ controller/controller.hpp       |   11 +-
+ controller/localController.cpp  |   23 +-
+ controller/localController.hpp  |    9 +
+ controller/replayController.cpp |    2 +
+ controller/replayController.hpp |   11 +
+ filesystem.cpp                  |    8 +-
+ game.cpp                        |    7 +-
+ gfx.cpp                         |  157 +++++++-------
+ gfx.hpp                         |    2 +-
+ gfx/blit.hpp                    |    6 +-
+ gfx/color.hpp                   |    6 +-
+ gfx/font.hpp                    |    6 +-
+ keys.cpp                        |  229 +++-----------------
+ keys.hpp                        |    6 +-
+ main.cpp                        |   16 +-
+ menu/arrayEnumBehavior.hpp      |    6 +-
+ menu/booleanSwitchBehavior.hpp  |    6 +-
+ menu/enumBehavior.hpp           |    8 +-
+ menu/hiddenMenu.hpp             |    6 +-
+ menu/integerBehavior.hpp        |    6 +-
+ menu/itemBehavior.hpp           |    6 +-
+ menu/menu.hpp                   |    6 +-
+ menu/menuItem.hpp               |    6 +-
+ menu/timeBehavior.hpp           |    6 +-
+ platform.hpp                    |   10 -
+ rand.hpp                        |   50 +----
+ replay.cpp                      |    4 +-
+ replay.hpp                      |    5 +-
+ sdlmain.cpp                     |    4 +-
+ settings.cpp                    |  152 +-------------
+ sfx.cpp                         |   49 ++++-
+ sfx.hpp                         |    5 +-
+ sys.cpp                         |    2 +-
+ sys.hpp                         |   10 +-
+ worm.cpp                        |    4 +-
+ worm.hpp                        |   44 ++--
+ 39 files changed, 702 insertions(+), 652 deletions(-)
+
+commit d4c386b5153d4a236442a4f944f89f4d80df1b44
+Author: basro <>
+Date:   Sat Jan 23 14:06:29 2010 -0300
+
+    Added a dig key, since its impossible to dig if you control the worm using a joystick hat or axis.
+
+ controller/localController.cpp |    8 +++-
+ game.cpp                       |    6 ++-
+ gfx.cpp                        |   89 +++++++++-------------------------------
+ settings.hpp                   |    2 +-
+ worm.hpp                       |   20 +++++----
+ 5 files changed, 42 insertions(+), 83 deletions(-)
+
+commit 10a84a041894e1ba40f3a882ecef0543fa6778e7
+Author: basro <>
+Date:   Tue Jan 19 19:03:33 2010 -0300
+
+    Preliminar gamepad support.
+    
+    --HG--
+    rename : gfx/colour.hpp => gfx/color.hpp
+    rename : menu/booleanSwitchBehaviour.cpp => menu/booleanSwitchBehavior.cpp
+    rename : menu/booleanSwitchBehaviour.hpp => menu/booleanSwitchBehavior.hpp
+    rename : menu/enumBehaviour.cpp => menu/enumBehavior.cpp
+    rename : menu/enumBehaviour.hpp => menu/enumBehavior.hpp
+    rename : menu/integerBehaviour.cpp => menu/integerBehavior.cpp
+    rename : menu/integerBehaviour.hpp => menu/integerBehavior.hpp
+    rename : menu/itemBehaviour.cpp => menu/itemBehavior.cpp
+    rename : menu/itemBehaviour.hpp => menu/itemBehavior.hpp
+    rename : menu/timeBehaviour.cpp => menu/timeBehavior.cpp
+    rename : menu/timeBehaviour.hpp => menu/timeBehavior.hpp
+
+ bobject.cpp                     |    4 +-
+ bobject.hpp                     |    2 +-
+ common.cpp                      |   10 +-
+ common.hpp                      |    2 +-
+ game.cpp                        |    5 +-
+ gfx.cpp                         |  224 +++++++++++++++++++++++++--------------
+ gfx.hpp                         |   17 ++-
+ gfx/blit.cpp                    |   36 ++++---
+ gfx/blit.hpp                    |   10 +-
+ gfx/color.hpp                   |    6 ++
+ gfx/colour.hpp                  |    6 --
+ gfx/font.cpp                    |   10 +-
+ gfx/font.hpp                    |    8 +-
+ gfx/palette.cpp                 |    2 +-
+ gfx/sprite.cpp                  |   52 +++++++++
+ gfx/sprite.hpp                  |    2 +-
+ keys.hpp                        |   15 +++
+ level.cpp                       |    4 +-
+ main.cpp                        |    2 +-
+ menu/arrayEnumBehavior.hpp      |   30 ++++++
+ menu/booleanSwitchBehavior.cpp  |   34 ++++++
+ menu/booleanSwitchBehavior.hpp  |   24 +++++
+ menu/booleanSwitchBehaviour.cpp |   34 ------
+ menu/booleanSwitchBehaviour.hpp |   24 -----
+ menu/enumBehavior.cpp           |   49 +++++++++
+ menu/enumBehavior.hpp           |   32 ++++++
+ menu/enumBehaviour.cpp          |   49 ---------
+ menu/enumBehaviour.hpp          |   32 ------
+ menu/hiddenMenu.cpp             |   86 +++++++++++++++
+ menu/hiddenMenu.hpp             |   31 ++++++
+ menu/integerBehavior.cpp        |   57 ++++++++++
+ menu/integerBehavior.hpp        |   32 ++++++
+ menu/integerBehaviour.cpp       |   57 ----------
+ menu/integerBehaviour.hpp       |   32 ------
+ menu/itemBehavior.cpp           |    3 +
+ menu/itemBehavior.hpp           |   23 ++++
+ menu/itemBehaviour.cpp          |    3 -
+ menu/itemBehaviour.hpp          |   23 ----
+ menu/menu.cpp                   |   12 +--
+ menu/menu.hpp                   |   16 +--
+ menu/menuItem.cpp               |    2 +-
+ menu/menuItem.hpp               |    8 +-
+ menu/timeBehavior.cpp           |   14 +++
+ menu/timeBehavior.hpp           |   20 ++++
+ menu/timeBehaviour.cpp          |   14 ---
+ menu/timeBehaviour.hpp          |   20 ----
+ ninjarope.cpp                   |    2 +-
+ nobject.cpp                     |   16 +--
+ nobject.hpp                     |    6 +-
+ replay.cpp                      |    4 +-
+ settings.cpp                    |    4 +-
+ settings.hpp                    |   16 ++-
+ version.hpp                     |    2 +-
+ viewport.cpp                    |   12 +--
+ weapon.cpp                      |    2 +-
+ weapon.hpp                      |    2 +-
+ weapsel.cpp                     |    2 +-
+ worm.cpp                        |    4 +-
+ worm.hpp                        |   41 ++++---
+ 59 files changed, 799 insertions(+), 492 deletions(-)
+
+commit af6e209e601fa1733c09dfcff27da0de865311a9
+Author: basro <>
+Date:   Sun Jan 17 14:54:29 2010 -0300
+
+    Added blit.hpp header. Moved blitting functions into it.
+
+ gfx.hpp      |   39 ++++++++-------------------------------
+ gfx/blit.hpp |   38 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 46 insertions(+), 31 deletions(-)
+
+commit e273e752102e84066a636168ac1cc3c12b46de62
+Author: basro <>
+Date:   Sun Jan 17 14:44:58 2010 -0300
+
+    GFX and Controller code refactor.
+    Moved gfx related stuff into gfx/
+    Split controller.hpp into multiple files and placed them in controller/.
+    
+    --HG--
+    rename : controller.hpp => controller/controller.hpp
+    rename : blit.cpp => gfx/blit.cpp
+    rename : colour.hpp => gfx/colour.hpp
+    rename : font.cpp => gfx/font.cpp
+    rename : font.hpp => gfx/font.hpp
+    rename : palette.cpp => gfx/palette.cpp
+    rename : palette.hpp => gfx/palette.hpp
+    rename : sprite.hpp => gfx/sprite.hpp
+
+ blit.cpp                        |  481 ----------------------------------
+ bobject.cpp                     |    2 +-
+ colour.hpp                      |    6 -
+ common.hpp                      |    6 +-
+ controller.hpp                  |  550 ---------------------------------------
+ controller/commonController.cpp |   46 ++++
+ controller/commonController.hpp |   16 ++
+ controller/controller.hpp       |   47 ++++
+ controller/localController.cpp  |  261 +++++++++++++++++++
+ controller/localController.hpp  |   46 ++++
+ controller/replayController.cpp |  168 ++++++++++++
+ controller/replayController.hpp |   42 +++
+ font.cpp                        |  125 ---------
+ font.hpp                        |   40 ---
+ gfx.cpp                         |  109 +-------
+ gfx.hpp                         |   29 +--
+ gfx/blit.cpp                    |  479 ++++++++++++++++++++++++++++++++++
+ gfx/colour.hpp                  |    6 +
+ gfx/font.cpp                    |  125 +++++++++
+ gfx/font.hpp                    |   40 +++
+ gfx/palette.cpp                 |  115 ++++++++
+ gfx/palette.hpp                 |   54 ++++
+ gfx/sprite.hpp                  |   26 ++
+ level.cpp                       |    2 +-
+ level.hpp                       |    2 +-
+ menu/menu.hpp                   |    2 +-
+ menu/menuItem.hpp               |    2 +-
+ ninjarope.cpp                   |    2 +-
+ palette.cpp                     |  115 --------
+ palette.hpp                     |   54 ----
+ sprite.hpp                      |   26 --
+ 31 files changed, 1489 insertions(+), 1535 deletions(-)
+
+commit 55f222f86b28c8bfb08f36c4fb40c2a076b4eafb
+Author: basro <>
+Date:   Sun Jan 17 14:41:58 2010 -0300
+
+    Changed exception to runtime_error.
+
+ filesystem.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 438474df2d3a1b4f24dbede39cfade5ee4a5ef14
+Author: basro <>
+Date:   Sat Jan 16 22:31:56 2010 -0300
+
+    Great start, forgot to add the files in the previous commit :)
+
+ menu/booleanSwitchBehaviour.cpp |   34 +++++++++++++++++++++++
+ menu/booleanSwitchBehaviour.hpp |   24 +++++++++++++++++
+ menu/enumBehaviour.cpp          |   49 +++++++++++++++++++++++++++++++++
+ menu/enumBehaviour.hpp          |   32 ++++++++++++++++++++++
+ menu/integerBehaviour.cpp       |   57 +++++++++++++++++++++++++++++++++++++++
+ menu/integerBehaviour.hpp       |   32 ++++++++++++++++++++++
+ menu/itemBehaviour.cpp          |    3 +++
+ menu/itemBehaviour.hpp          |   23 ++++++++++++++++
+ menu/menuItem.cpp               |   39 +++++++++++++++++++++++++++
+ menu/menuItem.hpp               |   35 ++++++++++++++++++++++++
+ menu/timeBehaviour.cpp          |   14 ++++++++++
+ menu/timeBehaviour.hpp          |   20 ++++++++++++++
+ 12 files changed, 362 insertions(+)
+
+commit 0c7a9ba3833b82de21a54cdcae710b09c9672428
+Author: basro <>
+Date:   Sat Jan 16 22:18:35 2010 -0300
+
+    Code refactor and changes to make the code compile with MinGW.
+    Changed game.settings->selectableWeapons into Settings::selectableWeapons in several files.
+    Split menu.hpp/.cpp into multiple files and placed them in a new subfolder named menu.
+    
+    --HG--
+    rename : menu.cpp => menu/menu.cpp
+    rename : menu.hpp => menu/menu.hpp
+
+ gfx.hpp       |    2 +-
+ menu.cpp      |  448 ---------------------------------------------------------
+ menu.hpp      |  265 ----------------------------------
+ menu/menu.cpp |  291 +++++++++++++++++++++++++++++++++++++
+ menu/menu.hpp |  155 ++++++++++++++++++++
+ weapsel.cpp   |   12 +-
+ weapsel.hpp   |    2 +-
+ worm.cpp      |    8 +-
+ 8 files changed, 458 insertions(+), 725 deletions(-)
+
+commit bee3493f70ce70c922fd7da34828b9a4c27f0f06
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Thu Aug 20 19:14:41 2009 +0200
+
+    Enlarged replay and profile menus, added added case-insensitive sorting to the replay, profile and level menus
+
+ font.cpp |    6 +++++
+ font.hpp |    4 +++-
+ gfx.cpp  |   76 ++++++++++++++++++++++++++++++++++++++++----------------------
+ text.cpp |   17 ++++++++++++++
+ text.hpp |    3 ++-
+ 5 files changed, 77 insertions(+), 29 deletions(-)
+
+commit 34b63963bf85ef434cfaa9ce71d1f26ddebfc7a8
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Thu Aug 20 18:39:09 2009 +0200
+
+    Fixed exception with slightly too large levels with powerlevel loading enabled
+
+ level.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b4f824546465d6ae172a0c42dc5df7d4b190abde
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Thu Aug 20 18:14:23 2009 +0200
+
+    Forgot to remove test code
+
+ sfx.cpp |    2 --
+ 1 file changed, 2 deletions(-)
+
+commit 04aae51280ef07acd08cf5534c2eb011a2f91ddc
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Thu Aug 20 18:11:24 2009 +0200
+
+    Fixed unavailable sound, added NDEBUG to Jamfile
+
+ Jamfile |    4 ++--
+ sfx.cpp |   36 ++++++++++++++++++++++++++----------
+ 2 files changed, 28 insertions(+), 12 deletions(-)
+
+commit 59a161796a2b817b00ab67462131cb1b65af837e
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Thu Aug 20 17:37:11 2009 +0200
+
+    Updated Jamfile
+
+ Jamfile |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit d2856ba2d44e8e156b03f78f325f1ff199b01d5d
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Tue Aug 18 21:59:20 2009 +0200
+
+    Fixed viewport status messages
+
+ blit.cpp       |   20 ++------------
+ font.cpp       |   80 +++++++++++++++++++++++++++-----------------------------
+ gfx/macros.hpp |   19 ++++++++++++++
+ 3 files changed, 59 insertions(+), 60 deletions(-)
+
+commit f5a433a05897ad59aefe285303f0c27f2bfd8208
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Tue Aug 18 21:36:58 2009 +0200
+
+    Fixed gcc warnings, fixed some graphics bugs when changing mode
+
+ .hgignore    |    4 +++-
+ Jamfile      |    9 ++++++---
+ common.cpp   |    4 ++--
+ font.cpp     |    2 +-
+ game.cpp     |    2 +-
+ game.hpp     |   19 ++++++++-----------
+ gfx.cpp      |   29 ++++++++---------------------
+ gfx.hpp      |    5 +++--
+ level.cpp    |    6 +++---
+ main.cpp     |   22 ++++++++++++----------
+ menu.cpp     |    2 +-
+ palette.cpp  |    2 +-
+ reader.hpp   |   31 +++++++++++++++++++------------
+ replay.cpp   |    8 ++++----
+ settings.cpp |    2 +-
+ settings.hpp |    2 +-
+ sfx.cpp      |   28 +++++++++++++++++++++++-----
+ sfx.hpp      |   12 +++++++++---
+ weapsel.cpp  |    2 --
+ worm.cpp     |    1 -
+ 20 files changed, 106 insertions(+), 86 deletions(-)
+
+commit 6c0dcb3cca43d9c8d8a84c7c0df6a4a84ac0c1fb
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Tue Aug 18 18:33:21 2009 +0200
+
+    Added .hgignore
+
+ .hgignore |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 819cff0554f02e4fc2611e2b930ccf8dc4343358
+Author: glip@glip-vm <glip@glip-vm>
+Date:   Tue Aug 18 07:54:46 2009 +0200
+
+    Fixes for gcc/linux
+
+ Jamfile      |   17 ++++++++++-------
+ console.cpp  |    4 ++--
+ gfx.cpp      |   19 ++++++++++---------
+ menu.hpp     |    2 +-
+ reader.hpp   |    4 ++--
+ settings.cpp |    4 ++--
+ settings.hpp |    3 ++-
+ sfx.hpp      |    3 ++-
+ text.hpp     |    3 ++-
+ worm.hpp     |    7 +++++--
+ 10 files changed, 38 insertions(+), 28 deletions(-)
+
+commit 4299c0ded83f6a47d5e0ae732144116feeca3236
+Author: Erik Lindroos <gliptic@gmail.com>
+Date:   Mon Aug 17 20:02:44 2009 +0200
+
+    Minor fix of replay ending
+
+ controller.hpp |    8 ++++----
+ gfx.cpp        |    2 +-
+ weapsel.cpp    |   28 +++++++++++-----------------
+ 3 files changed, 16 insertions(+), 22 deletions(-)
+
+commit 14abe747e930c38204543878bc3eb8307162f1ac
+Merge: c7694ee d2ffc26
+Author: glip@eee <glip@eee>
+Date:   Sat Aug 15 22:10:39 2009 +0200
+
+    Merged in cleanup branch
+
+commit d2ffc26ed8f838f240d3cf60ab554d4988bb9582
+Author: glip@eee <glip@eee>
+Date:   Sat Aug 15 22:00:00 2009 +0200
+
+    Tweaks with replays mostly
+    
+    --HG--
+    branch : cleanup
+
+ _build/liero.vcproj |    4 +
+ controller.hpp      |  104 +++++++++----
+ fastObjectList.hpp  |   31 ++--
+ font.cpp            |    4 +-
+ game.cpp            |   23 ++-
+ game.hpp            |    6 +-
+ gfx.cpp             |  424 ++++++++++++++++++++++++++++++++++-----------------
+ gfx.hpp             |    5 +-
+ gfx/macros.hpp      |    6 +-
+ main.cpp            |    2 +
+ palette.cpp         |    1 +
+ replay.cpp          |   19 ++-
+ replay.hpp          |   10 +-
+ settings.cpp        |    2 +
+ settings.hpp        |   41 ++++-
+ text.cpp            |   17 +++
+ text.hpp            |    1 +
+ version.hpp         |    6 +
+ viewport.cpp        |    8 +-
+ viewport.hpp        |    2 +-
+ weapsel.cpp         |   13 ++
+ weapsel.hpp         |    4 +
+ worm.cpp            |   52 ++++---
+ worm.hpp            |   34 ++++-
+ 24 files changed, 597 insertions(+), 222 deletions(-)
+
+commit 37c2a9ed0362b0ab930061b3aacbdea22aa21937
+Author: glip@desktop <glip@desktop>
+Date:   Wed Aug 12 02:26:43 2009 +0200
+
+    Generalized FILTER_X macro
+    
+    --HG--
+    branch : cleanup
+
+ gfx.cpp        |    4 +-
+ gfx/macros.hpp |  139 ++++++++++++++++++++++++++++----------------------------
+ 2 files changed, 72 insertions(+), 71 deletions(-)
+
+commit 76b12f24e5fdd8d03d925f168409c9471b747812
+Author: glip@desktop <glip@desktop>
+Date:   Tue Aug 11 23:03:17 2009 +0200
+
+    Minor fixes
+    
+    --HG--
+    branch : cleanup
+
+ controller.hpp |    2 +-
+ gfx.cpp        |  113 +++++++++++++++++++++++++++++++++++++++++++-------------
+ main.cpp       |   32 ++--------------
+ menu.hpp       |    5 +++
+ 4 files changed, 98 insertions(+), 54 deletions(-)
+
+commit 9140d1e91fb31af1e191f6bbbe4225c3e2acce95
+Author: glip@desktop <glip@desktop>
+Date:   Tue Aug 11 20:06:26 2009 +0200
+
+    Forgot to add fastObjectList.hpp
+    
+    --HG--
+    branch : cleanup
+
+ fastObjectList.hpp |  113 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 113 insertions(+)
+
+commit 9992608823d819c602fe80563519d63379465d5e
+Author: glip@desktop <glip@desktop>
+Date:   Tue Aug 11 20:01:48 2009 +0200
+
+    Lots of changes, fixes..
+    
+    --HG--
+    branch : cleanup
+
+ _build/liero.vcproj |   12 +
+ bobject.cpp         |   12 +-
+ bobject.hpp         |    7 +-
+ common.hpp          |    2 -
+ constants.cpp       |   35 +
+ constants.hpp       |    9 +
+ controller.hpp      |  319 +++++++--
+ filesystem.cpp      |   88 ++-
+ filesystem.hpp      |    6 +
+ font.cpp            |   16 +-
+ font.hpp            |    6 +-
+ game.cpp            |   90 +--
+ game.hpp            |   10 +-
+ gfx.cpp             | 1876 ++++++++++++++++++++++++++++++---------------------
+ gfx.hpp             |   85 ++-
+ gfx/macros.hpp      |  155 +++++
+ level.cpp           |    2 +-
+ main.cpp            |   41 +-
+ menu.cpp            |  406 ++++++++++-
+ menu.hpp            |  220 +++++-
+ nobject.cpp         |   11 +-
+ palette.cpp         |   35 +-
+ palette.hpp         |    4 +-
+ rand.hpp            |    8 +-
+ replay.cpp          |  788 ++++++++++------------
+ replay.hpp          |   68 +-
+ settings.cpp        |   64 +-
+ settings.hpp        |  233 ++++++-
+ sfx.cpp             |    8 +-
+ sfx.hpp             |   34 +-
+ sobject.cpp         |    9 +-
+ viewport.cpp        |   40 +-
+ weapon.cpp          |    9 +-
+ weapsel.cpp         |   85 ++-
+ weapsel.hpp         |    5 +-
+ worm.cpp            |  310 ++++++---
+ worm.hpp            |  127 +++-
+ 37 files changed, 3534 insertions(+), 1701 deletions(-)
+
+commit 2b4db15ad94ef1eb13fc864ef189617ac0753f03
+Author: glip@eee.lan <glip@eee.lan>
+Date:   Mon Aug 3 17:39:01 2009 +0200
+
+    Working replays, adaptive graphics size, exact liero object list behavior
+    
+    --HG--
+    branch : cleanup
+
+ _build/liero.sln    |   20 +-
+ _build/liero.vcproj |   14 +-
+ bobject.hpp         |    3 +-
+ bonus.hpp           |    3 +-
+ controller.hpp      |   11 +-
+ exactObjectList.hpp |  180 +++++++++++++++++
+ game.cpp            |   57 ++----
+ game.hpp            |   10 +-
+ gfx.cpp             |  234 ++++++++++++++--------
+ gfx.hpp             |    3 +-
+ math.cpp            |    6 +-
+ menu.cpp            |    2 +-
+ menu.hpp            |    6 +-
+ nobject.cpp         |   28 ++-
+ nobject.hpp         |    3 +-
+ objectList.hpp      |   36 ++--
+ replay.cpp          |  545 ++++++++++++++++++++++++++++++++++++++++-----------
+ replay.hpp          |   35 ++--
+ sobject.cpp         |   15 +-
+ sobject.hpp         |    4 +-
+ viewport.cpp        |   10 +-
+ viewport.hpp        |   12 +-
+ weapon.cpp          |   37 +++-
+ weapon.hpp          |    9 +-
+ weapsel.cpp         |    6 +-
+ worm.cpp            |   96 ++++-----
+ worm.hpp            |   13 +-
+ 27 files changed, 1026 insertions(+), 372 deletions(-)
+
+commit 6655738dfb4ffae065e196b34ba922acc53ef865
+Author: glip@eee <glip@eee>
+Date:   Sun Feb 15 18:11:35 2009 +0200
+
+    Some broken changes.
+    
+    --HG--
+    branch : cleanup
+
+ replay.cpp |  163 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ worm.hpp   |   18 +++----
+ 2 files changed, 169 insertions(+), 12 deletions(-)
+
+commit 42424c5dc278fbebd50a2764a98ce05c674cd351
+Author: glip@desktop <glip@desktop>
+Date:   Thu Feb 12 23:20:24 2009 +0100
+
+    Initial hardcoded replay support. Does not work reliably.
+    
+    --HG--
+    branch : cleanup
+
+ _build/liero.vcproj |   13 ++-
+ controller.hpp      |  164 +++++++++++++++++++++++++++++++-
+ game.cpp            |   50 +++++-----
+ game.hpp            |    1 +
+ gfx.cpp             |    6 ++
+ level.cpp           |   11 ++-
+ level.hpp           |    2 +
+ replay.cpp          |  261 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ replay.hpp          |   59 ++++++++++++
+ weapsel.cpp         |   17 +---
+ worm.cpp            |   16 ++++
+ worm.hpp            |   54 ++++++++++-
+ 12 files changed, 602 insertions(+), 52 deletions(-)
+
+commit 863ec948dd08ab62dd2953d8483d3d8adad6f5b8
+Author: glip@desktop <glip@desktop>
+Date:   Mon Feb 9 21:48:43 2009 +0100
+
+    Moved project files into _build.
+    
+    --HG--
+    branch : cleanup
+    rename : liero.sln => _build/liero.sln
+    rename : liero.vcproj => _build/liero.vcproj
+
+ _build/liero.sln    |   47 ++++++
+ _build/liero.vcproj |  440 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ liero.sln           |   47 ------
+ liero.vcproj        |  444 ---------------------------------------------------
+ 4 files changed, 487 insertions(+), 491 deletions(-)
+
+commit bf94169db2aa07a9cee9bba7342c1b69c71ac9ea
+Author: glip@desktop <glip@desktop>
+Date:   Mon Feb 9 20:17:01 2009 +0100
+
+    Made Game a truly isolated class. Added Controller class that controls a game.
+    
+    --HG--
+    branch : cleanup
+
+ blit.cpp       |   92 +++----
+ bobject.cpp    |   14 +-
+ bobject.hpp    |    6 +-
+ bonus.cpp      |   14 +-
+ bonus.hpp      |    4 +-
+ common.cpp     |  458 ++++++++++++++++++++++++++++++++
+ common.hpp     |  164 ++++++++++++
+ constants.cpp  |    7 +-
+ constants.hpp  |    8 +-
+ controller.hpp |  174 +++++++++++++
+ game.cpp       |  792 +++++++++++++++++---------------------------------------
+ game.hpp       |  143 ++--------
+ gfx.cpp        |  652 +++++++++++++++++++++-------------------------
+ gfx.hpp        |  123 +++------
+ keys.hpp       |    2 +
+ level.cpp      |  148 ++++++-----
+ level.hpp      |   35 ++-
+ liero.sln      |   28 ++
+ liero.vcproj   |   30 ++-
+ main.cpp       |   88 ++++---
+ math.cpp       |    1 +
+ menu.cpp       |   16 +-
+ menu.hpp       |    6 +-
+ ninjarope.cpp  |   22 +-
+ nobject.cpp    |   42 +--
+ nobject.hpp    |    7 +-
+ palette.cpp    |  109 ++++++++
+ palette.hpp    |   52 ++++
+ settings.cpp   |   71 +++--
+ settings.hpp   |    5 +-
+ sfx.hpp        |   51 ++++
+ sobject.cpp    |   40 +--
+ sobject.hpp    |    5 +-
+ sprite.hpp     |   26 ++
+ viewport.cpp   |  156 +++++------
+ viewport.hpp   |    8 +-
+ weapon.cpp     |   56 ++--
+ weapon.hpp     |    7 +-
+ weapsel.cpp    |  453 +++++++++++++-------------------
+ weapsel.hpp    |   24 +-
+ worm.cpp       |  271 ++++++++++---------
+ worm.hpp       |   49 +---
+ 42 files changed, 2523 insertions(+), 1936 deletions(-)
+
+commit e4b21bb7e803c624144962726fdd46246457e366
+Author: glip@desktop <glip@desktop>
+Date:   Fri Jan 30 20:23:39 2009 +0100
+
+    Decoupled worm controls from input source.
+    
+    --HG--
+    branch : cleanup
+
+ game.cpp     |  238 +++++++++++++++++++++++++++++++++-------------------------
+ game.hpp     |    9 ++-
+ gfx.cpp      |    6 ++
+ liero.vcproj |    2 +-
+ main.cpp     |    1 +
+ viewport.cpp |    4 +-
+ weapon.cpp   |    6 +-
+ weapsel.cpp  |   14 ++--
+ worm.cpp     |  110 +++++++++++++--------------
+ worm.hpp     |   62 +++++++++++++--
+ 10 files changed, 276 insertions(+), 176 deletions(-)
+
+commit c7694eecacf1ada41f6a21109e80dc8031d9f4cc
+Author: glip@desktop <glip@desktop>
+Date:   Fri Jan 30 18:52:35 2009 +0100
+
+    Liero 1.34
+
+ Jamfile        |   16 +
+ blit.cpp       |  497 ++++++++++++++++++
+ bobject.cpp    |   60 +++
+ bobject.hpp    |   18 +
+ bonus.cpp      |   35 ++
+ bonus.hpp      |   24 +
+ colour.hpp     |    6 +
+ console.cpp    |  227 +++++++++
+ console.hpp    |   38 ++
+ constants.cpp  |  318 ++++++++++++
+ constants.hpp  |  148 ++++++
+ filesystem.cpp |  312 ++++++++++++
+ filesystem.hpp |   72 +++
+ font.cpp       |  111 ++++
+ font.hpp       |   38 ++
+ game.cpp       |  845 +++++++++++++++++++++++++++++++
+ game.hpp       |  182 +++++++
+ gfx.cpp        | 1539 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gfx.hpp        |  268 ++++++++++
+ keys.cpp       |  305 +++++++++++
+ keys.hpp       |   15 +
+ level.cpp      |  251 +++++++++
+ level.hpp      |   50 ++
+ lfs.hpp        |   78 +++
+ liero.sln      |   19 +
+ liero.vcproj   |  418 +++++++++++++++
+ main.cpp       |  192 +++++++
+ math.cpp       |   24 +
+ math.hpp       |   28 ++
+ menu.cpp       |   88 ++++
+ menu.hpp       |   48 ++
+ ninjarope.cpp  |  119 +++++
+ nobject.cpp    |  356 +++++++++++++
+ nobject.hpp    |   58 +++
+ objectList.hpp |  163 ++++++
+ platform.hpp   |   10 +
+ rand.hpp       |   48 ++
+ reader.cpp     |  104 ++++
+ reader.hpp     |  114 +++++
+ rect.hpp       |  208 ++++++++
+ sdlmain.cpp    |   27 +
+ settings.cpp   |  284 +++++++++++
+ settings.hpp   |   49 ++
+ sfx.cpp        |  120 +++++
+ sfx.hpp        |   35 ++
+ sobject.cpp    |  263 ++++++++++
+ sobject.hpp    |   40 ++
+ sys.cpp        |   19 +
+ sys.hpp        |   15 +
+ text.cpp       |   56 +++
+ text.hpp       |   34 ++
+ viewport.cpp   |  651 ++++++++++++++++++++++++
+ viewport.hpp   |   70 +++
+ weapon.cpp     |  418 +++++++++++++++
+ weapon.hpp     |   90 ++++
+ weapsel.cpp    |  612 ++++++++++++++++++++++
+ weapsel.hpp    |    6 +
+ worm.cpp       | 1396 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ worm.hpp       |  260 ++++++++++
+ 59 files changed, 11895 insertions(+)
