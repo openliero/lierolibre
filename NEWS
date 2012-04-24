@@ -2,6 +2,7 @@ lierolibre NEWS - History of user-visible changes.
 
 Version 0.2 - April 2012, by Martin Erik Werner
 
+* New dependency on boost_program_options
 * Better command-line handling
   + Generalised options
     - -f --file : input file
@@ -11,7 +12,12 @@ Version 0.2 - April 2012, by Martin Erik Werner
     - arg1 is auto-assigned to input file
     - arg2 is auto-assigned to output file
   + Several major bugs with command line handing fixed in the process
-  + New dependency on boost_program_options
+  + 3 modes for input file extensions, given parameter "path/something.ext":
+    - EXE/exe - load vars and data from given path
+    - cfg/txt - load vars and data from given path
+    - other   - load vars from ~/.lierolibre/liero.cfg if it exists,
+                else from path/liero.cfg, and load data from path.
+* Removal of non-free dtoa piece in gvl
 
 Version 0.1 - April 2012, by Martin Erik Werner
 
