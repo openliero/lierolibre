@@ -17,16 +17,14 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 	common = a_common;
 
 	if (getExtension(filePath) == "EXE" || getExtension(filePath) == "exe") {
-		setLieroEXE(filePath);
+		setLieroPath(filePath);
 		loadFromEXE(filePath);
 	} else if (getExtension(filePath) == "cfg" || getExtension(filePath) == "txt") {
-		// Force reading from given CFG
 		setLieroPath(filePath);
-		loadFromCFG(filePath);
+		loadFromCFG(filePath); // Force reading from given CFG
 	} else {
-		// $HOME CFG takes priority
 		setLieroPath(filePath);
-		loadFromCFG(lieroCFG);
+		loadFromCFG(lieroCFG); // $HOME CFG takes priority
 	}
 }
 
@@ -35,12 +33,11 @@ ConfigInit::ConfigInit(string filePath, string dirPath, gvl::shared_ptr<Common> 
 	common = a_common;
 
 	if (getExtension(filePath) == "EXE" || getExtension(filePath) == "exe") {
-		setLieroEXE(filePath);
 		setLieroPath(dirPath);
 		loadFromEXE(filePath);
 	} else {
 		// User provides file and dir/
-		// file must be intented as config
+		// file must be intented as config hence ignore cfg in $HOME
 		setLieroPath(dirPath);
 		loadFromCFG(filePath);
 	}
