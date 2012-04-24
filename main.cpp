@@ -161,6 +161,8 @@ try
 		fclose(f);
 	}
 
+	gfx.windowW = 800;
+	gfx.windowH = 500;
 	gfx.setVideoMode();
 	sfx.init();
 
