@@ -9,14 +9,16 @@ ArgParse::ArgParse(int argc, char* argv[])
 	// Declare the supported options.
 	desc.add_options()
 	("help,h", "produce help message")
-	("file,f", po::value<string>(), "read game variables from file")
-	("write,w", po::value<string>(), "write game variables to file")
 	("sdlvideo,v", po::value<string>(), "set the SDL_VIDEODRIVER environemtn variable")
+	("file,f", po::value<string>(), "read game variables from file")
+	("dir,d", po::value<string>(), "load game data from separate directory")
+	("write,w", po::value<string>(), "write game variables to file")
 	;
 
-	// First positional option is input file; second output file
+	// First positional option is input file
+	// second is data dir, third is output file
 	po::positional_options_description p;
-	p.add("file", 1).add("write", 1);
+	p.add("file", 1).add("dir", 1).add("write", 1);
 
 	// Export to "vm"
 	po::store(po::command_line_parser(argc, argv)
