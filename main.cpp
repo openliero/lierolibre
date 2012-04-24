@@ -61,6 +61,11 @@ try
 		SDL_putenv(sdlvd);
 	}
 
+	if(argParse.vm.count("help")) {
+		std::cout << argParse.desc << std::endl;
+		return 0;
+	}
+
 	if(argParse.vm.count("file"))
 		inputFile = argParse.vm["file"].as<std::string>();
 
@@ -127,23 +132,21 @@ try
 
 	gfx.settingsFile = "LIERO";
 
-	if(!fileExists(lieroOPT)) // NOTE: Liero uses LIERO.OPT to store the name of the currently active settings file
-	{
+	// NOTE: Liero uses LIERO.OPT to store the name of the currently active settings file
+	if (!fileExists(lieroOPT)) {
 		gfx.settings.reset(new Settings);
 		gfx.saveSettings();
-	}
-	else
-	{
+	} else {
 		FILE* f = fopen(lieroOPT.c_str(), "rb");
 		std::size_t len = fileLength(f);
-		if(len > 255) len = 255;
+		if (len > 255)
+			len = 255;
 		char buf[256];
 		fread(buf, 1, len, f);
 		gfx.settingsFile.assign(buf, len);
 
 		rtrim(gfx.settingsFile);
-		if(!gfx.loadSettings())
-		{
+		if (!gfx.loadSettings()) {
 			gfx.settingsFile = "LIERO";
 			gfx.settings.reset(new Settings);
 			gfx.saveSettings();
