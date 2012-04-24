@@ -187,11 +187,13 @@ lierolibre_SOURCES = \
 	worm.hpp \
 	\
 	\
+	argParse.cpp \
 	configHelper.cpp \
 	configInit.cpp \
 	dataPath.cpp \
 	to_string.cpp \
 	\
+	argParse.hpp \
 	configHelper.hpp \
 	configInit.hpp \
 	dataPath.hpp \
