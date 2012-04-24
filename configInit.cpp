@@ -16,10 +16,15 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 {
 	common = a_common;
 
-	if(getExtension(filePath) == "EXE" || getExtension(filePath) == "exe") {
+	if (getExtension(filePath) == "EXE" || getExtension(filePath) == "exe") {
 		setLieroEXE(filePath);
 		loadFromEXE(filePath);
+	} else if (getExtension(filePath) == "cfg" || getExtension(filePath) == "txt") {
+		// Force reading from given CFG
+		setLieroCFG(filePath);
+		loadFromCFG(lieroCFG);
 	} else {
+		// $HOME CFG takes priority
 		setLieroPath(filePath);
 		loadFromCFG(lieroCFG);
 	}
@@ -82,14 +87,13 @@ void ConfigInit::loadFromCFG(string filePath)
 	common->loadOthersFromCFG(filePath);
 }
 
-
 void ConfigInit::write(string filePath)
 {
 	Console::writeLine("");
 	Console::writeLine("Saving variables to file '" + filePath +"'");
 
 	// Create empty if nonexistant
-	if(!fileExists(filePath)) {
+	if (!fileExists(filePath)) {
 		ofstream f(filePath.c_str());
 		f << flush;
 		f.close();
