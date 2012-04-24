@@ -2,6 +2,7 @@
 #define ARG_PARSE_HPP
 
 #include <boost/program_options.hpp>
+#include "config.h" // Sets Dynamic boost linking
 
 class ArgParse
 {
