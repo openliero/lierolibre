@@ -4,7 +4,7 @@ C++FLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 CFLAGS = -Wall -I$(TOP) -I/usr/include -DNDEBUG -g ;
 OPTIM = -O3 ;
 LINK = "g++" ;
-LINKLIBS on lierolibre$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ ;
+LINKLIBS on lierolibre$(SUFEXE) = -lSDL -lSDL_mixer -lrt -lconfig++ -lboost_program_options ;
 
 Main lierolibre : bobject.cpp bonus.cpp common.cpp console.cpp
 	constants.cpp filesystem.cpp game.cpp
@@ -19,6 +19,7 @@ Main lierolibre : bobject.cpp bonus.cpp common.cpp console.cpp
 	to_string.cpp
 	configHelper.cpp
 	configInit.cpp
+	argParse.cpp
 
 	controller/commonController.cpp
 	controller/localController.cpp

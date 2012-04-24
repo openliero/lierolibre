@@ -32,6 +32,7 @@
 #include <gvl/support/log.hpp> // TEMP
 
 #include "configInit.hpp"
+#include "argParse.hpp"
 
 //#undef main
 
@@ -46,47 +47,26 @@ try
 
 	std::string inputFile = "./liero.cfg";
 	std::string outputFile = "new_liero.cfg";
-	bool inFileSet = false;
-	bool writeFlag = false;
 	bool cfgWriteSet = false;
 	gvl::shared_ptr<Common> common(new Common);
 	gfx.common = common;
 
-	for(int i = 1; i < argc; ++i)
-	{
-		if(argv[i][0] == '-')
-		{
-			writeFlag = false;
+	ArgParse argParse(argc, argv);
 
-			switch(argv[i][1])
-			{
-			case 'v':
-				// SDL_putenv seems to take char* in linux, STOOPID
-				SDL_putenv(const_cast<char*>((std::string("SDL_VIDEODRIVER=") + &argv[i][2]).c_str()));
-			break;
-			/*
-			case 'r':
-				common->loadPowerlevelPalette = false;
-			break;*/
+	if(argParse.vm.count("sdlvideo")) {
+		// SDL_putenv seems to take char* in linux, STOOPID
+		std::string s = "SDL_VIDEODRIVER=" + argParse.vm["sdlvideo"].as<std::string>();
+		char * sdlvd = new char[s.length()+1];
+		strcpy(sdlvd, s.c_str());
+		SDL_putenv(sdlvd);
+	}
 
-			break;
+	if(argParse.vm.count("file"))
+		inputFile = argParse.vm["file"].as<std::string>();
 
-			case 'w':
-				writeFlag = true;
-			break;
-			}
-		}
-		else if(writeFlag)
-		{
-			outputFile = argv[i];
-			writeFlag = false;
-			cfgWriteSet = true;
-		}
-		else if(!inFileSet)
-		{
-			inputFile = argv[i];
-			inFileSet = true;
-		}
+	if(argParse.vm.count("write")) {
+		outputFile = argParse.vm["write"].as<std::string>();
+		cfgWriteSet = true;
 	}
 
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
