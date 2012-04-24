@@ -409,7 +409,6 @@ EXTRA_DIST = \
 	gvl/io/stream.cpp \
 	gvl/io/tests/bitstream.cpp \
 	gvl/io/tests/stream.cpp \
-	gvl/math/dtoa.c \
 	gvl/math/ieee.cpp \
 	gvl/math/tests/reproducible_floats.cpp \
 	gvl/math/tt800.cpp \
@@ -433,21 +432,7 @@ EXTRA_DIST = \
 	gvl/tut/quickcheck/context.cpp \
 	gvl/uthread/coro.cpp \
 	gvl/uthread/test.cpp \
-	gvl/uthread/uthread.cpp \
-	gvl/zlib/adler32.c \
-	gvl/zlib/compress.c \
-	gvl/zlib/crc32.c \
-	gvl/zlib/deflate.c \
-	gvl/zlib/example.c \
-	gvl/zlib/gzio.c \
-	gvl/zlib/infback.c \
-	gvl/zlib/inffast.c \
-	gvl/zlib/inflate.c \
-	gvl/zlib/inftrees.c \
-	gvl/zlib/minigzip.c \
-	gvl/zlib/trees.c \
-	gvl/zlib/uncompr.c \
-	gvl/zlib/zutil.c \
+	gvl/uthread/uthread.cpp
 	\
 	gvl/containers/accurate_rectangle_packing.hpp \
 	gvl/containers/avl_tree.hpp \
@@ -504,7 +489,6 @@ EXTRA_DIST = \
 	gvl/linked_hash_set.hpp \
 	gvl/list.hpp \
 	gvl/math/cmwc.hpp \
-	gvl/math/dtoa.hpp \
 	gvl/math/float.hpp \
 	gvl/math/ieee.hpp \
 	gvl/math/math.hpp \
@@ -576,18 +560,7 @@ EXTRA_DIST = \
 	gvl/tut/tut_restartable.hpp \
 	gvl/uthread/coro.hpp \
 	gvl/uthread/uthread.hpp \
-	gvl/uthread/uthread_config.hpp \
-	gvl/zlib/crc32.h \
-	gvl/zlib/deflate.h \
-	gvl/zlib/inffast.h \
-	gvl/zlib/inffixed.h \
-	gvl/zlib/inflate.h \
-	gvl/zlib/inftrees.h \
-	gvl/zlib/trees.h \
-	gvl/zlib/zconf.h \
-	gvl/zlib/zconf.in.h \
-	gvl/zlib/zlib.h \
-	gvl/zlib/zutil.h
+	gvl/uthread/uthread_config.hpp
 
 $(nodist_bin_SCRIPTS):
 	install -d scripts/
