@@ -21,12 +21,28 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 		loadFromEXE(filePath);
 	} else if (getExtension(filePath) == "cfg" || getExtension(filePath) == "txt") {
 		// Force reading from given CFG
-		setLieroCFG(filePath);
-		loadFromCFG(lieroCFG);
+		setLieroPath(filePath);
+		loadFromCFG(filePath);
 	} else {
 		// $HOME CFG takes priority
 		setLieroPath(filePath);
 		loadFromCFG(lieroCFG);
+	}
+}
+
+ConfigInit::ConfigInit(string filePath, string dirPath, gvl::shared_ptr<Common> a_common)
+{
+	common = a_common;
+
+	if (getExtension(filePath) == "EXE" || getExtension(filePath) == "exe") {
+		setLieroEXE(filePath);
+		setLieroPath(dirPath);
+		loadFromEXE(filePath);
+	} else {
+		// User provides file and dir/
+		// file must be intented as config
+		setLieroPath(dirPath);
+		loadFromCFG(filePath);
 	}
 }
 
