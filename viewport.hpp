@@ -26,13 +26,13 @@ struct Viewport
 		y = 0;
 		shake = 0;
 	}
-	
+
 	Viewport(Game& game)
 	: game(game)
 	{
-		
+
 	}
-	
+
 	int x, y;
 	int shake;
 	int maxX, maxY;
@@ -44,13 +44,13 @@ struct Viewport
 	Rect rect;
 	Game& game;
 
-	
+
 	void setCenter(int x, int y)
 	{
 		this->x = x - centerX;
 		this->y = y - centerY;
 	}
-	
+
 	void scrollTo(int destX, int destY, int iter)
 	{
 		for(int c = 0; c < iter; c++)
@@ -62,8 +62,8 @@ struct Viewport
 			else if(y > destY - centerY) --y;
 		}
 	}
-	
-	
+
+
 	void draw(bool isReplay);
 	void process();
 

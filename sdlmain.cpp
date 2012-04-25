@@ -16,7 +16,7 @@ int gameEntry(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
 	SDL_SetModuleHandle(GetModuleHandle(NULL));
-	
+
 	return gameEntry(argc, argv);
 }
 #else

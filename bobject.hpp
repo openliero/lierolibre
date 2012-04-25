@@ -11,7 +11,7 @@ struct Game;
 struct BObject // : ExactObjectListBase
 {
 	bool process(Game& game);
-	
+
 	fixed x, y;
 	fixed velX, velY;
 	int color;

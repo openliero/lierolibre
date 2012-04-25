@@ -41,14 +41,14 @@ struct NObjectType
 	int leaveObjDelay;
 	int timeToExplo;
 	int timeToExploV;
-	
+
 	int id;
 };
 
 struct NObject : ExactObjectListBase
 {
 	void process(Game& game);
-	
+
 	fixed x, y;
 	fixed velX, velY;
 	int timeLeft;

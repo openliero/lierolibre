@@ -15,13 +15,13 @@ struct IntegerBehavior : ItemBehavior
 	, allowEntry(true)
 	{
 	}
-	
+
 	bool onLeftRight(Menu& menu, int item, int dir);
 	int onEnter(Menu& menu, int item);
 	void onUpdate(Menu& menu, int item);
-	
-	
-	
+
+
+
 	Common& common;
 	int& v;
 	int min, max, step;

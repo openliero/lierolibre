@@ -16,35 +16,35 @@ struct Game;
 
 struct GameSerializationContext : gvl::serialization_context<GameSerializationContext>
 {
-	
-	
+
+
 	GameSerializationContext()
 	: game(0)
 	, nextWormId(0)
 	, replayVersion(myGameVersion)
 	{
 	}
-	
+
 	struct WormData
 	{
 		WormData()
 		: settingsExpired(true)
 		{
 		}
-		
+
 		gvl::gash::value_type lastSettingsHash;
 		bool settingsExpired;
 	};
-	
+
 	int version()
 	{
 		return replayVersion;
 	}
-	
+
 	typedef std::map<int, Worm*> IdToWormMap;
 	typedef std::map<Worm*, WormData> WormDataMap;
-	
-	
+
+
 	Game* game;
 	WormDataMap wormData;
 	IdToWormMap idToWorm;
@@ -54,8 +54,8 @@ struct GameSerializationContext : gvl::serialization_context<GameSerializationCo
 
 struct Replay
 {
-	
-	
+
+
 	Replay()
 	{
 	}
@@ -63,24 +63,24 @@ struct Replay
 	virtual void unfocus() = 0;
 	virtual void focus() = 0;
 	*/
-	
+
 	GameSerializationContext context;
-	
+
 };
 
 struct ReplayWriter : Replay
 {
 	ReplayWriter(gvl::stream_ptr str_init);
 	~ReplayWriter();
-	
+
 	void unfocus();
 	void focus();
-	
+
 	gvl::filter_ptr str;
 	gvl::octet_stream_writer writer;
 	gvl::gash::value_type lastSettingsHash;
 	bool settingsExpired;
-	
+
 	void beginRecord(Game& game);
 	void recordFrame();
 private:
@@ -90,20 +90,20 @@ private:
 struct ReplayReader : Replay
 {
 	ReplayReader(gvl::stream_ptr str_init);
-	
+
 	void unfocus()
 	{
 		// Nothing
 	}
-	
+
 	void focus()
 	{
 		// Nothing
 	}
-	
+
 	std::auto_ptr<Game> beginPlayback(gvl::shared_ptr<Common> common);
 	bool playbackFrame();
-	
+
 	gvl::filter_ptr str;
 	gvl::octet_stream_reader reader;
 };

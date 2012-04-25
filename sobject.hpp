@@ -11,7 +11,7 @@ struct Game;
 struct SObjectType
 {
 	void create(Game& game, int x, int y, Worm* owner);
-	
+
 	int startSound;
 	int numSounds;
 	int animDelay;
@@ -24,14 +24,14 @@ struct SObjectType
 	int shake;
 	int flash;
 	int dirtEffect;
-	
+
 	int id;
 };
 
 struct SObject : ExactObjectListBase
 {
 	void process(Game& game);
-	
+
 	fixed x, y;
 	int id; // type
 	int curFrame;

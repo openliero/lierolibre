@@ -30,25 +30,25 @@ void dir_itr_increment( dir_itr_imp_ptr & m_imp );
 struct DirectoryIterator
 {
 	dir_itr_imp_ptr m_imp;
-	
+
 	DirectoryIterator(std::string const& dir);
 	~DirectoryIterator();
-	
+
 	operator void*()
 	{
 		return m_imp.get();
 	}
-	
+
 	std::string const& operator*() const
 	{
 		return dir_itr_dereference( m_imp );
 	}
-	
+
 	std::string const& alt() const
 	{
 		return dir_itr_alt_dereference( m_imp );
 	}
-	
+
 	void operator++()
 	{
 		dir_itr_increment(m_imp);
@@ -61,17 +61,17 @@ struct ScopedFile
 	: f(f)
 	{
 	}
-	
+
 	~ScopedFile()
 	{
 		if(f) fclose(f);
 	}
-	
+
 	operator FILE*()
 	{
 		return f;
 	}
-	
+
 	FILE* f;
 };
 

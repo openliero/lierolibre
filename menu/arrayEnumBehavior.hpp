@@ -16,14 +16,14 @@ struct ArrayEnumBehavior : EnumBehavior
 	, arr(arr)
 	{
 	}
-		
+
 	void onUpdate(Menu& menu, int item)
 	{
 		MenuItem& i = menu.items[item];
 		i.value = arr[v];
 		i.hasValue = true;
 	}
-	
+
 	std::string const* arr;
 };
 

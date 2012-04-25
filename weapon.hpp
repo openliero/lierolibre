@@ -20,7 +20,7 @@ struct Weapon
 		STDType2,
 		STLaser
 	};
-	
+
 	void fire(Game& game, int angle, fixed velX, fixed velY, int speed, fixed x, fixed y, Worm* owner);
 
 	int detectDistance;
@@ -71,9 +71,9 @@ struct Weapon
 	int partTrailType;
 	int partTrailObj;
 	int partTrailDelay;
-	
+
 	int computedLoadingTime(Settings& settings);
-	
+
 	int id;
 	//int computedLoadingTime;
 	std::string name;
@@ -83,7 +83,7 @@ struct WObject : ExactObjectListBase
 {
 	void blowUpObject(Game& game, Worm* cause);
 	void process(Game& game);
-	
+
 	fixed x, y;
 	fixed velX, velY;
 	int id;

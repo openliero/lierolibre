@@ -24,12 +24,12 @@ struct LocalAttributes
 	{
 		setAttributes(attr);
 	}
-	
+
 	~LocalAttributes()
 	{
 		setAttributes(oldAttributes);
 	}
-	
+
 	int oldAttributes;
 };
 

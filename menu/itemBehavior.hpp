@@ -9,12 +9,12 @@ struct ItemBehavior
 	{
 		return true;
 	}
-	
+
 	virtual int onEnter(Menu& menu, int item)
 	{
 		return -1;
 	}
-	
+
 	virtual void onUpdate(Menu& menu, int item)
 	{
 	}

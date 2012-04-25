@@ -16,13 +16,13 @@ struct EnumBehavior : ItemBehavior
 	, brokenLeftRight(brokenLeftRight)
 	{
 	}
-	
+
 	bool onLeftRight(Menu& menu, int item, int dir);
 	int onEnter(Menu& menu, int item);
 	void onUpdate(Menu& menu, int item);
-	
+
 	void change(Menu& menu, int item, int dir);
-	
+
 	Common& common;
 	uint32_t& v;
 	uint32_t min, max;

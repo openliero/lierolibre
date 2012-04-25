@@ -19,7 +19,7 @@ void Sfx::init()
 #if !DISABLE_SOUND
 	if(initialized)
 		return;
-	
+
 	SDL_InitSubSystem(SDL_INIT_AUDIO);
 
 #if HQ_SOUND

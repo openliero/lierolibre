@@ -12,7 +12,7 @@ struct TimeBehavior : IntegerBehavior
 	: IntegerBehavior(common, v, min, max, step, percentage)
 	{
 	}
-	
+
 	void onUpdate(Menu& menu, int item);
 };
 

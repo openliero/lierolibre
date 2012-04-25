@@ -19,12 +19,12 @@ struct HiddenMenu : Menu
 		FullscreenH,
 		Depth32
 	};
-	
+
 	HiddenMenu(int x, int y)
 	: Menu(x, y)
 	{
 	}
-	
+
 	virtual ItemBehavior* getItemBehavior(Common& common, int item);
 };
 

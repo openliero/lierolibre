@@ -11,7 +11,7 @@ struct ExactObjectListBase : gvl::pairing_node<>
 	{
 		return index < b.index;
 	}
-	
+
 	int index;
 	bool used;
 };
@@ -29,7 +29,7 @@ struct ExactObjectList
 				++cur;
 			}
 		}
-		
+
 		iterator& operator++()
 		{
 			do
@@ -37,35 +37,35 @@ struct ExactObjectList
 				++cur;
 			}
 			while(!cur->used);
-			
+
 			return *this;
 		}
-		
+
 		T& operator*()
 		{
 			assert(cur->used);
 			return *cur;
 		}
-		
+
 		T* operator->()
 		{
 			assert(cur->used);
 			return cur;
 		}
-		
+
 		bool operator!=(iterator b)
 		{
 			return cur != b.cur;
 		}
-		
+
 		T* cur;
 	};
-	
+
 	ExactObjectList()
 	{
 		clear();
 	}
-	
+
 	T* getFreeObject()
 	{
 		/*
@@ -76,19 +76,19 @@ struct ExactObjectList
 		T* ptr = freeList.unlink_min();
 		assert(!ptr->used);
 		ptr->used = true;
-		
+
 		/*
 		sentinel.prev->next = ptr;
 		ptr->prev = sentinel.prev;
 		ptr->next = &sentinel;
 		sentinel.prev = ptr;
 		*/
-		
+
 		++count;
-		
+
 		return ptr;
 	}
-	
+
 	T* newObjectReuse()
 	{
 		T* ret;
@@ -96,31 +96,31 @@ struct ExactObjectList
 			ret = &arr[Limit - 1];
 		else
 			ret = getFreeObject();
-			
+
 		assert(ret->used);
 		return ret;
 	}
-	
+
 	T* newObject()
 	{
 		if(freeList.empty())
 			return 0;
-			
+
 		T* ret = getFreeObject();
 		assert(ret->used);
 		return ret;
 	}
-	
+
 	iterator begin()
 	{
 		return iterator(&arr[0]);
 	}
-	
+
 	iterator end()
 	{
 		return iterator(&arr[Limit]);
 	}
-		
+
 	void free(T* ptr)
 	{
 		assert(ptr->used);
@@ -130,27 +130,27 @@ struct ExactObjectList
 			//nextFree = ptr;
 			freeList.insert(ptr);
 			ptr->used = false;
-			
+
 			assert(count > 0);
-			
+
 			--count;
 		}
 	}
-	
+
 	void free(iterator i)
 	{
 		free(&*i);
 	}
-	
+
 	void clear()
 	{
 		count = 0;
 		/*
 		sentinel.prev = &sentinel;
 		sentinel.next = &sentinel;*/
-		
+
 		arr[Limit].used = true; // Sentinel
-		
+
 		for(std::size_t i = 0; i < Limit; ++i)
 		{
 			//arr[i].nextFree = &arr[i + 1];
@@ -158,17 +158,17 @@ struct ExactObjectList
 			arr[i].index = i;
 			freeList.insert(&arr[i]);
 		}
-		
+
 		//arr[Limit - 1].nextFree = 0;
 		//arr[Limit - 1].used = false;
 		//nextFree = &arr[0];
 	}
-	
+
 	std::size_t size() const
 	{
 		return count;
 	}
-	
+
 	T arr[Limit + 1]; // One sentinel
 
 	//ObjectListBase* nextFree;

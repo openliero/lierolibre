@@ -15,21 +15,21 @@ struct Sfx
 		: id(0)
 		{
 		}
-		
+
 		void* id; // ID of the sound playing on this channel
 	};
-	
+
 	Sfx()
 	: initialized(false)
 	{
 	}
 	~Sfx();
-	
+
 	void init();
 	void deinit();
 	void loadFromSND();
-	
-	void play(int sound, void* id = 0, int loops = 0);	
+
+	void play(int sound, void* id = 0, int loops = 0);
 	bool isPlaying(void* id);
 	void playOn(int channel, int sound, void* id, int loops = 0);
 	void stop(void* id);
@@ -56,17 +56,17 @@ struct DefaultSoundPlayer : SoundPlayer
 	{
 		sfx.play(sound, id, loops);
 	}
-	
+
 	bool isPlaying(void* id)
 	{
 		return sfx.isPlaying(id);
 	}
-	
+
 	void playOn(int channel, int sound, void* id, int loops = 0)
 	{
 		return sfx.playOn(channel, sound, id, loops);
 	}
-	
+
 	void stop(void* id)
 	{
 		sfx.stop(id);
@@ -78,16 +78,16 @@ struct NullSoundPlayer : SoundPlayer
 	void play(int sound, void* id, int loops)
 	{
 	}
-	
+
 	bool isPlaying(void* id)
 	{
 		return false;
 	}
-	
+
 	void playOn(int channel, int sound, void* id, int loops)
 	{
 	}
-	
+
 	void stop(void* id)
 	{
 	}

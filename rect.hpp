@@ -26,17 +26,17 @@ public:
 
 	}
 	*/
-	
+
 	T x1;
 	T y1;
 	T x2;
 	T y2;
-	
+
 	T center_x() const
 	{
 		return (x1 + x2) / T(2);
 	}
-	
+
 	T center_y() const
 	{
 		return (y1 + y2) / T(2);
@@ -56,7 +56,7 @@ public:
 	{
 		return y2 - y1;
 	}
-	
+
 	basic_rect flip() const
 	{
 		return basic_rect<T>(y1, x1, y2, x2);
@@ -66,7 +66,7 @@ public:
 	{
 		return x1 <= x2 && y1 <= y2;
 	}
-	
+
 	void join(basic_rect const& b)
 	{
 		if(b.x1 < x1)
@@ -98,7 +98,7 @@ public:
 	{
 	/*
 		if(!intersecting(b))
-		{	  
+		{
 			return false;
 		}*/
 
@@ -118,17 +118,17 @@ public:
 	{
 		T diffX = v.x - x1;
 		T diffY = v.y - y1;
-		
+
 		return diffX < width() && diffX >= T(0)
 		    && diffY < height() && diffY >= T(0);
-		
+
 	}*/
-	
+
 	basic_rect operator&(basic_rect const& b) const
 	{
 		return basic_rect(*this) &= b;
 	}
-	
+
 	basic_rect& operator&=(basic_rect const& b)
 	{
 		if(b.x1 > x1)
@@ -139,7 +139,7 @@ public:
 			x2 = b.x2;
 		if(b.y2 < y2)
 			y2 = b.y2;
-		
+
 		return *this;
 	}
 	/*
@@ -147,54 +147,54 @@ public:
 	{
 		return basic_rect(*this) += b;
 	}
-	
+
 	basic_rect& operator+=(basic_vec<T> const& b)
 	{
 		x1 += b.x;
 		x2 += b.x;
 		y1 += b.y;
 		y2 += b.y;
-		
+
 		return *this;
 	}
-	
+
 	basic_rect operator-(basic_vec<T> const& b)
 	{
 		return basic_rect(*this) -= b;
 	}
-	
+
 	basic_rect& operator-=(basic_vec<T> const& b)
 	{
 		x1 -= b.x;
 		x2 -= b.x;
 		y1 -= b.y;
 		y2 -= b.y;
-		
+
 		return *this;
 	}
 */
-	
+
 	basic_rect translate(T x, T y)
 	{
 		return basic_rect(x1 + x, y1 + y, x2 + x, y2 + y);
 	}
-	
+
 /*
 	basic_vec<T> ul()
 	{
 		return basic_vec<T>(x1, y1);
 	}
-	
+
 	basic_vec<T> ur()
 	{
 		return basic_vec<T>(x2, y1);
 	}
-	
+
 	basic_vec<T> ll()
 	{
 		return basic_vec<T>(x1, y2);
 	}
-	
+
 	basic_vec<T> lr()
 	{
 		return basic_vec<T>(x2, y2);

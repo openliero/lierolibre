@@ -12,14 +12,14 @@ struct SpriteSet
 	int height;
 	int spriteSize;
 	int count;
-	
+
 	void read(FILE* f, int width, int height, int count);
-	
+
 	PalIdx* spritePtr(int frame)
 	{
 		return &data[frame*spriteSize];
 	}
-	
+
 	void allocate(int width, int height, int count);
 };
 
