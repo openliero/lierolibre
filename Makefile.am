@@ -35,7 +35,8 @@ dist_bin_SCRIPTS = \
 
 dist_noinst_SCRIPTS = \
 	autogen.sh \
-	Jamfile \
+	src/Jamfile \
+	src/dummy_config.h \
 	src/gvl/Jamfile \
 	scripts/lierolibre.am
 
