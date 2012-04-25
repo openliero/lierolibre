@@ -167,7 +167,11 @@ try
 	sfx.init();
 
 	//game.initGame();
-	gfx.mainLoop();
+
+	try {
+		gfx.mainLoop();
+	}
+	catch (int c) {};
 
 	gfx.saveSettings();
 

@@ -537,6 +537,7 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 		case SDL_QUIT:
 		{
 			running = false;
+			throw 22; // TODO: Unwind properly, this is fugly but better than nothing
 		}
 		break;
 
