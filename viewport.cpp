@@ -108,22 +108,20 @@ void Viewport::process()
 void Viewport::draw(bool isReplay)
 {
 	Common& common = *game.common;
-	if(worm) // Should not be necessary further on
+
+	if(worm->visible)
 	{
-		if(worm->visible)
+		int lifebarWidth = worm->health * 100 / worm->settings->health;
+		drawBar(inGameX, 161, lifebarWidth, lifebarWidth/10 + 234);
+	}
+	else
+	{
+		int lifebarWidth = 100 - (worm->killedTimer * 25) / 37;
+		if(lifebarWidth > 0)
 		{
-			int lifebarWidth = worm->health * 100 / worm->settings->health;
+			if(lifebarWidth > 100)
+				lifebarWidth = 100;
 			drawBar(inGameX, 161, lifebarWidth, lifebarWidth/10 + 234);
-		}
-		else
-		{
-			int lifebarWidth = 100 - (worm->killedTimer * 25) / 37;
-			if(lifebarWidth > 0)
-			{
-				if(lifebarWidth > 100)
-					lifebarWidth = 100;
-				drawBar(inGameX, 161, lifebarWidth, lifebarWidth/10 + 234);
-			}
 		}
 	}
 
