@@ -1,3 +1,30 @@
+/*
+ * Copyright (c) 2010, Erik Lindroos <gliptic@gmail.com>
+ * Copyright (c) 2010, "basro"
+ * Copyright (c) 2012, Martin Erik Werner <martinerikwerner@gmail.com>
+ * This software is released under the The BSD-2-Clause License:
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * * Redistributions of source code must retain the above copyright notice,
+ *   this list of conditions and the following disclaimer.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
 #ifndef LIERO_SETTINGS_HPP
 #define LIERO_SETTINGS_HPP
 
@@ -15,9 +42,9 @@
 struct Extensions
 {
 	static int const myVersion = 2;
-	
+
 	Extensions();
-	
+
 	// Extensions
 	bool extensions;
 	bool recordReplays;
@@ -25,7 +52,7 @@ struct Extensions
 	uint32_t scaleFilter;
 	bool depth32;
 	int bloodParticleMax;
-	
+
 	int fullscreenW;
 	int fullscreenH;
 };
@@ -39,7 +66,7 @@ struct Settings : gvl::shared, Extensions
 		GMCtF,
 		GMSimpleCtF
 	};
-	
+
 	enum
 	{
 		SiGameMode,
@@ -60,27 +87,27 @@ struct Settings : gvl::shared, Extensions
 		SiPlayer2Options,
 		SiWeaponOptions
 	};
-	
+
 	enum
 	{
 		SfNearest,
 		SfScale2X,
-		
+
 		SfMax
 	};
-	
+
 	static int const selectableWeapons = 5;
-	
+
 	static int const wormAnimTab[];
-	
+
 	Settings();
-	
+
 	bool load(std::string const& path);
 	void save(std::string const& path);
 	gvl::gash::value_type& updateHash();
-	
+
 	static void generateName(WormSettings& ws);
-	
+
 	uint32_t weapTable[40];
 	int maxBonuses;
 	int blood;
@@ -97,11 +124,11 @@ struct Settings : gvl::shared, Extensions
 	std::string levelFile;
 	bool map;
 	bool screenSync;
-	
+
 	gvl::shared_ptr<WormSettings> wormSettings[2];
-	
-	
-	
+
+
+
 	gvl::gash::value_type hash;
 };
 
@@ -112,7 +139,7 @@ inline int limit(int v)
 		return H - 1;
 	else if(v < L)
 		return L;
-		
+
 	return v;
 }
 
@@ -124,7 +151,7 @@ void archive_liero(Archive ar, Settings& settings)
 	.ui16_le(settings.loadingTime)
 	.ui16_le(settings.lives)
 	.ui16_le(settings.timeToLose)
-	.ui16_le(settings.flagsToWin)	
+	.ui16_le(settings.flagsToWin)
 	.b(settings.screenSync)
 	.b(settings.map)
 	.ui8(settings.wormSettings[0]->controller)
@@ -135,23 +162,23 @@ void archive_liero(Archive ar, Settings& settings)
 	.b(settings.namesOnBonuses)
 	.b(settings.regenerateLevel)
 	.b(settings.shadow);
-	
+
 	if(ar.in) settings.wormSettings[0]->controller &= 1;
 	if(ar.in) settings.wormSettings[1]->controller &= 1;
-	
+
 	for(int i = 0; i < 40; ++i)
 	{
 		ar.ui8(settings.weapTable[i]);
 		if(ar.in) settings.weapTable[i] = limit<0, 3>(settings.weapTable[i]);
 	}
-	
+
 	for(int i = 0; i < 2; ++i)
 	for(int j = 0; j < 3; ++j)
 	{
 		ar.ui8(settings.wormSettings[i]->rgb[j]);
 		if(ar.in) settings.wormSettings[i]->rgb[j] &= 63;
 	}
-		
+
 	for(int i = 0; i < 2; ++i)
 	{
 		for(int j = 0; j < 5; ++j)
@@ -182,15 +209,15 @@ void archive_liero(Archive ar, Settings& settings)
 			}
 		}
 	}
-	
+
 	ar.b(settings.loadChange);
-	
+
 	char lieroStr[] = "\x05LIERO\0\0";
 	for(std::size_t i = 0; i < sizeof(lieroStr); ++i)
 	{
 		ar.ui8(lieroStr[i]);
 	}
-	
+
 	for(int i = 0; i < 2; ++i)
 	{
 		for(int j = 0; j < 7; ++j)
@@ -209,26 +236,26 @@ void archive_liero(Archive ar, Settings& settings)
 			}
 		}
 	}
-	
+
 	ar.pascal_str(settings.levelFile, 9);
 
-	// TODO: Slightly bad way to detect whether extensions exist, no?	
+	// TODO: Slightly bad way to detect whether extensions exist, no?
 	try
 	{
 		// Extensions
 		int fileExtensionVersion = myGameVersion;
 		ar.ui8(fileExtensionVersion);
-		
+
 		ar.b(settings.extensions);
 		ar.b(settings.recordReplays);
 		ar.b(settings.loadPowerlevelPalette);
 		ar.ui8(settings.scaleFilter);
 		ar.ui16(settings.fullscreenW);
 		ar.ui16(settings.fullscreenH);
-		
+
 		gvl::enable_when(ar, fileExtensionVersion >= 2)
 			.b(settings.depth32, true);
-			
+
 		for(int i = 0; i < 2; ++i)
 		{
 			for(int c = 0; c < WormSettings::MaxControl; ++c)
@@ -239,7 +266,7 @@ void archive_liero(Archive ar, Settings& settings)
 					.ui8(dummy, 255);
 			}
 		}
-		
+
 		for(int i = 0; i < 2; ++i)
 		{
 			WormSettings& ws = *settings.wormSettings[i];
@@ -254,7 +281,7 @@ void archive_liero(Archive ar, Settings& settings)
 	{
 		// Reset to default state
 		settings.Extensions::operator=(Extensions());
-		
+
 		for(int i = 0; i < 2; ++i)
 		{
 			WormSettings& ws = *settings.wormSettings[i];
@@ -272,7 +299,7 @@ void archive(Archive ar, Settings& settings)
 	{
 		ar.ui8(settings.weapTable[i]);
 	}
-	
+
 	ar
 	.ui16(settings.maxBonuses)
 	.ui16(settings.blood)
@@ -289,12 +316,12 @@ void archive(Archive ar, Settings& settings)
 	.b(settings.map)
 	.b(settings.screenSync)
 	.str(settings.levelFile);
-	
+
 	// Extensions
 	int fileExtensionVersion = Extensions::myVersion;
-			
+
 	ar.ui8(fileExtensionVersion);
-	
+
 	ar
 	.b(settings.extensions)
 	.b(settings.recordReplays)
@@ -302,7 +329,7 @@ void archive(Archive ar, Settings& settings)
 	.ui8(settings.scaleFilter)
 	.ui16(settings.fullscreenW)
 	.ui16(settings.fullscreenH);
-	
+
 	gvl::enable_when(ar, fileExtensionVersion >= 2)
 		.b(settings.depth32, true);
 
