@@ -1807,6 +1807,7 @@ bool Gfx::inputString(std::string& dest, std::size_t maxLen, int x, int y, int (
 			}
 		}
 	}
+	return false; // Treat SDL_QUIT as ESC for unwinding here
 }
 
 int filterDigits(int k)
