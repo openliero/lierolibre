@@ -2,3 +2,17 @@
 _*
 *~
 *.o
+INSTALL
+#Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.log
+config.status
+#configure
+libtool
+src/build-aux/
+#src/config.h
+src/config.h.in
+src/m4/*
+src/stamp-h1
