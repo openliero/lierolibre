@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, Erik Lindroos <gliptic@gmail.com>
+ * Copyright (c) 2007-2010, Erik Lindroos <gliptic@gmail.com>
  * Copyright (c) 2010, "basro"
  * Copyright (c) 2012, Martin Erik Werner <martinerikwerner@gmail.com>
  * This software is released under the The BSD-2-Clause License:
