@@ -492,14 +492,14 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 				if(!fullscreen)
 				{
 					// Try lowest resolution
-					windowW = 320;
-					windowH = 200;
+					windowW = 640;
+					windowH = 400;
 				}
 				setVideoMode();
 			}
 			else if(s == SDLK_F6)
 			{
-				if(windowW >= 640 && windowH >= 480)
+				if(windowW >= 640 && windowH >= 400)
 				{
 					windowW = 320;
 					windowH = 200;
@@ -507,7 +507,7 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 				else
 				{
 					windowW = 640;
-					windowH = 480;
+					windowH = 400;
 				}
 				setVideoMode();
 			}
