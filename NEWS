@@ -20,6 +20,7 @@ Version 0.2 - April 2012, by Martin Erik Werner
   + Fullscreen now defaults to highest supported screen resolution
     - Game area will grab max multiple of 320x200, rest becomes border
   + Added F7 and F8 keys for x3 and x4 scaling respecively
+* Added ability to quit game via desktop events (window close, alt+F4, etc.)
 
 Version 0.1 - April 2012, by Martin Erik Werner
 
