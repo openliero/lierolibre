@@ -194,10 +194,7 @@ try
 
 	//game.initGame();
 
-	try {
-		gfx.mainLoop();
-	}
-	catch (int c) {};
+	gfx.mainLoop();
 
 	gfx.saveSettings();
 

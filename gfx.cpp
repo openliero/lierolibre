@@ -600,7 +600,6 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 		case SDL_QUIT:
 		{
 			running = false;
-			throw 22; // TODO: Unwind properly, this is fugly but better than nothing
 		}
 		break;
 
@@ -678,7 +677,7 @@ void Gfx::process(Controller* controller)
 SDL_keysym Gfx::waitForKey()
 {
 	SDL_Event ev;
-	while(SDL_WaitEvent(&ev))
+	while(running && SDL_WaitEvent(&ev))
 	{
 		processEvent(ev);
 		if(ev.type == SDL_KEYDOWN)
@@ -1420,7 +1419,7 @@ void Gfx::selectLevel()
 		flip();
 		process();
 	}
-	while(!testSDLKeyOnce(SDLK_ESCAPE));
+	while(running && !testSDLKeyOnce(SDLK_ESCAPE));
 }
 
 void Gfx::selectProfile(WormSettings& ws)
@@ -1505,7 +1504,7 @@ void Gfx::selectProfile(WormSettings& ws)
 		flip();
 		process();
 	}
-	while(!testSDLKeyOnce(SDLK_ESCAPE));
+	while(running && !testSDLKeyOnce(SDLK_ESCAPE));
 
 	return;
 }
@@ -1605,7 +1604,7 @@ int Gfx::selectReplay()
 		flip();
 		process();
 	}
-	while(!testSDLKeyOnce(SDLK_ESCAPE));
+	while(running && !testSDLKeyOnce(SDLK_ESCAPE));
 
 	return -1;
 }
@@ -1697,6 +1696,8 @@ void Gfx::weaponOptions()
 
 		flip();
 		process();
+		if(!running)
+			break;
 
 		if(testSDLKeyOnce(SDLK_ESCAPE))
 		{
@@ -1737,6 +1738,8 @@ void Gfx::infoBox(std::string const& text, int x, int y, bool clearScreen)
 
 	flip();
 	process();
+	if(!running)
+		return;
 
 	waitForKey();
 	clearKeys();
@@ -1749,7 +1752,7 @@ bool Gfx::inputString(std::string& dest, std::size_t maxLen, int x, int y, int (
 {
 	std::string buffer = dest;
 
-	while(true)
+	while(running)
 	{
 		std::string str = prefix + buffer + '_';
 
@@ -1768,6 +1771,7 @@ bool Gfx::inputString(std::string& dest, std::size_t maxLen, int x, int y, int (
 		drawRoundedBox(x - 2 - adjust, y, 0, 7, width);
 
 		font.drawText(str, x - adjust, y + 1, 50);
+		process();
 		flip();
 		SDL_keysym key(waitForKey());
 
@@ -1917,7 +1921,7 @@ void Gfx::mainLoop()
 	controller->currentGame()->focus();
 	// TODO: Unfocus game when necessary
 
-	while(true)
+	while(running)
 	{
 		clear();
 		controller->draw();
@@ -1963,7 +1967,7 @@ void Gfx::mainLoop()
 
 		controller->focus();
 
-		while(true)
+		while(running)
 		{
 			if(!controller->process())
 				break;
@@ -2066,6 +2070,8 @@ int Gfx::menuLoop()
 	std::memset(pal.entries, 0, sizeof(pal.entries));
 	flip();
 	process();
+	if(!running)
+		return 0;
 
 	fillRect(0, 151, 160, 7, 0);
 	common->font.drawText(common->texts.copyright2, 2, 152, 19);
@@ -2241,7 +2247,7 @@ int Gfx::menuLoop()
 		flip();
 		process();
 	}
-	while(selected < 0);
+	while(running && selected < 0);
 
 	for(fadeValue = 32; fadeValue > 0; --fadeValue)
 	{
