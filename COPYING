@@ -6,11 +6,6 @@ configuration variables extracted from the original game are released under
 the WTFPL license. Note that the old freeware license in data/LIERO(ENG).TXT
 no longer applies.
 
-One of the items included in the uthread module (and therefore the whole
-module) is GPLv2+ however this module is not used in the gvl library.
-
-The included copy of Zlib is licensed under the Zlib license.
-
 The type_info header is licensed under the Boost Software License 1.0, and
 is included in the gvl library.
 
@@ -93,16 +88,6 @@ License: BSD-2-Clause
 Files: gvl/*
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
 License: BSD-2-Clause
-
-Files: gvl/zlib/*
-Copyright: 1995-2005 Jean-loup Gailly
-           1995-2005 Mark Adler
-License: Zlib
-
-Files: gvl/uthread/uthread_config.hpp
-Copyright: 2003  Davide Libenzi
-License: GPL-2+
-Comment: This file is not used in the the gvl library
 
 Files: gvl/support/type_info.hpp
 Copyright: 2002 David Abrahams
