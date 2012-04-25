@@ -511,6 +511,34 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 				}
 				setVideoMode();
 			}
+			else if(s == SDLK_F7)
+			{
+				if(windowW >= 960 && windowH >= 600)
+				{
+					windowW = 640;
+					windowH = 400;
+				}
+				else
+				{
+					windowW = 960;
+					windowH = 600;
+				}
+				setVideoMode();
+			}
+			else if(s == SDLK_F8)
+			{
+				if(windowW >= 1280 && windowH >= 800)
+				{
+					windowW = 640;
+					windowH = 400;
+				}
+				else
+				{
+					windowW = 1280;
+					windowH = 800;
+				}
+				setVideoMode();
+			}
 		}
 		break;
 
