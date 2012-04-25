@@ -40,6 +40,9 @@ Main lierolibre : bobject.cpp bonus.cpp common.cpp console.cpp
 	menu/timeBehavior.cpp
 	;
 
+File config.h : dummy_config.h ;
+LOCATE on config.h = $(LOCATE_SOURCE) ;
+
 MakeLocate lierolibre$(SUFEXE) : $(TOP)/_bin ;
 
 LinkLibraries lierolibre : libgvl ;

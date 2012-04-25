@@ -215,7 +215,11 @@ void Gfx::init()
 {
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 	SDL_EnableUNICODE(1);
+#ifdef PACKAGE_CAPTION
 	SDL_WM_SetCaption(PACKAGE_CAPTION, 0);
+#else
+	SDL_WM_SetCaption("lierolibre", 0);
+#endif
 	SDL_ShowCursor(SDL_DISABLE);
 	lastFrame = SDL_GetTicks();
 
