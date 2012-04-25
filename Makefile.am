@@ -1,4 +1,4 @@
-ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4
+ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I src/m4
 
 appicondir = $(datarootdir)/icons/hicolor/scalable/apps
 desktopdir = $(datarootdir)/applications
@@ -7,19 +7,20 @@ desktopdir = $(datarootdir)/applications
 CFGFILE = liero.cfg
 
 pkglibexec_PROGRAMS = lierolibre
-lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS)
+# It seems it only includes src/../ by default
+lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src
 lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
-lierolibre_LDADD = gvl/libgvl.la $(DEPS_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
+lierolibre_LDADD = src/gvl/libgvl.la $(DEPS_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
 
-noinst_LTLIBRARIES = gvl/libgvl.la
-gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
-gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
+noinst_LTLIBRARIES = src/gvl/libgvl.la
+src_gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
+src_gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
 
-EXTRA_PROGRAMS = gvl/gvltest
-gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
-gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
-gvl_gvltest_LDADD = gvl/libgvl.la
+EXTRA_PROGRAMS = src/gvl/gvltest
+src_gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
+src_gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
+src_gvl_gvltest_LDADD = src/gvl/libgvl.la
 
 nodist_bin_SCRIPTS = \
 	scripts/lierolibre
@@ -35,7 +36,7 @@ dist_bin_SCRIPTS = \
 dist_noinst_SCRIPTS = \
 	autogen.sh \
 	Jamfile \
-	gvl/Jamfile \
+	src/gvl/Jamfile \
 	scripts/lierolibre.am
 
 nodist_man6_MANS = \
@@ -125,442 +126,432 @@ dist_noinst_DATA = \
 	data/sounds/THROW.wav
 
 lierolibre_SOURCES = \
-	binReader.cpp \
-	bobject.cpp \
-	bonus.cpp \
-	common.cpp \
-	console.cpp \
-	constants.cpp \
-	filesystem.cpp \
-	game.cpp \
-	gfx.cpp \
-	keys.cpp \
-	level.cpp \
-	main.cpp \
-	math.cpp \
-	ninjarope.cpp \
-	nobject.cpp \
-	rand.cpp \
-	reader.cpp \
-	replay.cpp \
-	sdlmain.cpp \
-	settings.cpp \
-	sfx.cpp \
-	sobject.cpp \
-	sys.cpp \
-	text.cpp \
-	viewport.cpp \
-	weapon.cpp \
-	weapsel.cpp \
-	worm.cpp \
+	src/binReader.cpp \
+	src/bobject.cpp \
+	src/bonus.cpp \
+	src/common.cpp \
+	src/console.cpp \
+	src/constants.cpp \
+	src/filesystem.cpp \
+	src/game.cpp \
+	src/gfx.cpp \
+	src/keys.cpp \
+	src/level.cpp \
+	src/main.cpp \
+	src/math.cpp \
+	src/ninjarope.cpp \
+	src/nobject.cpp \
+	src/rand.cpp \
+	src/reader.cpp \
+	src/replay.cpp \
+	src/sdlmain.cpp \
+	src/settings.cpp \
+	src/sfx.cpp \
+	src/sobject.cpp \
+	src/sys.cpp \
+	src/text.cpp \
+	src/viewport.cpp \
+	src/weapon.cpp \
+	src/weapsel.cpp \
+	src/worm.cpp \
 	\
-	binReader.hpp \
-	bobject.hpp \
-	bonus.hpp \
-	common.hpp \
-	console.hpp \
-	constants.hpp \
-	exactObjectList.hpp \
-	fastObjectList.hpp \
-	filesystem.hpp \
-	game.hpp \
-	gfx.hpp \
-	keys.hpp \
-	level.hpp \
-	lfs.hpp \
-	math.hpp \
-	nobject.hpp \
-	objectList.hpp \
-	rand.hpp \
-	reader.hpp \
-	rect.hpp\
-	replay.hpp \
-	settings.hpp \
-	sfx.hpp \
-	sobject.hpp \
-	sys.hpp \
-	text.hpp \
-	version.hpp \
-	viewport.hpp \
-	weapon.hpp \
-	weapsel.hpp \
-	worm.hpp \
-	\
-	\
-	argParse.cpp \
-	configHelper.cpp \
-	configInit.cpp \
-	dataPath.cpp \
-	to_string.cpp \
-	\
-	argParse.hpp \
-	configHelper.hpp \
-	configInit.hpp \
-	dataPath.hpp \
-	to_string.hpp \
+	src/binReader.hpp \
+	src/bobject.hpp \
+	src/bonus.hpp \
+	src/common.hpp \
+	src/console.hpp \
+	src/constants.hpp \
+	src/exactObjectList.hpp \
+	src/fastObjectList.hpp \
+	src/filesystem.hpp \
+	src/game.hpp \
+	src/gfx.hpp \
+	src/keys.hpp \
+	src/level.hpp \
+	src/lfs.hpp \
+	src/math.hpp \
+	src/nobject.hpp \
+	src/objectList.hpp \
+	src/rand.hpp \
+	src/reader.hpp \
+	src/rect.hpp\
+	src/replay.hpp \
+	src/settings.hpp \
+	src/sfx.hpp \
+	src/sobject.hpp \
+	src/sys.hpp \
+	src/text.hpp \
+	src/version.hpp \
+	src/viewport.hpp \
+	src/weapon.hpp \
+	src/weapsel.hpp \
+	src/worm.hpp \
 	\
 	\
-	controller/commonController.cpp \
-	controller/localController.cpp \
-	controller/replayController.cpp \
+	src/argParse.cpp \
+	src/configHelper.cpp \
+	src/configInit.cpp \
+	src/dataPath.cpp \
+	src/to_string.cpp \
 	\
-	controller/commonController.hpp \
-	controller/controller.hpp \
-	controller/localController.hpp \
-	controller/replayController.hpp \
-	\
-	\
-	gfx/blit.cpp \
-	gfx/font.cpp \
-	gfx/palette.cpp \
-	gfx/sprite.cpp \
-	\
-	gfx/blit.hpp \
-	gfx/color.hpp \
-	gfx/font.hpp \
-	gfx/macros.hpp \
-	gfx/palette.hpp \
-	gfx/sprite.hpp \
+	src/argParse.hpp \
+	src/configHelper.hpp \
+	src/configInit.hpp \
+	src/dataPath.hpp \
+	src/to_string.hpp \
 	\
 	\
-	menu/booleanSwitchBehavior.cpp \
-	menu/enumBehavior.cpp \
-	menu/hiddenMenu.cpp \
-	menu/integerBehavior.cpp \
-	menu/itemBehavior.cpp \
-	menu/menu.cpp \
-	menu/menuItem.cpp \
-	menu/timeBehavior.cpp \
+	src/controller/commonController.cpp \
+	src/controller/localController.cpp \
+	src/controller/replayController.cpp \
 	\
-	menu/arrayEnumBehavior.hpp \
-	menu/booleanSwitchBehavior.hpp \
-	menu/enumBehavior.hpp \
-	menu/hiddenMenu.hpp \
-	menu/integerBehavior.hpp \
-	menu/itemBehavior.hpp \
-	menu/menu.hpp \
-	menu/menuItem.hpp \
-	menu/timeBehavior.hpp
+	src/controller/commonController.hpp \
+	src/controller/controller.hpp \
+	src/controller/localController.hpp \
+	src/controller/replayController.hpp \
+	\
+	\
+	src/gfx/blit.cpp \
+	src/gfx/font.cpp \
+	src/gfx/palette.cpp \
+	src/gfx/sprite.cpp \
+	\
+	src/gfx/blit.hpp \
+	src/gfx/color.hpp \
+	src/gfx/font.hpp \
+	src/gfx/macros.hpp \
+	src/gfx/palette.hpp \
+	src/gfx/sprite.hpp \
+	\
+	\
+	src/menu/booleanSwitchBehavior.cpp \
+	src/menu/enumBehavior.cpp \
+	src/menu/hiddenMenu.cpp \
+	src/menu/integerBehavior.cpp \
+	src/menu/itemBehavior.cpp \
+	src/menu/menu.cpp \
+	src/menu/menuItem.cpp \
+	src/menu/timeBehavior.cpp \
+	\
+	src/menu/arrayEnumBehavior.hpp \
+	src/menu/booleanSwitchBehavior.hpp \
+	src/menu/enumBehavior.hpp \
+	src/menu/hiddenMenu.hpp \
+	src/menu/integerBehavior.hpp \
+	src/menu/itemBehavior.hpp \
+	src/menu/menu.hpp \
+	src/menu/menuItem.hpp \
+	src/menu/timeBehavior.hpp
 
-gvl_libgvl_la_SOURCES = \
-	gvl/containers/list.cpp \
+src_gvl_libgvl_la_SOURCES = \
+	src/gvl/containers/list.cpp \
 	\
-	gvl/containers/list.hpp \
-	gvl/containers/bucket.hpp \
-	gvl/containers/string.hpp \
-	gvl/containers/list.h \
-	\
-	\
-	gvl/crypt/curve25519.cpp \
-	gvl/crypt/curve25519.hpp \
+	src/gvl/containers/list.hpp \
+	src/gvl/containers/bucket.hpp \
+	src/gvl/containers/string.hpp \
+	src/gvl/containers/list.h \
 	\
 	\
-	gvl/io/stream.cpp \
-	gvl/io/encoding.cpp \
-	gvl/io/convert.cpp \
-	\
-	gvl/io/stream.hpp \
-	gvl/io/fstream.hpp \
-	gvl/io/iostream.hpp \
-	gvl/io/encoding.hpp \
-	gvl/io/convert.hpp \
+	src/gvl/crypt/curve25519.cpp \
+	src/gvl/crypt/curve25519.hpp \
 	\
 	\
-	gvl/math/ieee.cpp \
-	gvl/math/tt800.cpp \
+	src/gvl/io/stream.cpp \
+	src/gvl/io/encoding.cpp \
+	src/gvl/io/convert.cpp \
 	\
-	gvl/math/ieee.hpp \
-	gvl/math/tt800.hpp \
-	gvl/math/cmwc.hpp \
-	gvl/math/random.hpp \
-	\
-	\
-	gvl/meta/as_unsigned.hpp \
-	\
-	\
-	gvl/resman/shared.cpp \
-	\
-	gvl/resman/shared_ptr.hpp \
-	gvl/resman/shared.hpp \
-	gvl/resman/shared_count.hpp \
+	src/gvl/io/stream.hpp \
+	src/gvl/io/fstream.hpp \
+	src/gvl/io/iostream.hpp \
+	src/gvl/io/encoding.hpp \
+	src/gvl/io/convert.hpp \
 	\
 	\
-	gvl/sockets/fd_set.cpp \
-	gvl/sockets/sockets.cpp \
-	gvl/sockets/socketstream.cpp \
+	src/gvl/math/ieee.cpp \
+	src/gvl/math/tt800.cpp \
 	\
-	gvl/sockets/fd_set.hpp \
-	gvl/sockets/sockets.hpp \
-	gvl/sockets/sockets_sys_impl.hpp \
-	gvl/sockets/socketstream.hpp \
-	\
-	\
-	gvl/support/bits.c \
-	gvl/support/debug.cpp \
-	gvl/support/hash.cpp \
-	gvl/support/log.cpp \
-	gvl/support/profile.cpp \
-	\
-	gvl/support/functional.hpp \
-	gvl/support/profile.hpp \
-	gvl/support/hash.hpp \
-	gvl/support/debug.hpp \
-	gvl/support/log.hpp \
-	gvl/support/macros.hpp \
-	gvl/support/platform.hpp \
-	gvl/support/cstdint.hpp \
-	gvl/support/type_info.hpp \
-	gvl/support/platform.h \
-	gvl/support/opt.hpp \
-	gvl/support/bits.hpp \
-	gvl/support/flags.hpp \
-	gvl/support/algorithm.hpp \
+	src/gvl/math/ieee.hpp \
+	src/gvl/math/tt800.hpp \
+	src/gvl/math/cmwc.hpp \
+	src/gvl/math/random.hpp \
 	\
 	\
-	gvl/system/system.c \
-	\
-	gvl/system/system.hpp \
+	src/gvl/meta/as_unsigned.hpp \
 	\
 	\
-	gvl/tut/quickcheck/context.cpp \
+	src/gvl/resman/shared.cpp \
 	\
-	gvl/tut/quickcheck/context.hpp \
-	gvl/tut/quickcheck/generator.hpp
+	src/gvl/resman/shared_ptr.hpp \
+	src/gvl/resman/shared.hpp \
+	src/gvl/resman/shared_count.hpp \
+	\
+	\
+	src/gvl/sockets/fd_set.cpp \
+	src/gvl/sockets/sockets.cpp \
+	src/gvl/sockets/socketstream.cpp \
+	\
+	src/gvl/sockets/fd_set.hpp \
+	src/gvl/sockets/sockets.hpp \
+	src/gvl/sockets/sockets_sys_impl.hpp \
+	src/gvl/sockets/socketstream.hpp \
+	\
+	\
+	src/gvl/support/bits.c \
+	src/gvl/support/debug.cpp \
+	src/gvl/support/hash.cpp \
+	src/gvl/support/log.cpp \
+	src/gvl/support/profile.cpp \
+	\
+	src/gvl/support/functional.hpp \
+	src/gvl/support/profile.hpp \
+	src/gvl/support/hash.hpp \
+	src/gvl/support/debug.hpp \
+	src/gvl/support/log.hpp \
+	src/gvl/support/macros.hpp \
+	src/gvl/support/platform.hpp \
+	src/gvl/support/cstdint.hpp \
+	src/gvl/support/type_info.hpp \
+	src/gvl/support/platform.h \
+	src/gvl/support/opt.hpp \
+	src/gvl/support/bits.hpp \
+	src/gvl/support/flags.hpp \
+	src/gvl/support/algorithm.hpp \
+	\
+	\
+	src/gvl/system/system.c \
+	\
+	src/gvl/system/system.hpp \
+	\
+	\
+	src/gvl/tut/quickcheck/context.cpp \
+	\
+	src/gvl/tut/quickcheck/context.hpp \
+	src/gvl/tut/quickcheck/generator.hpp
 
-gvl_gvltest_SOURCES = \
-	gvl/gvl_test/containers/list.cpp \
-	gvl/gvl_test/containers/pairing_heap.cpp \
-	gvl/gvl_test/containers/treap.cpp \
-	gvl/gvl_test/io/bitstream.cpp \
-	gvl/gvl_test/io/stream.cpp \
-	gvl/gvl_test/support/bits.cpp \
-	gvl/gvl_test/math/deterministic_float.cpp \
-	gvl/gvl_test/test.cpp \
+src_gvl_gvltest_SOURCES = \
+	src/gvl/gvl_test/containers/list.cpp \
+	src/gvl/gvl_test/containers/pairing_heap.cpp \
+	src/gvl/gvl_test/containers/treap.cpp \
+	src/gvl/gvl_test/io/bitstream.cpp \
+	src/gvl/gvl_test/io/stream.cpp \
+	src/gvl/gvl_test/support/bits.cpp \
+	src/gvl/gvl_test/math/deterministic_float.cpp \
+	src/gvl/gvl_test/test.cpp \
 	\
 	\
-	gvl/containers/list.hpp \
-	gvl/containers/list.h \
+	src/gvl/containers/list.hpp \
+	src/gvl/containers/list.h \
 	\
 	\
-	gvl/io/iostream.hpp
+	src/gvl/io/iostream.hpp
 	\
 	\
-	gvl/list.hpp \
+	src/gvl/list.hpp \
 	\
 	\
-	gvl/math/cmwc.hpp \
-	gvl/math/random.hpp \
-	gvl/math/ieee.hpp \
+	src/gvl/math/cmwc.hpp \
+	src/gvl/math/random.hpp \
+	src/gvl/math/ieee.hpp \
 	\
 	\
-	gvl/resman/shared_ptr.hpp \
-	gvl/resman/shared.hpp \
-	gvl/resman/shared_count.hpp \
+	src/gvl/resman/shared_ptr.hpp \
+	src/gvl/resman/shared.hpp \
+	src/gvl/resman/shared_count.hpp \
 	\
 	\
-	gvl/support/algorithm.hpp \
-	gvl/support/macros.hpp \
-	gvl/support/functional.hpp \
-	gvl/support/debug.hpp \
-	gvl/support/platform.hpp \
-	gvl/support/platform.h \
-	gvl/support/cstdint.hpp \
-	gvl/support/type_info.hpp \
+	src/gvl/support/algorithm.hpp \
+	src/gvl/support/macros.hpp \
+	src/gvl/support/functional.hpp \
+	src/gvl/support/debug.hpp \
+	src/gvl/support/platform.hpp \
+	src/gvl/support/platform.h \
+	src/gvl/support/cstdint.hpp \
+	src/gvl/support/type_info.hpp \
 	\
 	\
-	gvl/tut/tut.hpp \
-	gvl/tut/quickcheck/context.hpp \
-	gvl/tut/quickcheck/generator.hpp \
-	gvl/tut/quickcheck/property.hpp
+	src/gvl/tut/quickcheck/context.hpp \
+	src/gvl/tut/quickcheck/generator.hpp \
+	src/gvl/tut/quickcheck/property.hpp
 
 # Just everything in a bunch, some bits are unused currently
 # but I'm ignorant so I'm bloating the archive.
 EXTRA_DIST = \
-	gvl/containers/buffer.cpp \
-	gvl/containers/critbit.cpp \
-	gvl/containers/list.cpp \
-	gvl/containers/tests/deque.cpp \
-	gvl/containers/tests/hash_set.cpp \
-	gvl/containers/tests/list.cpp \
-	gvl/containers/tests/pairing_heap.cpp \
-	gvl/containers/tests/treap.cpp \
-	gvl/crypt/curve25519.cpp \
-	gvl/gvl_test/_build/deque.cpp \
-	gvl/gvl_test/containers/accurate_rectangle_packing.cpp \
-	gvl/gvl_test/containers/bounded_rectangle_packing.cpp \
-	gvl/gvl_test/containers/compact_interval_set.cpp \
-	gvl/gvl_test/containers/dense_int_set.cpp \
-	gvl/gvl_test/containers/hash_set.cpp \
-	gvl/gvl_test/containers/list.cpp \
-	gvl/gvl_test/containers/pairing_heap.cpp \
-	gvl/gvl_test/containers/string.cpp \
-	gvl/gvl_test/containers/treap.cpp \
-	gvl/gvl_test/io/bitstream.cpp \
-	gvl/gvl_test/io/formatter.cpp \
-	gvl/gvl_test/io/stream.cpp \
-	gvl/gvl_test/math/deterministic_float.cpp \
-	gvl/gvl_test/math/random.cpp \
-	gvl/gvl_test/support/bits.cpp \
-	gvl/gvl_test/support/opt.cpp \
-	gvl/gvl_test/test.cpp \
-	gvl/io/convert.cpp \
-	gvl/io/device_buf.cpp \
-	gvl/io/encoding.cpp \
-	gvl/io/stream.cpp \
-	gvl/io/tests/bitstream.cpp \
-	gvl/io/tests/stream.cpp \
-	gvl/math/ieee.cpp \
-	gvl/math/tests/reproducible_floats.cpp \
-	gvl/math/tt800.cpp \
-	gvl/resman/shared.cpp \
-	gvl/sockets/fd_set.cpp \
-	gvl/sockets/socket_listener.cpp \
-	gvl/sockets/sockets.cpp \
-	gvl/sockets/socketstream.cpp \
-	gvl/support/bits.c \
-	gvl/support/debug.cpp \
-	gvl/support/hash.cpp \
-	gvl/support/log.cpp \
-	gvl/support/platform.cpp \
-	gvl/support/profile.cpp \
-	gvl/support/string_pool.cpp \
-	gvl/support/tests/bits.cpp \
-	gvl/system/mutex.c \
-	gvl/system/system.c \
-	gvl/test/gvl_tests.cpp \
-	gvl/text/util.cpp \
-	gvl/tut/quickcheck/context.cpp \
-	gvl/uthread/coro.cpp \
-	gvl/uthread/test.cpp \
-	gvl/uthread/uthread.cpp
+	src/gvl/containers/buffer.cpp \
+	src/gvl/containers/critbit.cpp \
+	src/gvl/containers/list.cpp \
+	src/gvl/containers/tests/deque.cpp \
+	src/gvl/containers/tests/hash_set.cpp \
+	src/gvl/containers/tests/list.cpp \
+	src/gvl/containers/tests/pairing_heap.cpp \
+	src/gvl/containers/tests/treap.cpp \
+	src/gvl/crypt/curve25519.cpp \
+	src/gvl/gvl_test/_build/deque.cpp \
+	src/gvl/gvl_test/containers/accurate_rectangle_packing.cpp \
+	src/gvl/gvl_test/containers/bounded_rectangle_packing.cpp \
+	src/gvl/gvl_test/containers/compact_interval_set.cpp \
+	src/gvl/gvl_test/containers/dense_int_set.cpp \
+	src/gvl/gvl_test/containers/hash_set.cpp \
+	src/gvl/gvl_test/containers/list.cpp \
+	src/gvl/gvl_test/containers/pairing_heap.cpp \
+	src/gvl/gvl_test/containers/string.cpp \
+	src/gvl/gvl_test/containers/treap.cpp \
+	src/gvl/gvl_test/io/bitstream.cpp \
+	src/gvl/gvl_test/io/formatter.cpp \
+	src/gvl/gvl_test/io/stream.cpp \
+	src/gvl/gvl_test/math/deterministic_float.cpp \
+	src/gvl/gvl_test/math/random.cpp \
+	src/gvl/gvl_test/support/bits.cpp \
+	src/gvl/gvl_test/support/opt.cpp \
+	src/gvl/gvl_test/test.cpp \
+	src/gvl/io/convert.cpp \
+	src/gvl/io/device_buf.cpp \
+	src/gvl/io/encoding.cpp \
+	src/gvl/io/stream.cpp \
+	src/gvl/io/tests/bitstream.cpp \
+	src/gvl/io/tests/stream.cpp \
+	src/gvl/math/ieee.cpp \
+	src/gvl/math/tests/reproducible_floats.cpp \
+	src/gvl/math/tt800.cpp \
+	src/gvl/resman/shared.cpp \
+	src/gvl/sockets/fd_set.cpp \
+	src/gvl/sockets/socket_listener.cpp \
+	src/gvl/sockets/sockets.cpp \
+	src/gvl/sockets/socketstream.cpp \
+	src/gvl/support/bits.c \
+	src/gvl/support/debug.cpp \
+	src/gvl/support/hash.cpp \
+	src/gvl/support/log.cpp \
+	src/gvl/support/platform.cpp \
+	src/gvl/support/profile.cpp \
+	src/gvl/support/string_pool.cpp \
+	src/gvl/support/tests/bits.cpp \
+	src/gvl/system/mutex.c \
+	src/gvl/system/system.c \
+	src/gvl/test/gvl_tests.cpp \
+	src/gvl/text/util.cpp \
+	src/gvl/tut/quickcheck/context.cpp \
 	\
-	gvl/containers/accurate_rectangle_packing.hpp \
-	gvl/containers/avl_tree.hpp \
-	gvl/containers/bounded_rectangle_packing.hpp \
-	gvl/containers/bucket.hpp \
-	gvl/containers/buffer.hpp \
-	gvl/containers/compact_interval_set.hpp \
-	gvl/containers/critbit.hpp \
-	gvl/containers/deque.hpp \
-	gvl/containers/generic_hash_set.hpp \
-	gvl/containers/hash_map.hpp \
-	gvl/containers/hash_set.hpp \
-	gvl/containers/int_set.hpp \
-	gvl/containers/iterator.hpp \
-	gvl/containers/linked_vector.hpp \
-	gvl/containers/list.h \
-	gvl/containers/list.hpp \
-	gvl/containers/list3.hpp \
-	gvl/containers/node_base.hpp \
-	gvl/containers/pairing_heap.hpp \
-	gvl/containers/pod_vector.hpp \
-	gvl/containers/range.hpp \
-	gvl/containers/string.hpp \
-	gvl/containers/treap.hpp \
-	gvl/containers/treap2.hpp \
-	gvl/containers/xlist.hpp \
-	gvl/crypt/curve25519.hpp \
-	gvl/crypt/gash.hpp \
-	gvl/crypt/gciph.hpp \
-	gvl/cstdint.hpp \
-	gvl/debug.hpp \
-	gvl/dense_int_set.hpp \
-	gvl/gvl_test/template.hpp \
-	gvl/hash_set/generic_hash_set.hpp \
-	gvl/hash_set/hash_set.hpp \
-	gvl/io/bitstream.hpp \
-	gvl/io/bitstream_old.hpp \
-	gvl/io/bitstream_templ.hpp \
-	gvl/io/bitstream_templ_old.hpp \
-	gvl/io/brigade2.h \
-	gvl/io/brigade2.hpp \
-	gvl/io/common_bitstream.hpp \
-	gvl/io/convert.hpp \
-	gvl/io/deflate_filter.hpp \
-	gvl/io/device_buf.hpp \
-	gvl/io/devnull.hpp \
-	gvl/io/encoding.hpp \
-	gvl/io/encoding_compat.hpp \
-	gvl/io/fstream.hpp \
-	gvl/io/iostream.hpp \
-	gvl/io/range_coder.hpp \
-	gvl/io/stream.hpp \
-	gvl/io/unicode.hpp \
-	gvl/linked_hash_set.hpp \
-	gvl/list.hpp \
-	gvl/math/cmwc.hpp \
-	gvl/math/float.hpp \
-	gvl/math/ieee.hpp \
-	gvl/math/math.hpp \
-	gvl/math/matrix.hpp \
-	gvl/math/normal_distribution.hpp \
-	gvl/math/random.hpp \
-	gvl/math/rect.hpp \
-	gvl/math/tt800.hpp \
-	gvl/math/vec.hpp \
-	gvl/meta/as_unsigned.hpp \
-	gvl/meta/is_ptr_convertible.hpp \
-	gvl/meta/meta.hpp \
-	gvl/meta/static_log2.hpp \
-	gvl/resman/allocator.hpp \
-	gvl/resman/linked_object.hpp \
-	gvl/resman/scoped_array.hpp \
-	gvl/resman/shared.h \
-	gvl/resman/shared.hpp \
-	gvl/resman/shared_count.hpp \
-	gvl/resman/shared_list.hpp \
-	gvl/resman/shared_ptr.hpp \
-	gvl/serialization/archive.hpp \
-	gvl/serialization/context.hpp \
-	gvl/serialization/except.hpp \
-	gvl/sockets/fd_set.hpp \
-	gvl/sockets/socket_listener.hpp \
-	gvl/sockets/sockets.hpp \
-	gvl/sockets/sockets_sys_impl.hpp \
-	gvl/sockets/socketstream.hpp \
-	gvl/support.hpp \
-	gvl/support/algorithm.hpp \
-	gvl/support/align.hpp \
-	gvl/support/bits.hpp \
-	gvl/support/borrow.hpp \
-	gvl/support/cheap_flags.hpp \
-	gvl/support/config.h \
-	gvl/support/cstdint.hpp \
-	gvl/support/debug.hpp \
-	gvl/support/disjoint_set.hpp \
-	gvl/support/flags.hpp \
-	gvl/support/foreach.hpp \
-	gvl/support/functional.hpp \
-	gvl/support/hash.hpp \
-	gvl/support/log.hpp \
-	gvl/support/macros.hpp \
-	gvl/support/move.hpp \
-	gvl/support/object_model.h \
-	gvl/support/opt.hpp \
-	gvl/support/platform.h \
-	gvl/support/platform.hpp \
-	gvl/support/profile.hpp \
-	gvl/support/string_pool.hpp \
-	gvl/support/type_info.hpp \
-	gvl/system/memory.hpp \
-	gvl/system/mutex.hpp \
-	gvl/system/system.hpp \
-	gvl/system/windows.hpp \
-	gvl/test/gvl_tests.hpp \
-	gvl/test/test.hpp \
-	gvl/text/utf8.hpp \
-	gvl/text/util.hpp \
-	gvl/trees/node_base.hpp \
-	gvl/tut/quickcheck/context.hpp \
-	gvl/tut/quickcheck/generator.hpp \
-	gvl/tut/quickcheck/property.hpp \
-	gvl/tut/quickcheck/quickcheck.hpp \
-	gvl/tut/tut.hpp \
-	gvl/tut/tut_reporter.hpp \
-	gvl/tut/tut_restartable.hpp \
-	gvl/uthread/coro.hpp \
-	gvl/uthread/uthread.hpp \
-	gvl/uthread/uthread_config.hpp
+	src/gvl/containers/accurate_rectangle_packing.hpp \
+	src/gvl/containers/avl_tree.hpp \
+	src/gvl/containers/bounded_rectangle_packing.hpp \
+	src/gvl/containers/bucket.hpp \
+	src/gvl/containers/buffer.hpp \
+	src/gvl/containers/compact_interval_set.hpp \
+	src/gvl/containers/critbit.hpp \
+	src/gvl/containers/deque.hpp \
+	src/gvl/containers/generic_hash_set.hpp \
+	src/gvl/containers/hash_map.hpp \
+	src/gvl/containers/hash_set.hpp \
+	src/gvl/containers/int_set.hpp \
+	src/gvl/containers/iterator.hpp \
+	src/gvl/containers/linked_vector.hpp \
+	src/gvl/containers/list.h \
+	src/gvl/containers/list.hpp \
+	src/gvl/containers/list3.hpp \
+	src/gvl/containers/node_base.hpp \
+	src/gvl/containers/pairing_heap.hpp \
+	src/gvl/containers/pod_vector.hpp \
+	src/gvl/containers/range.hpp \
+	src/gvl/containers/string.hpp \
+	src/gvl/containers/treap.hpp \
+	src/gvl/containers/treap2.hpp \
+	src/gvl/containers/xlist.hpp \
+	src/gvl/crypt/curve25519.hpp \
+	src/gvl/crypt/gash.hpp \
+	src/gvl/crypt/gciph.hpp \
+	src/gvl/cstdint.hpp \
+	src/gvl/debug.hpp \
+	src/gvl/dense_int_set.hpp \
+	src/gvl/gvl_test/template.hpp \
+	src/gvl/hash_set/generic_hash_set.hpp \
+	src/gvl/hash_set/hash_set.hpp \
+	src/gvl/io/bitstream.hpp \
+	src/gvl/io/bitstream_old.hpp \
+	src/gvl/io/bitstream_templ.hpp \
+	src/gvl/io/bitstream_templ_old.hpp \
+	src/gvl/io/brigade2.h \
+	src/gvl/io/brigade2.hpp \
+	src/gvl/io/common_bitstream.hpp \
+	src/gvl/io/convert.hpp \
+	src/gvl/io/deflate_filter.hpp \
+	src/gvl/io/device_buf.hpp \
+	src/gvl/io/devnull.hpp \
+	src/gvl/io/encoding.hpp \
+	src/gvl/io/encoding_compat.hpp \
+	src/gvl/io/fstream.hpp \
+	src/gvl/io/iostream.hpp \
+	src/gvl/io/range_coder.hpp \
+	src/gvl/io/stream.hpp \
+	src/gvl/io/unicode.hpp \
+	src/gvl/linked_hash_set.hpp \
+	src/gvl/list.hpp \
+	src/gvl/math/cmwc.hpp \
+	src/gvl/math/float.hpp \
+	src/gvl/math/ieee.hpp \
+	src/gvl/math/math.hpp \
+	src/gvl/math/matrix.hpp \
+	src/gvl/math/normal_distribution.hpp \
+	src/gvl/math/random.hpp \
+	src/gvl/math/rect.hpp \
+	src/gvl/math/tt800.hpp \
+	src/gvl/math/vec.hpp \
+	src/gvl/meta/as_unsigned.hpp \
+	src/gvl/meta/is_ptr_convertible.hpp \
+	src/gvl/meta/meta.hpp \
+	src/gvl/meta/static_log2.hpp \
+	src/gvl/resman/allocator.hpp \
+	src/gvl/resman/linked_object.hpp \
+	src/gvl/resman/scoped_array.hpp \
+	src/gvl/resman/shared.h \
+	src/gvl/resman/shared.hpp \
+	src/gvl/resman/shared_count.hpp \
+	src/gvl/resman/shared_list.hpp \
+	src/gvl/resman/shared_ptr.hpp \
+	src/gvl/serialization/archive.hpp \
+	src/gvl/serialization/context.hpp \
+	src/gvl/serialization/except.hpp \
+	src/gvl/sockets/fd_set.hpp \
+	src/gvl/sockets/socket_listener.hpp \
+	src/gvl/sockets/sockets.hpp \
+	src/gvl/sockets/sockets_sys_impl.hpp \
+	src/gvl/sockets/socketstream.hpp \
+	src/gvl/support.hpp \
+	src/gvl/support/algorithm.hpp \
+	src/gvl/support/align.hpp \
+	src/gvl/support/bits.hpp \
+	src/gvl/support/borrow.hpp \
+	src/gvl/support/cheap_flags.hpp \
+	src/gvl/support/config.h \
+	src/gvl/support/cstdint.hpp \
+	src/gvl/support/debug.hpp \
+	src/gvl/support/disjoint_set.hpp \
+	src/gvl/support/flags.hpp \
+	src/gvl/support/foreach.hpp \
+	src/gvl/support/functional.hpp \
+	src/gvl/support/hash.hpp \
+	src/gvl/support/log.hpp \
+	src/gvl/support/macros.hpp \
+	src/gvl/support/move.hpp \
+	src/gvl/support/object_model.h \
+	src/gvl/support/opt.hpp \
+	src/gvl/support/platform.h \
+	src/gvl/support/platform.hpp \
+	src/gvl/support/profile.hpp \
+	src/gvl/support/string_pool.hpp \
+	src/gvl/support/type_info.hpp \
+	src/gvl/system/memory.hpp \
+	src/gvl/system/mutex.hpp \
+	src/gvl/system/system.hpp \
+	src/gvl/system/windows.hpp \
+	src/gvl/test/gvl_tests.hpp \
+	src/gvl/test/test.hpp \
+	src/gvl/text/utf8.hpp \
+	src/gvl/text/util.hpp \
+	src/gvl/trees/node_base.hpp \
+	src/gvl/tut/quickcheck/context.hpp \
+	src/gvl/tut/quickcheck/generator.hpp \
+	src/gvl/tut/quickcheck/property.hpp \
+	src/gvl/tut/quickcheck/quickcheck.hpp
 
 $(nodist_bin_SCRIPTS):
 	install -d scripts/

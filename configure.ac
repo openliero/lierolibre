@@ -1,9 +1,9 @@
 AC_PREREQ([2.59])
 AC_INIT([lierolibre C++], [0.2], [martinerikwerner@gmail.com], [lierolibre], [https://gitorious.org/lierolibre])
-AC_CONFIG_SRCDIR([worm.cpp])
-AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_SRCDIR([src/worm.cpp])
+AC_CONFIG_MACRO_DIR([src/m4])
+AC_CONFIG_AUX_DIR([src/build-aux])
+AC_CONFIG_HEADERS([src/config.h])
 
 LT_INIT
 AM_INIT_AUTOMAKE([1.10 -Wall subdir-objects])
@@ -55,15 +55,15 @@ PKG_CHECK_MODULES([GVL_DEPS], [zlib])
 # Get libgvl library and include locations
 AC_ARG_WITH([gvl-include-path],
 	[AS_HELP_STRING([--with-gvl-include-path],
-    		[location of the gvl headers, defaults to ./glv/])],
+    		[location of the gvl headers, defaults to ./src/glv/])],
 	[GVL_CPPFLAGS="-I$withval"],
-	[GVL_CPPFLAGS='-I./gvl/'])
+	[GVL_CPPFLAGS='-I./src/gvl/'])
 AC_SUBST([GVL_CFLAGS])
 AC_ARG_WITH([gvl-lib-path],
 	[AS_HELP_STRING([--with-gvl-lib-path],
-		[location of the gvl libraries, defaults to ./gvl/])],
+		[location of the gvl libraries, defaults to ./src/gvl/])],
 	[GVL_LIBS="-L$withval -lgvl"],
-	[GVL_LIBS='-L./gvl/ -lgvl'])
+	[GVL_LIBS='-L./src/gvl/ -lgvl'])
 AC_SUBST([GVL_LIBS])
 
 # Checks for header files.
