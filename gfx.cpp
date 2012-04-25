@@ -489,7 +489,7 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 			|| s == SDLK_F5)
 			{
 				fullscreen = !fullscreen;
-				if(fullscreen)
+				if(!fullscreen)
 				{
 					// Try lowest resolution
 					windowW = 320;
