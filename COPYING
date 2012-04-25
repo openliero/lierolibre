@@ -23,35 +23,35 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://gitorious.org/lierolibre
 Upstream-Contact: Martin Erik Werner <martinerikwerner@gmail.com>
 
-Files: *
-Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2010, Mario Carbajal "basro"
-License: BSD-2-Clause
-
-Files: console.* exactObjectList.hpp fastObjectList.hpp lfs.hpp rand.*
-       rect.hpp sdlmain.cpp sfx.* sobject.* sys.* text.* _build/*
-Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-License: BSD-2-Clause
-
-Files: binReader.* constants.* main.cpp math.* reader.*
-Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2012, Martin Erik Werner <martinerikwerner@gmail.com>
-License: BSD-2-Clause
-
-Files: common.* controller/localController.cpp gfx.* gfx/font.* Jamfile
-       level.* menu/menu.* settings.* worm.*
-Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2010, Mario Carbajal "basro"
-           2012, Martin Erik Werner <martinerikwerner@gmail.com>
-License: BSD-2-Clause
-
-Files: boostTesting.cpp configHelper.* configInit.* dataPath.*  to_string.*
-       AUTHORS autogen.sh ChangeLog configure.ac COPYING Makefile.am NEWS
-       README
+Files: ./* src/boostTesting.cpp src/configHelper.* src/configInit.* src/dataPath.*
+       src/to_string.*
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 Comment: The full license texts in this document are separate entities with
          separate licenses, and not covered under the BSD-2-Clause license
+
+Files: src/*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2010, Mario Carbajal "basro"
+License: BSD-2-Clause
+
+Files: src/console.* src/exactObjectList.hpp src/fastObjectList.hpp src/lfs.hpp
+       src/rand.* src/rect.hpp src/sdlmain.cpp src/sfx.* src/sobject.* src/sys.*
+       src/text.* src/_build/*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+License: BSD-2-Clause
+
+Files: src/binReader.* src/constants.* src/main.cpp src/math.* src/reader.*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: BSD-2-Clause
+
+Files: src/common.* src/controller/localController.cpp src/gfx.* src/gfx/font.*
+       src/Jamfile src/level.* src/menu/menu.* src/settings.* src/worm.*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2010, Mario Carbajal "basro"
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: BSD-2-Clause
 
 Files: aclocal.m4 config.h.in configure Makefile.in build-aux/* m4/*
 Copyright: 1992-2011, Free Software Foundation, Inc.
@@ -69,7 +69,6 @@ License: WTFPL
 Comment: Note that the old freeware license in data/LIERO(ENG).TXT no longer
          applies.
 
-
 Files: data/sounds/*.wav
 Copyright: 2012, "sea"
 License: WTFPL
@@ -85,11 +84,11 @@ Files: scripts/lierolibre-extractsounds scripts/lierolibre-packsounds
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 
-Files: gvl/*
+Files: src/gvl/*
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
 License: BSD-2-Clause
 
-Files: gvl/support/type_info.hpp
+Files: src/gvl/support/type_info.hpp
 Copyright: 2002 David Abrahams
 License: BSL-1.0
 
