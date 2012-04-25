@@ -48,9 +48,25 @@ SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION, :, \
 	 AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
 
-PKG_CHECK_MODULES([DEPS], [libconfig++ SDL_mixer])
+PKG_CHECK_MODULES([LIBCONFIGXX], [libconfig++])
 
-PKG_CHECK_MODULES([GVL_DEPS], [zlib])
+PKG_CHECK_MODULES([SDL_MIXER], [SDL_mixer],
+	[SDL_MIXER_CFLAGS=`pkg-config --cflags SDL_mixer` \
+	SDL_MIXER_LIBS=`pkg-config --libs SDL_mixer`],
+	[pkgcSDLM="no"])
+
+# Fall back on a quite stupid header check if pkg-config doesn't work
+# (pkg-config for SDL_mixer is relatively new)
+AS_IF([test "x$pkgcSDLM" = "xno"], [
+	AC_CHECK_HEADERS([SDL/SDL_mixer.h],
+		[SDL_MIXER_CFLAGS="-D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/SDL"],
+		[AC_MSG_WARN(SDL_mixer headers not found, you will need this to compile lierolibre!)]),
+	AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,
+		[SDL_MIXER_LIBS="-lSDL_mixer -lSDL"],
+		[AC_MSG_WARN(SDL_mixer library not found, you will need this to link lierolibre!)]),
+	])
+
+PKG_CHECK_MODULES([ZLIB], [zlib])
 
 # Get libgvl library and include locations
 AC_ARG_WITH([gvl-include-path],
