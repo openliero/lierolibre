@@ -9,9 +9,9 @@ CFGFILE = liero.cfg
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src
-lierolibre_CFLAGS = $(DEPS_CFLAGS) $(SDL_CFLAGS)
+lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
-lierolibre_LDADD = src/gvl/libgvl.la $(DEPS_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
+lierolibre_LDADD = src/gvl/libgvl.la $(LIBCONFIGXX_LIBS) $(SDL_MIXER_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
 
 noinst_LTLIBRARIES = src/gvl/libgvl.la
 src_gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
