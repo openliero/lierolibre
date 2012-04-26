@@ -9,17 +9,34 @@
 .SH SYNOPSIS
 
 .SY #PACKAGE#
-.OP \fIinputfile
-.OP \-v videodriver
-.OP \-w outputfile
+[\fIinputfile \fR[\fIinputdir \fR[\fIoutputfile\fR]]]
+.YS
+
+.SY #PACKAGE#
+.OP \-f\fR|\fB\-\-file inputfile
+.OP \-d\fR|\fB\-\-dir inputdir
+.OP \-w\fR|\fB\-\-write outputfile
+.OP \-v\fR|\fB\-\-sdlvideo videodriver
+.OP -h\fR|\fB\-\-help
 
 
 .SH DESCRIPTION
 
 #PACKAGE# is an  old-school earthworm action game. It is a direct fork of Liero.
-.TP
-Features:
+.PP
+.IP Features:
+.RS
+.IP \[bu] 2
 2 worms, 40 weapons, great playability, two game modes: Kill'em All and Game of Tag, plus AI-players without true intelligence!
+.IP \[bu] 2
+Extensions via a hidden F1 menu:
+.RS
+.IP \[bu] 2
+Replays, game controller support, powerlevel palettes
+.RE
+.IP \[bu] 2
+Fullscreen, x2, x3 and x4 scaling via the F5, F6, F7 and F8 keys
+.RE
 
 .PP
 .B #PACKAGE#
@@ -27,20 +44,21 @@ is a script which executes the
 .BR #PACKAGE#
 binary from the
 .I #LIBEXECDIR#/#PACKAGE#
-directory. If no
+directory. The script defaults to using the directory
+.IR #PKGDATADIR#/
+as the
 .I inputfile
-is given it defaults to using
-.IR #PKGDATADIR#/#CFGFILE# .
+parameter.
 
 .PP
 .B #PACKAGE#
 automatically copies the file
 .I #CFGFILE#
 from
-.I #PKGDATADIR#
+.I inputdir
 to
 .I $HOME/.#PACKAGE#/
-unless already exist, in which case it will read the game variables from there.
+unless already it already exists in this location.
 .I #CFGFILE#
 is a plain text file which can be modified, go wild! But don't be surprised if the game crahes ;)
 
@@ -48,38 +66,63 @@ is a plain text file which can be modified, go wild! But don't be surprised if t
 .SH OPTIONS
 
 .TP
+[\fB\-f\fR|\fB\-\-file\fR] \fIinputfile
+Reads game variables from the given file or directory.
+
+.IP
+If
 .I inputfile
-Reads game variables from
+points to a directory or a file with an unknown extension, and
+.I inputdir
+is not set, the game tries to load the
+.I #CFGFILE#
+file from
+.I $HOME/.#PACKAGE#/
+first, otherwise it tries to load it from
+.IR inputdir .
+
+.IP
+If
+.I inputdir
+is set,
 .I inputfile
-and also sets the directory of this file as the data directory for #PACKAGE#, which must contain the files
-.I LIERO.CHR LIERO.DAT LIERO.SND NAMES.DAT \fR.
+must be a file.
 
 .TP
-.BI \-v " videodriver"
-Sets the SDL_VIDEODRIVER environment variable to
-.IR videodriver .
+[\fB\-d\fR|\fB\-\-dir\fR] \fIinputdir
+Reads the files
+.I LIERO.CHR LIERO.SND NAMES.DAT
+from the given directory. Defaults to the directory of
+.IR inputfile .
 
 .TP
-.BI \-w " outputfile"
-Writes all game variables to
-.IR outputfile .
+[\fB\-d\fR|\fB\-\-dir\fR] \fIoutputfile
+Writes all game variables to a plain text file.
 
+.TP
+\fB\-v\fR|\fB\-\-sdlvideo \fIvideodriver
+Sets the SDL_VIDEODRIVER environment variable.
+
+.TP
+\fB-h\fR|\fB\-\-help
+Print a brief help overview.
 
 .SH EXAMPLES
 
 .B #PACKAGE# mymod/LIERO.EXE
 .RS 4
-Reads game variables from a (potentially) modded EXE file and starts the game.
+Reads game variables from a (potentially) modded EXE file, and reads game data from files in
+.IR mymod/ .
 .RE
 
-.B #PACKAGE# mymod/LIERO.EXE -w mymod_liero.cfg
+.B #PACKAGE# -f mymod/LIERO.EXE -d #PKGDATADIR#/ -w mymod_liero.cfg
 .RS 4
-Reads game variables from a (potentially) modded EXE file and writes them to a plain text config file, and starts the game.
+Reads game variables from a (potentially) modded EXE file and writes them to a plain text config file (and starts the game).
 .RE
 
-.B #PACKAGE# mymod_liero.cfg
+.B #PACKAGE# mymod_liero.cfg mydata/
 .RS 4
-Reads game variables from a custom plain text config file and starts the game.
+Reads game variables from a custom plain text config file, and reads the game data from another directory.
 .RE
 
 
