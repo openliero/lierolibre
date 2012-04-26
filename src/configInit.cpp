@@ -105,7 +105,12 @@ void ConfigInit::loadFromEXE(string filePath)
 
 void ConfigInit::loadFromCFG(string filePath)
 {
+/* The neat exception methods were introduced in v 1.4 of libconfig
+ * don't try to use them on earlier versions
+ */
+#if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	try {
+#endif
 		common->texts.loadFromCFG(filePath);
 
 		initKeys();
@@ -124,6 +129,8 @@ void ConfigInit::loadFromCFG(string filePath)
 		common->loadWeaponsFromCFG(filePath);
 		common->loadTexturesFromCFG(filePath);
 		common->loadOthersFromCFG(filePath);
+
+#if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	} catch (const libconfig::ParseException& e) {
 		std::cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << std::endl;
 		throw;
@@ -131,6 +138,7 @@ void ConfigInit::loadFromCFG(string filePath)
 		std::cerr << "Problem at " <<  e.getPath() << std::endl;
 		throw;
 	}
+#endif
 }
 
 void ConfigInit::write(string filePath)
