@@ -74,28 +74,21 @@ nodist_pkgdata_DATA = \
 	data/LIERO.CHR \
 	data/LIERO.SND
 
-dist_noinst_DATA = \
+MANPAGES_SOURCES = \
 	man/lierolibre.6.am \
 	man/lierolibre-extractgfx.6.am \
 	man/lierolibre-packgfx.6.am \
 	man/lierolibre-extractsounds.6.am \
 	man/lierolibre-packsounds.6.am \
 	man/lierolibre-extractlev.6.am \
-	man/lierolibre-packlev.6.am \
-	\
-	\
-	data/FILE_ID.DIZ \
-	data/LICENSE.TXT \
-	\
-	\
-	data/lierolibre.xpm \
-	\
-	\
+	man/lierolibre-packlev.6.am
+
+GRAPHICS_SOURCES = \
 	data/graphics/gfx1.xpm \
 	data/graphics/gfx2.xpm \
-	data/graphics/gfx3.xpm \
-	\
-	\
+	data/graphics/gfx3.xpm
+
+SOUND_SOURCES = \
 	data/sounds/ALIVE.wav \
 	data/sounds/BAZOOKA.wav \
 	data/sounds/BEGIN.wav \
@@ -126,6 +119,22 @@ dist_noinst_DATA = \
 	data/sounds/SHOT.wav \
 	data/sounds/SHOTGUN.wav \
 	data/sounds/THROW.wav
+
+dist_noinst_DATA = \
+	$(MANPAGES_SOURCES) \
+	\
+	\
+	data/FILE_ID.DIZ \
+	data/LICENSE.TXT \
+	\
+	\
+	data/lierolibre.xpm \
+	\
+	\
+	$(GRAPHICS_SOURCES) \
+	\
+	\
+	$(SOUND_SOURCES)
 
 lierolibre_SOURCES = \
 	src/binReader.cpp \
@@ -555,7 +564,7 @@ EXTRA_DIST = \
 	src/gvl/tut/quickcheck/property.hpp \
 	src/gvl/tut/quickcheck/quickcheck.hpp
 
-$(nodist_bin_SCRIPTS):
+$(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
 	sed \
 		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
@@ -565,7 +574,7 @@ $(nodist_bin_SCRIPTS):
 		$(srcdir)/$@.am \
 		> $@
 
-$(nodist_man6_MANS):
+$(nodist_man6_MANS): $(MANPAGES_SOURCES)
 	install -d man/
 	sed \
 		-e 's,#PKGDATADIR#,$(pkgdatadir),g' \
@@ -576,13 +585,13 @@ $(nodist_man6_MANS):
 		$(srcdir)/$@.am \
 		> $@
 
-data/LIERO.CHR:
+data/LIERO.CHR: $(GRAPHICS_SOURCES)
 	install -d data/
 	$(srcdir)/scripts/lierolibre-packgfx \
 		$(srcdir)/data/graphics/gfx{1..3}.xpm \
 		$@
 
-data/LIERO.SND:
+data/LIERO.SND: $(SOUND_SOURCES)
 	install -d data/
 	$(srcdir)/scripts/lierolibre-packsounds \
 		$(srcdir)/data/sounds/ \
