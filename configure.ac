@@ -60,10 +60,10 @@ PKG_CHECK_MODULES([SDL_MIXER], [SDL_mixer],
 AS_IF([test "x$pkgcSDLM" = "xno"], [
 	AC_CHECK_HEADERS([SDL/SDL_mixer.h],
 		[SDL_MIXER_CFLAGS="-D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/SDL"],
-		[AC_MSG_WARN(SDL_mixer headers not found, you will need this to compile lierolibre!)]),
+		[AC_MSG_WARN(SDL_mixer headers not found, you will need this to compile lierolibre!)])
 	AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,
 		[SDL_MIXER_LIBS="-lSDL_mixer -lSDL"],
-		[AC_MSG_WARN(SDL_mixer library not found, you will need this to link lierolibre!)]),
+		[AC_MSG_WARN(SDL_mixer library not found, you will need this to link lierolibre!)])
 	])
 
 PKG_CHECK_MODULES([ZLIB], [zlib])
