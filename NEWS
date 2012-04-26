@@ -25,6 +25,8 @@ Version 0.2 - April 2012, by Martin Erik Werner
 * Made configure checks for SDL_mixer not depend on pkg-config
 * Error messages from handling config files are now much more verbose
   + If possible gives error type, file, line number, setting path, etc.
+  + This is only enabled with libconfig++ version 1.4 and above
+    - (libconfig++9 in Debian/Ubuntu)
 
 
 Version 0.1 - April 2012, by Martin Erik Werner
