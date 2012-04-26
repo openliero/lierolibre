@@ -29,6 +29,7 @@
 #include <stdexcept>
 #include <cassert>
 #include <cctype>
+#include <sys/stat.h>
 
 std::string changeLeaf(std::string const& path, std::string const& newLeaf)
 {
@@ -128,6 +129,16 @@ bool fileExists(std::string const& path)
 	bool state = (f != 0);
 	if(f) fclose(f);
 	return state;
+}
+
+bool isDir(std::string const& path)
+{
+	struct stat s;
+	if(stat(path.c_str(), &s) == 0) {
+		if(s.st_mode & S_IFDIR)
+			return true;
+	}
+	return false;
 }
 
 std::size_t fileLength(FILE* f)

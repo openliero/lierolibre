@@ -40,6 +40,8 @@ std::string joinPath(std::string const& root, std::string const& leaf);
 
 bool fileExists(std::string const& path);
 
+bool isDir(std::string const& path);
+
 FILE* tolerantFOpen(std::string const& name, char const* mode);
 
 std::size_t fileLength(FILE* f);
