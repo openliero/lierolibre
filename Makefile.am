@@ -14,12 +14,12 @@ lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
 lierolibre_LDADD = src/gvl/libgvl.la $(LIBCONFIGXX_LIBS) $(SDL_MIXER_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
 
 noinst_LTLIBRARIES = src/gvl/libgvl.la
-src_gvl_libgvl_la_CFLAGS = $(GVL_DEPS_CFLAGS)
-src_gvl_libgvl_la_LIBADD = $(GVL_DEPS_LIBS)
+src_gvl_libgvl_la_CFLAGS = $(ZLIB_CFLAGS)
+src_gvl_libgvl_la_LIBADD = $(ZLIB_LIBS)
 
 EXTRA_PROGRAMS = src/gvl/gvltest
-src_gvl_gvltest_CFLAGS = $(GVL_DEPS_CFLAGS)
-src_gvl_gvltest_LDFLAGS = $(GVL_DEPS_LIBS) $(LIBRT)
+src_gvl_gvltest_CFLAGS = $(ZLIB_CFLAGS)
+src_gvl_gvltest_LDFLAGS = $(ZLIB_LIBS) $(LIBRT)
 src_gvl_gvltest_LDADD = src/gvl/libgvl.la
 
 nodist_bin_SCRIPTS = \
