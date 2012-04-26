@@ -22,6 +22,8 @@ Version 0.2 - April 2012, by Martin Erik Werner
   + Added F7 and F8 keys for x3 and x4 scaling respecively
 * Added ability to quit game via desktop events (window close, alt+F4, etc.)
 * Made configure checks for SDL_mixer not depend on pkg-config
+* Error messages from handling config files are now much more verbose
+  + If possible gives error type, file, line number, setting path, etc.
 
 Version 0.1 - April 2012, by Martin Erik Werner
 
