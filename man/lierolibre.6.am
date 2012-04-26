@@ -45,7 +45,7 @@ is a script which executes the
 binary from the
 .I #LIBEXECDIR#/#PACKAGE#
 directory. The script defaults to using the directory
-.IR #PKGDATADIR#/
+.IR #PKGDATADIR#
 as the
 .I inputfile
 parameter.
@@ -115,12 +115,12 @@ Reads game variables from a (potentially) modded EXE file, and reads game data f
 .IR mymod/ .
 .RE
 
-.B #PACKAGE# -f mymod/LIERO.EXE -d #PKGDATADIR#/ -w mymod_liero.cfg
+.B #PACKAGE# -f mymod/LIERO.EXE -d #PKGDATADIR# -w mymod_liero.cfg
 .RS 4
 Reads game variables from a (potentially) modded EXE file and writes them to a plain text config file (and starts the game).
 .RE
 
-.B #PACKAGE# mymod_liero.cfg mydata/
+.B #PACKAGE# mymod_liero.cfg mydata
 .RS 4
 Reads game variables from a custom plain text config file, and reads the game data from another directory.
 .RE
