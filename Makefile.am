@@ -51,6 +51,7 @@ nodist_man6_MANS = \
 
 dist_doc_DATA = \
 	AUTHORS \
+	ChangeLog \
 	COPYING \
 	NEWS \
 	README \
