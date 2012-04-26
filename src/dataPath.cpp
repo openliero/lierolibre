@@ -48,13 +48,11 @@ string create_configdir(string directory)
 
 DataPath::DataPath(string a_readonly_path)
 {
-	readonly_path = a_readonly_path;
 	if (isDir(a_readonly_path))
 		readonly_path = a_readonly_path; // Don't getRoot on a dir
 	else
 		readonly_path = getRoot(a_readonly_path);
 
-	readonly_path = a_readonly_path;
 	configdotdir = string(getenv("HOME")) + '/' + ".lierolibre";
 
 	// Map of files we may want to return path to
