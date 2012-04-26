@@ -2,32 +2,54 @@
 
 defaultpath="#PKGDATADIR#/#CFGFILE#"
 
-ARGS=""
+manualpath="false"
 
-# We want to catch the no-path and the help case, and pass on everything else
-# it is known that -v and -w are the only options
+options="" # Buffer var
+
+# We want to catch the no-inputfile-path case, and pass on everything else
+# it is known that -h, -v, -f, -d and -w are the only options
 while :
 do
 	case "$1" in
-		-h|-help|--help)
-			exec man lierolibre
+		-h|--help)
+			break
 			;;
-		-v)
-			ARGS = "$ARGS $1 $2"
-			shift 2
+		--file=)
+			manualpath="true"
+			break
 			;;
-		-w)
-			ARGS = "$ARGS $1 $2"
-			shift 2
+		-f|--file)
+			manualpath="true"
+			break
 			;;
-		-*)
-			ARGS = "$ARGS $1"
+		--sdlvideo=)
+			options+="$1"
 			shift 1
+			;;
+		-v|--sdlvideo)
+			options+="$1 $2"
+			shift 2
+			;;
+		--write=)
+			options+="$1"
+			shift 1
+			;;
+		-w|--write)
+			options+="$1 $2"
+			shift 2
+			;;
+		--dir=)
+			options+="$1"
+			shift 1
+			;;
+		-d|--dir)
+			options+="$1 $2"
+			shift 2
 			;;
 		?*)
-			ARGS="$ARGS $1"
-			manualpath="true"
-			shift 1
+			# positional arg1 is assigned to --file in the program
+			manualpath=true
+			break
 			;;
 		*)
 			break
@@ -35,13 +57,15 @@ do
 	esac
 done
 
-if [ "$manualpath" = "true" ]; then
-	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$ARGS" "$@"
-
-elif [ -z "$ARG" ]; then
+if [ "x$manualpath" = xtrue ]; then
+	if [ -z "$options" ]; then
+		exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$@"
+	else
+		exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$options" "$@"
+	fi
+elif [ -z "$options" ]; then
 	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$defaultpath" "$@"
-
 else
-	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$ARGS" "$defaultpath" "$@"
+	exec #LIBEXECDIR#/#PACKAGE#/#PACKAGE# "$defaultpath" "$options" "$@"
 fi
 
