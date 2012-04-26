@@ -27,7 +27,7 @@
 
 #include <string>
 #include <fstream>
-#include <exception>
+#include <stdexcept>
 
 #include "filesystem.hpp"
 #include "gfx.hpp"
@@ -105,47 +105,63 @@ void ConfigInit::loadFromEXE(string filePath)
 
 void ConfigInit::loadFromCFG(string filePath)
 {
-	common->texts.loadFromCFG(filePath);
+	try {
+		common->texts.loadFromCFG(filePath);
 
-	initKeys();
+		initKeys();
 
-	common->loadConstantsFromCFG(filePath);
-	loadTablesFromCFG(filePath);
+		common->loadConstantsFromCFG(filePath);
+		loadTablesFromCFG(filePath);
 
-	consoleBlurb();
+		consoleBlurb();
 
-	common->font.loadFromCFG(filePath);
-	common->loadPaletteFromCFG(filePath);
-	gfx.loadPalette(); // This gets the palette from common
-	gfx.loadMenusFromCFG(filePath);
-	common->loadGfxFromCFG(filePath);
-	common->loadMaterialsFromCFG(filePath);
-	common->loadWeaponsFromCFG(filePath);
-	common->loadTexturesFromCFG(filePath);
-	common->loadOthersFromCFG(filePath);
+		common->font.loadFromCFG(filePath);
+		common->loadPaletteFromCFG(filePath);
+		gfx.loadPalette(); // This gets the palette from common
+		gfx.loadMenusFromCFG(filePath);
+		common->loadGfxFromCFG(filePath);
+		common->loadMaterialsFromCFG(filePath);
+		common->loadWeaponsFromCFG(filePath);
+		common->loadTexturesFromCFG(filePath);
+		common->loadOthersFromCFG(filePath);
+	} catch (const libconfig::ParseException& e) {
+		std::cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << std::endl;
+		throw;
+	} catch (const libconfig::SettingException e) {
+		std::cerr << "Problem at " <<  e.getPath() << std::endl;
+		throw;
+	}
 }
 
 void ConfigInit::write(string filePath)
 {
-	Console::writeLine("");
-	Console::writeLine("Saving variables to file '" + filePath +"'");
+	try {
+		Console::writeLine("");
+		Console::writeLine("Saving variables to file '" + filePath +"'");
 
-	// Create empty if nonexistant
-	if (!fileExists(filePath)) {
-		ofstream f(filePath.c_str());
-		f << flush;
-		f.close();
+		// Create empty if nonexistant
+		if (!fileExists(filePath)) {
+			ofstream f(filePath.c_str());
+			f << flush;
+			f.close();
+		}
+
+		common->texts.writeToCFG(filePath);
+		common->writeConstantsToCFG(filePath);
+		writeTablesToCFG(filePath);
+		common->font.writeToCFG(filePath);
+		common->writePaletteToCFG(filePath);
+		gfx.writeMenusToCFG(filePath);
+		common->writeGfxToCFG(filePath);
+		common->writeMaterialsToCFG(filePath);
+		common->writeWeaponsToCFG(filePath);
+		common->writeTexturesToCFG(filePath);
+		common->writeOthersToCFG(filePath);
+	} catch (const libconfig::ParseException& e) {
+		std::cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << std::endl;
+		throw;
+	} catch (const libconfig::SettingException e) {
+		std::cerr << "Problem at " <<  e.getPath() << std::endl;
+		throw;
 	}
-
-	common->texts.writeToCFG(filePath);
-	common->writeConstantsToCFG(filePath);
-	writeTablesToCFG(filePath);
-	common->font.writeToCFG(filePath);
-	common->writePaletteToCFG(filePath);
-	gfx.writeMenusToCFG(filePath);
-	common->writeGfxToCFG(filePath);
-	common->writeMaterialsToCFG(filePath);
-	common->writeWeaponsToCFG(filePath);
-	common->writeTexturesToCFG(filePath);
-	common->writeOthersToCFG(filePath);
 }
