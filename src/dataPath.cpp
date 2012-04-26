@@ -31,6 +31,7 @@
 #include <sys/types.h>
 #include <stdexcept>
 #include <cerrno>
+#include "filesystem.hpp"
 using namespace std;
 
 string create_configdir(string directory)
@@ -47,6 +48,12 @@ string create_configdir(string directory)
 
 DataPath::DataPath(string a_readonly_path)
 {
+	readonly_path = a_readonly_path;
+	if (isDir(a_readonly_path))
+		readonly_path = a_readonly_path; // Don't getRoot on a dir
+	else
+		readonly_path = getRoot(a_readonly_path);
+
 	readonly_path = a_readonly_path;
 	configdotdir = string(getenv("HOME")) + '/' + ".lierolibre";
 
