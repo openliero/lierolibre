@@ -3,7 +3,7 @@ lierolibre NEWS - History of user-visible changes.
 Version 0.2 - April 2012, by Martin Erik Werner
 
 * New dependency on boost_program_options
-* Better command-line handling
+* Reworked command-line handling completely
   + Generalised options
     - -f --file : input file
     - -d --dir : input dir
@@ -13,7 +13,8 @@ Version 0.2 - April 2012, by Martin Erik Werner
     - arg1 is auto-assigned to input file
     - arg2 is auto-assigned to input dir
     - arg3 is auto-assigned to output file
-  + Several major bugs with command line handing fixed in the process
+* Fixed a bug where giving a directory path without the ending "/" would set
+  the path to the parent directory instead.
 * Removal of non-free dtoa piece in gvl
 * Better resolution handling (only for 'Nearest' filter)
   + Game window now defaults to double the size (640x400)
@@ -24,6 +25,7 @@ Version 0.2 - April 2012, by Martin Erik Werner
 * Made configure checks for SDL_mixer not depend on pkg-config
 * Error messages from handling config files are now much more verbose
   + If possible gives error type, file, line number, setting path, etc.
+
 
 Version 0.1 - April 2012, by Martin Erik Werner
 
