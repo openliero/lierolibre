@@ -33,11 +33,11 @@ ArgParse::ArgParse(int argc, char* argv[])
 {
 	// Declare the supported options.
 	desc.add_options()
-	("help,h", "produce help message")
-	("sdlvideo,v", po::value<string>(), "set the SDL_VIDEODRIVER environemtn variable")
-	("file,f", po::value<string>(), "read game variables from file")
+	("file,f", po::value<string>(), "read game variables from file or directory")
 	("dir,d", po::value<string>(), "load game data from separate directory")
 	("write,w", po::value<string>(), "write game variables to file")
+	("sdlvideo,v", po::value<string>(), "set the SDL_VIDEODRIVER environment variable")
+	("help,h", "print this help message")
 	;
 
 	// First positional option is input file
