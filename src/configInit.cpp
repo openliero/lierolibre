@@ -143,7 +143,12 @@ void ConfigInit::loadFromCFG(string filePath)
 
 void ConfigInit::write(string filePath)
 {
+/* The neat exception methods were introduced in v 1.4 of libconfig
+ * don't try to use them on earlier versions
+ */
+#if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	try {
+#endif
 		Console::writeLine("");
 		Console::writeLine("Saving variables to file '" + filePath +"'");
 
@@ -165,6 +170,8 @@ void ConfigInit::write(string filePath)
 		common->writeWeaponsToCFG(filePath);
 		common->writeTexturesToCFG(filePath);
 		common->writeOthersToCFG(filePath);
+
+#if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	} catch (const libconfig::ParseException& e) {
 		std::cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << std::endl;
 		throw;
@@ -172,4 +179,5 @@ void ConfigInit::write(string filePath)
 		std::cerr << "Problem at " <<  e.getPath() << std::endl;
 		throw;
 	}
+#endif
 }
