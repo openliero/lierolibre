@@ -1,3 +1,1148 @@
+commit b0d707833ddff662fe426d827d4fcd9758325c8a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 16:44:50 2012 +0200
+
+    Bump date in all manpages
+
+ man/lierolibre-extractgfx.6.am    |    2 +-
+ man/lierolibre-extractlev.6.am    |    2 +-
+ man/lierolibre-extractsounds.6.am |    2 +-
+ man/lierolibre-packgfx.6.am       |    2 +-
+ man/lierolibre-packlev.6.am       |    2 +-
+ man/lierolibre-packsounds.6.am    |    2 +-
+ man/lierolibre.6.am               |    2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
+
+commit bf707c541c9149df11a35400110c94ac4517604d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 14:38:09 2012 +0200
+
+    Use seddable #PACKAGE_VERSION# in manpages and add build command
+
+ Makefile.am                       |    1 +
+ man/lierolibre-extractgfx.6.am    |    2 +-
+ man/lierolibre-extractlev.6.am    |    2 +-
+ man/lierolibre-extractsounds.6.am |    2 +-
+ man/lierolibre-packgfx.6.am       |    2 +-
+ man/lierolibre-packlev.6.am       |    2 +-
+ man/lierolibre-packsounds.6.am    |    2 +-
+ man/lierolibre.6.am               |    2 +-
+ 8 files changed, 8 insertions(+), 7 deletions(-)
+
+commit 0a64f22bae5a3252ce8666755c221c318f233655
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 14:28:58 2012 +0200
+
+    Change inputfile to refer to the directory of itself instead of inputdir
+    
+    I think this is slightly less confusing.
+
+ man/lierolibre.6.am |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 37ffe7627b89e17cbf04f9fcd6bfac3eb27a59a3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 13:12:01 2012 +0200
+
+    Refactor: Add gfx.{load,save}OPT() instead of doing it all in main
+
+ src/gfx.cpp  |   37 +++++++++++++++++++++++++++++++++++++
+ src/gfx.hpp  |    3 +++
+ src/main.cpp |   19 ++-----------------
+ 3 files changed, 42 insertions(+), 17 deletions(-)
+
+commit 996127347661893a805a140da8797b1c4a0c6d51
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 13:10:12 2012 +0200
+
+    do closeAllCachedFiles() in main exception cleanup
+
+ src/main.cpp |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 3d080a9e15f70d47b0a727a5e4d16e1c32169589
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 03:01:11 2012 +0200
+
+    check return value on fread, and throw
+
+ src/main.cpp |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 017058b54073baecc6a9ecf6c4e1302ba630cc6b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 01:05:04 2012 +0200
+
+    Add libconfig version check for write as well
+
+ src/configInit.cpp |    8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit 1dc3d7bedf159e0314e07ea3c020d3bee27c1f15
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 00:51:47 2012 +0200
+
+    noted required version of libconfig++ for verbose errors in NEWS
+
+ NEWS |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 3f304931965517b26cb3f3f77a79064fb2776a48
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 00:37:16 2012 +0200
+
+    Use pp logic to check libconfig version & disable the exception info
+    
+    Get-info methods on the exceptions don't work in libconfig <= 1.4,
+    this is unfortunately the prevalent version in Ubuntu, for example.
+
+ src/configInit.cpp |    8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit eb363f16cc5ba949d5eb0208fbb6eb2b6aa21f18
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 00:36:58 2012 +0200
+
+    cleanup leftover path assignments
+
+ src/dataPath.cpp |    2 --
+ 1 file changed, 2 deletions(-)
+
+commit 942330d8ee77f335ba18b6961f6c5b2c05e5d918
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 23:09:31 2012 +0200
+
+    Note no-longer-need ending "/" in NEWS, reword Better -> Reworked
+
+ NEWS |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 5999b4e77383ccfabb614a3537a49041db619c24
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 23:06:12 2012 +0200
+
+    Remove ending "/" hints in manpage now that it's not needed
+
+ man/lierolibre.6.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit ff47311920201d42bb71efaf1cfdb62f1e590aae
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 22:59:38 2012 +0200
+
+    Avoid setting root path to parent of directory if given without ending "/"
+    
+    Previously if DataPath was was constructed with a directory path
+    which did not end with "/" it instead set its path to the parent
+    directory. Now it uses isDir() to check for this and set it
+    correctly.
+
+ src/dataPath.cpp |    7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit 2a1a386a1d3164fb090ef28e670e6a36478ae768
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 22:58:51 2012 +0200
+
+    Implement isDir() to check if path is a directory
+
+ src/filesystem.cpp |   11 +++++++++++
+ src/filesystem.hpp |    2 ++
+ 2 files changed, 13 insertions(+)
+
+commit 257bfcfd0ccacb661be1895a3e98b7a04b202e96
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 22:30:11 2012 +0200
+
+    Use disable getRoot() in setLieroPath and delete setLiero{EXE,CFG}()
+
+ src/reader.cpp |   30 ++----------------------------
+ src/reader.hpp |    2 --
+ 2 files changed, 2 insertions(+), 30 deletions(-)
+
+commit 19d54cb2b30ce654a0b951c7f90c49498ecb7cb4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 22:17:37 2012 +0200
+
+    Update news file with verbose cfg error messages
+
+ NEWS |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 2b825851d61e27689d5517f79a9aa92251b40037
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 22:06:27 2012 +0200
+
+    catch exceptions by libconfig, output info, rethrow
+    
+    Wrap loadFromCFG() and writeToCFG() in try blocks,
+    catch ParseException and SettingException and print all provided
+    info before rethrowing.
+    
+    This should possibly be done via a custom exception class, with a
+    single assembled string message, but that seems like a lot of pain
+    for little gain.
+
+ src/configInit.cpp |   94 ++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 55 insertions(+), 39 deletions(-)
+
+commit 00903c61ee52a1d6b9b2a165f9d98faeac3a1c5f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 18:58:33 2012 +0200
+
+    Rework manpage to fit new cli parameters and options
+
+ man/lierolibre.6.am |   91 +++++++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 67 insertions(+), 24 deletions(-)
+
+commit 790e611d2335c220cfed3dbe53c3f128b68383ef
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 18:57:49 2012 +0200
+
+    reword help message, spelling, ordering..
+
+ src/argParse.cpp |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit e0e9defc861e5d2b2f416cd7743b556005fb1c42
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 14:14:13 2012 +0200
+
+    Update wrapper script with new binary
+
+ scripts/lierolibre.am |   64 +++++++++++++++++++++++++++++++++----------------
+ 1 file changed, 44 insertions(+), 20 deletions(-)
+
+commit 7056597388fe2d032c4d873b4a6d7d8f22279100
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 14:13:06 2012 +0200
+
+    Specify source files for script, gfx and sounds in Makefile
+
+ Makefile.am |   45 +++++++++++++++++++++++++++------------------
+ 1 file changed, 27 insertions(+), 18 deletions(-)
+
+commit ed0935e0c179c1ee8d4ee52cb37b92de6e68d012
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 03:26:59 2012 +0200
+
+    add changelog to distributed and installed
+
+ Makefile.am |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 7d39ebdbf54f1f0ffbda27198053bb152a358620
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 03:21:09 2012 +0200
+
+    Fix syntax error with extra ","
+
+ configure.ac |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 45da140e91f12c4c435c48917e98550c89d78816
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 03:06:52 2012 +0200
+
+    Follow change in configure.ac GVL_DEPS -> ZLIB
+
+ Makefile.am |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 69dbe6db61aa602d3a60b63586f30440dfabd669
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 01:12:33 2012 +0200
+
+    Added some more git ignores
+
+ .gitignore |   14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+commit 846f12990203eaf659d9a75baa9333572f3cf8b7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 01:06:36 2012 +0200
+
+    no-need-pkg-config for SDL_mixer in NEWS
+
+ NEWS |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 54ee9320584a19eaa73171384051502ef16a6d75
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 01:03:51 2012 +0200
+
+    set Jamfile path and add dummy_config.h to dist
+
+ Makefile.am |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 20d8f6dd217d6a1ed9fd01b4c86b5c221bea5e35
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 01:02:28 2012 +0200
+
+    Update makefile with splitting of SDL_mixer and libconfig++
+
+ Makefile.am |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit f504cdf4cb50124dd68cdac771d4e8ba73d22afa
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Apr 26 01:01:53 2012 +0200
+
+    work around missing pkg-config for SDL_mixer
+
+ configure.ac |   22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
+
+commit ee5008051064f0fcc116ecfebe00b78a89645abf
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 23:37:09 2012 +0200
+
+    Delete top Jamfile, can't get it to work properly
+
+ 0 files changed
+
+commit 120e88629e2573011af3d23090686f8e29110905
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 23:31:31 2012 +0200
+
+    Work around Jam not having config.h
+    
+    We include config.h in autotools, but the #include won't work with
+    jam, hence create a dummy file which is renamed by Jam (to avoid
+    having a file in VCS that is modified by build), and included, empty.
+    
+    Also ifdef the use of PACKAGE_CAPTION since that's what we get from
+    config.h normally...
+    
+    I'm guessing it might be time to drop Jam one of these days....
+
+ src/Jamfile        |    3 +++
+ src/dummy_config.h |    1 +
+ src/gfx.cpp        |    4 ++++
+ 3 files changed, 8 insertions(+)
+
+commit 60727e001bd77913ea662510db0843d51f97fc67
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 23:02:57 2012 +0200
+
+    Fix no return value in inputString when we SDL_QUIT
+
+ src/gfx.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 4bc3b963da333d82fbb7f4b4be7714ea59415e8f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 22:47:19 2012 +0200
+
+    Add dummy config.h for Jam
+
+ 0 files changed
+
+commit e37667b66306840dd4c969eef9e0c9595c99ade5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 22:22:01 2012 +0200
+
+    Update copyright file paths with src migrations
+
+ COPYING |   33 ++++++++++++++++-----------------
+ 1 file changed, 16 insertions(+), 17 deletions(-)
+
+commit 5ffe122ab57ffc8f5bc8b34965eedd6cc5429ada
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 22:08:29 2012 +0200
+
+    Move gvl submodule to src/gvl
+    
+    That took way more effort that it should
+    see my (arand's) comment on http://stackoverflow.com/questions/4604486
+
+ .gitmodules |    2 +-
+ gvl         |    1 -
+ src/gvl     |    1 +
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 1cc09f6a8e1b9cbb8f9cb70fade75518a296d1e4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 20:13:19 2012 +0200
+
+    Modify build scripts for src move
+
+ Makefile.am  |  793 +++++++++++++++++++++++++++++-----------------------------
+ autogen.sh   |    4 +-
+ configure.ac |   16 +-
+ 3 files changed, 402 insertions(+), 411 deletions(-)
+
+commit a6ad9f6ad736a44715ccaf3f121a38f0277b1603
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 20:10:35 2012 +0200
+
+    First step in movinf to src/subdir
+
+ Jamfile                             |   47 -
+ _build/liero.sln                    |   47 -
+ _build/liero.vcproj                 |  841 -------------
+ argParse.cpp                        |   52 -
+ argParse.hpp                        |   40 -
+ binReader.cpp                       |  133 --
+ binReader.hpp                       |   51 -
+ bobject.cpp                         |   90 --
+ bobject.hpp                         |   48 -
+ bonus.cpp                           |   63 -
+ bonus.hpp                           |   53 -
+ boostTesting.cpp                    |  428 -------
+ common.cpp                          | 1154 ------------------
+ common.hpp                          |  232 ----
+ configHelper.cpp                    |  135 ---
+ configHelper.hpp                    |   52 -
+ configInit.cpp                      |  151 ---
+ configInit.hpp                      |   52 -
+ console.cpp                         |  248 ----
+ console.hpp                         |   63 -
+ constants.cpp                       |  586 ---------
+ constants.hpp                       |  183 ---
+ controller/commonController.cpp     |   72 --
+ controller/commonController.hpp     |   42 -
+ controller/controller.hpp           |   64 -
+ controller/localController.cpp      |  309 -----
+ controller/localController.hpp      |   81 --
+ controller/replayController.cpp     |  196 ---
+ controller/replayController.hpp     |   79 --
+ dataPath.cpp                        |  132 --
+ dataPath.hpp                        |   69 --
+ exactObjectList.hpp                 |  205 ----
+ fastObjectList.hpp                  |  151 ---
+ filesystem.cpp                      |  384 ------
+ filesystem.hpp                      |  104 --
+ game.cpp                            |  550 ---------
+ game.hpp                            |  115 --
+ gfx.cpp                             | 2262 -----------------------------------
+ gfx.hpp                             |  271 -----
+ gfx/blit.cpp                        |  515 --------
+ gfx/blit.hpp                        |   64 -
+ gfx/color.hpp                       |   32 -
+ gfx/font.cpp                        |  212 ----
+ gfx/font.hpp                        |   71 --
+ gfx/macros.hpp                      |  201 ----
+ gfx/palette.cpp                     |  187 ---
+ gfx/palette.hpp                     |   86 --
+ gfx/sprite.cpp                      |   78 --
+ gfx/sprite.hpp                      |   52 -
+ keys.cpp                            |  152 ---
+ keys.hpp                            |   58 -
+ level.cpp                           |  311 -----
+ level.hpp                           |  103 --
+ lfs.hpp                             |  103 --
+ main.cpp                            |  228 ----
+ math.cpp                            |  102 --
+ math.hpp                            |   60 -
+ menu/arrayEnumBehavior.hpp          |   56 -
+ menu/booleanSwitchBehavior.cpp      |   60 -
+ menu/booleanSwitchBehavior.hpp      |   50 -
+ menu/enumBehavior.cpp               |   75 --
+ menu/enumBehavior.hpp               |   58 -
+ menu/hiddenMenu.cpp                 |  112 --
+ menu/hiddenMenu.hpp                 |   57 -
+ menu/integerBehavior.cpp            |   83 --
+ menu/integerBehavior.hpp            |   58 -
+ menu/itemBehavior.cpp               |   29 -
+ menu/itemBehavior.hpp               |   49 -
+ menu/menu.cpp                       |  318 -----
+ menu/menu.hpp                       |  182 ---
+ menu/menuItem.cpp                   |   65 -
+ menu/menuItem.hpp                   |   61 -
+ menu/timeBehavior.cpp               |   40 -
+ menu/timeBehavior.hpp               |   46 -
+ ninjarope.cpp                       |  149 ---
+ nobject.cpp                         |  399 ------
+ nobject.hpp                         |   86 --
+ objectList.hpp                      |  193 ---
+ rand.cpp                            |   25 -
+ rand.hpp                            |   35 -
+ reader.cpp                          |  157 ---
+ reader.hpp                          |   59 -
+ rect.hpp                            |  233 ----
+ replay.cpp                          |  692 -----------
+ replay.hpp                          |  137 ---
+ sdlmain.cpp                         |   52 -
+ settings.cpp                        |  219 ----
+ settings.hpp                        |  340 ------
+ sfx.cpp                             |  220 ----
+ sfx.hpp                             |  121 --
+ sobject.cpp                         |  298 -----
+ sobject.hpp                         |   66 -
+ src/Jamfile                         |   47 +
+ src/_build/liero.sln                |   47 +
+ src/_build/liero.vcproj             |  841 +++++++++++++
+ src/argParse.cpp                    |   52 +
+ src/argParse.hpp                    |   40 +
+ src/binReader.cpp                   |  133 ++
+ src/binReader.hpp                   |   51 +
+ src/bobject.cpp                     |   90 ++
+ src/bobject.hpp                     |   48 +
+ src/bonus.cpp                       |   63 +
+ src/bonus.hpp                       |   53 +
+ src/boostTesting.cpp                |  428 +++++++
+ src/common.cpp                      | 1154 ++++++++++++++++++
+ src/common.hpp                      |  232 ++++
+ src/configHelper.cpp                |  135 +++
+ src/configHelper.hpp                |   52 +
+ src/configInit.cpp                  |  151 +++
+ src/configInit.hpp                  |   52 +
+ src/console.cpp                     |  248 ++++
+ src/console.hpp                     |   63 +
+ src/constants.cpp                   |  586 +++++++++
+ src/constants.hpp                   |  183 +++
+ src/controller/commonController.cpp |   72 ++
+ src/controller/commonController.hpp |   42 +
+ src/controller/controller.hpp       |   64 +
+ src/controller/localController.cpp  |  309 +++++
+ src/controller/localController.hpp  |   81 ++
+ src/controller/replayController.cpp |  196 +++
+ src/controller/replayController.hpp |   79 ++
+ src/dataPath.cpp                    |  132 ++
+ src/dataPath.hpp                    |   69 ++
+ src/exactObjectList.hpp             |  205 ++++
+ src/fastObjectList.hpp              |  151 +++
+ src/filesystem.cpp                  |  384 ++++++
+ src/filesystem.hpp                  |  104 ++
+ src/game.cpp                        |  550 +++++++++
+ src/game.hpp                        |  115 ++
+ src/gfx.cpp                         | 2262 +++++++++++++++++++++++++++++++++++
+ src/gfx.hpp                         |  271 +++++
+ src/gfx/blit.cpp                    |  515 ++++++++
+ src/gfx/blit.hpp                    |   64 +
+ src/gfx/color.hpp                   |   32 +
+ src/gfx/font.cpp                    |  212 ++++
+ src/gfx/font.hpp                    |   71 ++
+ src/gfx/macros.hpp                  |  201 ++++
+ src/gfx/palette.cpp                 |  187 +++
+ src/gfx/palette.hpp                 |   86 ++
+ src/gfx/sprite.cpp                  |   78 ++
+ src/gfx/sprite.hpp                  |   52 +
+ src/keys.cpp                        |  152 +++
+ src/keys.hpp                        |   58 +
+ src/level.cpp                       |  311 +++++
+ src/level.hpp                       |  103 ++
+ src/lfs.hpp                         |  103 ++
+ src/main.cpp                        |  228 ++++
+ src/math.cpp                        |  102 ++
+ src/math.hpp                        |   60 +
+ src/menu/arrayEnumBehavior.hpp      |   56 +
+ src/menu/booleanSwitchBehavior.cpp  |   60 +
+ src/menu/booleanSwitchBehavior.hpp  |   50 +
+ src/menu/enumBehavior.cpp           |   75 ++
+ src/menu/enumBehavior.hpp           |   58 +
+ src/menu/hiddenMenu.cpp             |  112 ++
+ src/menu/hiddenMenu.hpp             |   57 +
+ src/menu/integerBehavior.cpp        |   83 ++
+ src/menu/integerBehavior.hpp        |   58 +
+ src/menu/itemBehavior.cpp           |   29 +
+ src/menu/itemBehavior.hpp           |   49 +
+ src/menu/menu.cpp                   |  318 +++++
+ src/menu/menu.hpp                   |  182 +++
+ src/menu/menuItem.cpp               |   65 +
+ src/menu/menuItem.hpp               |   61 +
+ src/menu/timeBehavior.cpp           |   40 +
+ src/menu/timeBehavior.hpp           |   46 +
+ src/ninjarope.cpp                   |  149 +++
+ src/nobject.cpp                     |  399 ++++++
+ src/nobject.hpp                     |   86 ++
+ src/objectList.hpp                  |  193 +++
+ src/rand.cpp                        |   25 +
+ src/rand.hpp                        |   35 +
+ src/reader.cpp                      |  157 +++
+ src/reader.hpp                      |   59 +
+ src/rect.hpp                        |  233 ++++
+ src/replay.cpp                      |  692 +++++++++++
+ src/replay.hpp                      |  137 +++
+ src/sdlmain.cpp                     |   52 +
+ src/settings.cpp                    |  219 ++++
+ src/settings.hpp                    |  340 ++++++
+ src/sfx.cpp                         |  220 ++++
+ src/sfx.hpp                         |  121 ++
+ src/sobject.cpp                     |  298 +++++
+ src/sobject.hpp                     |   66 +
+ src/sys.cpp                         |   44 +
+ src/sys.hpp                         |   40 +
+ src/text.cpp                        |  115 ++
+ src/text.hpp                        |   62 +
+ src/to_string.cpp                   |   39 +
+ src/to_string.hpp                   |   45 +
+ src/version.hpp                     |   32 +
+ src/viewport.cpp                    |  675 +++++++++++
+ src/viewport.hpp                    |  108 ++
+ src/weapon.cpp                      |  468 ++++++++
+ src/weapon.hpp                      |  122 ++
+ src/weapsel.cpp                     |  574 +++++++++
+ src/weapsel.hpp                     |   57 +
+ src/worm.cpp                        | 1593 ++++++++++++++++++++++++
+ src/worm.hpp                        |  452 +++++++
+ sys.cpp                             |   44 -
+ sys.hpp                             |   40 -
+ text.cpp                            |  115 --
+ text.hpp                            |   62 -
+ to_string.cpp                       |   39 -
+ to_string.hpp                       |   45 -
+ version.hpp                         |   32 -
+ viewport.cpp                        |  675 -----------
+ viewport.hpp                        |  108 --
+ weapon.cpp                          |  468 --------
+ weapon.hpp                          |  122 --
+ weapsel.cpp                         |  574 ---------
+ weapsel.hpp                         |   57 -
+ worm.cpp                            | 1593 ------------------------
+ worm.hpp                            |  452 -------
+ 214 files changed, 21756 insertions(+), 21756 deletions(-)
+
+commit 8feb9da498aa6bd5fec5f31404a0dd412ac8c53b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 18:57:18 2012 +0200
+
+    Add the quitting news to NEWS
+
+ NEWS |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit e840a00c4ac4de8dacff458e9e454f23d7ce3462
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 18:28:24 2012 +0200
+
+    Fix game exit when catching SDL_QUIT, without ugly throw
+    
+    Bascially a metter of adding checks for !running which is set when
+    SDL_QUIT is processed, had to add some return and process()
+    to catch and unwind all subcases, hopefully there shouldn't be any
+    left now.
+
+ gfx.cpp  |   24 +++++++++++++++---------
+ main.cpp |    5 +----
+ 2 files changed, 16 insertions(+), 13 deletions(-)
+
+commit 1ec8a5a5051f44b89720567b2dce0c64a09feabf
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 17:02:05 2012 +0200
+
+    Add dummy file to not end up with empty dir
+
+ 0 files changed
+
+commit 7509d7cda9571678581a913a54740980159fcc5a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:58:37 2012 +0200
+
+    Change Erik Lindroos' (c) years 2010 -> 2007-2010
+    
+    Some of those are too early, but it's better to claim copyright on
+    nonexistent stuff and catch the important than to miss out, I guess.
+
+ binReader.cpp                   |    2 +-
+ binReader.hpp                   |    2 +-
+ bobject.cpp                     |    2 +-
+ bobject.hpp                     |    2 +-
+ bonus.cpp                       |    2 +-
+ bonus.hpp                       |    2 +-
+ common.cpp                      |    2 +-
+ common.hpp                      |    2 +-
+ console.cpp                     |    2 +-
+ console.hpp                     |    2 +-
+ constants.cpp                   |    2 +-
+ constants.hpp                   |    2 +-
+ controller/commonController.cpp |    2 +-
+ controller/commonController.hpp |    2 +-
+ controller/controller.hpp       |    2 +-
+ controller/localController.cpp  |    2 +-
+ controller/localController.hpp  |    2 +-
+ controller/replayController.cpp |    2 +-
+ controller/replayController.hpp |    2 +-
+ exactObjectList.hpp             |    2 +-
+ fastObjectList.hpp              |    2 +-
+ filesystem.cpp                  |    2 +-
+ filesystem.hpp                  |    2 +-
+ game.cpp                        |    2 +-
+ game.hpp                        |    2 +-
+ gfx.cpp                         |    2 +-
+ gfx.hpp                         |    2 +-
+ gfx/blit.cpp                    |    2 +-
+ gfx/blit.hpp                    |    2 +-
+ gfx/color.hpp                   |    2 +-
+ gfx/font.cpp                    |    2 +-
+ gfx/font.hpp                    |    2 +-
+ gfx/macros.hpp                  |    2 +-
+ gfx/palette.cpp                 |    2 +-
+ gfx/sprite.cpp                  |    2 +-
+ gfx/sprite.hpp                  |    2 +-
+ keys.cpp                        |    2 +-
+ keys.hpp                        |    2 +-
+ level.cpp                       |    2 +-
+ level.hpp                       |    2 +-
+ lfs.hpp                         |    2 +-
+ main.cpp                        |    2 +-
+ math.cpp                        |    2 +-
+ math.hpp                        |    2 +-
+ menu/arrayEnumBehavior.hpp      |    2 +-
+ menu/booleanSwitchBehavior.cpp  |    2 +-
+ menu/booleanSwitchBehavior.hpp  |    2 +-
+ menu/enumBehavior.cpp           |    2 +-
+ menu/enumBehavior.hpp           |    2 +-
+ menu/hiddenMenu.cpp             |    2 +-
+ menu/hiddenMenu.hpp             |    2 +-
+ menu/integerBehavior.cpp        |    2 +-
+ menu/integerBehavior.hpp        |    2 +-
+ menu/itemBehavior.cpp           |    2 +-
+ menu/itemBehavior.hpp           |    2 +-
+ menu/menu.cpp                   |    2 +-
+ menu/menu.hpp                   |    2 +-
+ menu/menuItem.cpp               |    2 +-
+ menu/menuItem.hpp               |    2 +-
+ menu/timeBehavior.cpp           |    2 +-
+ menu/timeBehavior.hpp           |    2 +-
+ ninjarope.cpp                   |    2 +-
+ nobject.cpp                     |    2 +-
+ nobject.hpp                     |    2 +-
+ objectList.hpp                  |    2 +-
+ rand.cpp                        |    2 +-
+ rand.hpp                        |    2 +-
+ reader.cpp                      |    2 +-
+ reader.hpp                      |    2 +-
+ rect.hpp                        |    2 +-
+ replay.cpp                      |    2 +-
+ replay.hpp                      |    2 +-
+ sdlmain.cpp                     |    2 +-
+ settings.cpp                    |    4 ++--
+ settings.hpp                    |    2 +-
+ sfx.cpp                         |    2 +-
+ sfx.hpp                         |    2 +-
+ sobject.cpp                     |    2 +-
+ sobject.hpp                     |    2 +-
+ sys.cpp                         |    2 +-
+ sys.hpp                         |    2 +-
+ text.cpp                        |    2 +-
+ text.hpp                        |    2 +-
+ version.hpp                     |    2 +-
+ viewport.cpp                    |    2 +-
+ viewport.hpp                    |    2 +-
+ weapon.cpp                      |    2 +-
+ weapon.hpp                      |    2 +-
+ weapsel.cpp                     |    2 +-
+ weapsel.hpp                     |    2 +-
+ worm.cpp                        |    2 +-
+ worm.hpp                        |    2 +-
+ 92 files changed, 93 insertions(+), 93 deletions(-)
+
+commit 35adfaa7c766c1f6498b1125946ebea49545c25b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:58:18 2012 +0200
+
+    gvl copyright tweak
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit dbbb4587c97eab4e9c78a9b90354b3242fe37f73
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:53:45 2012 +0200
+
+    GLobal add of copyright to remaining Gliptic+basro
+
+ bobject.cpp                     |   26 ++++++++++++++++++++++++++
+ bobject.hpp                     |   26 ++++++++++++++++++++++++++
+ bonus.cpp                       |   26 ++++++++++++++++++++++++++
+ bonus.hpp                       |   26 ++++++++++++++++++++++++++
+ controller/commonController.cpp |   26 ++++++++++++++++++++++++++
+ controller/commonController.hpp |   26 ++++++++++++++++++++++++++
+ controller/controller.hpp       |   26 ++++++++++++++++++++++++++
+ controller/localController.hpp  |   26 ++++++++++++++++++++++++++
+ controller/replayController.cpp |   26 ++++++++++++++++++++++++++
+ controller/replayController.hpp |   26 ++++++++++++++++++++++++++
+ filesystem.cpp                  |   26 ++++++++++++++++++++++++++
+ filesystem.hpp                  |   26 ++++++++++++++++++++++++++
+ game.cpp                        |   26 ++++++++++++++++++++++++++
+ gfx/blit.cpp                    |   26 ++++++++++++++++++++++++++
+ gfx/blit.hpp                    |   26 ++++++++++++++++++++++++++
+ gfx/color.hpp                   |   26 ++++++++++++++++++++++++++
+ gfx/macros.hpp                  |   26 ++++++++++++++++++++++++++
+ gfx/palette.cpp                 |   26 ++++++++++++++++++++++++++
+ gfx/sprite.cpp                  |   26 ++++++++++++++++++++++++++
+ gfx/sprite.hpp                  |   26 ++++++++++++++++++++++++++
+ keys.cpp                        |   26 ++++++++++++++++++++++++++
+ keys.hpp                        |   26 ++++++++++++++++++++++++++
+ level.hpp                       |   26 ++++++++++++++++++++++++++
+ menu/arrayEnumBehavior.hpp      |   26 ++++++++++++++++++++++++++
+ menu/booleanSwitchBehavior.cpp  |   26 ++++++++++++++++++++++++++
+ menu/booleanSwitchBehavior.hpp  |   26 ++++++++++++++++++++++++++
+ menu/enumBehavior.cpp           |   26 ++++++++++++++++++++++++++
+ menu/enumBehavior.hpp           |   26 ++++++++++++++++++++++++++
+ menu/hiddenMenu.cpp             |   26 ++++++++++++++++++++++++++
+ menu/hiddenMenu.hpp             |   26 ++++++++++++++++++++++++++
+ menu/integerBehavior.cpp        |   26 ++++++++++++++++++++++++++
+ menu/integerBehavior.hpp        |   26 ++++++++++++++++++++++++++
+ menu/itemBehavior.cpp           |   26 ++++++++++++++++++++++++++
+ menu/itemBehavior.hpp           |   26 ++++++++++++++++++++++++++
+ menu/menuItem.cpp               |   26 ++++++++++++++++++++++++++
+ menu/menuItem.hpp               |   26 ++++++++++++++++++++++++++
+ menu/timeBehavior.cpp           |   26 ++++++++++++++++++++++++++
+ menu/timeBehavior.hpp           |   26 ++++++++++++++++++++++++++
+ ninjarope.cpp                   |   26 ++++++++++++++++++++++++++
+ nobject.cpp                     |   26 ++++++++++++++++++++++++++
+ nobject.hpp                     |   26 ++++++++++++++++++++++++++
+ objectList.hpp                  |   26 ++++++++++++++++++++++++++
+ replay.cpp                      |   26 ++++++++++++++++++++++++++
+ replay.hpp                      |   26 ++++++++++++++++++++++++++
+ version.hpp                     |   26 ++++++++++++++++++++++++++
+ viewport.cpp                    |   26 ++++++++++++++++++++++++++
+ viewport.hpp                    |   26 ++++++++++++++++++++++++++
+ weapon.cpp                      |   26 ++++++++++++++++++++++++++
+ weapon.hpp                      |   26 ++++++++++++++++++++++++++
+ weapsel.cpp                     |   26 ++++++++++++++++++++++++++
+ weapsel.hpp                     |   26 ++++++++++++++++++++++++++
+ 51 files changed, 1326 insertions(+)
+
+commit df2066fe2992aa51441aef52ca2f0c61ae9ba916
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:47:38 2012 +0200
+
+    add missing copyright header
+
+ math.hpp |   26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+commit ecd5808c85909b3072a1b3de935224abe7e3b345
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:41:59 2012 +0200
+
+    globally add copyright for Gliptic+basro+martin
+
+ common.cpp                     |   27 +++++++++++++++++++++++++++
+ controller/localController.cpp |   27 +++++++++++++++++++++++++++
+ gfx.cpp                        |   27 +++++++++++++++++++++++++++
+ gfx/font.cpp                   |   27 +++++++++++++++++++++++++++
+ level.cpp                      |   27 +++++++++++++++++++++++++++
+ menu/menu.cpp                  |   27 +++++++++++++++++++++++++++
+ settings.cpp                   |   27 +++++++++++++++++++++++++++
+ worm.cpp                       |   27 +++++++++++++++++++++++++++
+ 8 files changed, 216 insertions(+)
+
+commit 22dfe997aae0ab541d577c1ee15139e804486fe4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:39:09 2012 +0200
+
+    Add copyright headers for martin-only
+
+ argParse.cpp     |   25 +++++++++++++++++++++++++
+ argParse.hpp     |   25 +++++++++++++++++++++++++
+ boostTesting.cpp |   25 +++++++++++++++++++++++++
+ configHelper.cpp |   25 +++++++++++++++++++++++++
+ configInit.cpp   |   25 +++++++++++++++++++++++++
+ dataPath.cpp     |   25 +++++++++++++++++++++++++
+ to_string.cpp    |   25 +++++++++++++++++++++++++
+ 7 files changed, 175 insertions(+)
+
+commit b01c38846b54a4eacb0ef9ed782b7a97eceddf96
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:36:56 2012 +0200
+
+    Add copyright headers for martin + gliptic
+
+ binReader.cpp |   26 ++++++++++++++++++++++++++
+ constants.cpp |   26 ++++++++++++++++++++++++++
+ main.cpp      |   26 ++++++++++++++++++++++++++
+ math.cpp      |   26 ++++++++++++++++++++++++++
+ reader.cpp    |   26 ++++++++++++++++++++++++++
+ 5 files changed, 130 insertions(+)
+
+commit bb387b9eca789f348b302e7e53afe4a2bd37ad22
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:32:32 2012 +0200
+
+    Add copyright headers globally for Gliptic 2010
+
+ console.cpp         |   25 +++++++++++++++++++++++++
+ console.hpp         |   25 +++++++++++++++++++++++++
+ exactObjectList.hpp |   25 +++++++++++++++++++++++++
+ fastObjectList.hpp  |   25 +++++++++++++++++++++++++
+ lfs.hpp             |   25 +++++++++++++++++++++++++
+ rand.cpp            |   25 +++++++++++++++++++++++++
+ rand.hpp            |   25 +++++++++++++++++++++++++
+ rect.hpp            |   25 +++++++++++++++++++++++++
+ sdlmain.cpp         |   25 +++++++++++++++++++++++++
+ sfx.cpp             |   25 +++++++++++++++++++++++++
+ sfx.hpp             |   25 +++++++++++++++++++++++++
+ sobject.cpp         |   25 +++++++++++++++++++++++++
+ sobject.hpp         |   25 +++++++++++++++++++++++++
+ sys.cpp             |   25 +++++++++++++++++++++++++
+ sys.hpp             |   25 +++++++++++++++++++++++++
+ text.cpp            |   25 +++++++++++++++++++++++++
+ text.hpp            |   25 +++++++++++++++++++++++++
+ 17 files changed, 425 insertions(+)
+
+commit 05c1cd8766895dfdf3e2a5ed7ab4fb7af30306a0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 16:31:38 2012 +0200
+
+    gvl: copyright headers
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6d76a6256417dd08b513613835cdac11b10dbb9c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 15:08:40 2012 +0200
+
+    purge crlf and whitespace lierolibre-globally
+
+ .hgignore                       |    8 +-
+ bobject.cpp                     |  128 +-
+ bobject.hpp                     |   44 +-
+ bonus.cpp                       |   74 +-
+ bonus.hpp                       |   54 +-
+ console.cpp                     |  446 +++---
+ console.hpp                     |   76 +-
+ controller/commonController.cpp |   92 +-
+ controller/commonController.hpp |   32 +-
+ controller/controller.hpp       |   76 +-
+ controller/localController.cpp  |  564 +++----
+ controller/localController.hpp  |  110 +-
+ controller/replayController.cpp |  340 ++---
+ controller/replayController.hpp |  106 +-
+ exactObjectList.hpp             |  360 ++---
+ fastObjectList.hpp              |  252 ++--
+ filesystem.cpp                  |  716 ++++-----
+ filesystem.hpp                  |  156 +-
+ gfx/blit.cpp                    |  978 ++++++------
+ gfx/blit.hpp                    |   76 +-
+ gfx/color.hpp                   |   12 +-
+ gfx/macros.hpp                  |  350 ++---
+ gfx/sprite.cpp                  |  104 +-
+ gfx/sprite.hpp                  |   52 +-
+ keys.cpp                        |  252 ++--
+ keys.hpp                        |   64 +-
+ level.cpp                       |  568 +++----
+ level.hpp                       |  154 +-
+ lfs.hpp                         |  156 +-
+ menu/arrayEnumBehavior.hpp      |   60 +-
+ menu/booleanSwitchBehavior.cpp  |   68 +-
+ menu/booleanSwitchBehavior.hpp  |   48 +-
+ menu/enumBehavior.cpp           |   98 +-
+ menu/enumBehavior.hpp           |   64 +-
+ menu/hiddenMenu.cpp             |  172 +--
+ menu/hiddenMenu.hpp             |   62 +-
+ menu/integerBehavior.cpp        |  114 +-
+ menu/integerBehavior.hpp        |   64 +-
+ menu/itemBehavior.cpp           |    6 +-
+ menu/itemBehavior.hpp           |   46 +-
+ menu/menuItem.cpp               |   78 +-
+ menu/menuItem.hpp               |   68 +-
+ menu/timeBehavior.cpp           |   28 +-
+ menu/timeBehavior.hpp           |   40 +-
+ ninjarope.cpp                   |  246 +--
+ nobject.cpp                     |  746 +++++-----
+ nobject.hpp                     |  120 +-
+ objectList.hpp                  |  334 ++---
+ rand.hpp                        |   20 +-
+ rect.hpp                        |   42 +-
+ replay.cpp                      | 1330 ++++++++---------
+ replay.hpp                      |  222 +--
+ sdlmain.cpp                     |    2 +-
+ sfx.cpp                         |  304 ++--
+ sfx.hpp                         |  176 +--
+ sobject.cpp                     |  546 +++----
+ sobject.hpp                     |   82 +-
+ sys.cpp                         |   38 +-
+ sys.hpp                         |   30 +-
+ text.cpp                        |  164 +-
+ text.hpp                        |   70 +-
+ version.hpp                     |   12 +-
+ viewport.hpp                    |  164 +-
+ weapon.cpp                      |  884 +++++------
+ weapon.hpp                      |  192 +--
+ weapsel.cpp                     | 1096 +++++++-------
+ weapsel.hpp                     |   62 +-
+ worm.cpp                        | 3132 +++++++++++++++++++--------------------
+ 68 files changed, 8715 insertions(+), 8715 deletions(-)
+
+commit d63cb4750fca7c9475254227de61423013e6dd53
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 15:07:36 2012 +0200
+
+    gvl: update module with whitespace purge
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 97ad2ee5556845de8b34d296033861366788d583
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 14:53:55 2012 +0200
+
+    omit a probably redundant null check
+
+ viewport.cpp |   24 +++++++++++-------------
+ 1 file changed, 11 insertions(+), 13 deletions(-)
+
+commit ea92788ab94ed74cdb7bc2797c031d5d871523f1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 14:23:27 2012 +0200
+
+    viewport.cpp whitespace
+
+ viewport.cpp |  184 +++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 92 insertions(+), 92 deletions(-)
+
+commit f52b8dc2802b1e5e58d96109e24ec5fef2ed98f3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 13:41:18 2012 +0200
+
+    Check for tut headers and just do a notice if the don't exist
+    
+    Embedded libtut was removed from gvl, however it is only required
+    for gvltest
+
+ configure.ac |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit 8a0c3320caee21b5751b2154da823d06e755e700
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 13:41:02 2012 +0200
+
+    update gvl with removal of zlib & libpcl
+
+ gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1e10d484e8a9d233df349849ed6179c720fdb020
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 13:40:12 2012 +0200
+
+    Update copyright infor with removal of zlib & libpcl
+
+ COPYING |   15 ---------------
+ 1 file changed, 15 deletions(-)
+
+commit a409cc9a8d0acd715498f1f3eb0645ba4e1aaf94
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 13:19:12 2012 +0200
+
+    Copy in sdl.m4 during autoreconf step instead of keeping it in VCS
+
+ autogen.sh |    4 ++
+ m4/sdl.m4  |  208 ------------------------------------------------------------
+ 2 files changed, 4 insertions(+), 208 deletions(-)
+
+commit 16a0afd65d9ba251617e126ea6a9f4ab135d0ab9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 12:10:11 2012 +0200
+
+    Info about new resolution features in NEWS
+
+ NEWS |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit e8255a00b0765847eb702cd8d15ea7252a3093ae
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 12:01:25 2012 +0200
+
+    Add F7 for x3, F8 for x4 scaling
+
+ gfx.cpp |   28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+commit f1defa0f3dea0fc6b6e33f7793b00193190db5c3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 12:00:14 2012 +0200
+
+    change default screen height 480 -> 400, (200*n)
+
+ gfx.cpp |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit d3f134e730d20673a4956e34bfd595f639dfc058
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 11:55:57 2012 +0200
+
+    Reset resolution if not fullscreen, instead of if
+
+ gfx.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f40401a1d3af3ba8d6fde27be26e94fd3028a2af
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 11:51:36 2012 +0200
+
+    Try max resolution given by SDL for fullscreen first
+
+ gfx.cpp |   10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 06c3757214e4f08614a6413ad3e14472a5918a7f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 11:46:44 2012 +0200
+
+    main: lower default screen resolution to 640x400
+    
+    Since the Nearest scaling filter in the game only supports exact
+    multiples of 320x200 (everything else just becomes a black border)
+    640x400 seems to be the safest and nicest default resolution.
+
+ main.cpp |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 18d4e2c2fa76f7616ac98a267010cf054a881fe9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 10:51:08 2012 +0200
+
+    settings: crlf, whitespace, license headers
+
+ settings.cpp |  353 ++++++++++++++++---------------
+ settings.hpp |  651 ++++++++++++++++++++++++++++++----------------------------
+ 2 files changed, 529 insertions(+), 475 deletions(-)
+
+commit 3788a8b80ac17e80fe0da60c8d5daae33248c949
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 02:33:49 2012 +0200
+
+    Ugly try-catch to make SDL_QUIT do something
+
+ gfx.cpp  |    1 +
+ main.cpp |    6 +++++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+commit 27edf4c37e1a05cdf2262cc4b153d7848411e001
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Apr 25 00:21:39 2012 +0200
+
+    Ugly hack in main to initialize game at 800x500
+
+ main.cpp |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit f2ce5fc4522f0c98798e9ea10a73a66e09e19f75
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 23:27:00 2012 +0200
+
+    Added history from Liero OpenLiero and LIERO to NEWS
+
+ NEWS |  300 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 300 insertions(+)
+
+commit e0c08681fb9f26aa551f8e111fa96965ab76f0d6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 22:58:36 2012 +0200
+
+    Add a configure var for window caption and use in gfx.cpp
+
+ configure.ac |    4 ++++
+ gfx.cpp      |    3 ++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+commit 78d478795d2622895393991107d2cda491c65495
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Apr 24 22:27:28 2012 +0200
+
+    Dump "git log --stat" to changelog
+
+ ChangeLog | 4069 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 4068 insertions(+), 1 deletion(-)
+
 commit cc01f9d8c11f8d13a3023550db250dd5f4581ced
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Tue Apr 24 22:13:15 2012 +0200
