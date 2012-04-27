@@ -1,3 +1,30 @@
+commit c4b0e2d09e1347e5baede192139180f5bb5b36f6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 18:29:36 2012 +0200
+
+    note ./liero.cfg -> data/liero.cfg default change in NEWS
+
+ NEWS |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 522200c4b5b5ee2a0149f44106e7329cb924ab3c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 18:27:33 2012 +0200
+
+    Default to using the data/liero.cfg instead of ./liero.cfg
+
+ src/main.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 58af8f5d9647a8284c3e41920737d2404764cba7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 18:21:20 2012 +0200
+
+    Refresh ChangeLog
+
+ ChangeLog |   24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
 commit e7b9d977494556be9278dfb2dcf8540dac926610
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Fri Apr 27 18:18:27 2012 +0200
