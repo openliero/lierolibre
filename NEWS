@@ -15,6 +15,7 @@ Version 0.2 - April 2012, by Martin Erik Werner
     - arg3 is auto-assigned to output file
 * Fixed a bug where giving a directory path without the ending "/" would set
   the path to the parent directory instead.
+* Defaults to reading data/liero.cfg instead of ./liero.cfg
 * Removal of non-free dtoa piece in gvl
 * Better resolution handling (only for 'Nearest' filter)
   + Game window now defaults to double the size (640x400)
