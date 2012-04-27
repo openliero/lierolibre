@@ -1,3 +1,27 @@
+commit e7b9d977494556be9278dfb2dcf8540dac926610
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 18:18:27 2012 +0200
+
+    Add a lot of info to the README
+    
+    * Window size keys
+    * Config file info
+    * Compile and install instructions
+    * Bug reporting link
+    * More info link to LP
+
+ README |   52 +++++++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 41 insertions(+), 11 deletions(-)
+
+commit 91d3580b9938a09ec16159563e5cc628d6103510
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 16:47:47 2012 +0200
+
+    Update ChangeLog with git-log --stat >
+
+ ChangeLog | 1145 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 1145 insertions(+)
+
 commit b0d707833ddff662fe426d827d4fcd9758325c8a
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Fri Apr 27 16:44:50 2012 +0200
