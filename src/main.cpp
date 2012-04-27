@@ -216,6 +216,8 @@ try
 }
 catch(std::exception& ex)
 {
+	closeAllCachedFiles();
+
 	SDL_Quit();
 	Console::setAttributes(0x2f);
 	Console::writeLine(std::string("EXCEPTION: ") + ex.what());
