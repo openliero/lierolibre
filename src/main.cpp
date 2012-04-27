@@ -169,23 +169,12 @@ try
 		gfx.settings.reset(new Settings);
 		gfx.saveSettings();
 	} else {
-		FILE* f = fopen(lieroOPT.c_str(), "rb");
-		std::size_t len = fileLength(f);
-		if (len > 255)
-			len = 255;
-		char buf[256];
-		if(fread(buf, 1, len, f) != len)
-			throw std::runtime_error("failed to fully read '" + lieroOPT + "'");
-		gfx.settingsFile.assign(buf, len);
-
-		rtrim(gfx.settingsFile);
+		gfx.loadOPT(lieroOPT); // Assigns gfx.settingsFile
 		if (!gfx.loadSettings()) {
 			gfx.settingsFile = "LIERO";
 			gfx.settings.reset(new Settings);
 			gfx.saveSettings();
 		}
-
-		fclose(f);
 	}
 
 	gfx.windowW = 640;
@@ -199,11 +188,7 @@ try
 
 	gfx.saveSettings();
 
-	FILE* f = fopen(lieroOPT.c_str(), "wb");
-	fwrite(gfx.settingsFile.data(), 1, gfx.settingsFile.size(), f);
-	fputc('\r', f);
-	fputc('\n', f);
-	fclose(f);
+	gfx.saveOPT(lieroOPT);
 
 	closeAllCachedFiles();
 

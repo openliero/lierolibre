@@ -2019,6 +2019,43 @@ bool Gfx::loadSettings()
 	return settings->load(data_path->file(settingsFile + ".DAT"));
 }
 
+void Gfx::loadOPT(std::string path)
+{
+	FILE* f = fopen(path.c_str(), "rb");
+	if (f == NULL) {
+		throw std::runtime_error("failed to open '" + path + "' for reading");
+	}
+	std::size_t len = fileLength(f);
+	if (len > 255)
+		len = 255;
+	char buf[256];
+	fread(buf, 1, len, f);
+	if (ferror(f)) {
+		fclose(f);
+		throw std::runtime_error("failed to fully read '" + path + "'");
+	}
+
+	gfx.settingsFile.assign(buf, len);
+	rtrim(gfx.settingsFile);
+
+	fclose(f);
+}
+
+void Gfx::saveOPT(std::string path)
+{
+	FILE* f = fopen(path.c_str(), "wb");
+	if (f == NULL) {
+		throw std::runtime_error("failed to open '" + path + "' for writing");
+	} else if (fwrite(gfx.settingsFile.data(), 1, gfx.settingsFile.size(), f) != gfx.settingsFile.size()) {
+		fclose(f);
+		throw std::runtime_error("failed to fully write to '" + path + "'");
+	} else if (fputc('\r', f) == EOF || fputc('\n', f) == EOF) {
+		fclose(f);
+		throw std::runtime_error("failed to fully write to '" + path + "'");
+	}
+	fclose(f);
+}
+
 void Gfx::drawBasicMenu(/*int curSel*/)
 {
 	std::memcpy(screen->pixels, &frozenScreen[0], frozenScreen.size());

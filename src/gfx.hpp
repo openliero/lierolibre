@@ -210,6 +210,9 @@ struct Gfx
 	void saveSettings();
 	bool loadSettings();
 
+	void saveOPT(std::string);
+	void loadOPT(std::string);
+
 	void processEvent(SDL_Event& ev, Controller* controller = 0);
 	//void settingEnter(int item);
 	//void settingLeftRight(int change, int item);
