@@ -174,7 +174,8 @@ try
 		if (len > 255)
 			len = 255;
 		char buf[256];
-		fread(buf, 1, len, f);
+		if(fread(buf, 1, len, f) != len)
+			throw std::runtime_error("failed to fully read '" + lieroOPT + "'");
 		gfx.settingsFile.assign(buf, len);
 
 		rtrim(gfx.settingsFile);
