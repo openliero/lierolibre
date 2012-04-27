@@ -582,6 +582,7 @@ $(nodist_man6_MANS): $(MANPAGES_SOURCES)
 		-e 's,#LIBEXECDIR#,$(libexecdir),g' \
 		-e 's,#PACKAGE#,$(PACKAGE),g' \
 		-e 's,#UPPERCASE_PACKAGE#,\U$(PACKAGE),g' \
+		-e 's,#PACKAGE_VERSION#,$(PACKAGE_VERSION),g' \
 		$(srcdir)/$@.am \
 		> $@
 
