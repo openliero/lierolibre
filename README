@@ -2,15 +2,45 @@ lierolibre is an old-school earthworm action game. It is a direct fork of Liero
 (OpenLiero).
 
 Features:
-* 2 worms, 40 weapons, great playability, two game modes: Kill'em All and Game
-  of Tag, plus AI-players without true intelligence!
-* Dat nostalgia
-* Extensions via a hidden F1 menu
-  + Replays
-  + Game controller support
-  + Powerlevel palettes
-* Ability to write game variables to plain text files
-* Ability to load game variables from both EXE and plain text files
-* New freely licensed audio
-* Scripts to extract and repack graphics, sounds and levels
+  * 2 worms, 40 weapons, great playability, two game modes: Kill'em All
+    and Game of Tag, plus AI-players without true intelligence!
+  * Dat nostalgia
+  * Extensions via a hidden F1 menu
+    + Replays
+    + Game controller support
+    + Powerlevel palettes
+  * Ability to write game variables to plain text files
+  * Ability to load game variables from both EXE and plain text files
+  * New freely licensed audio
+  * Scripts to extract and repack graphics, sounds and levels
 
+To switch between different window sizes, use F6, F7 and F8, to switch to
+fullscreen, use F5 or Alt+Enter.
+
+The file 'data/liero.cfg' is a plain text file containing all the game
+variables, this file is intented to be modified, go wild! Some things are
+likely to not work (make the game refuse to start, or crash) though:
+  ! Appending/Deleting elements
+  ! Changing integers to strings, strings to integers, etc.
+  ! Changing the sine and cosine tables
+
+Compiling, running and installing:
+
+  Build-dependencies as named in Debian Wheezy:
+    build-essential libtool pkg-config libsdl1.2-dev libsdl-mixer1.2-dev zlib1g-dev libconfig++-dev sox imagemagick
+
+  To compile lierolibre use:
+    ./configure
+    make
+
+  To run lierolibre from the source directory use:
+    ./lierolibre
+
+  To install lierolibre use:
+    (sudo) make install
+
+Please report bugs at https://bugs.launchpad.net/lierolibre/+filebug
+
+For more information see the manual pages in the man/ direcory, and visit the
+Launchpad page:
+https://launchpad.net/lierolibre
