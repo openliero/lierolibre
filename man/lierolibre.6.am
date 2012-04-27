@@ -78,8 +78,8 @@ is not set, the game tries to load the
 .I #CFGFILE#
 file from
 .I $HOME/.#PACKAGE#/
-first, otherwise it tries to load it from
-.IR inputdir .
+first, otherwise it tries to load it from the directory of
+.IR inputfile .
 
 .IP
 If
