@@ -71,7 +71,7 @@ try
 	Console::init();
 	gfx.rand.seed(Uint32(std::time(0)));
 
-	std::string inputFile = "./liero.cfg";
+	std::string inputFile = "data/liero.cfg";
 	std::string inputDir;
 	std::string outputFile;
 	gvl::shared_ptr<Common> common(new Common);
