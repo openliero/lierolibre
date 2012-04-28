@@ -1,5 +1,9 @@
 lierolibre NEWS - History of user-visible changes.
 
+Version 0.2.1 - March 2012, by Martin Erik Werner
+* Made it possible to exit from fullscreen via Alt+F4
+
+
 Version 0.2 - April 2012, by Martin Erik Werner
 
 * New dependency on boost_program_options
