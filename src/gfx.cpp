@@ -516,6 +516,9 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 			std::cout << "v " << s << ", " << std::hex << ev.key.keysym.mod << ", " << std::dec << int(ev.key.keysym.scancode) << std::endl;
 #endif
 
+			if((ev.key.keysym.mod & KMOD_ALT) && s == SDLK_F4)
+				running = false;
+
 			if(((ev.key.keysym.mod & KMOD_ALT) && s == SDLK_RETURN)
 			|| s == SDLK_F5)
 			{
