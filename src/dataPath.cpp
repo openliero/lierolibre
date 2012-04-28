@@ -36,8 +36,13 @@ using namespace std;
 
 string create_configdir(string directory)
 {
+#if GVL_WINDOWS
+	if (mkdir(directory.c_str()) == 0) {
+		return directory;
+#else
 	if (mkdir(directory.c_str(), 0777) == 0) {
 		return directory;
+#endif
 	} else if (errno == EEXIST) {
 		return directory;
 	} else {
@@ -53,7 +58,11 @@ DataPath::DataPath(string a_readonly_path)
 	else
 		readonly_path = getRoot(a_readonly_path);
 
+#if GVL_WINDOWS
+	configdotdir = "settings";
+#else
 	configdotdir = string(getenv("HOME")) + '/' + ".lierolibre";
+#endif
 
 	// Map of files we may want to return path to
 	// should probably be read from plaintext file
