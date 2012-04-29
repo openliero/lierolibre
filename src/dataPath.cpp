@@ -31,6 +31,7 @@
 #include <sys/types.h>
 #include <stdexcept>
 #include <cerrno>
+#include <gvl/support/platform.hpp> // For GVL_WINDOWS
 #include "filesystem.hpp"
 using namespace std;
 
