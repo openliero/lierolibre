@@ -35,10 +35,14 @@
 #include "filesystem.hpp"
 using namespace std;
 
+#if GVL_WINDOWS
+#include <direct.h> // _mkdir()
+#endif
+
 string create_configdir(string directory)
 {
 #if GVL_WINDOWS
-	if (mkdir(directory.c_str()) == 0) {
+	if (_mkdir(directory.c_str()) == 0) {
 		return directory;
 #else
 	if (mkdir(directory.c_str(), 0777) == 0) {
