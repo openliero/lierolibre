@@ -1,6 +1,6 @@
 #!/bin/sh
 
-defaultpath="#PKGDATADIR#/#CFGFILE#"
+defaultpath="#PKGDATADIR#"
 
 manualpath="false"
 
