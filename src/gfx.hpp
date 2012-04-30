@@ -259,7 +259,7 @@ struct Gfx
 	int fadeValue;
 	Uint32 lastFrame;
 	int menuCyclic;
-	int windowW, windowH;
+	int desktopH, desktopW, windowW, windowH, storedWindowH, storedWindowW;
 	int prevMag; // Previous magnification used for drawing
 	gvl::rect lastUpdateRect; // Last region that was updated when flipping
 	Rand rand; // PRNG for things that don't affect the game

@@ -235,7 +235,12 @@ void Gfx::init()
 	for ( int i = 0; i < numJoysticks; ++i ) {
 		joysticks[i].sdlJoystick = SDL_JoystickOpen(i);
 		joysticks[i].clearState();
+
 	}
+	// Save for checking to not go above
+	const SDL_VideoInfo* vidInfo = SDL_GetVideoInfo();
+	desktopH = vidInfo->current_h;
+	desktopW = vidInfo->current_w;
 }
 
 void Gfx::setVideoMode()
@@ -525,10 +530,14 @@ void Gfx::processEvent(SDL_Event& ev, Controller* controller)
 				fullscreen = !fullscreen;
 				if(!fullscreen)
 				{
-					// Try lowest resolution
-					windowW = 640;
-					windowH = 400;
+					// Restore pre-fullscreen size
+					windowW = storedWindowW;
+					windowH = storedWindowH;
+					setVideoMode();
 				}
+				// Store pre-fullscreen size
+				storedWindowW = windowW;
+				storedWindowH = windowH;
 				setVideoMode();
 			}
 			else if(s == SDLK_F6)
