@@ -253,19 +253,9 @@ void Gfx::setVideoMode()
 	if(fullscreen)
 	{
 		flags |= SDL_FULLSCREEN;
-		SDL_Rect** modes = SDL_ListModes(NULL, flags);
-		if(modes != (SDL_Rect**)0) // Any modes available
-		{
-			// Get max resolution and use that
-			int mx = sizeof modes / sizeof modes[0];
-			windowW = modes[mx]->w;
-			windowH = modes[mx]->h;
-		}
-		else if(settings->fullscreenW > 0 && settings->fullscreenH > 0)
-		{
-			windowW = settings->fullscreenW;
-			windowH = settings->fullscreenH;
-		}
+		// Use the (host) desktop resolution
+		windowW = desktopW;
+		windowH = desktopH;
 	}
 
 	if(!SDL_VideoModeOK(windowW, windowH, bitDepth, flags))
