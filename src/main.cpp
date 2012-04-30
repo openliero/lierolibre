@@ -176,10 +176,7 @@ try
 			gfx.saveSettings();
 		}
 	}
-
-	gfx.windowW = 640;
-	gfx.windowH = 400;
-	gfx.setVideoMode();
+	gfx.setMaxVideoMode();
 	sfx.init();
 
 	//game.initGame();
