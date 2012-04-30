@@ -809,11 +809,6 @@ int Gfx::fitScreen(int backW, int backH, int scrW, int scrH, int& offsetX, int& 
 
 	--mag; // mag was the first that didn't fit
 
-	if(settings->scaleFilter == Settings::SfScale2X)
-	{
-		mag = std::min(mag, 2);
-	}
-
 	scrW *= mag;
 	scrH *= mag;
 
@@ -939,75 +934,85 @@ void Gfx::flip()
 			}
 			else if(mag > 2)
 			{
-				for(int y = 0; y < 200; ++y)
+				if(settings->scaleFilter == Settings::SfNearest)
 				{
-					PalIdx* line = src + y*srcPitch;
-					int destMagPitch = mag*destPitch;
-					PalIdx* destLine = dest + y*destMagPitch;
 
-					for(int x = 0; x < 320/4 - 1; ++x)
+					for(int y = 0; y < 200; ++y)
 					{
-						uint32_t pix = *reinterpret_cast<uint32_t*>(line);
-						line += 4;
+						PalIdx* line = src + y*srcPitch;
+						int destMagPitch = mag*destPitch;
+						PalIdx* destLine = dest + y*destMagPitch;
 
-						uint32_t a = pix >> 24;
-						uint32_t b = pix & 0x00ff0000;
-						uint32_t c = pix & 0x0000ff00;
-						uint32_t d = pix & 0x000000ff;
-
-						a |= (a << 8);
-						b |= (b << 8);
-						c |= (c >> 8);
-						d |= (d << 8);
-
-						a |= (a << 16);
-						b |= (b >> 16);
-						c |= (c << 16);
-						d |= (d << 16);
-
-						// !arch
-						#define WRITE_BLOCK(C) \
-						do { \
-							int i = mag; \
-							while(i >= 4) { \
-								for(int y = 0; y < destMagPitch; y += destPitch) { \
-									uint32_t* dest32 = reinterpret_cast<uint32_t*>(destLine + y); \
-									*dest32 = (C); \
-								} \
-								destLine += 4; \
-								i -= 4; \
-							} \
-							if(i > 0) { \
-								for(int y = 0; y < destMagPitch; y += destPitch) { \
-									uint32_t* dest32 = reinterpret_cast<uint32_t*>(destLine + y); \
-									*dest32 = (C); \
-								} \
-								destLine += i; \
-							} \
-						} while(0)
-
-						// !arch
-						WRITE_BLOCK(d);
-						WRITE_BLOCK(c);
-						WRITE_BLOCK(b);
-						WRITE_BLOCK(a);
-
-						#undef WRITE_BLOCK
-
-					}
-
-					for(int x = 0; x < 4; ++x)
-					{
-						PalIdx pix = *line++;
-						for(int dy = 0; dy < destMagPitch; dy += destPitch)
+						for(int x = 0; x < 320/4 - 1; ++x)
 						{
-							for(int dx = 0; dx < mag; ++dx)
-							{
-								destLine[dy + dx] = pix;
-							}
+							uint32_t pix = *reinterpret_cast<uint32_t*>(line);
+							line += 4;
+
+							uint32_t a = pix >> 24;
+							uint32_t b = pix & 0x00ff0000;
+							uint32_t c = pix & 0x0000ff00;
+							uint32_t d = pix & 0x000000ff;
+
+							a |= (a << 8);
+							b |= (b << 8);
+							c |= (c >> 8);
+							d |= (d << 8);
+
+							a |= (a << 16);
+							b |= (b >> 16);
+							c |= (c << 16);
+							d |= (d << 16);
+
+							// !arch
+							#define WRITE_BLOCK(C) \
+							do { \
+								int i = mag; \
+								while(i >= 4) { \
+									for(int y = 0; y < destMagPitch; y += destPitch) { \
+										uint32_t* dest32 = reinterpret_cast<uint32_t*>(destLine + y); \
+										*dest32 = (C); \
+									} \
+									destLine += 4; \
+									i -= 4; \
+								} \
+								if(i > 0) { \
+									for(int y = 0; y < destMagPitch; y += destPitch) { \
+										uint32_t* dest32 = reinterpret_cast<uint32_t*>(destLine + y); \
+										*dest32 = (C); \
+									} \
+									destLine += i; \
+								} \
+							} while(0)
+
+							// !arch
+							WRITE_BLOCK(d);
+							WRITE_BLOCK(c);
+							WRITE_BLOCK(b);
+							WRITE_BLOCK(a);
+
+							#undef WRITE_BLOCK
+
 						}
-						destLine += mag;
+
+						for(int x = 0; x < 4; ++x)
+						{
+							PalIdx pix = *line++;
+							for(int dy = 0; dy < destMagPitch; dy += destPitch)
+							{
+								for(int dx = 0; dx < mag; ++dx)
+								{
+									destLine[dy + dx] = pix;
+								}
+							}
+							destLine += mag;
+						}
 					}
+				}
+				else if(settings->scaleFilter == Settings::SfScale2X)
+				{
+					#define DECL int downOffset = destPitch ; SCALE2X_DECL
+					FILTER_X(dest, mag*destPitch, src, srcPitch, 320, 200, 1, mag, SCALE2X, DECL, READER_8, WRITER_2X_8);
+					#undef DECL
 				}
 			}
 		}
@@ -1046,7 +1051,7 @@ void Gfx::flip()
 					WRITE32(pix_2x_dest_+downOffset, R3); \
 					WRITE32(pix_2x_dest_+downOffset+4, R4); \
 				} while(0)
-				FILTER_X(dest, 2*destPitch, src, srcPitch, 320, 200, 1, 2*4, SCALE2X, DECL, PALREADER_8, WRITER_2X_32);
+				FILTER_X(dest, mag*destPitch, src, srcPitch, 320, 200, 1, mag*4, SCALE2X, DECL, PALREADER_8, WRITER_2X_32);
 				#undef DECL
 			}
 			else
