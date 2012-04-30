@@ -278,6 +278,42 @@ void Gfx::setVideoMode()
 	back = SDL_SetVideoMode(windowW, windowH, bitDepth, flags);
 }
 
+// Prioritises maximum supported 320x200 multiple
+void Gfx::setMaxVideoMode()
+{
+	int bitDepth = 8;
+	if(settings->depth32)
+		bitDepth = 32;
+
+	int flags = SDL_SWSURFACE | SDL_RESIZABLE;
+
+	if(fullscreen)
+	{
+		flags |= SDL_FULLSCREEN;
+		windowW = desktopW;
+		windowH = desktopH;
+	}
+	else
+	{
+		// Get max possible within desktop size
+		int max = 1;
+		while((320 * max <= desktopW) && (200 * max <= desktopH))
+			++max;
+		--max; // Last known working
+		windowW = 320 * max;
+		windowH = 200 * max;
+	}
+
+	if(!SDL_VideoModeOK(windowW, windowH, bitDepth, flags))
+	{
+		// Default to 640x480
+		windowW = 640;
+		windowH = 480;
+	}
+
+	back = SDL_SetVideoMode(windowW, windowH, bitDepth, flags);
+}
+
 void Gfx::loadPalette()
 {
 	origpal = common->exepal;

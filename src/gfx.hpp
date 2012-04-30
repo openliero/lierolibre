@@ -113,6 +113,7 @@ struct Gfx
 
 	void init();
 	void setVideoMode();
+	void setMaxVideoMode();
 	void loadPalette();
 	void loadMenus();
 	void loadMenusFromCFG(std::string cfgFilePath);
