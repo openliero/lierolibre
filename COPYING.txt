@@ -35,7 +35,7 @@ Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
            2010, Mario Carbajal "basro"
            2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
-##Comment: The full license texts in this document are separate entities with
+Comment: The full license texts in this document are separate entities with
          separate licenses, and not covered under the BSD-2-Clause license
 
 Files: data/*
