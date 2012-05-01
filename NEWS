@@ -1,6 +1,6 @@
 lierolibre NEWS - History of user-visible changes.
 
-Version 0.2.1 - March 2012, by Martin Erik Werner
+Version 0.3 - March 2012, by Martin Erik Werner
 * Made it possible to exit from fullscreen via Alt+F4
 * Fixed a bug in the launch script that made the liero.cfg file in the home
   directory not be prioritized.
