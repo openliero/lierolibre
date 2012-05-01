@@ -25,10 +25,11 @@
  */
 
 #include "reader.hpp"
-#include "filesystem.hpp"
 #include <SDL/SDL.h>
 #include <map>
 #include <stdexcept>
+#include <gvl/support/platform.hpp> // For GVL_WINDOWS
+#include "filesystem.hpp"
 
 std::string lieroOPT;
 std::string lieroCFG;
