@@ -79,11 +79,11 @@ struct DirectorySetup
 		file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
 		file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 		file_access_map.insert(pair<string, bool>("liero.cfg", true));
-		file_access_map.insert(pair<string, bool>("liero.txt", true));
+		file_access_map.insert(pair<string, bool>("lierocfg.txt", true));
 
 		names_rw.push_back("LIERO.DAT");
 		names_rw.push_back("liero.cfg");
-		names_rw.push_back("liero.txt");
+		names_rw.push_back("lierocfg.txt");
 
 		template_string = "/tmp/liero_tmp_XXXXXX";
 		strcpy(c_temp_homedir, template_string.c_str());
