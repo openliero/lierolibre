@@ -1,3 +1,28 @@
+commit df1708ee4a4755cfc5603d0ec5aab48a73ef6dba
+Merge: 0b717aa e99af1e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 00:05:50 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit e99af1ea5c41a1c1107b3764ceb423de3585abf6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 00:05:35 2012 +0200
+
+    add include for GVL_WINDOWS
+
+ src/reader.cpp |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 0b717aa4e2209b9a2b516535c95f1e1746ae64c9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 23:47:18 2012 +0200
+
+    Separate ChangeLog for the windows branch, though
+
+ ChangeLog.txt | 5612 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 5612 insertions(+)
+
 commit 37b2e921522275d2dfb690c785e6a0a28f18fd92
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Tue May 1 23:46:18 2012 +0200
