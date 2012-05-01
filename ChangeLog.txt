@@ -1,3 +1,21 @@
+commit b47b99a71b87ac49525ef9dd840b72ea2744d8f0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 00:19:13 2012 +0200
+
+    Remove leftover check-marker
+
+ COPYING.txt |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d29f2436db04e8c53e48fdbf55583a2be2a9c818
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 00:06:58 2012 +0200
+
+    Update windows changelog
+
+ ChangeLog.txt |   25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
 commit df1708ee4a4755cfc5603d0ec5aab48a73ef6dba
 Merge: 0b717aa e99af1e
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
