@@ -79,6 +79,7 @@ DataPath::DataPath(string a_readonly_path)
 	file_access_map.insert(pair<string, bool>("LIERO.OPT", true));
 	file_access_map.insert(pair<string, bool>("LIERO.DAT", true));
 	file_access_map.insert(pair<string, bool>("liero.cfg", true));
+	file_access_map.insert(pair<string, bool>("liero.txt", true));
 }
 
 string DataPath::file(string filename)
