@@ -46,9 +46,7 @@ struct Font
 
 	void loadFromEXE();
 	void loadFromCFG(std::string cfgFilePath);
-	void loadFromCFG();
 	void writeToCFG(std::string cfgFilePath);
-	void writeToCFG();
 	void drawText(char const* str, std::size_t len, int x, int y, int color);
 	int getDims(char const* str, std::size_t len, int* height = 0);
 	void drawChar(unsigned char ch, int x, int y, int color);

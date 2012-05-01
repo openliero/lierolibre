@@ -71,7 +71,7 @@ try
 	Console::init();
 	gfx.rand.seed(Uint32(std::time(0)));
 
-	std::string inputFile = "data/liero.cfg";
+	std::string inputFile = "data";
 	std::string inputDir;
 	std::string outputFile;
 	gvl::shared_ptr<Common> common(new Common);
@@ -108,6 +108,10 @@ try
 	if (argParse.vm.count("file") && argParse.vm.count("dir")) {
 		ConfigInit cfgInit(inputFile, inputDir, common);
 
+		if (argParse.vm.count("write"))
+			cfgInit.write(argParse.vm["write"].as<std::string>());
+	} else if (argParse.vm.count("dir")) {
+		ConfigInit cfgInit(inputFile, inputDir, common);
 		if (argParse.vm.count("write"))
 			cfgInit.write(argParse.vm["write"].as<std::string>());
 	} else {

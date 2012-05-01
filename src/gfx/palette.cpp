@@ -130,11 +130,6 @@ void Palette::readFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Palette::readFromCFG(void)
-{
-	readFromCFG("liero.cfg");
-}
-
 void Palette::writeToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -151,11 +146,6 @@ void Palette::writeToCFG(std::string cfgFilePath)
 		cfgHelp.put(spentries, "entries" + to_string(i) + "b", entries[i].b);
 	}
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Palette::writeToCFG()
-{
-	writeToCFG("liero.cfg");
 }
 
 void Palette::setWormColour(int i, WormSettings const& settings)

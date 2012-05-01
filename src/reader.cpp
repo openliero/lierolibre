@@ -127,5 +127,15 @@ void setLieroPath(std::string const& path)
 	lieroCHR = data_path->file("LIERO.CHR");
 	lieroSND = data_path->file("LIERO.SND");
 	lieroOPT = data_path->file("LIERO.OPT");
-	lieroCFG = data_path->file("liero.cfg"); // Looks in $HOME first
+}
+
+// $HOME takes priority, copies to $HOME, needs setLieroPath() first
+void setLieroCFG(std::string const& path)
+{
+	DataPath dp_tmp(path);
+#if GVL_WINDOWS
+	lieroCFG = dp_tmp.file("liero.txt");
+#else
+	lieroCFG = dp_tmp.file("liero.cfg");
+#endif
 }

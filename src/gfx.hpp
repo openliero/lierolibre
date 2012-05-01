@@ -117,9 +117,7 @@ struct Gfx
 	void loadPalette();
 	void loadMenus();
 	void loadMenusFromCFG(std::string cfgFilePath);
-	void loadMenusFromCFG();
 	void writeMenusToCFG(std::string cfgFilePath);
-	void writeMenusToCFG();
 
 	void process(Controller* controller = 0);
 	void flip();

@@ -188,11 +188,6 @@ void Texts::loadFromCFG(std::string cfgFilePath)
 	copyrightBarFormat = (int)texts["copyrightBarFormat"];
 }
 
-void Texts::loadFromCFG()
-{
-	loadFromCFG("liero.cfg");
-}
-
 void Texts::writeToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -268,11 +263,6 @@ void Texts::writeToCFG(std::string cfgFilePath)
 	cfg.writeFile(cfgFilePath.c_str());
 }
 
-void Texts::writeToCFG(void)
-{
-	writeToCFG("liero.cfg");
-}
-
 void Common::loadPalette()
 {
 	FILE* exe = openLieroEXE();
@@ -306,11 +296,6 @@ void Common::loadPaletteFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Common::loadPaletteFromCFG()
-{
-	loadPaletteFromCFG("liero.cfg");
-}
-
 void Common::writePaletteToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -329,11 +314,6 @@ void Common::writePaletteToCFG(std::string cfgFilePath)
 
 	cfg.writeFile(cfgFilePath.c_str());
 	}
-}
-
-void Common::writePaletteToCFG()
-{
-	writePaletteToCFG("liero.cfg");
 }
 
 void Common::loadMaterials()
@@ -384,11 +364,6 @@ void Common::loadMaterialsFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Common::loadMaterialsFromCFG()
-{
-	loadMaterialsFromCFG("liero.cfg");
-}
-
 void Common::writeMaterialsToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -402,11 +377,6 @@ void Common::writeMaterialsToCFG(std::string cfgFilePath)
 		cfgHelp.put(smaterials, "flags" + to_string(i), materials[i].flags);
 	}
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Common::writeMaterialsToCFG()
-{
-	writeMaterialsToCFG("liero.cfg");
 }
 
 struct Read32
@@ -719,11 +689,6 @@ void Common::loadWeaponsFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Common::loadWeaponsFromCFG()
-{
-	loadWeaponsFromCFG("liero.cfg");
-}
-
 void Common::writeWeaponsToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -851,11 +816,6 @@ void Common::writeWeaponsToCFG(std::string cfgFilePath)
 	cfg.writeFile(cfgFilePath.c_str());
 }
 
-void Common::writeWeaponsToCFG()
-{
-	writeWeaponsToCFG("liero.cfg");
-}
-
 void Common::loadTextures()
 {
 	FILE* exe = openLieroEXE();
@@ -886,11 +846,6 @@ void Common::loadTexturesFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Common::loadTexturesFromCFG()
-{
-	loadTexturesFromCFG("liero.cfg");
-}
-
 void Common::writeTexturesToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -908,10 +863,6 @@ void Common::writeTexturesToCFG(std::string cfgFilePath)
 		cfgHelp.put(sttextures, "rFrame", textures[i].rFrame);
 	}
 	cfg.writeFile(cfgFilePath.c_str());
-}
-void Common::writeTexturesToCFG()
-{
-	writeTexturesToCFG("liero.cfg");
 }
 
 void Common::loadOthers()
@@ -959,11 +910,6 @@ void Common::loadOthersFromCFG(std::string cfgFilePath)
 		bonusSObjects[i] = (int)sothers["bonusSObjects"][i];
 }
 
-void Common::loadOthersFromCFG()
-{
-	loadOthersFromCFG("liero.cfg");
-}
-
 void Common::writeOthersToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -997,11 +943,6 @@ void Common::writeOthersToCFG(std::string cfgFilePath)
 		sobsobjects.add(libconfig::Setting::TypeInt) = bonusSObjects[i];
 
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Common::writeOthersToCFG()
-{
-	writeOthersToCFG("liero.cfg");
 }
 
 void Common::loadGfxFromEXE()
@@ -1113,11 +1054,6 @@ void Common::loadGfxFromCFG(std::string cfgFilePath)
 	loadGfxExtra();
 }
 
-void Common::loadGfxFromCFG()
-{
-	loadGfxFromCFG("liero.cfg");
-}
-
 void Common::writeGfxToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -1131,11 +1067,6 @@ void Common::writeGfxToCFG(std::string cfgFilePath)
 	sgbframes.add(libconfig::Setting::TypeInt) = bonusFrames[1];
 
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Common::writeGfxToCFG()
-{
-	writeGfxToCFG("liero.cfg");
 }
 
 void Common::drawTextSmall(char const* str, int x, int y)
