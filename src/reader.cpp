@@ -134,7 +134,7 @@ void setLieroCFG(std::string const& path)
 {
 	DataPath dp_tmp(path);
 #if GVL_WINDOWS
-	lieroCFG = dp_tmp.file("liero.txt");
+	lieroCFG = dp_tmp.file("lierocfg.txt");
 #else
 	lieroCFG = dp_tmp.file("liero.cfg");
 #endif
