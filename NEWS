@@ -6,6 +6,8 @@ Version 0.2.1 - March 2012, by Martin Erik Werner
   directory not be prioritized.
 * First windows release
   + Fixed Visual Studio C++ project and added a "windows" git branch
+  + Uses liero.txt instead of liero.cfg for the CFG file
+  + Uses a settings/ subdirectory instead of $HOME
 * Improved window/fullscreen resolution behaviour
   + Game grabs maximum possible window size on launch
   + Fullscreen uses host desktop resolution
@@ -15,6 +17,9 @@ Version 0.2.1 - March 2012, by Martin Erik Werner
     - Jumps up by integer multiples when window is large enough
 * Incomplete support for scale2X on sizes above 640x400
   + Currently just creates black space between pixels
+* Binary now defaults to writing the CFG file to the $HOME/settings directory
+  (not just the launcher script)
+
 
 Version 0.2 - April 2012, by Martin Erik Werner
 
