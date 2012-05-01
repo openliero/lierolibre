@@ -88,11 +88,6 @@ void Font::loadFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Font::loadFromCFG()
-{
-	loadFromCFG("liero.cfg");
-}
-
 void Font::writeToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -114,11 +109,6 @@ void Font::writeToCFG(std::string cfgFilePath)
 		cfgHelp.put(sfchar, "width", chars[i].width);
 	}
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Font::writeToCFG()
-{
-	writeToCFG("liero.cfg");
 }
 
 void Font::drawChar(unsigned char c, int x, int y, int color)

@@ -449,11 +449,6 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	hiddenMenu.valueOffsetX = 100;
 }
 
-void Gfx::loadMenusFromCFG()
-{
-	loadMenusFromCFG("liero.cfg");
-}
-
 void Gfx::writeMenusToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -491,11 +486,6 @@ void Gfx::writeMenusToCFG(std::string cfgFilePath)
 	}
 
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Gfx::writeMenusToCFG()
-{
-	writeMenusToCFG("liero.cfg");
 }
 
 void Gfx::updateSettingsMenu()

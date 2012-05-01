@@ -82,9 +82,7 @@ struct Texts
 {
 	void loadFromEXE();
 	void loadFromCFG(std::string cfgFilePath);
-	void loadFromCFG();
 	void writeToCFG(std::string cfgFilePath);
-	void writeToCFG();
 
 	std::string copyright1;
 	std::string copyright2;
@@ -149,48 +147,34 @@ struct Common : gvl::shared
 
 	void loadMaterials();
 	void loadMaterialsFromCFG(std::string);
-	void loadMaterialsFromCFG();
 	void writeMaterialsToCFG(std::string);
-	void writeMaterialsToCFG();
 
 	void loadWeapons();
 	void loadWeaponsFromCFG(std::string cfgFilePath);
-	void loadWeaponsFromCFG();
 	void writeWeaponsToCFG(std::string cfgFilePath);
-	void writeWeaponsToCFG();
 
 	void loadTextures();
 	void loadTexturesFromCFG(std::string cfgFilePath);
-	void loadTexturesFromCFG();
 	void writeTexturesToCFG(std::string cfgFilePath);
-	void writeTexturesToCFG();
 
 	void loadOthers();
 	void loadOthersFromCFG(std::string cfgFilePath);
-	void loadOthersFromCFG();
 	void writeOthersToCFG(std::string cfgFilePath);
-	void writeOthersToCFG();
 
 	void loadConstantsFromEXE();
 	void loadConstantsFromCFG(std::string cfgFilePath);
-	void loadConstantsFromCFG();
 	void writeConstantsToCFG(std::string cfgFilePath);
-	void writeConstantsToCFG();
 
 	void loadGfxFromEXE();
 	void loadGfxFromCHR();
 	void loadGfxExtra();
 	void loadGfx();
 	void loadGfxFromCFG(std::string cfgFilePath);
-	void loadGfxFromCFG();
 	void writeGfxToCFG(std::string cfgFilePath);
-	void writeGfxToCFG();
 
 	void loadPalette();
 	void loadPaletteFromCFG(std::string cfgFilePath);
-	void loadPaletteFromCFG();
 	void writePaletteToCFG(std::string cfgFilePath);
-	void writePaletteToCFG();
 
 	void drawTextSmall(char const* str, int x, int y);
 

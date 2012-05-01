@@ -545,11 +545,6 @@ void Common::loadConstantsFromCFG(std::string cfgFilePath)
 	}
 }
 
-void Common::loadConstantsFromCFG()
-{
-	loadConstantsFromCFG("liero.cfg");
-}
-
 void Common::writeConstantsToCFG(std::string cfgFilePath)
 {
 	libconfig::Config cfg;
@@ -577,10 +572,5 @@ void Common::writeConstantsToCFG(std::string cfgFilePath)
 	}
 
 	cfg.writeFile(cfgFilePath.c_str());
-}
-
-void Common::writeConstantsToCFG()
-{
-	writeConstantsToCFG("liero.cfg");
 }
 

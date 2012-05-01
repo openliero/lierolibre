@@ -68,10 +68,6 @@ void loadTablesFromCFG(std::string cfgFilePath)
 		cosTable[i] = tables["cosTable"][i];
 	}
 }
-void loadTablesFromCFG()
-{
-	loadTablesFromCFG("liero.cfg");
-}
 
 void writeTablesToCFG(std::string cfgFilePath)
 {
@@ -94,9 +90,5 @@ void writeTablesToCFG(std::string cfgFilePath)
 	}
 
 	cfg.writeFile(cfgFilePath.c_str());
-}
-void writeTablesToCFG()
-{
-	writeTablesToCFG("liero.cfg");
 }
 

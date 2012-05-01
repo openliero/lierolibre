@@ -53,8 +53,6 @@ inline int distanceTo(int x1, int y1, int x2, int y2)
 
 void loadTablesFromEXE();
 void loadTablesFromCFG(std::string cfgFilePath);
-void loadTablesFromCFG();
 void writeTablesToCFG(std::string cfgFilePath);
-void writeTablesToCFG();
 
 #endif // LIERO_MATH_HPP
