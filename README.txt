@@ -16,7 +16,7 @@ Features:
 To switch between different window sizes, use F6, F7 and F8, to switch to
 fullscreen, use F5 or Alt+Enter.
 
-The copied file 'settings/liero.txt' is a plain text file containing all the
+The copied file 'settings\lierocfg.txt' is a plain text file containing all the
 game variables, this file is intented to be modified, go wild! Some things are
 likely to not work (make the game refuse to start, or crash) though:
   ! Appending/Deleting elements
