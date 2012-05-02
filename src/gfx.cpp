@@ -2062,8 +2062,7 @@ void Gfx::loadOPT(std::string path)
 	if (len > 255)
 		len = 255;
 	char buf[256];
-	fread(buf, 1, len, f);
-	if (ferror(f)) {
+	if (fread(buf, 1, len, f) != len) {
 		fclose(f);
 		throw std::runtime_error("failed to fully read '" + path + "'");
 	}
