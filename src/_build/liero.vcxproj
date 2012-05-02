@@ -244,7 +244,7 @@
     <ClInclude Include="..\worm.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\..\boost_1_49_0\bin.v2\libs\program_options\build\msvc-10.0\debug\threading-multi\boost_program_options-vc100-mt-gd-1_49.dll" />
+    <None Include="..\..\lib\boost\boost_program_options-vc100-mt-1_49.dll" />
     <None Include="..\..\lib\SDL\lib\x86\SDL.dll" />
     <None Include="..\..\lib\SDL_mixer\lib\x86\SDL_mixer.dll" />
     <None Include="..\Jamfile" />
@@ -259,7 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\boost_1_49_0\bin.v2\libs\program_options\build\msvc-10.0\debug\link-static\threading-multi\libboost_program_options-vc100-mt-gd-1_49.lib" />
-    <Library Include="..\..\..\..\..\boost_1_49_0\bin.v2\libs\program_options\build\msvc-10.0\debug\threading-multi\boost_program_options-vc100-mt-gd-1_49.lib" />
+    <Library Include="..\..\lib\boost\boost_program_options-vc100-mt-1_49.lib" />
     <Library Include="..\..\lib\SDL\lib\x86\SDL.lib" />
     <Library Include="..\..\lib\SDL_mixer\lib\x86\SDL_mixer.lib" />
   </ItemGroup>
