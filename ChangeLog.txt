@@ -1,3 +1,30 @@
+commit e1bf459bb4d9bdde7413e58c48c2c16a911050a1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 16:38:22 2012 +0200
+
+    update lib module with zlib no-masm /MD
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a564e1e9c466e9ea2c256abed861df8ae6eee22d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 16:17:04 2012 +0200
+
+    fix lierocfg.txt path and name in windows README
+
+ README.txt |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8c63640b224b910be2d7ccd78f29b3793cb9f8c5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 16:02:08 2012 +0200
+
+    Update windows changelog
+
+ ChangeLog.txt |   78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 78 insertions(+)
+
 commit 42cfcb06652aa2a63acc827caa2885aea9cadd1f
 Merge: 50eee55 6e78a5f
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
