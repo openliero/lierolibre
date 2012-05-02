@@ -11,7 +11,7 @@ The included libconfig++ shared library is licensed under LGPLv2.1+.
 
 The included SDL_mixer shared library is licensed under the Zlib license.
 
-The included Zlib shared library is licensed under the Zlib license.
+The Zlib library used in lierolibre is licensed under the Zlib license.
 
 The included boost_program_options shared library is licensed under the BSL-1.0.
 
@@ -31,12 +31,24 @@ Source: https://gitorious.org/lierolibre
 Upstream-Contact: Martin Erik Werner <martinerikwerner@gmail.com>
 
 Files: *
-Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2010, Mario Carbajal "basro"
-           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 Comment: The full license texts in this document are separate entities with
          separate licenses, and not covered under the BSD-2-Clause license
+
+Files: lierolibre.exe
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2010, Mario Carbajal "basro"
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+           1995-2012 Jean-loup Gailly and Mark Adler
+License: BSD-2-Clause and Zlib
+Comment: ZLib is statically linked into the executable.
+
+Files: NEWS.txt
+Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
+           2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: WTFPL and BSD-2-Clause
 
 Files: data/*
 Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
@@ -48,7 +60,7 @@ Files: data/LIERO.SND
 Copyright: 2012 "sea"
 License: WTFPL
 
-Files: data/liero.cfg
+Files: data/lierocfg.txt
 Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
            2012 Martin Erik Werner <martinerikwerner@gmail.com>
 License: WTFPL
@@ -62,10 +74,6 @@ Copyright: 2005-2009  Mark A Lindner
 License: LGPL-2.1+
 
 Files: SDL_mixer.dll
-Copyright: 1997-2012 Sam Lantinga
-License: Zlib
-
-Files: zlibwapi.dll
 Copyright: 1997-2012 Sam Lantinga
 License: Zlib
 
