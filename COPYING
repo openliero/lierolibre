@@ -11,8 +11,13 @@ is included in the gvl library.
 
 The SDL m4 script is LGPLv2.1+.
 
+The autotools content in part licensed under the BSD-2-Clause license of
+lierolibre, and also under various custom permissive free software licenses.
+The content under the BSD-2-Clause license falls under the GPL-2+ if used
+outside of lierolibre.
+
 Content without a specified license is assumed to be released under the
-BSD-2-Clause license, this includes the autotools content.
+BSD-2-Clause license.
 
 The following section is written in the 'machine-readable copyright format'
 as specified by the Debian project.
@@ -23,16 +28,21 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://gitorious.org/lierolibre
 Upstream-Contact: Martin Erik Werner <martinerikwerner@gmail.com>
 
-Files: ./* src/boostTesting.cpp src/configHelper.* src/configInit.* src/dataPath.*
-       src/to_string.*
+Files: *
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 Comment: The full license texts in this document are separate entities with
          separate licenses, and not covered under the BSD-2-Clause license
 
-Files: src/*
-Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
-           2010, Mario Carbajal "basro"
+Files: NEWS
+Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
+           2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2012, Martin Erik Werner <martinerikwerner@gmail.com>
+License: WTFPL and BSD-2-Clause
+
+Files: src/boostTesting.cpp src/configHelper.* src/configInit.* src/dataPath.*
+       src/to_string.*
+Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 
 Files: src/console.* src/exactObjectList.hpp src/fastObjectList.hpp src/lfs.hpp
@@ -52,16 +62,6 @@ Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
            2010, Mario Carbajal "basro"
            2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
-
-Files: aclocal.m4 config.h.in configure Makefile.in build-aux/* m4/*
-Copyright: 1992-2011, Free Software Foundation, Inc.
-License: GPL-2+ or BSD-2-Clause
-Comment: Autotools content is distributed under the lierolibre license, if they
-         are used outside of lierolibre the GPL-2+ license applies instead
-
-Files: m4/sdl.m4
-Copyright: 1997-2012 Sam Lantinga
-License: LGPL-2.1+
 
 Files: data/*
 Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
@@ -91,6 +91,80 @@ License: BSD-2-Clause
 Files: src/gvl/support/type_info.hpp
 Copyright: 2002 David Abrahams
 License: BSL-1.0
+
+Files: aclocal.m4 src/config.h.in build-aux/*
+Copyright: 1992-2011, Free Software Foundation, Inc.
+License: GPL-2+ or BSD-2-Clause
+Comment: Autotools content is distributed under the lierolibre license, if they
+         are used outside of lierolibre the GPL-2+ license applies instead.
+
+Files: configure
+Copyright: 1992, 1993, 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
+           2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation,
+           Inc.
+License:
+ This configure script is free software; the Free Software Foundation
+ gives unlimited permission to copy, distribute and modify it.
+
+Files: INSTALL
+Copyright: 1994-1996, 1999-2002, 2004-2011 Free Software Foundation, Inc.
+License:
+ Copying and distribution of this file, with or without modification,
+ are permitted in any medium without royalty provided the copyright
+ notice and this notice are preserved.  This file is offered as-is,
+ without warranty of any kind.
+
+Files: Makefile.in
+Copyright: 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+           2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+License:
+ This Makefile.in is free software; the Free Software Foundation
+ gives unlimited permission to copy and/or distribute it,
+ with or without modifications, as long as this notice is preserved.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+ even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ PARTICULAR PURPOSE.
+
+Files: src/build-aux/install-sh
+Copyright: 1994 X Consortium
+           FSF
+License:
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to
+ deal in the Software without restriction, including without limitation the
+ rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ sell copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+ X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+ AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNEC-
+ TION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ .
+ Except as contained in this notice, the name of the X Consortium shall not
+ be used in advertising or otherwise to promote the sale, use or other deal-
+ ings in this Software without prior written authorization from the X Consor-
+ tium.
+ .
+ FSF changes to this file are in the public domain.
+
+Files: src/m4/*
+Copyright: 1996-2011 Free Software Foundation, Inc.
+License:
+ This file is free software; the Free Software Foundation gives
+ unlimited permission to copy and/or distribute it, with or without
+ modifications, as long as this notice is preserved.
+
+Files: src/m4/sdl.m4
+Copyright: 1997-2012 Sam Lantinga
+License: LGPL-2.1+
 
 License: BSD-2-Clause
  Redistribution and use in source and binary forms, with or without
