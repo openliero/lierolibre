@@ -1,3 +1,81 @@
+commit 42cfcb06652aa2a63acc827caa2885aea9cadd1f
+Merge: 50eee55 6e78a5f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 15:38:50 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 50eee556c5f07de7421336bd747bc315d63ae705
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 14:42:51 2012 +0200
+
+    Update COPYING with static zlib and licenses for NEWS
+
+ COPYING.txt |   26 +++++++++++++++++---------
+ 1 file changed, 17 insertions(+), 9 deletions(-)
+
+commit 6e78a5fab6d6a96fe290a20a1cc898177e70f86d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 15:28:50 2012 +0200
+
+    Large update of copyright info, autotools & NEWS pedantry
+
+ COPYING |  106 +++++++++++++++++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 90 insertions(+), 16 deletions(-)
+
+commit 0e4dd8cec4fcee432c2d24fc675d4101e576c0fc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 05:11:03 2012 +0200
+
+    undefining ZLIB_WINAPI and tweaking zlib in lib submodule
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2dd0a46c8577c58369bae1523591fc22187df1fe
+Merge: 80a9a0e 66618db
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 05:10:02 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 66618db7fe11c66e4eb3ad349c559c6c89f9a461
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 05:06:19 2012 +0200
+
+    msvcpp: changes for static zlib, use non-VCS boost debug
+
+ src/_build/liero.vcxproj  |    8 +++-----
+ src/_build/lierolibre.sln |   39 +++++++++++++++++++--------------------
+ 2 files changed, 22 insertions(+), 25 deletions(-)
+
+commit 2fe70f3d591b8375d480bebcd37f10205ab05608
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 04:57:55 2012 +0200
+
+    static zlib linking in gvl vcxproj
+
+ src/gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 80a9a0eb76ff8e7fb9293fdf5ea504db90379e4c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 04:57:55 2012 +0200
+
+    static zlib linking in gvl
+
+ src/gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e7d78f58b2ac1b749a8ccf3cc9ac361a35428991
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 00:23:13 2012 +0200
+
+    Update windows changelog
+
+ ChangeLog.txt |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
 commit b47b99a71b87ac49525ef9dd840b72ea2744d8f0
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Wed May 2 00:19:13 2012 +0200
