@@ -51,12 +51,13 @@ as the
 parameter.
 
 .PP
+If
+.I inputfile
+points to a directory (which is the default case),
 .B #PACKAGE#
-automatically copies the file
+copies the file
 .I #CFGFILE#
-from
-.I inputdir
-to
+from this directory to
 .I $HOME/.#PACKAGE#/
 unless already it already exists in this location.
 .I #CFGFILE#
@@ -74,26 +75,30 @@ If
 .I inputfile
 points to a directory or a file with an unknown extension, and
 .I inputdir
-is not set, the game tries to load the
+is not set,
+.br
+OR
+.br
+if
+.I inputfile
+points to a directory and
+.I inputdir
+is set,
+.br
+the game will try to load the
 .I #CFGFILE#
 file from
 .I $HOME/.#PACKAGE#/
-first, otherwise it tries to load it from the directory of
+first, otherwise it loads it from the directory of
 .IR inputfile .
-
-.IP
-If
-.I inputdir
-is set,
-.I inputfile
-must be a file.
 
 .TP
 [\fB\-d\fR|\fB\-\-dir\fR] \fIinputdir
 Reads the files
 .I LIERO.CHR LIERO.SND NAMES.DAT
-from the given directory. Defaults to the directory of
-.IR inputfile .
+from the given directory. If not set, the game uses the directory of
+.I inputfile
+instead.
 
 .TP
 [\fB\-d\fR|\fB\-\-dir\fR] \fIoutputfile

@@ -95,8 +95,8 @@ License: BSL-1.0
 Files: aclocal.m4 src/config.h.in build-aux/*
 Copyright: 1992-2011, Free Software Foundation, Inc.
 License: GPL-2+ or BSD-2-Clause
-Comment: Autotools content is distributed under the lierolibre license, if they
-         are used outside of lierolibre the GPL-2+ license applies instead.
+Comment: Autotools content is distributed under the lierolibre license, if it
+         is used outside of lierolibre the GPL-2+ license applies instead.
 
 Files: configure
 Copyright: 1992, 1993, 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
@@ -115,8 +115,9 @@ License:
  without warranty of any kind.
 
 Files: Makefile.in
-Copyright: 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-           2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+Copyright: 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
+           2005, 2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation,
+           Inc.
 License:
  This Makefile.in is free software; the Free Software Foundation
  gives unlimited permission to copy and/or distribute it,
@@ -140,7 +141,7 @@ License:
  .
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
-
+ .
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
@@ -201,26 +202,6 @@ License: WTFPL
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
  .
   0. You just DO WHAT THE FUCK YOU WANT TO.
-
-License: Zlib
- This software is provided 'as-is', without any express or implied
- warranty. In no event will the authors be held liable for any damages
- arising from the use of this software.
- .
- Permission is granted to anyone to use this software for any purpose,
- including commercial applications, and to alter it and redistribute it
- freely, subject to the following restrictions:
- .
- 1. The origin of this software must not be misrepresented; you must not
-    claim that you wrote the original software. If you use this software
-    in a product, an acknowledgment in the product documentation would be
-    appreciated but is not required.
- .
- 2. Altered source versions must be plainly marked as such, and must not be
-    misrepresented as being the original software.
- .
- 3. This notice may not be removed or altered from any source
-    distribution.
 
 License: BSL-1.0
  Boost Software License - Version 1.0 - August 17th, 2003
