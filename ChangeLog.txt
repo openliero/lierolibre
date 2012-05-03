@@ -1,3 +1,134 @@
+commit c56e0f370704e60455c69e78de666ca4c3ffa6a3
+Merge: 3039d30 16df031
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 12:21:26 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 16df031dfe180dad3318b78abaa99347284651ee
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 12:21:14 2012 +0200
+
+    Update changelog
+
+ ChangeLog |  395 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 395 insertions(+)
+
+commit c04b38225dfb4e77de3f58c0856d498aa82c1e08
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 04:36:58 2012 +0200
+
+    Account for dir + dir in inputfile behaviour
+    
+    dir + dir also makes it prioritize $HOME, however if given
+    foo.unknown and dir it won't, hence the unweildy if-or-if-then
+    to make sure it is by-letter correct.
+
+ man/lierolibre.6.am |   14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+commit d666620b4e964b963589ebda3b88bb0e90180094
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 03:13:38 2012 +0200
+
+    Reword and update manpage
+    
+    * dir + dir can be given
+    * CFG file only copied if inputfile is a dir
+    * inputdir does not default, rather then game uses inpufile
+
+ man/lierolibre.6.am |   21 ++++++++-------------
+ 1 file changed, 8 insertions(+), 13 deletions(-)
+
+commit 90b46db9587cce7fc252ec802c08bed61e1bba3b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 02:38:08 2012 +0200
+
+    Reword wrapper script, for loop & don't shift
+    
+    This seems to work infinitely much better than the previous
+    monster, and it should be future-proof as well!
+
+ scripts/lierolibre.am |   61 ++++++++-----------------------------------------
+ 1 file changed, 9 insertions(+), 52 deletions(-)
+
+commit 2d02dd391f93d28bc4c4b68b60cca1913d48f200
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 22:00:45 2012 +0200
+
+    Remove unused zlib license text from *nix version
+
+ COPYING |   20 --------------------
+ 1 file changed, 20 deletions(-)
+
+commit 90bb6b035bfe13790cd89d26bc6e92b7906431ac
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 21:28:17 2012 +0200
+
+    add a dot in COPYING
+
+ COPYING |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6593a22856f1cc9de484317f2ccfb2ce04870755
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 21:24:12 2012 +0200
+
+    Use return value from fread for error check instead of ferror
+
+ src/gfx.cpp |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 9325e3c29fcc57e0f18171f5779280460494ab09
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 21:03:24 2012 +0200
+
+    Fix a wrap and formulation error in COPYING
+
+ COPYING |    9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+commit 3039d30c9c3e28f9dc7238fb2e1be7a19648678b
+Merge: 2d13bc3 9046aab
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 17:31:08 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 9046aab7731f6fb9fd5043b2396b65bbcd82c399
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 17:17:08 2012 +0200
+
+    Fixes for the no-masm building (boost path & arch)
+    
+    Conflicts:
+    
+    	lib
+
+ src/_build/liero.vcxproj  |    4 ++--
+ src/_build/lierolibre.sln |    6 ++++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+commit 2d13bc3a050f13a2464f4846da2347fd315ca825
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 17:17:08 2012 +0200
+
+    Fixes for the no-masm building (boost path & arch)
+
+ lib                       |    2 +-
+ src/_build/liero.vcxproj  |    4 ++--
+ src/_build/lierolibre.sln |    6 ++++--
+ 3 files changed, 7 insertions(+), 5 deletions(-)
+
+commit 087eb6b8b4eef89573a0638f082b9899786a22dc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 16:52:14 2012 +0200
+
+    Update windows changelog
+
+ ChangeLog.txt |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
 commit e1bf459bb4d9bdde7413e58c48c2c16a911050a1
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Wed May 2 16:38:22 2012 +0200
