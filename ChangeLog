@@ -1,3 +1,398 @@
+commit c04b38225dfb4e77de3f58c0856d498aa82c1e08
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 04:36:58 2012 +0200
+
+    Account for dir + dir in inputfile behaviour
+    
+    dir + dir also makes it prioritize $HOME, however if given
+    foo.unknown and dir it won't, hence the unweildy if-or-if-then
+    to make sure it is by-letter correct.
+
+ man/lierolibre.6.am |   14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+commit d666620b4e964b963589ebda3b88bb0e90180094
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 03:13:38 2012 +0200
+
+    Reword and update manpage
+    
+    * dir + dir can be given
+    * CFG file only copied if inputfile is a dir
+    * inputdir does not default, rather then game uses inpufile
+
+ man/lierolibre.6.am |   21 ++++++++-------------
+ 1 file changed, 8 insertions(+), 13 deletions(-)
+
+commit 90b46db9587cce7fc252ec802c08bed61e1bba3b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 02:38:08 2012 +0200
+
+    Reword wrapper script, for loop & don't shift
+    
+    This seems to work infinitely much better than the previous
+    monster, and it should be future-proof as well!
+
+ scripts/lierolibre.am |   61 ++++++++-----------------------------------------
+ 1 file changed, 9 insertions(+), 52 deletions(-)
+
+commit 2d02dd391f93d28bc4c4b68b60cca1913d48f200
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 22:00:45 2012 +0200
+
+    Remove unused zlib license text from *nix version
+
+ COPYING |   20 --------------------
+ 1 file changed, 20 deletions(-)
+
+commit 90bb6b035bfe13790cd89d26bc6e92b7906431ac
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 21:28:17 2012 +0200
+
+    add a dot in COPYING
+
+ COPYING |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6593a22856f1cc9de484317f2ccfb2ce04870755
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 21:24:12 2012 +0200
+
+    Use return value from fread for error check instead of ferror
+
+ src/gfx.cpp |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 9325e3c29fcc57e0f18171f5779280460494ab09
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 21:03:24 2012 +0200
+
+    Fix a wrap and formulation error in COPYING
+
+ COPYING |    9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+commit 9046aab7731f6fb9fd5043b2396b65bbcd82c399
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 17:17:08 2012 +0200
+
+    Fixes for the no-masm building (boost path & arch)
+    
+    Conflicts:
+    
+    	lib
+
+ src/_build/liero.vcxproj  |    4 ++--
+ src/_build/lierolibre.sln |    6 ++++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+commit 6e78a5fab6d6a96fe290a20a1cc898177e70f86d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 15:28:50 2012 +0200
+
+    Large update of copyright info, autotools & NEWS pedantry
+
+ COPYING |  106 +++++++++++++++++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 90 insertions(+), 16 deletions(-)
+
+commit 66618db7fe11c66e4eb3ad349c559c6c89f9a461
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 05:06:19 2012 +0200
+
+    msvcpp: changes for static zlib, use non-VCS boost debug
+
+ src/_build/liero.vcxproj  |    8 +++-----
+ src/_build/lierolibre.sln |   39 +++++++++++++++++++--------------------
+ 2 files changed, 22 insertions(+), 25 deletions(-)
+
+commit 2fe70f3d591b8375d480bebcd37f10205ab05608
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 04:57:55 2012 +0200
+
+    static zlib linking in gvl vcxproj
+
+ src/gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e99af1ea5c41a1c1107b3764ceb423de3585abf6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 2 00:05:35 2012 +0200
+
+    add include for GVL_WINDOWS
+
+ src/reader.cpp |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit b6508be52524223ea2944a458ad67183d60860e6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 23:43:18 2012 +0200
+
+    Bump version to 0.3
+
+ NEWS         |    2 +-
+ configure.ac |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 4c31e6d621d2958fe5ec803e9b6be5b85288cc09
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 23:29:21 2012 +0200
+
+    Renamed liero.txt->lierocfg.txt to avoid conflict with LIERO.TXT
+
+ NEWS                 |    2 +-
+ src/boostTesting.cpp |    4 ++--
+ src/dataPath.cpp     |    2 +-
+ src/reader.cpp       |    2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
+
+commit 60481dd99ffa30ff36ede2b58bf933ebe03d3193
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 15:44:27 2012 +0200
+
+    Updated NEWS with new CFG file fixes
+
+ NEWS |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 19ffdae3883a46d1d9d246853410729a222967c7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 15:31:48 2012 +0200
+
+    Add liero.txt as equally valid for dataPath
+    
+    Implementation of setLieroCFG() does not auto-load the CFG from the
+    alternative platform though, e.g. *nix will not load liero.txt
+    if given a directory as inputfile, or from the home dir.
+
+ src/dataPath.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit efe09296f81b565e9c3fadf3ab05ba84adec6323
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 15:30:01 2012 +0200
+
+    Implement the setLieroCFG() function.
+    
+    Used to set the CFG file separately, does not leave a DataPath
+    object, chooses cfg/txt depending on platform.
+
+ src/reader.cpp |   12 +++++++++++-
+ src/reader.hpp |    1 +
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+
+commit dff191998885ee3b3f9f462c707f3c9a4feef91b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 15:25:18 2012 +0200
+
+    Use specific function to copy/set home CFG, handle two dirs
+    
+    * Use a dedicated function to set the CFG file, thus allowing
+      setLieroPath() wihout requiring CFG files to be present.
+    * Handle the case of two directories, as is the case if the user
+      only gives a -d option, since we default to inputfile being a dir
+
+ src/configInit.cpp |    8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+commit e7efaa89a9ce6879f9c08135e40f468448ea633e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 15:21:34 2012 +0200
+
+    inputfile defaults to data/ dir instead of cfg file on start
+    
+    Easier since we use cfg on *nix, txt on woe
+
+ src/main.cpp |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit 062cc6896f53317084bef318c92bacb3f519c072
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 15:19:05 2012 +0200
+
+    Updated dataPath test with liero.txt
+
+ src/boostTesting.cpp |   29 +++--------------------------
+ 1 file changed, 3 insertions(+), 26 deletions(-)
+
+commit 5fda8aeddd92b175c7b9698db09f0030d781a386
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 14:00:30 2012 +0200
+
+    Remove all CFG() functions hardcoding 'liero.cfg'
+
+ src/common.cpp      |   69 ---------------------------------------------------
+ src/common.hpp      |   16 ------------
+ src/constants.cpp   |   10 --------
+ src/gfx.cpp         |   10 --------
+ src/gfx.hpp         |    2 --
+ src/gfx/font.cpp    |   10 --------
+ src/gfx/font.hpp    |    2 --
+ src/gfx/palette.cpp |   10 --------
+ src/gfx/palette.hpp |    2 --
+ src/math.cpp        |    8 ------
+ src/math.hpp        |    2 --
+ 11 files changed, 141 deletions(-)
+
+commit 137aaa180ce23869718bec306e055a10218e4176
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 04:01:07 2012 +0200
+
+    Large update of NEWS
+
+ NEWS |   14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+commit d5421dee7c8497b68751ef67ab1215a11261d35c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 02:58:51 2012 +0200
+
+    gvl: some msvcpp changes
+
+ src/gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f96ca2d68834e2dad3bc7f5497719971212dedf1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue May 1 02:40:01 2012 +0200
+
+    Manually pick all VSC++ pjoject changes from windows branch
+
+ src/_build/liero.sln      |   47 --------
+ src/_build/liero.vcxproj  |  271 +++++++++++++++++++++++++++++++++++++++++++++
+ src/_build/lierolibre.sln |   90 +++++++++++++++
+ 3 files changed, 361 insertions(+), 47 deletions(-)
+
+commit fec92cf12d51eafda1dad6bd92cabc9c576e6a5f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 30 17:50:19 2012 +0200
+
+    Enable all sizes for scale2X, black intersections currently
+
+ src/gfx.cpp |  127 +++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 66 insertions(+), 61 deletions(-)
+
+commit 87bc3c70847647b445fda72eaf8d329fdc0f0196
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 30 17:17:44 2012 +0200
+
+    Use stored host desktop resolution for fullscreen
+
+ src/gfx.cpp |   16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
+
+commit 9aa7d2f052088edb25e01f0617a429476d53ef89
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 30 17:16:56 2012 +0200
+
+    Use setMaxVideoMode() at game start
+
+ src/main.cpp |    5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+commit 7a2e59409ee7bbfc14f957084ac1f6415f86139c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 30 17:10:28 2012 +0200
+
+    Add setMaxVideoMode()
+    
+    setMaxVideoMode() uses the gfx.desktop{W,H} as upper limits and
+    sets the highest possible window size (320x200 multiple),
+    if-fullscreen behaviour is same as setVideoMode, might be useful if
+    game is set to start fullscreen? (Horrible prospect...)
+
+ src/gfx.cpp |   36 ++++++++++++++++++++++++++++++++++++
+ src/gfx.hpp |    1 +
+ 2 files changed, 37 insertions(+)
+
+commit 0e85718bd0d385f4d3d9cb781e0702169debf752
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 30 16:22:44 2012 +0200
+
+    Store resolution on init, and store/restore with fullscreen
+    
+    * Desktop size from host stored in gfx.desktop{W,H}
+    * Window size stored in storedWindow{W,H} before entering
+      fullscreen, resored on leaving fullscreen
+
+ src/gfx.cpp |   15 ++++++++++++---
+ src/gfx.hpp |    2 +-
+ 2 files changed, 13 insertions(+), 4 deletions(-)
+
+commit 387b46856b5530f08e750b4c2a6f47a39bb6a543
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Apr 30 00:02:17 2012 +0200
+
+    change defaultpath to dir instead of file
+    
+    Fixes lierolibre not loading the $HOME liero.cfg file
+
+ scripts/lierolibre.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit cd71781f118cd430bdf29ed012e00fbbfe349c29
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 29 04:04:54 2012 +0200
+
+    stdint.h woe fix
+
+ src/gvl |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0f08615d8c28b1d1344c996f01654390ae2fc21a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 29 03:08:34 2012 +0200
+
+    mkdir() -> _mkdir() for woe
+
+ src/dataPath.cpp |    6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit d0a5b914c421e772381fd280d7e8a790c8773076
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Apr 29 02:49:37 2012 +0200
+
+    Include gvl/support/platform.hpp for GVL_WINDOWS def
+
+ src/dataPath.cpp |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit e07092c926b3ce190202ab818c4021d81abe55ef
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 28 23:16:52 2012 +0200
+
+    preprocess choice between $HOME and CurDir, and mkdir
+
+ src/dataPath.cpp |    9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit dcc91b48b01a62fe9004151a875d891a9dd00376
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 28 02:25:02 2012 +0200
+
+    Bump version to 0.2.1, note Alt-F4 fullscreen quit in NEWS
+
+ NEWS         |    4 ++++
+ configure.ac |    2 +-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+commit 9a752f005f421ad3eeeaca8d825d14257992751a
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Apr 28 02:22:28 2012 +0200
+
+    Made is possible to exit from fullscreen via alt+f4
+
+ src/gfx.cpp |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit bd6d35fe46b3c719798d49e26908c045ec0361d3
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Apr 27 18:36:35 2012 +0200
+
+    Update ChangeLog
+
+ ChangeLog |   27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
 commit c4b0e2d09e1347e5baede192139180f5bb5b36f6
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Fri Apr 27 18:29:36 2012 +0200
