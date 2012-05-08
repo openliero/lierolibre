@@ -23,6 +23,8 @@ likely to not work (make the game refuse to start, or crash) though:
   ! Changing integers to strings, strings to integers, etc.
   ! Changing the sine and cosine tables
 
+To use custom levels place the .lev files in the 'settings' directory.
+
 In order to make lierolibre load and write files differently you will need to
 use the command line, to start a command line prompt in the lierolibre
 directory run the lierolibre-cmd.bat script.
