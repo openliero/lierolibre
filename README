@@ -24,6 +24,8 @@ likely to not work (make the game refuse to start, or crash) though:
   ! Changing integers to strings, strings to integers, etc.
   ! Changing the sine and cosine tables
 
+To use custom levels, .lev files can be placed in $HOME/.lierolibre.
+
 Compiling, running and installing:
 
   Build-dependencies as named in Debian Wheezy:
