@@ -130,6 +130,11 @@ void setLieroPath(std::string const& path)
 	lieroOPT = data_path->file("LIERO.OPT");
 }
 
+void setLieroEXE(std::string const& path)
+{
+	lieroEXE = path;
+}
+
 // $HOME takes priority, copies to $HOME, needs setLieroPath() first
 void setLieroCFG(std::string const& path)
 {

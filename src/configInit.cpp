@@ -84,8 +84,7 @@ void ConfigInit::consoleBlurb()
 
 void ConfigInit::loadFromEXE(string filePath)
 {
-	// Need to get grab the path to the exe from somewheres
-//	setLieroEXE(filePath);
+	setLieroEXE(filePath);
 
 	common->texts.loadFromEXE();
 
