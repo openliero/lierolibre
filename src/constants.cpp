@@ -54,14 +54,7 @@ std::string valueConstantsNames[] =
 	"NinjaropeGravity",
 	"NRMinLength",
 	"NRMaxLength",
-
 	"BonusGravity",
-	"BObjGravity",
-
-	// WormFloat hack
-	"WormFloatPower",
-
-	"BloodLimit",
 
 	"WormFricMult",
 	"WormFricDiv",
@@ -73,7 +66,6 @@ std::string valueConstantsNames[] =
 	"WormSpawnRectH",
 	"AimFricMult",
 	"AimFricDiv",
-
 	"NRThrowVelX",
 	"NRThrowVelY",
 	"NRForceShlX",
@@ -81,43 +73,37 @@ std::string valueConstantsNames[] =
 	"NRForceShlY",
 	"NRForceDivY",
 	"NRForceLenShl",
-
 	"BonusBounceMul",
 	"BonusBounceDiv",
 	"BonusFlickerTime",
 
-	"BonusDropChance",
-	"SplinterLarpaVelDiv",
-	"SplinterCracklerVelDiv",
-
-
-	// WormFloat hack
-	"WormFloatLevel",
-
-	// BonusSpawnRect hack
-	"BonusSpawnRectX",
-	"BonusSpawnRectY",
-	"BonusSpawnRectW",
-	"BonusSpawnRectH",
 
 	"AimMaxRight",
 	"AimMinRight",
 	"AimMaxLeft",
 	"AimMinLeft",
+
+	"NRPullVel",
+	"NRReleaseVel",
+
 	"NRColourBegin",
 	"NRColourEnd",
 	"BonusExplodeRisk",
 	"BonusHealthVar",
 	"BonusMinHealth",
 	"LaserWeapon",
-
 	"FirstBloodColour",
 	"NumBloodColours",
 
-	"RemExpObject",
+	"BObjGravity",
 
-	"NRPullVel",
-	"NRReleaseVel",
+	"BonusDropChance",
+	"SplinterLarpaVelDiv",
+	"SplinterCracklerVelDiv",
+
+	"BloodStepUp",
+	"BloodStepDown",
+	"BloodLimit",
 
 	// FallDamage hack
 	"FallDamageRight",
@@ -125,15 +111,31 @@ std::string valueConstantsNames[] =
 	"FallDamageDown",
 	"FallDamageUp",
 
-	"BloodStepUp",
-	"BloodStepDown"
+	// WormFloat hack
+	"WormFloatLevel",
+	"WormFloatPower",
 
+	// BonusSpawn hack
+	"BonusSpawnRectX",
+	"BonusSpawnRectY",
+	"BonusSpawnRectW", // This is used even when the hack isn't enabled
+	"BonusSpawnRectH", // -==-
+
+	// RemExp hack
+	"RemExpObject"
 };
 
 std::string stringConstantsNames[] =
 {
 	"InitSound",
 	"LoadingSounds",
+	"LoadingAndThinking",
+	"OK",
+	"OK2",
+	"PressAnyKey",
+	"CommittedSuicideMsg",
+	"KilledMsg",
+	"YoureIt",
 
 	"Init_BaseIO",
 	"Init_IRQ",
@@ -148,16 +150,7 @@ std::string stringConstantsNames[] =
 	"Init_XMSSucc",
 
 	"Init_FreeXMS",
-	"Init_k",
-
-	"LoadingAndThinking",
-	"OK",
-	"OK2",
-	"PressAnyKey",
-
-	"CommittedSuicideMsg",
-	"KilledMsg",
-	"YoureIt"
+	"Init_k"
 };
 
 std::string hackConstantsNames[] =
@@ -171,8 +164,9 @@ std::string hackConstantsNames[] =
 	"HBonusDisable",
 	"HRemExp",
 	"HSignedRecoil",
+
 	"HAirJump",
-	"HMultiJump",
+	"HMultiJump"
 };
 
 int CSint32desc[][3] =
