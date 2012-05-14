@@ -32,6 +32,11 @@
 using namespace std;
 using namespace libconfig;
 
+void ConfigHelper::putVersion(Setting &node, int version)
+{
+	put(node, "Version", version);
+}
+
 // This templateification is somewhat unnecessay, could just use getUint8()
 template<typename Dest, typename Node, typename Idx>
 Dest ConfigHelper::getValue(Node &node, Idx index)
