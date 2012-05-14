@@ -65,7 +65,10 @@ void Common::writeCFGVersion(std::string cfgFilePath, int version)
 		ConfigHelper cfgHelp;
 		cfg.readFile(cfgFilePath.c_str());
 		libconfig::Setting &root = cfg.getRoot();
+
 		cfgHelp.putVersion(root, version);
+
+		cfg.writeFile(cfgFilePath.c_str());
 };
 
 void Texts::loadFromEXE()
