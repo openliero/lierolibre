@@ -26,6 +26,8 @@
 #ifndef LIERO_CONFIG_INIT_HPP
 #define LIERO_CONFIG_INIT_HPP
 
+#define CFGVERSION 1 // Bump in case of CFG file format changes
+
 #include "configHelper.hpp"
 
 #include <string>
