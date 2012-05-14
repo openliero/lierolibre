@@ -200,6 +200,7 @@ lierolibre_SOURCES = \
 	\
 	\
 	src/argParse.cpp \
+	src/configCompat.cpp \
 	src/configHelper.cpp \
 	src/configInit.cpp \
 	src/dataPath.cpp \
