@@ -34,7 +34,7 @@
 std::string changeLeaf(std::string const& path, std::string const& newLeaf)
 {
 	std::size_t lastSep = path.find_last_of("\\/");
-	
+
 	if(lastSep == std::string::npos)
 		return newLeaf; // We assume there's only a leaf in the path
 	return path.substr(0, lastSep + 1) + newLeaf;
@@ -43,7 +43,7 @@ std::string changeLeaf(std::string const& path, std::string const& newLeaf)
 std::string getRoot(std::string const& path)
 {
 	std::size_t lastSep = path.find_last_of("\\/");
-	
+
 	if(lastSep == std::string::npos)
 		return "";
 	return path.substr(0, lastSep);
@@ -52,7 +52,7 @@ std::string getRoot(std::string const& path)
 std::string getBasename(std::string const& path)
 {
 	std::size_t lastSep = path.find_last_of(".");
-	
+
 	if(lastSep == std::string::npos)
 		return path;
 	return path.substr(0, lastSep);
@@ -61,7 +61,7 @@ std::string getBasename(std::string const& path)
 std::string getExtension(std::string const& path)
 {
 	std::size_t lastSep = path.find_last_of(".");
-	
+
 	if(lastSep == std::string::npos)
 		return "";
 	return path.substr(lastSep + 1);
@@ -88,24 +88,24 @@ FILE* tolerantFOpen(std::string const& name, char const* mode)
 	FILE* f = std::fopen(name.c_str(), mode);
 	if(f)
 		return f;
-		
+
 	std::string ch(name);
 	toUpperCase(ch);
 	f = std::fopen(ch.c_str(), mode);
 	if(f)
 		return f;
-		
+
 	toLowerCase(ch);
 	f = std::fopen(ch.c_str(), mode);
 	if(f)
 		return f;
-		
+
 	// Try with first letter capital
 	ch[0] = std::toupper(static_cast<unsigned char>(ch[0]));
 	f = std::fopen(ch.c_str(), mode);
 	if(f)
 		return f;
-		
+
 	return 0;
 }
 
@@ -178,18 +178,18 @@ struct filename_result
 	: name(0), alt_name(0)
 	{
 	}
-	
+
 	filename_result(char const* name, char const* alt_name)
 	: name(name), alt_name(alt_name)
 	{
-	
+
 	}
-	
+
 	operator void const*()
 	{
 		return name;
 	}
-	
+
 	char const* name;
 	char const* alt_name;
 };
@@ -207,7 +207,7 @@ BOOST_HANDLE & handle, BOOST_SYSTEM_DIRECTORY_TYPE & )
 	const char * dummy_first_name = ".";
 	return ( (handle = ::opendir( dir ))
 		== BOOST_INVALID_HANDLE_VALUE ) ? filename_result() : filename_result(dummy_first_name, dummy_first_name);
-}  
+}
 
 inline void find_close( BOOST_HANDLE handle )
 {
@@ -250,14 +250,14 @@ BOOST_HANDLE & handle, BOOST_SYSTEM_DIRECTORY_TYPE & data )
 	//    std::cout << "find_first_file " << dir << std::endl;
 	std::string dirpath( std::string(dir) + "/*" );
 	bool fail = ( (handle = ::FindFirstFileA( dirpath.c_str(), &data )) == BOOST_INVALID_HANDLE_VALUE );
-	
+
 	if(fail)
 		return filename_result();
-	
+
 	return filename_result(
 		data.cFileName,
 		data.cAlternateFileName[0] ? data.cAlternateFileName : data.cFileName);
-}  
+}
 
 inline void find_close( BOOST_HANDLE handle )
 {
@@ -279,7 +279,7 @@ BOOST_HANDLE handle, BOOST_SYSTEM_DIRECTORY_TYPE & data )
 		}
 		else { return filename_result(); } // end reached
 	}
-	
+
 	return filename_result(
 		data.cFileName,
 		data.cAlternateFileName[0] ? data.cAlternateFileName : data.cFileName);
@@ -296,9 +296,9 @@ struct dir_itr_imp
 public:
 	dir_itr_imp()
 	{
-		
+
 	}
-	
+
 	std::string       entry_path;
 	std::string       entry_alt_path;
 	BOOST_HANDLE      handle;
@@ -342,7 +342,7 @@ void dir_itr_init( dir_itr_imp_ptr & m_imp,
 	if ( m_imp->handle != BOOST_INVALID_HANDLE_VALUE )
 	{
 		if ( !dot_or_dot_dot( name.name ) )
-		{ 
+		{
 			m_imp->entry_path = name.name;
 			m_imp->entry_alt_path = name.alt_name;
 		}
@@ -355,7 +355,7 @@ void dir_itr_init( dir_itr_imp_ptr & m_imp,
 	else
 	{
 		throw std::runtime_error("Directory iterator ctor");
-	}  
+	}
 }
 
 std::string & dir_itr_dereference(
@@ -390,6 +390,6 @@ void dir_itr_increment( dir_itr_imp_ptr & m_imp )
 			return;
 		}
 	}
-	
+
 	m_imp.reset(); // make base() the end iterator
 }
