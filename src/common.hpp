@@ -145,6 +145,9 @@ struct Common : gvl::shared
 
 	static int fireConeOffset[2][7][2];
 
+	int readCFGVersion(std::string cfgFilePath);
+	void writeCFGVersion(std::string cfgFilePath, int version);
+
 	void loadMaterials();
 	void loadMaterialsFromCFG(std::string);
 	void writeMaterialsToCFG(std::string);
@@ -164,6 +167,7 @@ struct Common : gvl::shared
 	void loadConstantsFromEXE();
 	void loadConstantsFromCFG(std::string cfgFilePath);
 	void writeConstantsToCFG(std::string cfgFilePath);
+	void loadConstantsFromCFGVer0(std::string cfgFilePath);
 
 	void loadGfxFromEXE();
 	void loadGfxFromCHR();

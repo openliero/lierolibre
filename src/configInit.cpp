@@ -84,8 +84,7 @@ void ConfigInit::consoleBlurb()
 
 void ConfigInit::loadFromEXE(string filePath)
 {
-	// Need to get grab the path to the exe from somewheres
-//	setLieroEXE(filePath);
+	setLieroEXE(filePath);
 
 	common->texts.loadFromEXE();
 
@@ -115,11 +114,19 @@ void ConfigInit::loadFromCFG(string filePath)
 #if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	try {
 #endif
+		int CFGFileVersion = common->readCFGVersion(filePath);
+		if (CFGFileVersion > CFGVERSION)
+			throw runtime_error("Config file '" + filePath + "' is of a newer, incompatible version");
+
 		common->texts.loadFromCFG(filePath);
 
 		initKeys();
 
-		common->loadConstantsFromCFG(filePath);
+		if (CFGFileVersion == 0)
+			common->loadConstantsFromCFGVer0(filePath);
+		else
+			common->loadConstantsFromCFG(filePath);
+
 		loadTablesFromCFG(filePath);
 
 		consoleBlurb();
@@ -162,6 +169,8 @@ void ConfigInit::write(string filePath)
 			f << flush;
 			f.close();
 		}
+
+		common->writeCFGVersion(filePath, CFGVERSION);
 
 		common->texts.writeToCFG(filePath);
 		common->writeConstantsToCFG(filePath);

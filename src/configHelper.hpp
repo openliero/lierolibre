@@ -35,6 +35,8 @@
 class ConfigHelper
 {
 public:
+	void putVersion(libconfig::Setting &node, int version);
+
 	template<typename Dest, typename Node, typename Idx>
 	Dest getValue(Node &node, Idx index);
 

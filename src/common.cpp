@@ -47,6 +47,30 @@ int stoneTab[3][4] =
 	{89, 90, 97, 96}
 };
 
+int Common::readCFGVersion(std::string cfgFilePath)
+{
+		libconfig::Config cfg;
+		cfg.readFile(cfgFilePath.c_str());
+		int version;
+		if (cfg.lookupValue("Version", version))
+			return version;
+		else
+			return 0;
+		// const libconfig::Setting &sversion = cfg.lookup("version");
+};
+
+void Common::writeCFGVersion(std::string cfgFilePath, int version)
+{
+		libconfig::Config cfg;
+		ConfigHelper cfgHelp;
+		cfg.readFile(cfgFilePath.c_str());
+		libconfig::Setting &root = cfg.getRoot();
+
+		cfgHelp.putVersion(root, version);
+
+		cfg.writeFile(cfgFilePath.c_str());
+};
+
 void Texts::loadFromEXE()
 {
 	FILE* exe = openLieroEXE();

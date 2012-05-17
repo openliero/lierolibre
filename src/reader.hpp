@@ -49,6 +49,7 @@ FILE* openLieroSND();
 FILE* openLieroCHR();
 
 void setLieroPath(std::string const& path);
+void setLieroEXE(std::string const& path);
 void setLieroCFG(std::string const& path);
 
 // Close old files
