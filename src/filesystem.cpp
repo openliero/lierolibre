@@ -30,6 +30,10 @@
 #include <cassert>
 #include <cctype>
 #include <sys/stat.h>
+#include <fstream>
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 std::string changeLeaf(std::string const& path, std::string const& newLeaf)
 {
@@ -139,6 +143,30 @@ bool isDir(std::string const& path)
 			return true;
 	}
 	return false;
+}
+
+void backupFile(std::string const& path)
+{
+	std::string pathTemplate = path + "_backup_XXXXXX";
+	char *tmpFileName = strdup(pathTemplate.c_str());
+	if (mkstemp(tmpFileName) == -1)
+		throw std::runtime_error("Unable to create temp file for backup");
+
+	std::ifstream in;
+	in.open(path.c_str(), std::ios::binary);
+	std::ofstream out;
+	out.open(tmpFileName, std::ios::binary | std::ios::out);
+
+	if (in.is_open() && out.is_open())
+		out << in.rdbuf();
+	else
+		throw std::runtime_error("Unable to open files for backup");
+}
+
+void rmFile(std::string const& path)
+{
+	if (remove(path.c_str()) != 0)
+		throw std::runtime_error("Could not remove file '" + path + "'");
 }
 
 std::size_t fileLength(FILE* f)
