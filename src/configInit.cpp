@@ -49,8 +49,9 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 		loadFromCFG(filePath); // Force reading from given CFG
 	} else {
 		setLieroPath(filePath);
-		setLieroCFG(filePath); // Copies to $HOME
-		loadFromCFG(lieroCFG); // $HOME CFG takes priority
+		setLieroCFG(filePath); // Copies to $HOME if need be
+		upgradeCFG(lieroCFG, CFGVERSION);
+		loadFromCFG(lieroCFG); // load $HOME CFG
 	}
 }
 
@@ -64,8 +65,11 @@ ConfigInit::ConfigInit(string filePath, string dirPath, gvl::shared_ptr<Common> 
 	} else if (isDir(filePath)) {
 		// User gave us two directories
 		setLieroPath(dirPath);
-		setLieroCFG(filePath); // Copies to $HOME
-		loadFromCFG(lieroCFG); // $HOME CFG takes priority
+		setLieroCFG(filePath);
+		if (upgradeCFG(lieroCFG, CFGVERSION))
+			; // upgrade function loaded the CFG
+		else
+			loadFromCFG(lieroCFG);
 	} else {
 		setLieroPath(dirPath);
 		loadFromCFG(filePath);
@@ -143,10 +147,10 @@ void ConfigInit::loadFromCFG(string filePath)
 
 #if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	} catch (const libconfig::ParseException& e) {
-		std::cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << std::endl;
+		cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << endl;
 		throw;
 	} catch (const libconfig::SettingException e) {
-		std::cerr << "Problem at " <<  e.getPath() << std::endl;
+		cerr << "Problem at " <<  e.getPath() << endl;
 		throw;
 	}
 #endif
@@ -186,11 +190,33 @@ void ConfigInit::write(string filePath)
 
 #if LIBCONFIGXX_VER_MAJOR >= 1 && LIBCONFIGXX_VER_MINOR >= 4
 	} catch (const libconfig::ParseException& e) {
-		std::cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << std::endl;
+		cerr << e.getError() << " in file '" << e.getFile() << "' at line " << e.getLine() << endl;
 		throw;
 	} catch (const libconfig::SettingException e) {
-		std::cerr << "Problem at " <<  e.getPath() << std::endl;
+		cerr << "Problem at " <<  e.getPath() << endl;
 		throw;
 	}
 #endif
+}
+
+bool ConfigInit::upgradeCFG(string filePath, int version)
+{
+	try {
+		int CFGFileVersion = common->readCFGVersion(filePath);
+		if (CFGFileVersion > CFGVERSION)
+			throw runtime_error("Config file '" + filePath + "' is of a newer, incompatible version");
+		else if (CFGFileVersion < CFGVERSION) {
+			loadFromCFG(filePath);
+			backupFile(filePath);
+			rmFile(filePath);
+			write(filePath);
+			return true;
+		}
+	} catch (std::exception& e) {
+		throw runtime_error("Error when upgrading CFG file: " + string(e.what()));
+	} catch (...) {
+		throw runtime_error("Error when upgrading CFG file");
+	}
+
+	return false; // Not upgraded
 }

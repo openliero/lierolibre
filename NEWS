@@ -1,5 +1,12 @@
 lierolibre NEWS - History of user-visible changes.
 
+Version 0.3.1 - May 2012, by Martin Erik Werner
+* Fixed a bug where the EXE file path would not be set
+* Updated CFG file with variable name corrctions
+  + New CFG files (v1) will be written with correct names
+  + Old CFG files (v0) with incorrect names can still be loaded
+
+
 Version 0.3 - March 2012, by Martin Erik Werner
 * Made it possible to exit from fullscreen via Alt+F4
 * Fixed a bug in the launch script that made the liero.cfg file in the home
