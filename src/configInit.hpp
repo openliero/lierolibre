@@ -46,6 +46,7 @@ public:
 private:
 	void loadFromEXE(std::string exeFilePath);
 	void loadFromCFG(std::string cfgFilePath);
+	bool upgradeCFG(std::string filePath, int version);
 	void consoleBlurb();
 
 	gvl::shared_ptr<Common> common;
