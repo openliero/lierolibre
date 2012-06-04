@@ -155,7 +155,7 @@ void backupFile(std::string const& path)
 	strcat(tmpFileName, "_backup_XXXXXX");
 
 #if GVL_WINDOWS
-	if (_mktemp_s(tmpFileName, strlen(tmpFileName)) != 0)
+	if (_mktemp_s(tmpFileName, strlen(tmpFileName) + 1) != 0)
 #else
 	if (mkstemp(tmpFileName) == -1)
 #endif
