@@ -2,9 +2,12 @@ lierolibre NEWS - History of user-visible changes.
 
 Version 0.3.1 - May 2012, by Martin Erik Werner
 * Fixed a bug where the EXE file path would not be set
-* Updated CFG file with variable name corrctions
+* Updated CFG file with variable name corrections
   + New CFG files (v1) will be written with correct names
   + Old CFG files (v0) with incorrect names can still be loaded
+* Added automatic upgrading of CFG file from v0 to v1
+  + Only upgrades if loading from $HOME / settings dir
+  + Creates a backup named *_backup_XXXXX
 
 
 Version 0.3 - March 2012, by Martin Erik Werner
