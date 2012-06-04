@@ -29,7 +29,7 @@ To use custom levels, .lev files can be placed in $HOME/.lierolibre.
 Compiling, running and installing:
 
   Build-dependencies as named in Debian Wheezy:
-    build-essential libtool pkg-config libsdl1.2-dev libsdl-mixer1.2-dev zlib1g-dev libconfig++-dev sox imagemagick
+    build-essential libtool pkg-config libsdl1.2-dev libsdl-mixer1.2-dev zlib1g-dev libconfig++-dev libboost-program-options-dev sox imagemagick
 
   To compile lierolibre use:
     ./configure
