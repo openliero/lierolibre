@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClCompile Include="..\argParse.cpp" />
     <ClCompile Include="..\binReader.cpp" />
+    <ClCompile Include="..\configCompat.cpp" />
     <ClCompile Include="..\configHelper.cpp" />
     <ClCompile Include="..\configInit.cpp" />
     <ClCompile Include="..\controller\commonController.cpp" />
