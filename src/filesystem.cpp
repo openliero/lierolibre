@@ -34,6 +34,9 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
+#if GVL_WINDOWS
+#include <io.h> // _mktemp_s()
+#endif
 
 std::string changeLeaf(std::string const& path, std::string const& newLeaf)
 {
@@ -147,9 +150,15 @@ bool isDir(std::string const& path)
 
 void backupFile(std::string const& path)
 {
-	std::string pathTemplate = path + "_backup_XXXXXX";
-	char *tmpFileName = strdup(pathTemplate.c_str());
+	char tmpFileName[FILENAME_MAX];
+	strcpy(tmpFileName, path.c_str());
+	strcat(tmpFileName, "_backup_XXXXXX");
+
+#if GVL_WINDOWS
+	if (_mktemp_s(tmpFileName, strlen(tmpFileName)) != 0)
+#else
 	if (mkstemp(tmpFileName) == -1)
+#endif
 		throw std::runtime_error("Unable to create temp file for backup");
 
 	std::ifstream in;

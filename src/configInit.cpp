@@ -50,8 +50,10 @@ ConfigInit::ConfigInit(string filePath, gvl::shared_ptr<Common> a_common)
 	} else {
 		setLieroPath(filePath);
 		setLieroCFG(filePath); // Copies to $HOME if need be
-		upgradeCFG(lieroCFG, CFGVERSION);
-		loadFromCFG(lieroCFG); // load $HOME CFG
+		if (upgradeCFG(lieroCFG, CFGVERSION))
+			; // upgrade function loaded the CFG
+		else
+			loadFromCFG(lieroCFG);
 	}
 }
 
