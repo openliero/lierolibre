@@ -614,7 +614,9 @@ NIXBIN_LIBFILES = \
 	$(LIB_NIXBIN_LIBFILES) \
 	$(USR_LIB_ARCH_NIXBIN_LIBFILES)
 
-.PHONY: clean-local dist-nixbin
+MANS_TXT = $(nodist_man6_MANS:.6=.txt)
+
+.PHONY: clean-local dist-nixbin-dir dist-nixbin dist-nixbin-xz
 
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
@@ -688,13 +690,23 @@ $(USR_LIB_ARCH_PA_NIXBIN_LIBFILES):
 		/usr/lib/$(build_cpu)-$(build_os)/pulseaudio/$${NIXBIN_LIBFILE#lib/}* \
 		lib/pulseaudio/
 
-dist-nixbin: distdir $(NIXBIN_LIBFILES)
-	cp -a $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
+$(MANS_TXT): $(nodist_man6_MANS)
+	man --no-justification --no-hyphenation $(@:.txt=.6) | col -b > $@
+	echo >> $@
+	echo "This text file was automatically generated from $(@:.txt=.6)" \
+		>> $@
+
+dist-nixbin-dir: distdir $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) $(MANS_TXT)
+	cp -aT $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
 	cp -a lib/ $(NIXBIN_DIRNAME)
+	cp -a lierolibre $(NIXBIN_DIRNAME)
+	cp -a $(nodist_pkgdata_DATA) $(NIXBIN_DIRNAME)/data/
+	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
+	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
+
+dist-nixbin: dist-nixbin-dir
 	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
 
-dist-nixbin-xz: distdir $(NIXBIN_LIBFILES)
-	cp -a $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
-	cp -a lib/ $(NIXBIN_DIRNAME)
+dist-nixbin-xz: dist-nixbin-dir
 	tar caf $(NIXBIN_DIRNAME).tar.xz $(NIXBIN_DIRNAME)
 
