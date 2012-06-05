@@ -656,7 +656,9 @@ clean-local:
 	rm -f \
 		$(nodist_pkgdata_DATA) \
 		$(nodist_bin_SCRIPTS) \
-		$(nodist_man6_MANS)
+		$(nodist_man6_MANS) \
+		$(MANS_TXT)
+	rm -rf lib/
 
 # Yeah, it's ugly
 $(LIB_ARCH_NIXBIN_LIBFILES):
