@@ -586,7 +586,6 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libvorbis.so.0 \
 	lib/libFLAC.so.8 \
 	lib/libpulse-simple.so.0 \
-	lib/libXext.so.6 \
 	lib/libdirectfb-1.2.so.9 \
 	lib/libfusion-1.2.so.9 \
 	lib/libdirect-1.2.so.9 \
@@ -698,10 +697,11 @@ $(MANS_TXT): $(nodist_man6_MANS)
 	echo "This text file was automatically generated from $(@:.txt=.6)" \
 		>> $@
 
-dist-nixbin-dir: distdir $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) $(MANS_TXT)
+dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
+		$(MANS_TXT)
 	cp -aT $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
 	cp -a lib/ $(NIXBIN_DIRNAME)
-	cp -a lierolibre $(NIXBIN_DIRNAME)
+	cp -a $(pkglibexec_PROGRAMS) $(NIXBIN_DIRNAME)
 	cp -a $(nodist_pkgdata_DATA) $(NIXBIN_DIRNAME)/data/
 	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
 	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
