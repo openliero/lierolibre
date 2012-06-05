@@ -113,6 +113,17 @@ AC_FUNC_MMAP
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([clock_gettime floor gethostbyname localeconv memmove memset mkdir munmap pow select setenv socket sqrt])
 
+# Relative path for portable packages with accompanying libs
+AC_ARG_ENABLE([relpath],
+  AC_HELP_STRING([--enable-relpath], [libraries are searched relative to the executable]),
+  [want_relative=yes], [want_relative=no])
+if test "$want_relative" = yes; then
+  RELPATH_CFLAGS='-DUSE_RELATIVE_PATHS'
+  RELPATH_LDFLAGS="-Wl,-rpath -Wl,\\\$\$ORIGIN/lib"
+fi
+AC_SUBST([RELPATH_CFLAGS])
+AC_SUBST([RELPATH_LDFLAGS])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 

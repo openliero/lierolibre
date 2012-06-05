@@ -6,20 +6,26 @@ desktopdir = $(datarootdir)/applications
 # For sedding in wrapper script later on
 CFGFILE = liero.cfg
 
+# For nixbin-dist
+PACKAGE_DIRNAME = $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)
+NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_nix$(build_cpu)
+
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src
-lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS)
-lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
+lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS) $(RELPATH_CFLAGS)
+lierolibre_CXXFLAGS = $(SDL_CXXFLAGS) $(RELPATH_CFLAGS)
 lierolibre_LDADD = src/gvl/libgvl.la $(LIBCONFIGXX_LIBS) $(SDL_MIXER_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
+lierolibre_LDFLAGS = $(RELPATH_LDFLAGS)
 
 noinst_LTLIBRARIES = src/gvl/libgvl.la
-src_gvl_libgvl_la_CFLAGS = $(ZLIB_CFLAGS)
+src_gvl_libgvl_la_CFLAGS = $(ZLIB_CFLAGS) $(RELPATH_CFLAGS)
 src_gvl_libgvl_la_LIBADD = $(ZLIB_LIBS)
+src_gvl_libgvl_la_LDFLAGS = $(RELPATH_LDFLAGS)
 
 EXTRA_PROGRAMS = src/gvl/gvltest
-src_gvl_gvltest_CFLAGS = $(ZLIB_CFLAGS)
-src_gvl_gvltest_LDFLAGS = $(ZLIB_LIBS) $(LIBRT)
+src_gvl_gvltest_CFLAGS = $(ZLIB_CFLAGS) $(RELPATH_CFLAGS)
+src_gvl_gvltest_LDFLAGS = $(ZLIB_LIBS) $(LIBRT) $(RELPATH_LDFLAGS)
 src_gvl_gvltest_LDADD = src/gvl/libgvl.la
 
 nodist_bin_SCRIPTS = \
@@ -565,6 +571,51 @@ EXTRA_DIST = \
 	src/gvl/tut/quickcheck/property.hpp \
 	src/gvl/tut/quickcheck/quickcheck.hpp
 
+
+LIB_ARCH_NIXBIN_LIBFILES = \
+	lib/libz.so.1 \
+	lib/libdbus-1.so.3 \
+	lib/libwrap.so.0
+
+USR_LIB_ARCH_NIXBIN_LIBFILES = \
+	lib/libconfig++.so \
+        lib/libSDL_mixer-1.2.so.0 \
+        lib/libSDL-1.2.so.0 \
+	lib/libmikmod.so.2 \
+	lib/libvorbisfile.so.3 \
+	lib/libvorbis.so.0 \
+	lib/libFLAC.so.8 \
+	lib/libpulse-simple.so.0 \
+	lib/libXext.so.6 \
+	lib/libdirectfb-1.2.so.9 \
+	lib/libfusion-1.2.so.9 \
+	lib/libdirect-1.2.so.9 \
+	lib/libcaca.so.0 \
+	lib/libsndfile.so.1 \
+	lib/libasyncns.so.0 \
+	lib/libvorbisenc.so.2
+
+USR_LIB_NIXBIN_LIBFILES = \
+	lib/libboost_program_options.so \
+	lib/libjson.so.0 \
+	lib/libogg.so.0 \
+	lib/libmad.so.0
+
+LIB_NIXBIN_LIBFILES = \
+	lib/libcap.so.2
+
+USR_LIB_ARCH__PA_NIXBIN_LIBFILES = \
+	lib/pulseaudio/libpulsecommon-2.0.so
+
+NIXBIN_LIBFILES = \
+	$(LIB_ARCH_NIXBIN_LIBFILES) \
+	$(USR_LIB_ARCH_NIXBIN_LIBFILES) \
+	$(USR_LIB_NIXBIN_LIBFILES) \
+	$(LIB_NIXBIN_LIBFILES) \
+	$(USR_LIB_ARCH_NIXBIN_LIBFILES)
+
+.PHONY: clean-local dist-nixbin
+
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
 	sed \
@@ -604,4 +655,46 @@ clean-local:
 		$(nodist_pkgdata_DATA) \
 		$(nodist_bin_SCRIPTS) \
 		$(nodist_man6_MANS)
+
+# Yeah, it's ugly
+$(LIB_ARCH_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a \
+		/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
+		lib/
+
+$(USR_LIB_ARCH_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a \
+		/usr/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
+		lib/
+
+$(USR_LIB_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a /usr/lib/$${NIXBIN_LIBFILE#lib/}* lib/
+
+$(LIB_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/
+
+$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES):
+	install -d lib/pulseaudio/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a \
+		/usr/lib/$(build_cpu)-$(build_os)/pulseaudio/$${NIXBIN_LIBFILE#lib/}* \
+		lib/pulseaudio/
+
+dist-nixbin: distdir $(NIXBIN_LIBFILES)
+	cp -a $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
+	cp -a lib/ $(NIXBIN_DIRNAME)
+	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
+
+dist-nixbin-xz: distdir $(NIXBIN_LIBFILES)
+	cp -a $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
+	cp -a lib/ $(NIXBIN_DIRNAME)
+	tar caf $(NIXBIN_DIRNAME).tar.xz $(NIXBIN_DIRNAME)
 
