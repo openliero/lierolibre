@@ -6,20 +6,26 @@ desktopdir = $(datarootdir)/applications
 # For sedding in wrapper script later on
 CFGFILE = liero.cfg
 
+# For nixbin-dist
+PACKAGE_DIRNAME = $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)
+NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_linux-$(build_cpu)
+
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
 lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src
-lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS)
-lierolibre_CXXFLAGS = $(SDL_CXXFLAGS)
+lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS) $(RELPATH_CFLAGS)
+lierolibre_CXXFLAGS = $(SDL_CXXFLAGS) $(RELPATH_CFLAGS)
 lierolibre_LDADD = src/gvl/libgvl.la $(LIBCONFIGXX_LIBS) $(SDL_MIXER_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
+lierolibre_LDFLAGS = $(RELPATH_LDFLAGS)
 
 noinst_LTLIBRARIES = src/gvl/libgvl.la
-src_gvl_libgvl_la_CFLAGS = $(ZLIB_CFLAGS)
+src_gvl_libgvl_la_CFLAGS = $(ZLIB_CFLAGS) $(RELPATH_CFLAGS)
 src_gvl_libgvl_la_LIBADD = $(ZLIB_LIBS)
+src_gvl_libgvl_la_LDFLAGS = $(RELPATH_LDFLAGS)
 
 EXTRA_PROGRAMS = src/gvl/gvltest
-src_gvl_gvltest_CFLAGS = $(ZLIB_CFLAGS)
-src_gvl_gvltest_LDFLAGS = $(ZLIB_LIBS) $(LIBRT)
+src_gvl_gvltest_CFLAGS = $(ZLIB_CFLAGS) $(RELPATH_CFLAGS)
+src_gvl_gvltest_LDFLAGS = $(ZLIB_LIBS) $(LIBRT) $(RELPATH_LDFLAGS)
 src_gvl_gvltest_LDADD = src/gvl/libgvl.la
 
 nodist_bin_SCRIPTS = \
@@ -48,6 +54,9 @@ nodist_man6_MANS = \
 	man/lierolibre-packsounds.6 \
 	man/lierolibre-extractlev.6 \
 	man/lierolibre-packlev.6
+
+# For nixbin
+MANS_TXT = $(nodist_man6_MANS:.6=.txt)
 
 dist_doc_DATA = \
 	AUTHORS \
@@ -565,6 +574,54 @@ EXTRA_DIST = \
 	src/gvl/tut/quickcheck/property.hpp \
 	src/gvl/tut/quickcheck/quickcheck.hpp
 
+
+LIB_ARCH_NIXBIN_LIBFILES = \
+	lib/libz.so.1 \
+	lib/libdbus-1.so.3 \
+	lib/libwrap.so.0 \
+	lib/libtinfo.so.5
+
+USR_LIB_ARCH_NIXBIN_LIBFILES = \
+	lib/libconfig++.so \
+        lib/libSDL_mixer-1.2.so.0 \
+        lib/libSDL-1.2.so.0 \
+	lib/libmikmod.so.2 \
+	lib/libvorbisfile.so.3 \
+	lib/libvorbis.so.0 \
+	lib/libFLAC.so.8 \
+	lib/libpulse-simple.so.0 \
+	lib/libpulse.so.0 \
+	lib/libdirectfb-1.2.so.9 \
+	lib/libfusion-1.2.so.9 \
+	lib/libdirect-1.2.so.9 \
+	lib/libcaca.so.0 \
+	lib/libsndfile.so.1 \
+	lib/libasyncns.so.0 \
+	lib/libvorbisenc.so.2 \
+	lib/libxcb.so.1 \
+	lib/libX11-xcb.so.1
+
+USR_LIB_NIXBIN_LIBFILES = \
+	lib/libboost_program_options.so \
+	lib/libjson.so.0 \
+	lib/libogg.so.0 \
+	lib/libmad.so.0
+
+LIB_NIXBIN_LIBFILES = \
+	lib/libcap.so.2
+
+USR_LIB_ARCH_PA_NIXBIN_LIBFILES = \
+	lib/libpulsecommon-2.0.so
+
+NIXBIN_LIBFILES = \
+	$(LIB_ARCH_NIXBIN_LIBFILES) \
+	$(USR_LIB_ARCH_NIXBIN_LIBFILES) \
+	$(USR_LIB_NIXBIN_LIBFILES) \
+	$(LIB_NIXBIN_LIBFILES) \
+	$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES)
+
+.PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
+
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
 	sed \
@@ -603,5 +660,97 @@ clean-local:
 	rm -f \
 		$(nodist_pkgdata_DATA) \
 		$(nodist_bin_SCRIPTS) \
-		$(nodist_man6_MANS)
+		$(nodist_man6_MANS) \
+		$(MANS_TXT)
+	rm -rf lib/ libsrc/
+
+# Yeah, it's ugly
+$(LIB_ARCH_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a \
+		/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
+		lib/
+
+$(USR_LIB_ARCH_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a \
+		/usr/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
+		lib/
+
+$(USR_LIB_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a /usr/lib/$${NIXBIN_LIBFILE#lib/}* lib/
+
+$(LIB_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/
+
+$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES):
+	install -d lib/
+	NIXBIN_LIBFILE=$@ ;\
+		cp -a \
+		/usr/lib/$(build_cpu)-$(build_os)/pulseaudio/$${NIXBIN_LIBFILE#lib/}* \
+		lib/
+
+$(MANS_TXT): $(nodist_man6_MANS)
+	man --no-justification --no-hyphenation $(@:.txt=.6) | col -b > $@
+	echo >> $@
+	echo "This text file was automatically generated from $(@:.txt=.6)" \
+		>> $@
+
+dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
+		$(MANS_TXT) dist-nixbin-libsrc
+	cp -aT $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
+	cp -a lib/ $(NIXBIN_DIRNAME)
+	cp -a libsrc/ $(NIXBIN_DIRNAME)
+	cp -a $(pkglibexec_PROGRAMS) $(NIXBIN_DIRNAME)
+	cp -a $(nodist_pkgdata_DATA) $(NIXBIN_DIRNAME)/data/
+	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
+	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
+	cp -a README_linuxbin $(NIXBIN_DIRNAME)
+
+dist-nixbin-libsrc:
+	install -d libsrc/
+	cd libsrc/ && \
+		apt-get source --tar-only \
+		libconfig++9 \
+		libsdl1.2 \
+		libmikmod2 \
+		libvorbisfile3 \
+		libvorbis0a \
+		libogg0 \
+		libflac8 \
+		libmad0 \
+		libpulse0 \
+		libdirectfb-1.2-9 \
+		libcap2 \
+		libjson0 \
+		libdbus-1-3 \
+		libxcb1 \
+		libncursesw5 \
+		libtinfo5 \
+		libx11-xcb1 \
+		libwrap0 \
+		libsndfile1 \
+		libasyncns0 \
+		libvorbisenc2
+
+dist-nixbin-dir-libsrc-binonly-license:
+	install -d $(NIXBIN_DIRNAME)/libsrc/
+	cd $(NIXBIN_DIRNAME)/libsrc && \
+		apt-get source --tar-only \
+		zlib1g \
+		libsdl-mixer1.2 \
+		libboost-program-options1.49.0 \
+		libcaca0
+
+dist-nixbin: dist-nixbin-dir
+	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
+
+dist-nixbin-xz: dist-nixbin-dir
+	tar caf $(NIXBIN_DIRNAME).tar.xz $(NIXBIN_DIRNAME)
 
