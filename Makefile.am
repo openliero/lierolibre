@@ -597,7 +597,9 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libcaca.so.0 \
 	lib/libsndfile.so.1 \
 	lib/libasyncns.so.0 \
-	lib/libvorbisenc.so.2
+	lib/libvorbisenc.so.2 \
+	lib/libxcb.so.1 \
+	lib/libX11-xcb.so.1
 
 USR_LIB_NIXBIN_LIBFILES = \
 	lib/libboost_program_options.so \
