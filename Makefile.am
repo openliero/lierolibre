@@ -620,7 +620,7 @@ NIXBIN_LIBFILES = \
 	$(LIB_NIXBIN_LIBFILES) \
 	$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES)
 
-.PHONY: clean-local dist-nixbin-dir dist-nixbin-dir-libsrc dist-nixbin dist-nixbin-xz
+.PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
 
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
@@ -662,7 +662,7 @@ clean-local:
 		$(nodist_bin_SCRIPTS) \
 		$(nodist_man6_MANS) \
 		$(MANS_TXT)
-	rm -rf lib/
+	rm -rf lib/ libsrc/
 
 # Yeah, it's ugly
 $(LIB_ARCH_NIXBIN_LIBFILES):
@@ -703,18 +703,19 @@ $(MANS_TXT): $(nodist_man6_MANS)
 		>> $@
 
 dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
-		$(MANS_TXT)
+		$(MANS_TXT) dist-nixbin-libsrc
 	cp -aT $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
 	cp -a lib/ $(NIXBIN_DIRNAME)
+	cp -a libsrc/ $(NIXBIN_DIRNAME)
 	cp -a $(pkglibexec_PROGRAMS) $(NIXBIN_DIRNAME)
 	cp -a $(nodist_pkgdata_DATA) $(NIXBIN_DIRNAME)/data/
 	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
 	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
 	cp -a README_linuxbin $(NIXBIN_DIRNAME)
 
-dist-nixbin-dir-libsrc:
-	install -d $(NIXBIN_DIRNAME)/libsrc/
-	cd $(NIXBIN_DIRNAME)/libsrc && \
+dist-nixbin-libsrc:
+	install -d libsrc/
+	cd libsrc/ && \
 		apt-get source --tar-only \
 		libconfig++9 \
 		libsdl1.2 \
@@ -745,11 +746,11 @@ dist-nixbin-dir-libsrc-binonly-license:
 		zlib1g \
 		libsdl-mixer1.2 \
 		libboost-program-options1.49.0 \
-		libcaca0 \
+		libcaca0
 
-dist-nixbin: dist-nixbin-dir dist-nixbin-dir-libsrc
+dist-nixbin: dist-nixbin-dir
 	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
 
-dist-nixbin-xz: dist-nixbin-dir dist-nixbin-dir-libsrc
+dist-nixbin-xz: dist-nixbin-dir
 	tar caf $(NIXBIN_DIRNAME).tar.xz $(NIXBIN_DIRNAME)
 
