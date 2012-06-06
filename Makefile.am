@@ -8,7 +8,7 @@ CFGFILE = liero.cfg
 
 # For nixbin-dist
 PACKAGE_DIRNAME = $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)
-NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_nix$(build_cpu)
+NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_nixbin$(build_cpu)
 
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
@@ -54,6 +54,9 @@ nodist_man6_MANS = \
 	man/lierolibre-packsounds.6 \
 	man/lierolibre-extractlev.6 \
 	man/lierolibre-packlev.6
+
+# For nixbin
+MANS_TXT = $(nodist_man6_MANS:.6=.txt)
 
 dist_doc_DATA = \
 	AUTHORS \
@@ -586,6 +589,7 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libvorbis.so.0 \
 	lib/libFLAC.so.8 \
 	lib/libpulse-simple.so.0 \
+	lib/libpulse.so.0 \
 	lib/libdirectfb-1.2.so.9 \
 	lib/libfusion-1.2.so.9 \
 	lib/libdirect-1.2.so.9 \
@@ -603,17 +607,15 @@ USR_LIB_NIXBIN_LIBFILES = \
 LIB_NIXBIN_LIBFILES = \
 	lib/libcap.so.2
 
-USR_LIB_ARCH__PA_NIXBIN_LIBFILES = \
-	lib/pulseaudio/libpulsecommon-2.0.so
+USR_LIB_ARCH_PA_NIXBIN_LIBFILES = \
+	lib/libpulsecommon-2.0.so
 
 NIXBIN_LIBFILES = \
 	$(LIB_ARCH_NIXBIN_LIBFILES) \
 	$(USR_LIB_ARCH_NIXBIN_LIBFILES) \
 	$(USR_LIB_NIXBIN_LIBFILES) \
 	$(LIB_NIXBIN_LIBFILES) \
-	$(USR_LIB_ARCH_NIXBIN_LIBFILES)
-
-MANS_TXT = $(nodist_man6_MANS:.6=.txt)
+	$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES)
 
 .PHONY: clean-local dist-nixbin-dir dist-nixbin dist-nixbin-xz
 
@@ -685,11 +687,11 @@ $(LIB_NIXBIN_LIBFILES):
 		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/
 
 $(USR_LIB_ARCH_PA_NIXBIN_LIBFILES):
-	install -d lib/pulseaudio/
+	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/usr/lib/$(build_cpu)-$(build_os)/pulseaudio/$${NIXBIN_LIBFILE#lib/}* \
-		lib/pulseaudio/
+		lib/
 
 $(MANS_TXT): $(nodist_man6_MANS)
 	man --no-justification --no-hyphenation $(@:.txt=.6) | col -b > $@
