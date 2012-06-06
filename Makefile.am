@@ -620,7 +620,7 @@ NIXBIN_LIBFILES = \
 	$(LIB_NIXBIN_LIBFILES) \
 	$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES)
 
-.PHONY: clean-local dist-nixbin-dir dist-nixbin dist-nixbin-xz
+.PHONY: clean-local dist-nixbin-dir dist-nixbin-dir-libsrc dist-nixbin dist-nixbin-xz
 
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
@@ -710,10 +710,46 @@ dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgd
 	cp -a $(nodist_pkgdata_DATA) $(NIXBIN_DIRNAME)/data/
 	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
 	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
+	cp -a README_linuxbin $(NIXBIN_DIRNAME)
 
-dist-nixbin: dist-nixbin-dir
+dist-nixbin-dir-libsrc:
+	install -d $(NIXBIN_DIRNAME)/libsrc/
+	cd $(NIXBIN_DIRNAME)/libsrc && \
+		apt-get source --tar-only \
+		libconfig++9 \
+		libsdl1.2 \
+		libmikmod2 \
+		libvorbisfile3 \
+		libvorbis0a \
+		libogg0 \
+		libflac8 \
+		libmad0 \
+		libpulse0 \
+		libdirectfb-1.2-9 \
+		libcap2 \
+		libjson0 \
+		libdbus-1-3 \
+		libxcb1 \
+		libncursesw5 \
+		libtinfo5 \
+		libx11-xcb1 \
+		libwrap0 \
+		libsndfile1 \
+		libasyncns0 \
+		libvorbisenc2
+
+dist-nixbin-dir-libsrc-binonly-license:
+	install -d $(NIXBIN_DIRNAME)/libsrc/
+	cd $(NIXBIN_DIRNAME)/libsrc && \
+		apt-get source --tar-only \
+		zlib1g \
+		libsdl-mixer1.2 \
+		libboost-program-options1.49.0 \
+		libcaca0 \
+
+dist-nixbin: dist-nixbin-dir dist-nixbin-dir-libsrc
 	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
 
-dist-nixbin-xz: dist-nixbin-dir
+dist-nixbin-xz: dist-nixbin-dir dist-nixbin-dir-libsrc
 	tar caf $(NIXBIN_DIRNAME).tar.xz $(NIXBIN_DIRNAME)
 
