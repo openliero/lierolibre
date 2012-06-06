@@ -8,7 +8,7 @@ CFGFILE = liero.cfg
 
 # For nixbin-dist
 PACKAGE_DIRNAME = $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)
-NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_nixbin$(build_cpu)
+NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_linux-$(build_cpu)
 
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
