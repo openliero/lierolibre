@@ -579,7 +579,7 @@ LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libz.so.1 \
 	lib/libdbus-1.so.3 \
 	lib/libwrap.so.0 \
-	libtinfo.so.5
+	lib/libtinfo.so.5
 
 USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libconfig++.so \
