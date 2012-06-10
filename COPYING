@@ -11,7 +11,7 @@ is included in the gvl library.
 
 The SDL m4 script is LGPLv2.1+.
 
-The autotools content in part licensed under the BSD-2-Clause license of
+The autotools content is in part licensed under the BSD-2-Clause license of
 lierolibre, and also under various custom permissive free software licenses.
 The content under the BSD-2-Clause license falls under the GPL-2+ if used
 outside of lierolibre.
