@@ -8,6 +8,11 @@ Version 0.3.1 - May 2012, by Martin Erik Werner
 * Added automatic upgrading of CFG file from v0 to v1
   + Only upgrades if loading from $HOME / settings dir
   + Creates a backup named *_backup_XXXXX
+* First binary linux release
+  - Uses hard-coded run-time search path and an included set of libs
+  - Also includes source code for libs under LGPL
+* Include library sources in windows package
+  - As required by LGPL (previously in a separate package)
 
 
 Version 0.3 - March 2012, by Martin Erik Werner
