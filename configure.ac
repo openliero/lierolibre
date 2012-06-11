@@ -115,7 +115,7 @@ AC_CHECK_FUNCS([clock_gettime floor gethostbyname localeconv memmove memset mkdi
 
 # Relative path for portable packages with accompanying libs
 AC_ARG_ENABLE([relpath],
-  AC_HELP_STRING([--enable-relpath], [libraries are searched relative to the executable]),
+  AC_HELP_STRING([--enable-relpath], [add lib/ to the runtime library search path]),
   [want_relative=yes], [want_relative=no])
 if test "$want_relative" = yes; then
   RELPATH_CFLAGS='-DUSE_RELATIVE_PATHS'
