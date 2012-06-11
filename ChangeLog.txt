@@ -1,3 +1,48 @@
+commit 303654042e5f683074a7489ed6769fa9b2d20c61
+Merge: accd144 104b3fe
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:58:56 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 104b3fe7c1b93e122489e1d8b046329bdbc28bef
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:58:47 2012 +0200
+
+    Update ChangeLog
+
+ ChangeLog |   29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+commit 6ce2817750ab081f420dd7e47a831367f249d52c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:41:08 2012 +0200
+
+    Update nixbin readme regarding source and copyright
+
+ README_linuxbin |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 10d0a17e2a75529b3ca12b2681b8a35336faadca
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:54:45 2012 +0200
+
+    Revert "move README_linuxbin to nixbin branch"
+    
+    This reverts commit 47894a5a9d207db95b94db5a1def58555f668ec8.
+
+ README_linuxbin |   10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit accd14473857192250f336380b1019cafbbad7e5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:48:59 2012 +0200
+
+    Update win ChangeLog
+
+ ChangeLog.txt |  729 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 729 insertions(+)
+
 commit 0d134f1fda2f107b4f1f280d57181106b1a4573a
 Merge: c726392 17ca2ff
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
