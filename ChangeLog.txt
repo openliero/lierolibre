@@ -1,3 +1,732 @@
+commit 0d134f1fda2f107b4f1f280d57181106b1a4573a
+Merge: c726392 17ca2ff
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:48:36 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 17ca2ff50810ff24ff1de24b626d547e2f505211
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:48:22 2012 +0200
+
+    Update ChangeLog
+
+ ChangeLog |  421 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 421 insertions(+)
+
+commit f44117205edf44533d6ef11d0ee136348663d15e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:38:29 2012 +0200
+
+    Bump to version 0.4
+
+ NEWS         |    2 +-
+ configure.ac |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit f7d707747e2991c00b5b61941809bc0f01755b1e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:36:21 2012 +0200
+
+    Better help string for --enable-relpath
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d6354e241879cb15cb4fe0cba892cf4743cfbc8c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:05:50 2012 +0200
+
+    Add configCompat.cpp to Jamfile
+
+ src/Jamfile |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit c726392511f8b7a1711628a420890e0812c9fe80
+Merge: 6a3cd15 f6a7e0c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 23:40:47 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit f6a7e0c4e8f53a3e7e28eac01a07a4b03bbacfbe
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 22:28:37 2012 +0200
+
+    create missing-files, take current deb sources
+
+ Makefile.am |   22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
+
+commit 314faf9877e04504dd44beba158cd36594d6db05
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 21:13:13 2012 +0200
+
+    Assign source & no-source libs
+
+ Makefile.am |   36 ++++++++++++++++++------------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
+
+commit 6ef6bf2e5236033f5a5d33172ef319be8951a586
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 16:04:00 2012 +0200
+
+    Revamp nixbin targets
+    
+    * Move libjson to usr/lib/$arch
+    * Use Variables for deb package names
+    * Add copyright downloading via cupt
+    * Use whole debian packaging for source
+
+ Makefile.am |   82 +++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 43 insertions(+), 39 deletions(-)
+
+commit 6a3cd15bd6b659723b620c3a4fd051637e37c65f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 15:26:06 2012 +0200
+
+    Note libsrc in win COPYING
+
+ COPYING.txt |   10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+commit 5680c14ac19c30751b0b4bb890cec97e3408e2b7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:48:58 2012 +0200
+
+    Rename liero.cfg->lierocfg.txt in release script
+
+ assemble-release.bat |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit a8e47c0d32cb5eee336d1570f2d5641e07344e85
+Merge: 522b737 578fdf8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:47:41 2012 +0200
+
+    Merge branch 'master' into windows
+    
+    Don't use win-specific data submodule
+
+commit 578fdf84102efe35eae3344260a98d9e6c5fc188
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:45:29 2012 +0200
+
+    data submodule store precompiled
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 522b73766ad2c17ada26071f289fad17064042ca
+Merge: 005035c 4138c50
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:36:18 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 005035cdd7b3d48a9cc2f369bb9637a908c7e380
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:29:22 2012 +0200
+
+    Don't mention man pages in windows release
+
+ README.txt |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 4138c502cfeb9cbed6fbae2e060780419cad9590
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:28:22 2012 +0200
+
+    Update NEWS with nixbin and win libsrc
+
+ NEWS |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 7e3663c0ed4151eb6fc1f9f002daf2c53621f697
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 23:44:23 2012 +0200
+
+    rename to txt, add SDL_mixer.dll
+
+ assemble-release.bat |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 41af8e3372d99cccdcd018a0fa9df58b926d4bae
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 23:28:08 2012 +0200
+
+    Workaround lack of sane cli
+
+ assemble-release.bat |   22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
+
+commit 252924d29a32b33dfc9fece36989744d3e370e2e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 23:27:54 2012 +0200
+
+    submodule hardcode D and set SDL for nomasm zlib
+
+ lib                       |    2 +-
+ src/_build/lierolibre.sln |    3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit a9e6cf0525593689190f031f48d449a43938807c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 23:14:22 2012 +0200
+
+    winadapt data submodule
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 35202747aec2ddef8bfd555b95bd0dbd5d7829c9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 21:27:36 2012 +0200
+
+    winrelease script for SDL source
+
+ assemble-release.bat |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit 6d7afffa1b5aae04eb26f6140ec49b444a0a94fa
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 21:24:42 2012 +0200
+
+    Update projs with SDL source
+
+ lib                       |    2 +-
+ src/_build/liero.vcxproj  |    7 ++++---
+ src/_build/lierolibre.sln |   17 +++++++++++++++++
+ 3 files changed, 22 insertions(+), 4 deletions(-)
+
+commit 9d7bf2d8c7e1ac657a29227608530df8cf2dca56
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 18:37:24 2012 +0200
+
+    submodule lib SDL include dir
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c51063a6dd7fbf069ca85cae07f208a3611bdd96
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 18:21:55 2012 +0200
+
+    lib submodule SDL dir fixes
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit be4abce226d915cc07449ae39c0769d317b4bcdc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 17:13:13 2012 +0200
+
+    lib submodule SDL dir move
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 03bfb7913c69b075f3ea8adab64f944396063d36
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 14:31:16 2012 +0200
+
+    Extend windows release script
+
+ assemble-release.bat |   10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+commit 52d411e0bedffb10572f2007ef8b5b951579f842
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 14:30:51 2012 +0200
+
+    Missing period
+
+ COPYING.txt |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit df5dc6ab306228a7453dd9fc71aaba5f6bb12264
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 14:23:06 2012 +0200
+
+    lib submodule SDL source
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b7cd653651114abeeea0ebb875b3c013129e9cb5
+Merge: 3bfe159 58f5b2e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:25:22 2012 +0200
+
+    Merge branch 'windows' of gitorious.org:lierolibre/lierolibre into windows
+
+commit 3bfe159768a635dc283205759892e21ac7778ccd
+Merge: b2a0625 547d93f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:22:48 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 547d93f0903a7e002d3960073625788e7ef1a663
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:20:47 2012 +0200
+
+    Fix formulation error in COPYING
+
+ COPYING |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d860b117fde04e18aae23afe43c53558dbffb5c7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:17:23 2012 +0200
+
+    Add plaintext LGPL
+
+ COPYING      |    2 +
+ lgpl-2.1.txt |  502 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 504 insertions(+)
+
+commit b2a06253045c4f99837b28c42e55e13e2883a179
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:10:29 2012 +0200
+
+    Add lgpl plaintext
+
+ COPYING.txt          |    2 +
+ assemble-release.bat |    2 +-
+ lgpl-2.1.txt         |  502 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 505 insertions(+), 1 deletion(-)
+
+commit 6a797a21ab3fd5882bbf43faab5295051cc04fd0
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 00:27:48 2012 +0200
+
+    start writing realease-assembly script for win
+
+ assemble-release.bat |   13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit 58f5b2e3b4d1cf886e0b9fbd6f9c64d913ec196b
+Merge: 658c1cd cd4c08f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Jun 9 22:45:28 2012 +0200
+
+    Merge branch 'windows' of gitorious.org:lierolibre/lierolibre into windows
+
+commit 658c1cdf38abc723a143d06ded1f82f2e328f472
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Jun 9 22:43:47 2012 +0200
+
+    Added msvc dlls to lib
+
+ lib |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 47894a5a9d207db95b94db5a1def58555f668ec8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Jun 9 21:38:19 2012 +0200
+
+    move README_linuxbin to nixbin branch
+
+ README_linuxbin |   10 ----------
+ 1 file changed, 10 deletions(-)
+
+commit cd4c08fb8f82a915f65a6f0199eced97ce266083
+Merge: 1ec6876 a657855
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 23:25:01 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit a657855ded908074c17c0cc37e5e919f93576cef
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 20:01:41 2012 +0200
+
+    libsrc make rules cleanup
+
+ Makefile.am |   19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+commit d33d371e3bad8dac53a3178942b8d57d75a3744e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 19:52:36 2012 +0200
+
+    README for binary linux package
+
+ README_linuxbin |   10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 71592ee7426e6b6de36756199618513c2d8fc602
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 19:51:54 2012 +0200
+
+    Make target for pulling in lib source tarballs
+
+ Makefile.am |   44 ++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 40 insertions(+), 4 deletions(-)
+
+commit 52a90814e23f4b9fd438368883e2051c8168a978
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 19:17:44 2012 +0200
+
+    Fix libtinfo5 path
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7d46dca7676b6b8982e0b30ece4d68f185c07298
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 18:14:12 2012 +0200
+
+    Add libxcb.so.1 & libX11-xcb.so.1
+
+ Makefile.am |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit ba6da1ad9ce3b616202822ed6fda9df6ba1d34a9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 17:53:00 2012 +0200
+
+    Add libtinfo.so.5
+
+ Makefile.am |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 2636fe2c2df7af6c4744a39bc427624e380be21c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 12:01:29 2012 +0200
+
+    Prettier nixbin tarname
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e53b900650a33aeefabc14f2db2c1d5e405962e8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 11:03:39 2012 +0200
+
+    Rename nix->nixbin, fix pulse libs, add MANS_TXT var
+
+ Makefile.am |   18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
+
+commit 1dd7f0e522377a382e4a7115252722d516b86766
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 15:00:29 2012 +0200
+
+    Remove libXext lib, variabelise a bit more
+    
+    LibXext appears to be closely tied to X, which I've heard is not
+    good to include-port.
+
+ Makefile.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit a77f81812e79032050c222bc5a260106256dfc5f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 14:50:07 2012 +0200
+
+    Add txt mans and lib dir to clean-local
+
+ Makefile.am |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit d6d780c15cccf8eed1663d4cbd72ff3122a96747
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 14:45:28 2012 +0200
+
+    Decapitalise mid-sentance break in manpage history
+
+ man/lierolibre.6.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 19736fc016f1d8a015dc185c40eeb1ba2d2cb484
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 14:43:19 2012 +0200
+
+    Refactor dist-nixbin and add MANS_TXT
+
+ Makefile.am |   24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
+
+commit d0177e6db4ab656b9f06a0553c9c8759ef16a0ea
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 12:06:54 2012 +0200
+
+    Clunky make rules for nix binary package
+    
+    This should allow making a fairly portable nix package which
+    includes a cruftton of libs, unfortunately the rules are extremely
+    unportable in themselves.
+
+ Makefile.am  |  103 +++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ configure.ac |   11 +++++++
+ 2 files changed, 109 insertions(+), 5 deletions(-)
+
+commit 1ec687600688287207a7d63b7adfb93533b9ec7e
+Merge: e85b0d5 4e27e1f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 23:03:48 2012 +0200
+
+    Merge branch 'windows' of gitorious.org:lierolibre/lierolibre into windows
+
+commit 4e27e1f9b6d8ce2e40cbc72f493b806a12c35471
+Merge: 9327c2a d050c99
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 23:03:52 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit d050c99278c3c45bb12c94ca66cce9622debafa9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 23:02:48 2012 +0200
+
+    Add nullbyte to strlen for w32 mktemp_s()
+
+ src/filesystem.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e85b0d55086529ffbdf24e1123650762551413a6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:42:13 2012 +0200
+
+    include configCompat.cpp in vcproj
+
+ src/_build/liero.vcxproj |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 9327c2a446ad385ae487120b2f8495c65b8a4f1a
+Merge: a22bd39 3c51509
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:41:08 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 3c51509cce2f73418743a7520a96b430dde85198
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:40:53 2012 +0200
+
+    Note loadConstantsFromCFGVer0() in configCompat.cpp
+
+ src/common.hpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a22bd3974b598fa3446de6fafca9dd370b9e9555
+Merge: 12f00a1 d2b59b5
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:19:37 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit d2b59b515e89a56622d9af24f2c3076b8a6548bd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:18:07 2012 +0200
+
+    Avoid double-loading CFG in first constructor as well
+
+ src/configInit.cpp |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 0e1dcb575fe9b656957c7e22708f56d45da43f4f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:07:37 2012 +0200
+
+    Make backupFile() w32-friendly
+
+ src/filesystem.cpp |   13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+commit 12f00a16f461671839afe35e352a96dff84fed71
+Merge: 9546fe7 525b851
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 20:09:14 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 525b851f614eb9fd51434355391738cc4cbdaaca
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 20:08:22 2012 +0200
+
+    Add libboost-program-options-dev depend in README
+
+ README |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9546fe767c896c2ba5bf70e0fa534e05d29fc361
+Merge: e645f31 5ca6a5c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 19:34:17 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 5ca6a5cf30153d32e6b776a05a57a1369b70cc6e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:27:51 2012 +0200
+
+    Added auto-upgrade note to NEWS
+
+ NEWS |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit e645f3139dd8af49dc8c5319b88e61c7acda4bff
+Merge: d577bfc f54a15e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:13:48 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit f54a15ed6f79d11028b9b9de19aec24bc6efcdcc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:12:09 2012 +0200
+
+    Use upgradeCFG() when the $HOME / settings CFG file is used
+
+ src/configInit.cpp |   12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+commit 3feeecc1e0954a800d8d85d957e42aa02057cbc4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:04:54 2012 +0200
+
+    Implement upgradeCFG()
+    
+    Function which takes a given CFG and a compating version,
+    if it is outdated:
+    * Loads the variables from it (using the existing compatible load)
+    * Makes a backup copy of the file
+    * Recreates the file in the new format from the loaded vars
+
+ src/configInit.cpp |   30 ++++++++++++++++++++++++++----
+ src/configInit.hpp |    1 +
+ 2 files changed, 27 insertions(+), 4 deletions(-)
+
+commit b50a629a8f1276e1b33b4b6d4823371b0c8d7410
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:02:59 2012 +0200
+
+    Implement rmFile() and backupFile() in filesystem
+
+ src/filesystem.cpp |   28 ++++++++++++++++++++++++++++
+ src/filesystem.hpp |    4 ++++
+ 2 files changed, 32 insertions(+)
+
+commit f53f12128b9f4f0cf9fb09eeeac502dd912ae16d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 17 12:41:28 2012 +0200
+
+    src/filesystem.cpp:fix whitespace
+
+ src/filesystem.cpp |   44 ++++++++++++++++++++++----------------------
+ 1 file changed, 22 insertions(+), 22 deletions(-)
+
+commit 9a315fdfd16af439b54963089ac042ca3fecea15
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 17 11:56:05 2012 +0200
+
+    Bump to 0.3.1, update NEWS
+
+ NEWS         |    7 +++++++
+ configure.ac |    2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+commit d577bfc48e3f14b28cb386efdccc6ddcd37c5d4a
+Merge: a819614 36a08d6
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 17 11:50:37 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 36a08d6ac07fd80ddd4d0adb3788c1df11c3341f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:49:47 2012 +0200
+
+    Make sure to write the version to file
+
+ src/common.cpp |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 2126369ffd8ed49ed6003ae296cbc58a058ffb25
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:32:00 2012 +0200
+
+    Fix constants names, needs CFG file v.1)
+
+ src/constants.cpp |   72 ++++++++++++++++++++++++-----------------------------
+ 1 file changed, 33 insertions(+), 39 deletions(-)
+
+commit f615fb356e792782c72ee9c4b758833a504ed27b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:29:34 2012 +0200
+
+    Do CFG version check in init, and load accordingly
+
+ src/configInit.cpp |   12 +++++++++++-
+ src/configInit.hpp |    2 ++
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+
+commit e64953abcb63687d87d25f11ba5ccc568790304c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:26:52 2012 +0200
+
+    Add functions for reading/writing CFG file version
+
+ src/common.cpp       |   21 +++++++++++++++++++++
+ src/common.hpp       |    3 +++
+ src/configHelper.cpp |    5 +++++
+ src/configHelper.hpp |    2 ++
+ 4 files changed, 31 insertions(+)
+
+commit dad3aa78b43608d5610ef8abee533820e8df28c1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:24:49 2012 +0200
+
+    Add compatible loading of constants from ver0 CFG
+
+ Makefile.am          |    1 +
+ src/common.hpp       |    1 +
+ src/configCompat.cpp |  178 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 180 insertions(+)
+
+commit ede3a2df920450d09d0b0e2c3e1a472b7e6e6627
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun May 13 17:56:51 2012 +0200
+
+    Fix loading EXE file by path
+    
+    Previously used an empty path :(
+
+ src/configInit.cpp |    3 +--
+ src/reader.cpp     |    5 +++++
+ src/reader.hpp     |    1 +
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
+commit 8c80937128137f857fccb6396241ccffc17e137f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 9 01:28:30 2012 +0200
+
+    Note where lev files go in README
+
+ README |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit a819614fa6e3a19a9d93e74dcf097125390c13ca
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 9 01:26:16 2012 +0200
+
+    Note where to place lev files in README
+
+ README.txt |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit cf1728bb2e7efb36dad629d87c428f2b86b8d174
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 12:22:39 2012 +0200
+
+    Update windows changelog
+
+ ChangeLog.txt |  131 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 131 insertions(+)
+
 commit c56e0f370704e60455c69e78de666ca4c3ffa6a3
 Merge: 3039d30 16df031
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
