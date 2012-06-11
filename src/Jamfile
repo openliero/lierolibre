@@ -17,6 +17,7 @@ Main lierolibre : bobject.cpp bonus.cpp common.cpp console.cpp
 	dataPath.cpp
 	binReader.cpp
 	to_string.cpp
+	configCompat.cpp
 	configHelper.cpp
 	configInit.cpp
 	argParse.cpp

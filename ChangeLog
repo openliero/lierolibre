@@ -1,3 +1,424 @@
+commit f44117205edf44533d6ef11d0ee136348663d15e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:38:29 2012 +0200
+
+    Bump to version 0.4
+
+ NEWS         |    2 +-
+ configure.ac |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit f7d707747e2991c00b5b61941809bc0f01755b1e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:36:21 2012 +0200
+
+    Better help string for --enable-relpath
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d6354e241879cb15cb4fe0cba892cf4743cfbc8c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:05:50 2012 +0200
+
+    Add configCompat.cpp to Jamfile
+
+ src/Jamfile |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit f6a7e0c4e8f53a3e7e28eac01a07a4b03bbacfbe
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 22:28:37 2012 +0200
+
+    create missing-files, take current deb sources
+
+ Makefile.am |   22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
+
+commit 314faf9877e04504dd44beba158cd36594d6db05
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 21:13:13 2012 +0200
+
+    Assign source & no-source libs
+
+ Makefile.am |   36 ++++++++++++++++++------------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
+
+commit 6ef6bf2e5236033f5a5d33172ef319be8951a586
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 16:04:00 2012 +0200
+
+    Revamp nixbin targets
+    
+    * Move libjson to usr/lib/$arch
+    * Use Variables for deb package names
+    * Add copyright downloading via cupt
+    * Use whole debian packaging for source
+
+ Makefile.am |   82 +++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 43 insertions(+), 39 deletions(-)
+
+commit 578fdf84102efe35eae3344260a98d9e6c5fc188
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:45:29 2012 +0200
+
+    data submodule store precompiled
+
+ data |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4138c502cfeb9cbed6fbae2e060780419cad9590
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 11 13:28:22 2012 +0200
+
+    Update NEWS with nixbin and win libsrc
+
+ NEWS |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 547d93f0903a7e002d3960073625788e7ef1a663
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:20:47 2012 +0200
+
+    Fix formulation error in COPYING
+
+ COPYING |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d860b117fde04e18aae23afe43c53558dbffb5c7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun Jun 10 12:17:23 2012 +0200
+
+    Add plaintext LGPL
+
+ COPYING      |    2 +
+ lgpl-2.1.txt |  502 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 504 insertions(+)
+
+commit 47894a5a9d207db95b94db5a1def58555f668ec8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Jun 9 21:38:19 2012 +0200
+
+    move README_linuxbin to nixbin branch
+
+ README_linuxbin |   10 ----------
+ 1 file changed, 10 deletions(-)
+
+commit a657855ded908074c17c0cc37e5e919f93576cef
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 20:01:41 2012 +0200
+
+    libsrc make rules cleanup
+
+ Makefile.am |   19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+commit d33d371e3bad8dac53a3178942b8d57d75a3744e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 19:52:36 2012 +0200
+
+    README for binary linux package
+
+ README_linuxbin |   10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 71592ee7426e6b6de36756199618513c2d8fc602
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 19:51:54 2012 +0200
+
+    Make target for pulling in lib source tarballs
+
+ Makefile.am |   44 ++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 40 insertions(+), 4 deletions(-)
+
+commit 52a90814e23f4b9fd438368883e2051c8168a978
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 19:17:44 2012 +0200
+
+    Fix libtinfo5 path
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7d46dca7676b6b8982e0b30ece4d68f185c07298
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 18:14:12 2012 +0200
+
+    Add libxcb.so.1 & libX11-xcb.so.1
+
+ Makefile.am |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit ba6da1ad9ce3b616202822ed6fda9df6ba1d34a9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 17:53:00 2012 +0200
+
+    Add libtinfo.so.5
+
+ Makefile.am |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 2636fe2c2df7af6c4744a39bc427624e380be21c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 12:01:29 2012 +0200
+
+    Prettier nixbin tarname
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e53b900650a33aeefabc14f2db2c1d5e405962e8
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed Jun 6 11:03:39 2012 +0200
+
+    Rename nix->nixbin, fix pulse libs, add MANS_TXT var
+
+ Makefile.am |   18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
+
+commit 1dd7f0e522377a382e4a7115252722d516b86766
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 15:00:29 2012 +0200
+
+    Remove libXext lib, variabelise a bit more
+    
+    LibXext appears to be closely tied to X, which I've heard is not
+    good to include-port.
+
+ Makefile.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit a77f81812e79032050c222bc5a260106256dfc5f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 14:50:07 2012 +0200
+
+    Add txt mans and lib dir to clean-local
+
+ Makefile.am |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit d6d780c15cccf8eed1663d4cbd72ff3122a96747
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 14:45:28 2012 +0200
+
+    Decapitalise mid-sentance break in manpage history
+
+ man/lierolibre.6.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 19736fc016f1d8a015dc185c40eeb1ba2d2cb484
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 14:43:19 2012 +0200
+
+    Refactor dist-nixbin and add MANS_TXT
+
+ Makefile.am |   24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
+
+commit d0177e6db4ab656b9f06a0553c9c8759ef16a0ea
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 5 12:06:54 2012 +0200
+
+    Clunky make rules for nix binary package
+    
+    This should allow making a fairly portable nix package which
+    includes a cruftton of libs, unfortunately the rules are extremely
+    unportable in themselves.
+
+ Makefile.am  |  103 +++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ configure.ac |   11 +++++++
+ 2 files changed, 109 insertions(+), 5 deletions(-)
+
+commit d050c99278c3c45bb12c94ca66cce9622debafa9
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 23:02:48 2012 +0200
+
+    Add nullbyte to strlen for w32 mktemp_s()
+
+ src/filesystem.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3c51509cce2f73418743a7520a96b430dde85198
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:40:53 2012 +0200
+
+    Note loadConstantsFromCFGVer0() in configCompat.cpp
+
+ src/common.hpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d2b59b515e89a56622d9af24f2c3076b8a6548bd
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:18:07 2012 +0200
+
+    Avoid double-loading CFG in first constructor as well
+
+ src/configInit.cpp |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 0e1dcb575fe9b656957c7e22708f56d45da43f4f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 22:07:37 2012 +0200
+
+    Make backupFile() w32-friendly
+
+ src/filesystem.cpp |   13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+commit 525b851f614eb9fd51434355391738cc4cbdaaca
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon Jun 4 20:08:22 2012 +0200
+
+    Add libboost-program-options-dev depend in README
+
+ README |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 5ca6a5cf30153d32e6b776a05a57a1369b70cc6e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:27:51 2012 +0200
+
+    Added auto-upgrade note to NEWS
+
+ NEWS |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit f54a15ed6f79d11028b9b9de19aec24bc6efcdcc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:12:09 2012 +0200
+
+    Use upgradeCFG() when the $HOME / settings CFG file is used
+
+ src/configInit.cpp |   12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+commit 3feeecc1e0954a800d8d85d957e42aa02057cbc4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:04:54 2012 +0200
+
+    Implement upgradeCFG()
+    
+    Function which takes a given CFG and a compating version,
+    if it is outdated:
+    * Loads the variables from it (using the existing compatible load)
+    * Makes a backup copy of the file
+    * Recreates the file in the new format from the loaded vars
+
+ src/configInit.cpp |   30 ++++++++++++++++++++++++++----
+ src/configInit.hpp |    1 +
+ 2 files changed, 27 insertions(+), 4 deletions(-)
+
+commit b50a629a8f1276e1b33b4b6d4823371b0c8d7410
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri May 18 13:02:59 2012 +0200
+
+    Implement rmFile() and backupFile() in filesystem
+
+ src/filesystem.cpp |   28 ++++++++++++++++++++++++++++
+ src/filesystem.hpp |    4 ++++
+ 2 files changed, 32 insertions(+)
+
+commit f53f12128b9f4f0cf9fb09eeeac502dd912ae16d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 17 12:41:28 2012 +0200
+
+    src/filesystem.cpp:fix whitespace
+
+ src/filesystem.cpp |   44 ++++++++++++++++++++++----------------------
+ 1 file changed, 22 insertions(+), 22 deletions(-)
+
+commit 9a315fdfd16af439b54963089ac042ca3fecea15
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 17 11:56:05 2012 +0200
+
+    Bump to 0.3.1, update NEWS
+
+ NEWS         |    7 +++++++
+ configure.ac |    2 +-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+commit 36a08d6ac07fd80ddd4d0adb3788c1df11c3341f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:49:47 2012 +0200
+
+    Make sure to write the version to file
+
+ src/common.cpp |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 2126369ffd8ed49ed6003ae296cbc58a058ffb25
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:32:00 2012 +0200
+
+    Fix constants names, needs CFG file v.1)
+
+ src/constants.cpp |   72 ++++++++++++++++++++++++-----------------------------
+ 1 file changed, 33 insertions(+), 39 deletions(-)
+
+commit f615fb356e792782c72ee9c4b758833a504ed27b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:29:34 2012 +0200
+
+    Do CFG version check in init, and load accordingly
+
+ src/configInit.cpp |   12 +++++++++++-
+ src/configInit.hpp |    2 ++
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+
+commit e64953abcb63687d87d25f11ba5ccc568790304c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:26:52 2012 +0200
+
+    Add functions for reading/writing CFG file version
+
+ src/common.cpp       |   21 +++++++++++++++++++++
+ src/common.hpp       |    3 +++
+ src/configHelper.cpp |    5 +++++
+ src/configHelper.hpp |    2 ++
+ 4 files changed, 31 insertions(+)
+
+commit dad3aa78b43608d5610ef8abee533820e8df28c1
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Mon May 14 20:24:49 2012 +0200
+
+    Add compatible loading of constants from ver0 CFG
+
+ Makefile.am          |    1 +
+ src/common.hpp       |    1 +
+ src/configCompat.cpp |  178 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 180 insertions(+)
+
+commit ede3a2df920450d09d0b0e2c3e1a472b7e6e6627
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sun May 13 17:56:51 2012 +0200
+
+    Fix loading EXE file by path
+    
+    Previously used an empty path :(
+
+ src/configInit.cpp |    3 +--
+ src/reader.cpp     |    5 +++++
+ src/reader.hpp     |    1 +
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
+commit 8c80937128137f857fccb6396241ccffc17e137f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Wed May 9 01:28:30 2012 +0200
+
+    Note where lev files go in README
+
+ README |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 16df031dfe180dad3318b78abaa99347284651ee
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu May 3 12:21:14 2012 +0200
+
+    Update changelog
+
+ ChangeLog |  395 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 395 insertions(+)
+
 commit c04b38225dfb4e77de3f58c0856d498aa82c1e08
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Thu May 3 04:36:58 2012 +0200

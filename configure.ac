@@ -1,5 +1,5 @@
 AC_PREREQ([2.59])
-AC_INIT([lierolibre C++], [0.3.1], [martinerikwerner@gmail.com], [lierolibre], [https://gitorious.org/lierolibre])
+AC_INIT([lierolibre C++], [0.4], [martinerikwerner@gmail.com], [lierolibre], [https://gitorious.org/lierolibre])
 AC_CONFIG_SRCDIR([src/worm.cpp])
 AC_CONFIG_MACRO_DIR([src/m4])
 AC_CONFIG_AUX_DIR([src/build-aux])
@@ -115,7 +115,7 @@ AC_CHECK_FUNCS([clock_gettime floor gethostbyname localeconv memmove memset mkdi
 
 # Relative path for portable packages with accompanying libs
 AC_ARG_ENABLE([relpath],
-  AC_HELP_STRING([--enable-relpath], [libraries are searched relative to the executable]),
+  AC_HELP_STRING([--enable-relpath], [add lib/ to the runtime library search path]),
   [want_relative=yes], [want_relative=no])
 if test "$want_relative" = yes; then
   RELPATH_CFLAGS='-DUSE_RELATIVE_PATHS'
