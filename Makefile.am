@@ -698,31 +698,36 @@ $(LIB_ARCH_NIXBIN_LIBFILES):
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
-		lib/
+		lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(USR_LIB_ARCH_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/usr/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
-		lib/
+		lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(USR_LIB_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
-		cp -a /usr/lib/$${NIXBIN_LIBFILE#lib/}* lib/
+		cp -a /usr/lib/$${NIXBIN_LIBFILE#lib/}* lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(LIB_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
-		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/
+		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(USR_LIB_ARCH_PA_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/usr/lib/$(build_cpu)-$(build_os)/pulseaudio/$${NIXBIN_LIBFILE#lib/}* \
-		lib/
+		lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(MANS_TXT): $(nodist_man6_MANS)
 	man --no-justification --no-hyphenation $(@:.txt=.6) | col -b > $@
@@ -734,12 +739,15 @@ dist-nixbin-libcopyright:
 	install -d lib/
 	cd lib/ && \
 		for i in $(NIXBIN_LIB_DEBS) $(NIXBIN_LIB_DEBS_NOSRC); do \
-		cupt copyright $$i > $$i.copyright; done
+		cupt copyright $$i > $$i.copyright || \
+		touch 00MISSING_$$i.copyright; done
 
 dist-nixbin-libsrc:
 	install -d libsrc/
 	cd libsrc/ && \
-		apt-get source --download-only $(NIXBIN_LIB_DEBS)
+		for i in $(NIXBIN_LIB_DEBS); do \
+		apt-get source --download-only $$i=$$(dpkg -s $$i | sed -n 's/^Version:\ \(.*\)/\1/p') || \
+		touch 00MISSING_$$i.debsource; done
 
 dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
 		$(MANS_TXT) dist-nixbin-libcopyright dist-nixbin-libsrc
