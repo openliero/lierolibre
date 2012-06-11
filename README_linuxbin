@@ -5,6 +5,8 @@ game to find these libraries.
 With luck it will work in your case, if not, compiling from source is usually
 more likely to produce a working result.
 
-Source code and license texts for the libraries which require source code
-and/or inclusion of license text are available in the libsrc/ directory.
+Source code for the libraries which require it are available in the libsrc/
+directory.
+
+License texts for all included libraries are available in the lib/ directory.
 
