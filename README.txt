@@ -54,6 +54,5 @@ can be omitted.
 
 Please report bugs at https://bugs.launchpad.net/lierolibre/+filebug
 
-For more information see the manual pages in the man/ direcory, and visit the
-Launchpad page:
+For more information visit the Launchpad page:
 https://launchpad.net/lierolibre
