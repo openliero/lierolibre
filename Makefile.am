@@ -621,33 +621,33 @@ NIXBIN_LIBFILES = \
 	$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES)
 
 NIXBIN_LIB_DEBS = \
+	libasyncns0 \
+	libcaca0 \
 	libconfig++9 \
-	libsdl1.2 \
-	libmikmod2 \
-	libvorbisfile3 \
-	libvorbis0a \
-	libogg0 \
+	libdbus-1-3 \
+	libdirectfb-1.2-9 \
 	libflac8 \
 	libmad0 \
+	libmikmod2 \
 	libpulse0 \
-	libdirectfb-1.2-9 \
-	libcap2 \
-	libjson0 \
-	libdbus-1-3 \
-	libxcb1 \
-	libncursesw5 \
-	libtinfo5 \
-	libx11-xcb1 \
-	libwrap0 \
-	libsndfile1 \
-	libasyncns0 \
-	libvorbisenc2
+	libsdl-mixer1.2 \
+	libsdl1.2debian \
+	libsndfile1
 
 NIXBIN_LIB_DEBS_NOSRC = \
-	zlib1g \
-	libsdl-mixer1.2 \
 	libboost-program-options1.49.0 \
-	libcaca0
+	libcap2 \
+	libjson0 \
+	libncursesw5 \
+	libogg0 \
+	libtinfo5 \
+	libvorbis0a \
+	libvorbisenc2
+	libvorbisfile3 \
+	libwrap0 \
+	libx11-xcb1 \
+	libxcb1 \
+	zlib1g
 
 .PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
 
