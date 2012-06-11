@@ -599,11 +599,11 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libasyncns.so.0 \
 	lib/libvorbisenc.so.2 \
 	lib/libxcb.so.1 \
-	lib/libX11-xcb.so.1
+	lib/libX11-xcb.so.1 \
+	lib/libjson.so.0
 
 USR_LIB_NIXBIN_LIBFILES = \
 	lib/libboost_program_options.so \
-	lib/libjson.so.0 \
 	lib/libogg.so.0 \
 	lib/libmad.so.0
 
@@ -619,6 +619,35 @@ NIXBIN_LIBFILES = \
 	$(USR_LIB_NIXBIN_LIBFILES) \
 	$(LIB_NIXBIN_LIBFILES) \
 	$(USR_LIB_ARCH_PA_NIXBIN_LIBFILES)
+
+NIXBIN_LIB_DEBS = \
+	libasyncns0 \
+	libcaca0 \
+	libconfig++9 \
+	libdbus-1-3 \
+	libdirectfb-1.2-9 \
+	libflac8 \
+	libmad0 \
+	libmikmod2 \
+	libpulse0 \
+	libsdl-mixer1.2 \
+	libsdl1.2debian \
+	libsndfile1
+
+NIXBIN_LIB_DEBS_NOSRC = \
+	libboost-program-options1.49.0 \
+	libcap2 \
+	libjson0 \
+	libncursesw5 \
+	libogg0 \
+	libtinfo5 \
+	libvorbis0a \
+	libvorbisenc2
+	libvorbisfile3 \
+	libwrap0 \
+	libx11-xcb1 \
+	libxcb1 \
+	zlib1g
 
 .PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
 
@@ -664,37 +693,41 @@ clean-local:
 		$(MANS_TXT)
 	rm -rf lib/ libsrc/
 
-# Yeah, it's ugly
 $(LIB_ARCH_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
-		lib/
+		lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(USR_LIB_ARCH_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/usr/lib/$(build_cpu)-$(build_os)/$${NIXBIN_LIBFILE#lib/}* \
-		lib/
+		lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(USR_LIB_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
-		cp -a /usr/lib/$${NIXBIN_LIBFILE#lib/}* lib/
+		cp -a /usr/lib/$${NIXBIN_LIBFILE#lib/}* lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(LIB_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
-		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/
+		cp -a /lib/$${NIXBIN_LIBFILE#lib/}* lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(USR_LIB_ARCH_PA_NIXBIN_LIBFILES):
 	install -d lib/
 	NIXBIN_LIBFILE=$@ ;\
 		cp -a \
 		/usr/lib/$(build_cpu)-$(build_os)/pulseaudio/$${NIXBIN_LIBFILE#lib/}* \
-		lib/
+		lib/ || \
+		touch lib/00MISSING_$${NIXBIN_LIBFILE#lib/}
 
 $(MANS_TXT): $(nodist_man6_MANS)
 	man --no-justification --no-hyphenation $(@:.txt=.6) | col -b > $@
@@ -702,8 +735,22 @@ $(MANS_TXT): $(nodist_man6_MANS)
 	echo "This text file was automatically generated from $(@:.txt=.6)" \
 		>> $@
 
+dist-nixbin-libcopyright:
+	install -d lib/
+	cd lib/ && \
+		for i in $(NIXBIN_LIB_DEBS) $(NIXBIN_LIB_DEBS_NOSRC); do \
+		cupt copyright $$i > $$i.copyright || \
+		touch 00MISSING_$$i.copyright; done
+
+dist-nixbin-libsrc:
+	install -d libsrc/
+	cd libsrc/ && \
+		for i in $(NIXBIN_LIB_DEBS); do \
+		apt-get source --download-only $$i=$$(dpkg -s $$i | sed -n 's/^Version:\ \(.*\)/\1/p') || \
+		touch 00MISSING_$$i.debsource; done
+
 dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
-		$(MANS_TXT) dist-nixbin-libsrc
+		$(MANS_TXT) dist-nixbin-libcopyright dist-nixbin-libsrc
 	cp -aT $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
 	cp -a lib/ $(NIXBIN_DIRNAME)
 	cp -a libsrc/ $(NIXBIN_DIRNAME)
@@ -712,41 +759,6 @@ dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgd
 	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
 	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
 	cp -a README_linuxbin $(NIXBIN_DIRNAME)
-
-dist-nixbin-libsrc:
-	install -d libsrc/
-	cd libsrc/ && \
-		apt-get source --tar-only \
-		libconfig++9 \
-		libsdl1.2 \
-		libmikmod2 \
-		libvorbisfile3 \
-		libvorbis0a \
-		libogg0 \
-		libflac8 \
-		libmad0 \
-		libpulse0 \
-		libdirectfb-1.2-9 \
-		libcap2 \
-		libjson0 \
-		libdbus-1-3 \
-		libxcb1 \
-		libncursesw5 \
-		libtinfo5 \
-		libx11-xcb1 \
-		libwrap0 \
-		libsndfile1 \
-		libasyncns0 \
-		libvorbisenc2
-
-dist-nixbin-dir-libsrc-binonly-license:
-	install -d $(NIXBIN_DIRNAME)/libsrc/
-	cd $(NIXBIN_DIRNAME)/libsrc && \
-		apt-get source --tar-only \
-		zlib1g \
-		libsdl-mixer1.2 \
-		libboost-program-options1.49.0 \
-		libcaca0
 
 dist-nixbin: dist-nixbin-dir
 	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
