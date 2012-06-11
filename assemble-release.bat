@@ -10,6 +10,7 @@ MD %lldir%\libsrc
 
 XCOPY /YIE data %lldir%\data
 DEL %lldir%\data\.git %lldir%\data\LICENSE.TXT
+MOVE %lldir%\data\liero.cfg %lldir%\data\lierocfg.cfg
 
 FOR %%i IN (%core% %doc% %lib%) DO (
   COPY %%i %lldir%
