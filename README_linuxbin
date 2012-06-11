@@ -1,0 +1,12 @@
+The binary linux release includes a lib/ directory with most of the libs needed
+to run lierolibre, it is compiled with the relative path option to allow the
+game to find these libraries.
+
+With luck it will work in your case, if not, compiling from source is usually
+more likely to produce a working result.
+
+Source code for the libraries which require it are available in the libsrc/
+directory.
+
+License texts for all included libraries are available in the lib/ directory.
+
