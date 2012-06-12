@@ -1,3 +1,21 @@
+commit f7921d48bc27099eea883e4ba3e96a31904b9de7
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 11:43:31 2012 +0200
+
+    Crrect name for lierocfg.txt
+
+ assemble-release.bat |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit ddcef02dd358d0c7964526031254ab1db4efa541
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 00:59:22 2012 +0200
+
+    Update win ChangeLog
+
+ ChangeLog.txt |   45 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
 commit 303654042e5f683074a7489ed6769fa9b2d20c61
 Merge: accd144 104b3fe
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
