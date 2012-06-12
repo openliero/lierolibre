@@ -1,3 +1,37 @@
+commit 8a7d5f6ebbe6a6d6cf88c6e5ff2efedc443ac390
+Merge: 8e3404d 3768ded
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 12:05:36 2012 +0200
+
+    Merge branch 'master' into windows
+
+commit 8e3404d2d9cdabbf7d2de37f42fdbedb518e3334
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 12:04:30 2012 +0200
+
+    Update win ChangeLog
+
+ ChangeLog.txt |    9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 3768ded7a88a7d273a5be2f6fe36b77edcb9f246
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 12:04:12 2012 +0200
+
+    Update ChangeLog
+
+ ChangeLog |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+commit 280931213e3f2142cb32db3418cd98db03c5d4ae
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 12:03:54 2012 +0200
+
+    Set June as release for 0.4
+
+ NEWS |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 commit b50f206c338c366cbce16c891a0113669db2a91b
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Tue Jun 12 11:58:14 2012 +0200
