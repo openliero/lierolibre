@@ -1,3 +1,21 @@
+commit 280931213e3f2142cb32db3418cd98db03c5d4ae
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 12:03:54 2012 +0200
+
+    Set June as release for 0.4
+
+ NEWS |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3d31aaaaac132e9a2d031c81679e34109e3b8fa4
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 11:57:49 2012 +0200
+
+    Update ChangeLog
+
+ ChangeLog |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
 commit 6f48a9776d3151c163a0bbef3eb8c52b0e75bd18
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Tue Jun 12 11:56:49 2012 +0200
