@@ -40,8 +40,8 @@ Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
            2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: WTFPL and BSD-2-Clause
 
-Files: src/boostTesting.cpp src/configHelper.* src/configInit.* src/dataPath.*
-       src/to_string.*
+Files: src/argParse.* src/boostTesting.cpp src/configCompat.cpp
+       src/configHelper.* src/configInit.* src/dataPath.* src/to_string.*
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 
