@@ -1,3 +1,12 @@
+commit b50f206c338c366cbce16c891a0113669db2a91b
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 11:58:14 2012 +0200
+
+    Update win ChangeLog
+
+ ChangeLog.txt |   34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+
 commit 56803e212d690496018f3030d2862df3df7398a0
 Merge: c2714e8 3d31aaa
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
