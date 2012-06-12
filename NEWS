@@ -1,6 +1,6 @@
 lierolibre NEWS - History of user-visible changes.
 
-Version 0.4 - May 2012, by Martin Erik Werner
+Version 0.4 - June 2012, by Martin Erik Werner
 * Fixed a bug where the EXE file path would not be set
 * Updated CFG file with variable name corrections
   + New CFG files (v1) will be written with correct names
