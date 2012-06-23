@@ -23,7 +23,7 @@ AC_PROG_MAKE_SET
 
 AC_CHECK_PROG(HAS_SOX, sox, yes)
 if test x"$HAS_SOX" != x"yes" ; then
-	AC_MSG_WARN(SoX not found, you will need this to build the sound data!)
+	AC_MSG_WARN([SoX not found, you will need this to build the sound data!])
 fi
 
 AC_CHECK_PROG(HAS_IM, convert, yes)
@@ -36,7 +36,7 @@ BOOST_PO_LIBS=""
 AC_LANG_PUSH([C++])
 	AC_CHECK_HEADER([boost/program_options.hpp],
 	[BOOST_PO_LIBS="-lboost_program_options"],
-	[AC_MSG_WARN(boost_program_options header not found, you will need this to compile lierolibre!)])
+	[AC_MSG_WARN([boost_program_options header not found, you will need this to compile lierolibre!])])
 AC_LANG_POP([C++])
 AC_SUBST(BOOST_PO_LIBS)
 
@@ -60,10 +60,10 @@ PKG_CHECK_MODULES([SDL_MIXER], [SDL_mixer],
 AS_IF([test "x$pkgcSDLM" = "xno"], [
 	AC_CHECK_HEADERS([SDL/SDL_mixer.h],
 		[SDL_MIXER_CFLAGS="-D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/SDL"],
-		[AC_MSG_WARN(SDL_mixer headers not found, you will need this to compile lierolibre!)])
+		[AC_MSG_WARN([SDL_mixer headers not found, you will need this to compile lierolibre!])])
 	AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,
 		[SDL_MIXER_LIBS="-lSDL_mixer -lSDL"],
-		[AC_MSG_WARN(SDL_mixer library not found, you will need this to link lierolibre!)])
+		[AC_MSG_WARN([SDL_mixer library not found, you will need this to link lierolibre!])])
 	])
 
 PKG_CHECK_MODULES([ZLIB], [zlib])
@@ -88,7 +88,7 @@ AC_CHECK_HEADERS([arpa/inet.h fcntl.h fenv.h float.h limits.h malloc.h netdb.h n
 AC_LANG_PUSH([C++])
 AC_CHECK_HEADERS([tut/tut.hpp tut/tut_reporter.hpp tut/tut_restartable.hpp],
 	[],
-	[AC_MSG_NOTICE(libtut headers not found, you will need these to compile gvltest)])
+	[AC_MSG_NOTICE([libtut headers not found, you will need these to compile gvltest])])
 AC_LANG_POP([C++])
 
 # Checks for typedefs, structures, and compiler characteristics.
