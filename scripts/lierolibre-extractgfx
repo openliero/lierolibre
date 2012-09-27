@@ -83,27 +83,24 @@ imgdim3="$img3_x"x120
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset1" count="$imgsize1" \
 	2>/dev/null | \
 	convert -depth 8 -size "$imgdim1" gray:- -compress None PGM:- | \
-	tr '\n' ' ' | \
-	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
-	-e 's/\(\([^ ]*\)  *\)\{'"$img1_x"'\}/&\n/g' \
+	sed ':a;4,${N;s/\n//;ba}' | \
+	sed -e 's/\(\([^ ]*\)  *\)\{'"$img1_x"'\}/&\n/g' \
 	-e 's/  */ /g' | \
 	sed 's/ $//' \
 	> "$outputdir"/gfx1.pnm
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset2" count="$imgsize2" \
 	2>/dev/null | \
 	convert -depth 8 -size "$imgdim2" gray:- -compress None PGM:- | \
-	tr '\n' ' ' | \
-	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
-	-e 's/\(\([^ ]*\)  *\)\{'"$img2_x"'\}/&\n/g' \
+	sed ':a;4,${N;s/\n//;ba}' | \
+	sed -e 's/\(\([^ ]*\)  *\)\{'"$img2_x"'\}/&\n/g' \
 	-e 's/  */ /g' | \
 	sed 's/ $//' \
 	> "$outputdir"/gfx2.pnm
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset3" count="$imgsize3" \
 	2>/dev/null | \
 	convert -depth 8 -size "$imgdim3" gray:- -compress None PGM:- | \
-	tr '\n' ' ' | \
-	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
-	-e 's/\(\([^ ]*\)  *\)\{'"$img3_x"'\}/&\n/g' \
+	sed ':a;4,${N;s/\n//;ba}' | \
+	sed -e 's/\(\([^ ]*\)  *\)\{'"$img3_x"'\}/&\n/g' \
 	-e 's/  */ /g' | \
 	sed 's/ $//' \
 	> "$outputdir"/gfx3.pnm
