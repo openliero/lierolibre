@@ -137,7 +137,7 @@ dist_noinst_DATA = \
 	data/LICENSE.TXT \
 	\
 	\
-	data/lierolibre.pnm \
+	data/lierolibre.xpm \
 	\
 	\
 	$(GRAPHICS_SOURCES) \
