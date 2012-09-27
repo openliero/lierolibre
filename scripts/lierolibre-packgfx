@@ -30,13 +30,13 @@
 #
 # -----//-----
 #
-# This script reads a set of three greyscale xpm images with dimensions
+# This script reads a set of three greyscale pnm images with dimensions
 # 16x1760, 7x910, 4x120 and packs them into a CHR-file for Liero.
 #
 # Credit goes to Sander de Jong for information regarding the CHR file format:
 # http://lierohell.free.fr/lierohack/docformats/liero-chr.html
 
-usage="Usage: $0 <inputfile{1..3}.xpm> <outputfile.CHR>"
+usage="Usage: $0 <inputfile{1..3}.pnm> <outputfile.CHR>"
 
 if [ $# != 4 ]; then
 	echo >&2 $usage

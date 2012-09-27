@@ -93,9 +93,9 @@ MANPAGES_SOURCES = \
 	man/lierolibre-packlev.6.am
 
 GRAPHICS_SOURCES = \
-	data/graphics/gfx1.xpm \
-	data/graphics/gfx2.xpm \
-	data/graphics/gfx3.xpm
+	data/graphics/gfx1.pnm \
+	data/graphics/gfx2.pnm \
+	data/graphics/gfx3.pnm
 
 SOUND_SOURCES = \
 	data/sounds/ALIVE.wav \
@@ -137,7 +137,7 @@ dist_noinst_DATA = \
 	data/LICENSE.TXT \
 	\
 	\
-	data/lierolibre.xpm \
+	data/lierolibre.pnm \
 	\
 	\
 	$(GRAPHICS_SOURCES) \
@@ -676,7 +676,7 @@ $(nodist_man6_MANS): $(MANPAGES_SOURCES)
 data/LIERO.CHR: $(GRAPHICS_SOURCES)
 	install -d data/
 	$(srcdir)/scripts/lierolibre-packgfx \
-		$(srcdir)/data/graphics/gfx{1..3}.xpm \
+		$(srcdir)/data/graphics/gfx{1..3}.pnm \
 		$@
 
 data/LIERO.SND: $(SOUND_SOURCES)

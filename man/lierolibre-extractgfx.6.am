@@ -18,7 +18,7 @@
 
 This script extracts the three sprite canvases contained within
 .IR LIERO.CHR ,
-and dumps them as greyscale images in xpm format.
+and dumps them as greyscale images in pnm format.
 Use the
 .BR #PACKAGE#-packgfx (6)
 script to pack them back up again.
@@ -34,7 +34,7 @@ with the exact dimensions 16x1760, 7x910 and 4x120, respectively.
 .TP
 .I outputdir
 The script will create the files
-.I gfx1.xpm gfx2.xpm gfx3.xpm
+.I gfx1.pnm gfx2.pnm gfx3.pnm
 in this directory.
 
 

@@ -31,7 +31,7 @@
 # -----//-----
 #
 # This script extracts the three sprite canvases contained within LIERO.CHR,
-# and dumps them as greyscale images in xpm format, use the 'packgfx' script to
+# and dumps them as greyscale images in pnm format, use the 'packgfx' script to
 # pack them back up again
 #
 # Credit goes to Sander de Jong for information regarding the CHR file format:
@@ -66,24 +66,45 @@ outputdir="$2"
 headersize1=10
 headersize2=4
 headersize3=4
-imgsize1=$((16 * 1760))
-imgsize2=$((7 * 910))
-imgsize3=$((4 * 120))
+img1_x=16
+img2_x=7
+img3_x=4
+imgsize1=$(($img1_x * 1760))
+imgsize2=$(($img2_x * 910))
+imgsize3=$(($img3_x * 120))
 imgoffset1="$headersize1"
 imgoffset2="$(($headersize1 + $imgsize1 + $headersize2))"
 imgoffset3="$(($headersize1 + $imgsize1 + $headersize2 + $imgsize2 + \
 	$headersize3))"
-imgdim1=16x1760
-imgdim2=7x910
-imgdim3=4x120
+imgdim1="$img1_x"x1760
+imgdim2="$img2_x"x910
+imgdim3="$img3_x"x120
 
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset1" count="$imgsize1" \
 	2>/dev/null | \
-	convert -depth 8 -size "$imgdim1" gray:- "$outputdir"/gfx1.xpm
+	convert -depth 8 -size "$imgdim1" gray:- -compress None PGM:- | \
+	tr '\n' ' ' | \
+	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
+	-e 's/\(\([^ ]*\)  *\)\{'"$img1_x"'\}/&\n/g' \
+	-e 's/  */ /g' | \
+	sed 's/ $//' \
+	> "$outputdir"/gfx1.pnm
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset2" count="$imgsize2" \
 	2>/dev/null | \
-	convert -depth 8 -size "$imgdim2" gray:- "$outputdir"/gfx2.xpm
+	convert -depth 8 -size "$imgdim2" gray:- -compress None PGM:- | \
+	tr '\n' ' ' | \
+	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
+	-e 's/\(\([^ ]*\)  *\)\{'"$img2_x"'\}/&\n/g' \
+	-e 's/  */ /g' | \
+	sed 's/ $//' \
+	> "$outputdir"/gfx2.pnm
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset3" count="$imgsize3" \
 	2>/dev/null | \
-	convert -depth 8 -size "$imgdim3" gray:- "$outputdir"/gfx3.xpm
+	convert -depth 8 -size "$imgdim3" gray:- -compress None PGM:- | \
+	tr '\n' ' ' | \
+	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
+	-e 's/\(\([^ ]*\)  *\)\{'"$img3_x"'\}/&\n/g' \
+	-e 's/  */ /g' | \
+	sed 's/ $//' \
+	> "$outputdir"/gfx3.pnm
 

@@ -9,7 +9,7 @@
 .SH SYNOPSIS
 
 .SY #PACKAGE#
-.I inputfile.xpm
+.I inputfile.pnm
 .I outputfile.lev
 
 
@@ -25,8 +25,8 @@ script to extract it again.
 .SH OPTIONS
 
 .TP
-.I inputfile.xpm
-This file must be a greyscale xpm file with the exact dimensions 504x350.
+.I inputfile.pnm
+This file must be a greyscale pnm file with the exact dimensions 504x350.
 
 .TP
 .I outputfile.lev

@@ -10,7 +10,7 @@
 
 .SY #PACKAGE#
 .I inputfile.lev
-.I outputfile.xpm
+.I outputfile.pnm
 
 
 .SH DESCRIPTION
@@ -29,8 +29,8 @@ script to pack it back up again.
 This file must be a valid lev file with dimensions 504x350.
 
 .TP
-.I outputfile.xpm
-The output will be a greyscale xpm file.
+.I outputfile.pnm
+The output will be a greyscale pnm file.
 
 
 .SH AUTHORS
