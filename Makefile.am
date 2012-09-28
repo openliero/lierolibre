@@ -745,9 +745,12 @@ dist-nixbin-libcopyright:
 dist-nixbin-libsrc:
 	install -d libsrc/
 	cd libsrc/ && \
-		for i in $(NIXBIN_LIB_DEBS); do \
-		apt-get source --download-only $$i=$$(dpkg -s $$i | sed -n 's/^Version:\ \(.*\)/\1/p') || \
-		touch 00MISSING_$$i.debsource; done
+		LANG=C apt-get source --download-only \
+		$$(for i in $(NIXBIN_LIB_DEBS); do \
+		echo $$i=$$(dpkg -s $$i | \
+		sed -n 's/^Version:\ \(.*\)/\1/p'); done) 2>&1 >/dev/null | \
+		sed -n 's/E: Unable to find a source package for \(.*\)/\1/p' | \
+		xargs -I '{}' touch 00MISSING_'{}'.debsource
 
 dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
 		$(MANS_TXT) dist-nixbin-libcopyright dist-nixbin-libsrc
