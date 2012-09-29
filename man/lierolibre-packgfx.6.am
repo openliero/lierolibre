@@ -9,16 +9,16 @@
 .SH SYNOPSIS
 
 .SY #PACKAGE#
-.I inputfile1.pnm
-.I inputfile2.pnm
-.I inputfile3.pnm
+.I inputfile1.xpm
+.I inputfile2.xpm
+.I inputfile3.xpm
 .I outputfile.CHR
 
 
 .SH DESCRIPTION
 
 
-This script creates a LIERO.CHR file from three pnm images.
+This script creates a LIERO.CHR file from three xpm images.
 Use the
 .BR #PACKAGE#-extractgfx (6)
 script to extract them again.
@@ -27,8 +27,8 @@ script to extract them again.
 .SH OPTIONS
 
 .TP
-.I inputfile.{1..3}.pnm
-These three files must be must be pnm greyscale files with the exact dimensions 16x1760, 7x910 and 4x120, respectively.
+.I inputfile.{1..3}.xpm
+These three files must be must be xpm greyscale files with the exact dimensions 16x1760, 7x910 and 4x120, respectively.
 
 .TP
 .I outputfile.CHR

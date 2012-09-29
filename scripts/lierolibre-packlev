@@ -30,13 +30,13 @@
 #
 # -----//-----
 #
-# This script takes a 504x350 greyscale pnm file and packs it into a Liero
+# This script takes a 504x350 greyscale xpm file and packs it into a Liero
 # .LEV file
 #
 # Credit goes to Tim Verweij for information regarding the LEV file format:
 # http://lierohell.free.fr/lierohack/docformats/liero-lev.html
 
-usage="Usage: $0 <inputfile.pnm> <outputfile.lev>"
+usage="Usage: $0 <inputfile.xpm> <outputfile.lev>"
 
 if [ $# != 2 ]; then
 	echo >&2 $usage

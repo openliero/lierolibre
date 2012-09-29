@@ -31,13 +31,13 @@
 # -----//-----
 #
 # This script extracts the level canvas contained within a Liero .LEV file and
-# dumps it to a greyscale images in pnm format, use the 'packlev' script to
+# dumps it to a greyscale images in xpm format, use the 'packlev' script to
 # pack it back up again.
 #
 # Credit goes to Tim Verweij for information regarding the LEV file format:
 # http://lierohell.free.fr/lierohack/docformats/liero-lev.html
 
-usage="Usage: $0 <inputfile.lev> <outputfile.pnm>"
+usage="Usage: $0 <inputfile.lev> <outputfile.xpm>"
 
 if [ $# != 2 ]; then
 	echo >&2 $usage
@@ -54,16 +54,9 @@ touch "$2" 2>&- || { echo >&2 "'"$2"' is not writable, aborting"; exit 1; }
 inputfile="$1"
 outputfile="$2"
 
-img_x=504
-imgsize=$(($img_x * 350))
-imgdim="$img_x"x350
+imgsize=$((504 * 350))
+imgdim=504x350
 
 dd if="$inputfile" bs=1 ibs=1 count="$imgsize" 2>/dev/null | \
-	convert -depth 8 -size "$imgdim" gray:- -compress None PGM:- | \
-	tr '\n' ' ' | \
-	sed -e 's/^\([^ ]*\) \([^ ]*\) \([^ ]*\) \([^ ]*\) /\1\n\2 \3\n\4\n/' \
-	-e 's/\(\([^ ]*\)  *\)\{'"$img_x"'\}/&\n/g' \
-	-e 's/  */ /g' | \
-	sed 's/ $//' \
-	> "$outputfile"
+	convert -depth 8 -size "$imgdim" gray:- "$outputfile"
 
