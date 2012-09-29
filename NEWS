@@ -1,8 +1,7 @@
 lierolibre NEWS - History of user-visible changes.
 
 Version 0.4.1 - September 2012, by Martin Erik Werner
-* Switched to using PNM files for graphics
-  + Should be more reliable for converting
+* Fixed packgfx and packlev scripts to work with newer ImageMagick
 * Fixed the packsounds script so that it won't fail with non-english shell
 
 Version 0.4 - June 2012, by Martin Erik Werner
