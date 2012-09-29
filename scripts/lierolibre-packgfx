@@ -135,15 +135,15 @@ writestring "$title" "$titlesize"
 for i in $img1_header; do
 	writedec "$i"
 done
-convert "$inputfile1" -depth 8 gray:- >> "$outputfile"
+convert "$inputfile1" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
 
 for i in $img2_header; do
 	writedec "$i"
 done
-convert "$inputfile2" -depth 8 gray:- >> "$outputfile"
+convert "$inputfile2" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
 
 for i in $img3_header; do
 	writedec "$i"
 done
-convert "$inputfile3" -depth 8 gray:- >> "$outputfile"
+convert "$inputfile3" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
 

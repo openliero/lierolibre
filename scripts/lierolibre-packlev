@@ -55,5 +55,5 @@ hash convert 2>&- || { echo >&2 "This script requires the "'"convert"'" tool fro
 inputfile="$1"
 outputfile="$2"
 
-convert "$inputfile" -depth 8 gray:- > "$outputfile"
+convert "$inputfile" -set colorspace Gray -depth 8 gray:- > "$outputfile"
 
