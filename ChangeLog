@@ -1,3 +1,109 @@
+commit 96ba2e736e38d8a8fe96e1713dfc2d1fb3247e5c (HEAD, master)
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Sep 28 02:32:27 2012 +0200
+
+    automake: more efficient download of libsrc
+
+ Makefile.am |    9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+commit 1107d90b237945a37ff21bddc276b679779ef60e
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Sep 28 01:29:43 2012 +0200
+
+    Bump to version 0.4.1 in configure.ac
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9ccdefd690b93bab6cd496126419f8607d8d151f
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Sep 28 00:51:23 2012 +0200
+
+    Better PNM format
+
+ data                          |    2 +-
+ scripts/lierolibre-extractgfx |   15 ++++++---------
+ 2 files changed, 7 insertions(+), 10 deletions(-)
+
+commit 8ccba2974286ca29daae7beb64085564cadc78fc
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Fri Sep 28 00:24:26 2012 +0200
+
+    fix erroneous xpm->pnm replace for icon
+
+ Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 21532da8786c3e01d72ce415989a3ce6e8f99f44 (origin/master)
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Sep 27 15:04:55 2012 +0200
+
+    Update NEWS for 0.4.1
+
+ NEWS |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit d4d25e164f8bb90c15e1499233e410ca932f9582
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Sep 27 04:16:22 2012 +0200
+
+    Change to using PNM files instead of XPM
+    
+    It appears PNM files, due to their raw values, are easier to
+    convert reliably.
+
+ Makefile.am                    |   10 +++++-----
+ data                           |    2 +-
+ man/lierolibre-extractgfx.6.am |    4 ++--
+ man/lierolibre-extractlev.6.am |    6 +++---
+ man/lierolibre-packgfx.6.am    |   12 ++++++------
+ man/lierolibre-packlev.6.am    |    6 +++---
+ scripts/lierolibre-extractgfx  |   41 ++++++++++++++++++++++++++++++----------
+ scripts/lierolibre-extractlev  |   17 ++++++++++++-----
+ scripts/lierolibre-packgfx     |    4 ++--
+ scripts/lierolibre-packlev     |    4 ++--
+ 10 files changed, 67 insertions(+), 39 deletions(-)
+
+commit 3f3862d765a1450319de6f641dec7194ee46db9c
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Thu Sep 27 03:16:10 2012 +0200
+
+    Set LANG=C in packsounds script to make sure we can grep "bytes"
+
+ scripts/lierolibre-packsounds |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 7e9180a936d497e5bd2f8b5d11bebd90f33f793d
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Sat Jun 23 14:15:41 2012 +0200
+
+    Fix configure creating files from messages
+    
+    Add [] quoting to all messages in order to avoid "," being
+    interpreted as a separator and causing creation of files
+
+ configure.ac |   10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 7a6fb27cf3a75830ed540a8b22f62b8f1e9aee76
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 14:01:10 2012 +0200
+
+    Add some files to COPYING
+
+ COPYING |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 3768ded7a88a7d273a5be2f6fe36b77edcb9f246 (tag: lierolibre-0.4)
+Author: Martin Erik Werner <martinerikwerner@gmail.com>
+Date:   Tue Jun 12 12:04:12 2012 +0200
+
+    Update ChangeLog
+
+ ChangeLog |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
 commit 280931213e3f2142cb32db3418cd98db03c5d4ae
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Tue Jun 12 12:03:54 2012 +0200
@@ -475,7 +581,7 @@ Date:   Wed May 9 01:28:30 2012 +0200
  README |    2 ++
  1 file changed, 2 insertions(+)
 
-commit 16df031dfe180dad3318b78abaa99347284651ee
+commit 16df031dfe180dad3318b78abaa99347284651ee (tag: lierolibre-0.3)
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Thu May 3 12:21:14 2012 +0200
 
@@ -870,7 +976,7 @@ Date:   Sat Apr 28 02:22:28 2012 +0200
  src/gfx.cpp |    3 +++
  1 file changed, 3 insertions(+)
 
-commit bd6d35fe46b3c719798d49e26908c045ec0361d3
+commit bd6d35fe46b3c719798d49e26908c045ec0361d3 (tag: lierolibre-0.2)
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Fri Apr 27 18:36:35 2012 +0200
 
@@ -2331,7 +2437,7 @@ Date:   Tue Apr 24 14:12:29 2012 +0200
  main.cpp     |   54 +++++++++++++++++-------------------------------------
  4 files changed, 56 insertions(+), 38 deletions(-)
 
-commit 917fe385ac41af2f08080706a3b54206a6afb573
+commit 917fe385ac41af2f08080706a3b54206a6afb573 (tag: lierolibre-0.1)
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Mon Apr 23 16:44:51 2012 +0200
 
@@ -2694,7 +2800,7 @@ Date:   Sun Apr 22 03:32:14 2012 +0200
  Makefile.am |    6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-commit 1cc23a186dc371814b9dee38eb40a980cd372268
+commit 1cc23a186dc371814b9dee38eb40a980cd372268 (autotools)
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Sun Apr 22 03:18:28 2012 +0200
 
@@ -4547,7 +4653,7 @@ Date:   Sun Apr 1 21:46:02 2012 +0200
  gvl         |    1 +
  2 files changed, 4 insertions(+)
 
-commit 744890aab61d4f50c8bfd30a1adee70fc95f5f49
+commit 744890aab61d4f50c8bfd30a1adee70fc95f5f49 (bridge/master)
 Author: Martin Erik Werner <martinerikwerner@gmail.com>
 Date:   Sun Apr 1 21:12:09 2012 +0200
 

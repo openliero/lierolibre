@@ -597,6 +597,7 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libcaca.so.0 \
 	lib/libsndfile.so.1 \
 	lib/libasyncns.so.0 \
+	lib/libogg.so.0 \
 	lib/libvorbisenc.so.2 \
 	lib/libxcb.so.1 \
 	lib/libX11-xcb.so.1 \
@@ -604,7 +605,6 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 
 USR_LIB_NIXBIN_LIBFILES = \
 	lib/libboost_program_options.so \
-	lib/libogg.so.0 \
 	lib/libmad.so.0
 
 LIB_NIXBIN_LIBFILES = \
@@ -745,9 +745,12 @@ dist-nixbin-libcopyright:
 dist-nixbin-libsrc:
 	install -d libsrc/
 	cd libsrc/ && \
-		for i in $(NIXBIN_LIB_DEBS); do \
-		apt-get source --download-only $$i=$$(dpkg -s $$i | sed -n 's/^Version:\ \(.*\)/\1/p') || \
-		touch 00MISSING_$$i.debsource; done
+		LANG=C apt-get source --download-only \
+		$$(for i in $(NIXBIN_LIB_DEBS); do \
+		echo $$i=$$(dpkg -s $$i | \
+		sed -n 's/^Version:\ \(.*\)/\1/p'); done) 2>&1 >/dev/null | \
+		sed -n 's/E: Unable to find a source package for \(.*\)/\1/p' | \
+		xargs -I '{}' touch 00MISSING_'{}'.debsource
 
 dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
 		$(MANS_TXT) dist-nixbin-libcopyright dist-nixbin-libsrc
