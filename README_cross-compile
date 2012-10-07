@@ -1,0 +1,10 @@
+bcp build program_options boost-program_options/
+
+cd boost-program_options/
+./bootstrap.sh
+./b2 toolset=gcc-mingw32 target-os=windows link=shared --layout=tagged -sNO_BZIP2=1 -sNO_ZLIB=1
+./configure --host=i686-w64-mingw32
+
+###
+
+make CPPFLAGS="-Ilib -Ilib/libconfig/lib" LDFLAGS="-Llib/SDL_mixer/lib/x86 -lSDL_mixer -Llib/libconfig-1.4.8/lib/.libs -llibconfig++ -Llib/SDL-1.2.15/build/.libs -lSDL -Llib/zlib-1.2.7 -lz -Llib/boost-program_options/stage/lib -llibboost_program_options-mt" 2>&1 | less
