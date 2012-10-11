@@ -101,7 +101,7 @@ from the given directory. If not set, the game uses the directory of
 instead.
 
 .TP
-[\fB\-d\fR|\fB\-\-dir\fR] \fIoutputfile
+[\fB\-w\fR|\fB\-\-write\fR] \fIoutputfile
 Writes all game variables to a plain text file.
 
 .TP
