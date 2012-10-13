@@ -3,6 +3,8 @@ lierolibre NEWS - History of user-visible changes.
 Version 0.4.1 - September 2012, by Martin Erik Werner
 * Fixed packgfx and packlev scripts to work with newer ImageMagick
 * Fixed the packsounds script so that it won't fail with non-english shell
+* Removed unused fullscreen resolution extension menu options
+* Changed default keybind to a Right Alt key code that should work better
 
 Version 0.4 - June 2012, by Martin Erik Werner
 * Fixed a bug where the EXE file path would not be set
