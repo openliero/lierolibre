@@ -80,8 +80,6 @@ Extensions::Extensions()
 , scaleFilter(Settings::SfNearest)
 , depth32(true)
 , bloodParticleMax(700)
-, fullscreenW(640)
-, fullscreenH(480)
 {
 }
 
