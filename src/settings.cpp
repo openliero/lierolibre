@@ -151,6 +151,22 @@ bool Settings::load(std::string const& path)
 
 	archive_liero(gvl::in_archive<gvl::default_serialization_context>(reader, context), *this);
 
+	unsigned char defControlsEx[2][8] =
+	{
+		{0x13, 0x21, 0x20, 0x22, 0x1D, 0x2A, 0x38, 0x56},
+		{0xA0, 0xA8, 0xA3, 0xA5, 0x75, 0x59, 0x36, 0x0C}
+	};
+
+	for(int i = 0; i < 2; ++i)
+	{
+		for(int j = 0; j < 7; ++j)
+		{
+			if(!wormSettings[i]->controlsEx[j])
+				wormSettings[i]->controlsEx[j] = (wormSettings[i]->controls[j] ? wormSettings[i]->controls[j] : defControlsEx[i][j]);
+		}
+		if(!wormSettings[i]->controlsEx[7])
+			wormSettings[i]->controlsEx[7] = defControlsEx[i][7];
+	}
 
 	return true;
 }
