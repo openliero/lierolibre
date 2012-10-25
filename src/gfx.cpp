@@ -357,8 +357,6 @@ void Gfx::loadMenus()
 	hiddenMenu.addItem(MenuItem(48, 7, "Load replay..."));
 	hiddenMenu.addItem(MenuItem(48, 7, "PowerLevel palettes"));
 	hiddenMenu.addItem(MenuItem(48, 7, "Scaling filter"));
-	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen width"));
-	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen height"));
 	hiddenMenu.addItem(MenuItem(48, 7, "TESTING 32-bit mode"));
 	hiddenMenu.valueOffsetX = 100;
 }
@@ -443,8 +441,6 @@ void Gfx::loadMenusFromCFG(std::string cfgFilePath)
 	hiddenMenu.addItem(MenuItem(48, 7, "Load replay..."));
 	hiddenMenu.addItem(MenuItem(48, 7, "PowerLevel palettes"));
 	hiddenMenu.addItem(MenuItem(48, 7, "Scaling filter"));
-	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen width"));
-	hiddenMenu.addItem(MenuItem(48, 7, "Fullscreen height"));
 	hiddenMenu.addItem(MenuItem(48, 7, "TESTING 32-bit mode"));
 	hiddenMenu.valueOffsetX = 100;
 }
@@ -1315,7 +1311,7 @@ ItemBehavior* SettingsMenu::getItemBehavior(Common& common, int item)
 
 void Gfx::updateExtensions(bool enabled)
 {
-	for(std::size_t i = HiddenMenu::Extensions + 1; i < HiddenMenu::FullscreenW; ++i)
+	for(std::size_t i = HiddenMenu::Extensions + 1; i < HiddenMenu::Depth32; ++i)
 	{
 		hiddenMenu.setVisibility(i, enabled);
 	}

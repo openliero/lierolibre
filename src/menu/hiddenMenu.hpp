@@ -41,8 +41,6 @@ struct HiddenMenu : Menu
 		Replays,
 		LoadPowerLevels,
 		ScalingFilter,
-		FullscreenW,
-		FullscreenH,
 		Depth32
 	};
 

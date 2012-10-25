@@ -52,9 +52,6 @@ struct Extensions
 	uint32_t scaleFilter;
 	bool depth32;
 	int bloodParticleMax;
-
-	int fullscreenW;
-	int fullscreenH;
 };
 
 struct Settings : gvl::shared, Extensions
@@ -250,8 +247,6 @@ void archive_liero(Archive ar, Settings& settings)
 		ar.b(settings.recordReplays);
 		ar.b(settings.loadPowerlevelPalette);
 		ar.ui8(settings.scaleFilter);
-		ar.ui16(settings.fullscreenW);
-		ar.ui16(settings.fullscreenH);
 
 		gvl::enable_when(ar, fileExtensionVersion >= 2)
 			.b(settings.depth32, true);
@@ -326,9 +321,7 @@ void archive(Archive ar, Settings& settings)
 	.b(settings.extensions)
 	.b(settings.recordReplays)
 	.b(settings.loadPowerlevelPalette)
-	.ui8(settings.scaleFilter)
-	.ui16(settings.fullscreenW)
-	.ui16(settings.fullscreenH);
+	.ui8(settings.scaleFilter);
 
 	gvl::enable_when(ar, fileExtensionVersion >= 2)
 		.b(settings.depth32, true);

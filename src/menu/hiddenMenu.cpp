@@ -100,10 +100,6 @@ ItemBehavior* HiddenMenu::getItemBehavior(Common& common, int item)
 			return new BooleanSwitchBehavior(common, gfx.settings->loadPowerlevelPalette);
 		case ScalingFilter:
 			return new ArrayEnumBehavior(common, gfx.settings->scaleFilter, scaleFilterNames);
-		case FullscreenW:
-			return new IntegerBehavior(common, gfx.settings->fullscreenW, 0, 9999, 0);
-		case FullscreenH:
-			return new IntegerBehavior(common, gfx.settings->fullscreenH, 0, 9999, 0);
 		case Depth32:
 			return new Depth32Behavior(common, gfx.settings->depth32);
 		default:
