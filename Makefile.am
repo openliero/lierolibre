@@ -41,10 +41,13 @@ dist_bin_SCRIPTS = \
 
 dist_noinst_SCRIPTS = \
 	autogen.sh \
+	scripts/assemble-release.bat \
+	scripts/cross-compile \
+	scripts/lierolibre-cmd.bat \
+	scripts/lierolibre.am \
 	src/Jamfile \
 	src/dummy_config.h \
-	src/gvl/Jamfile \
-	scripts/lierolibre.am
+	src/gvl/Jamfile
 
 nodist_man6_MANS = \
 	man/lierolibre.6 \
@@ -60,12 +63,16 @@ MANS_TXT = $(nodist_man6_MANS:.6=.txt)
 
 dist_doc_DATA = \
 	AUTHORS \
-	ChangeLog \
 	COPYING \
+	COPYING.txt \
+	ChangeLog \
 	NEWS \
 	README \
+	README.txt \
+	README_linuxbin \
 	data/LIERO.TXT \
-	data/LIEROENG.TXT
+	data/LIEROENG.TXT \
+	lgpl-2.1.txt
 
 dist_desktop_DATA = \
 	data/lierolibre.desktop
