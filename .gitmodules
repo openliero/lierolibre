@@ -4,6 +4,6 @@
 [submodule "gvl"]
 	path = src/gvl
 	url = git://gitorious.org/lierolibre/gvl.git
-[submodule "lib"]
-	path = lib
+[submodule "windows"]
+	path = windows
 	url = git://gitorious.org/lierolibre/lierolibre-w32depends.git
