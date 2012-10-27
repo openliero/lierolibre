@@ -135,9 +135,10 @@ SOUND_SOURCES = \
 	data/sounds/THROW.wav
 
 WINDOWS_SOURCES = \
-	"src/gvl/_build/Gvl C++0x.props" \
-	"src/gvl/_build/Gvl Standard Config.props" \
 	scripts/lierolibre-cmd.bat \
+	src/gvl/_build/Gvl_C++0x.props \
+	src/gvl/_build/Gvl_IEEE_SEE2.props \
+	src/gvl/_build/Gvl_Standard_Config.props \
 	src/gvl/_build/gvl.vcproj \
 	src/gvl/_build/gvl.vcxproj \
 	src/gvl/_build/gvl.vcxproj.filters \
@@ -660,6 +661,14 @@ NIXBIN_LIB_DEBS_NOSRC = \
 	zlib1g
 
 .PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
+
+dist-hook:
+	cp $(distdir)/src/gvl/_build/Gvl_C++0x.props \
+		"$(distdir)/src/gvl/_build/Gvl C++0x.props"
+	cp $(distdir)/src/gvl/_build/Gvl_IEEE_SEE2.props \
+		"$(distdir)/src/gvl/_build/Gvl IEEE SEE2.props"
+	cp $(distdir)/src/gvl/_build/Gvl_Standard_Config.props \
+		"$(distdir)/src/gvl/_build/Gvl Standard Config.props"
 
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
