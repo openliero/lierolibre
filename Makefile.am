@@ -41,9 +41,7 @@ dist_bin_SCRIPTS = \
 
 dist_noinst_SCRIPTS = \
 	autogen.sh \
-	scripts/assemble-release.bat \
 	scripts/cross-compile \
-	scripts/lierolibre-cmd.bat \
 	scripts/lierolibre.am \
 	src/Jamfile \
 	src/dummy_config.h \
@@ -136,21 +134,26 @@ SOUND_SOURCES = \
 	data/sounds/SHOTGUN.wav \
 	data/sounds/THROW.wav
 
+WINDOWS_SOURCES = \
+	"src/gvl/_build/Gvl C++0x.props" \
+	"src/gvl/_build/Gvl Standard Config.props" \
+	scripts/lierolibre-cmd.bat \
+	src/gvl/_build/gvl.vcproj \
+	src/gvl/_build/gvl.vcxproj \
+	src/gvl/_build/gvl.vcxproj.filters \
+	windows/assemble-release.bat \
+	windows/visualC/liero.vcproj \
+	windows/visualC/liero.vcxproj \
+	windows/visualC/lierolibre.sln
+
 dist_noinst_DATA = \
+	$(GRAPHICS_SOURCES) \
 	$(MANPAGES_SOURCES) \
-	\
-	\
+	$(SOUND_SOURCES) \
+	$(WINDOWS_SOURCES) \
 	data/FILE_ID.DIZ \
 	data/LICENSE.TXT \
-	\
-	\
-	data/lierolibre.xpm \
-	\
-	\
-	$(GRAPHICS_SOURCES) \
-	\
-	\
-	$(SOUND_SOURCES)
+	data/lierolibre.xpm
 
 lierolibre_SOURCES = \
 	src/binReader.cpp \
