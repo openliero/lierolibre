@@ -18,11 +18,6 @@ cd SDL-1.2.15 || exit 1
 make
 cd ..
 
-cd SDL_mixer-1.2.12 || exit 1
-./configure --host=i686-w64-mingw32
-make
-cd ..
-
 cd libconfig-1.4.8 || exit 1
 ./configure --host=i686-w64-mingw32
 make
@@ -32,13 +27,13 @@ cd ..
 
 ./autogen.sh
 ./configure --host=i686-w64-mingw32
-make CPPFLAGS="-Ilib/include" \
+make CPPFLAGS="-Iwindows/include" \
 	LDFLAGS="\
-	-Llib/boost-program_options-1.51.0/stage/lib -llibboost_program_options-mt \
-	-Llib/zlib-1.2.7 -lz \
-	-Llib/SDL-1.2.15/build/.libs -lSDL \
-	-Llib/SDL_mixer-1.2.12/.libs -lSDL_mixer \
-	-Llib/libconfig-1.4.8/lib/.libs -llibconfig++ \
+	-Lwindows/boost-program_options-1.51.0/stage/lib -llibboost_program_options-mt \
+	-Lwindows/zlib-1.2.7 -lz \
+	-Lwindows/SDL-1.2.15/build/.libs -lSDL \
+	-Lwindows/SDL_mixer-1.2.12/lib/x86 -lSDL_mixer \
+	-Lwindows/libconfig-1.4.8/lib/.libs -llibconfig++ \
 	-static-libgcc -static-libstdc++"
 cp .libs/lierolibre.exe lierolibre.exe
 i686-w64-mingw32-strip lierolibre.exe
