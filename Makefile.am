@@ -12,11 +12,11 @@ NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_linux-$(build_cpu)
 
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
-lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src
+lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src $(WINDOWS_CPPFLAGS)
 lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS) $(RELPATH_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS) $(RELPATH_CFLAGS)
 lierolibre_LDADD = src/gvl/libgvl.la $(LIBCONFIGXX_LIBS) $(SDL_MIXER_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
-lierolibre_LDFLAGS = $(RELPATH_LDFLAGS)
+lierolibre_LDFLAGS = $(RELPATH_LDFLAGS) $(WINDOWS_LDFLAGS)
 
 noinst_LTLIBRARIES = src/gvl/libgvl.la
 src_gvl_libgvl_la_CFLAGS = $(ZLIB_CFLAGS) $(RELPATH_CFLAGS)
@@ -660,7 +660,36 @@ NIXBIN_LIB_DEBS_NOSRC = \
 	libxcb1 \
 	zlib1g
 
+WINDOWS_LIBS= \
+	windows/boost-program_options-1.51.0/stage/lib/libboost_regex-mt.dll \
+	windows/zlib-1.2.7/zlib1.dll \
+	windows/SDL-1.2.15/build/.libs/SDL.dll \
+	windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll
+
+if HAS_WINDOWS_LDFLAGS
+EXTRA_lierolibre_DEPENDENCIES = $(WINDOWS_LIBS)
+endif
+
 .PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
+
+windows/boost-program_options-1.51.0/stage/lib/libboost_regex-mt.dll:
+	cd windows/boost-program_options-1.51.0/ && \
+		./bootstrap.sh && \
+		./b2 toolset=gcc-mingw32 target-os=windows link=shared --layout=tagged -sNO_BZIP2=1 -sNO_ZLIB=1
+
+windows/zlib-1.2.7/zlib1.dll:
+	cd windows/zlib-1.2.7/ && \
+		make -f win32/Makefile.gcc PREFIX=i686-w64-mingw32-
+
+windows/SDL-1.2.15/build/.libs/SDL.dll:
+	cd windows/SDL-1.2.15/ && \
+		./configure --host=i686-w64-mingw32 && \
+		make
+
+windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll:
+	cd windows/libconfig-1.4.8/ && \
+		./configure --host=i686-w64-mingw32 && \
+		make
 
 dist-hook:
 	cp $(distdir)/src/gvl/_build/Gvl_C++0x.props \

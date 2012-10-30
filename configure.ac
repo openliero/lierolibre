@@ -57,7 +57,7 @@ PKG_CHECK_MODULES([SDL_MIXER], [SDL_mixer],
 
 # Fall back on a quite stupid header check if pkg-config doesn't work
 # (pkg-config for SDL_mixer is relatively new)
-AS_IF([test "x$pkgcSDLM" = "xno"], [
+AS_IF([test x"$pkgcSDLM" = x"no"], [
 	AC_CHECK_HEADERS([SDL/SDL_mixer.h],
 		[SDL_MIXER_CFLAGS="-D_GNU_SOURCE=1 -D_REENTRANT -I/usr/include/SDL"],
 		[AC_MSG_WARN([SDL_mixer headers not found, you will need this to compile lierolibre!])])
@@ -65,6 +65,19 @@ AS_IF([test "x$pkgcSDLM" = "xno"], [
 		[SDL_MIXER_LIBS="-lSDL_mixer -lSDL"],
 		[AC_MSG_WARN([SDL_mixer library not found, you will need this to link lierolibre!])])
 	])
+
+AC_ARG_ENABLE([windows-includes],
+	[AS_HELP_STRING([--enable-windows-includes],
+		[use includes from local folder ./windows/include/])],
+	[WINDOWS_CPPFLAGS='-I./windows/include/'])
+AC_SUBST([WINDOWS_CPPFLAGS])
+
+AC_ARG_ENABLE([windows-libraries],
+	[AS_HELP_STRING([--enable-windows-libraries],
+		[compile and use libraries from local folder ./windows/include/])],
+	[WINDOWS_LDFLAGS='-Lwindows/boost-program_options-1.51.0/stage/lib -llibboost_program_options-mt -Lwindows/zlib-1.2.7 -lz -Lwindows/SDL-1.2.15/build/.libs -lSDL -Lwindows/SDL_mixer-1.2.12/lib/x86 -lSDL_mixer -Lwindows/libconfig-1.4.8/lib/.libs -llibconfig++ -static-libgcc -static-libstdc++'])
+AC_SUBST([WINDOWS_LDFLAGS])
+AM_CONDITIONAL([HAS_WINDOWS_LDFLAGS], [test "$WINDOWS_LDFLAGS"])
 
 PKG_CHECK_MODULES([ZLIB], [zlib])
 
@@ -117,7 +130,7 @@ AC_CHECK_FUNCS([clock_gettime floor gethostbyname localeconv memmove memset mkdi
 AC_ARG_ENABLE([relpath],
   AC_HELP_STRING([--enable-relpath], [add lib/ to the runtime library search path]),
   [want_relative=yes], [want_relative=no])
-if test "$want_relative" = yes; then
+if test x"$want_relative" = xyes; then
   RELPATH_CFLAGS='-DUSE_RELATIVE_PATHS'
   RELPATH_LDFLAGS="-Wl,-rpath -Wl,\\\$\$ORIGIN/lib"
 fi
