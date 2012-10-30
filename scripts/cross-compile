@@ -1,33 +1,6 @@
 #!/bin/bash
-# This is a rough script for cross-compiling lierolibre for windows from linux,
-# it should eventually be added as repository content or makefile targets.
-
-cd windows/ || exit 1
-
-cd boost-program_options-1.51.0 || exit 1
-./bootstrap.sh
-./b2 toolset=gcc-mingw32 target-os=windows link=shared --layout=tagged -sNO_BZIP2=1 -sNO_ZLIB=1
-cd ..
-
-cd zlib-1.2.7/ || exit 1
-make -f win32/Makefile.gcc PREFIX=i686-w64-mingw32-
-cd ..
-
-cd SDL-1.2.15 || exit 1
-./configure --host=i686-w64-mingw32
-make
-cd ..
-
-cd libconfig-1.4.8 || exit 1
-./configure --host=i686-w64-mingw32
-make
-cd ..
-
-cd ..
-
 ./autogen.sh
-./configure --host=i686-w64-mingw32
-make CPPFLAGS="-Iwindows/include" LDFLAGS="-Lwindows/boost-program_options-1.51.0/stage/lib -llibboost_program_options-mt -Lwindows/zlib-1.2.7 -lz -Lwindows/SDL-1.2.15/build/.libs -lSDL -Lwindows/SDL_mixer-1.2.12/lib/x86 -lSDL_mixer -Lwindows/libconfig-1.4.8/lib/.libs -llibconfig++ -static-libgcc -static-libstdc++"
+./configure --enable-windows-includes --enable-windows-libraries --host=i686-w64-mingw32 --build=x86_64-unknown-linux-gnu
 cp .libs/lierolibre.exe lierolibre.exe
 i686-w64-mingw32-strip lierolibre.exe
 
