@@ -716,6 +716,7 @@ dist-hook: lierolibre.exe
 	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
 	mv $(distdir)/NEWS $(distdir)/NEWS.txt
 	cd $(distdir) && rm -r $(WINDOWS_DIST_REMOVE)
+	mkdir $(distdir)/user
 	mkdir $(distdir)/libsrc
 	cp -r windows/SDL-1.2.15/ $(distdir)/libsrc/
 	cp -r windows/libconfig-1.4.8/ $(distdir)/libsrc/
