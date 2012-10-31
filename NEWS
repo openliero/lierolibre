@@ -7,6 +7,7 @@ Version 0.4.1 - September 2012, by Martin Erik Werner
 * Changed default keybind to a Right Alt key code that should work better
 * Fixed extended controls being empty if loaded from non-extended LIERO.DAT
   + Closes: http://code.google.com/p/liero/issues/detail?id=3
+* Changed windows homedir name from "settings" to "user"
 
 Version 0.4 - June 2012, by Martin Erik Werner
 * Fixed a bug where the EXE file path would not be set
