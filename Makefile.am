@@ -660,11 +660,28 @@ NIXBIN_LIB_DEBS_NOSRC = \
 	libxcb1 \
 	zlib1g
 
-WINDOWS_LIBS= \
-	windows/boost-program_options-1.51.0/stage/lib/libboost_regex-mt.dll \
+WINDOWS_LIBS = \
+	windows/boost-program_options-1.51.0/stage/lib/libboost_program_options-mt.dll \
 	windows/zlib-1.2.7/zlib1.dll \
 	windows/SDL-1.2.15/build/.libs/SDL.dll \
+	windows/SDL_mixer-1.2.12/lib/x86/SDL_mixer.dll \
 	windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll
+
+WINDOWS_DIST_REMOVE = \
+	aclocal.m4 \
+	autogen.sh \
+	configure \
+	configure.ac \
+	COPYING \
+	INSTALL \
+	Makefile.am \
+	Makefile.in \
+	man/ \
+	README \
+	README_linuxbin \
+	scripts/ \
+	src/ \
+	windows/
 
 if HAS_WINDOWS_LDFLAGS
 EXTRA_lierolibre_DEPENDENCIES = $(WINDOWS_LIBS)
@@ -691,6 +708,20 @@ windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll:
 		./configure --host=i686-w64-mingw32 && \
 		make
 
+if HAS_WINDOWS_LDFLAGS
+dist-hook: lierolibre.exe
+	$(STRIP) .libs/lierolibre.exe -o $(distdir)/lierolibre.exe
+	cp scripts/lierolibre-cmd.bat $(distdir)
+	cp $(WINDOWS_LIBS) $(distdir)
+	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
+	mv $(distdir)/NEWS $(distdir)/NEWS.txt
+	cd $(distdir) && rm -r $(WINDOWS_DIST_REMOVE)
+	mkdir $(distdir)/libsrc
+	cp -r windows/SDL-1.2.15/ $(distdir)/libsrc/
+	cp -r windows/libconfig-1.4.8/ $(distdir)/libsrc/
+	-make -C $(distdir)/libsrc/SDL-1.2.15/ distclean
+	-make -C $(distdir)/libsrc/libconfig-1.4.8/ distclean
+else
 dist-hook:
 	cp $(distdir)/src/gvl/_build/Gvl_C++0x.props \
 		"$(distdir)/src/gvl/_build/Gvl C++0x.props"
@@ -698,6 +729,7 @@ dist-hook:
 		"$(distdir)/src/gvl/_build/Gvl IEEE SEE2.props"
 	cp $(distdir)/src/gvl/_build/Gvl_Standard_Config.props \
 		"$(distdir)/src/gvl/_build/Gvl Standard Config.props"
+endif
 
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
