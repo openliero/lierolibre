@@ -16,14 +16,14 @@ Features:
 To switch between different window sizes, use F6, F7 and F8, to switch to
 fullscreen, use F5 or Alt+Enter.
 
-The copied file 'settings\lierocfg.txt' is a plain text file containing all the
+The copied file 'user\lierocfg.txt' is a plain text file containing all the
 game variables, this file is intented to be modified, go wild! Some things are
 likely to not work (make the game refuse to start, or crash) though:
   ! Appending/Deleting elements
   ! Changing integers to strings, strings to integers, etc.
   ! Changing the sine and cosine tables
 
-To use custom levels place the .lev files in the 'settings' directory.
+To use custom levels place the .lev files in the 'user' directory.
 
 In order to make lierolibre load and write files differently you will need to
 use the command line, to start a command line prompt in the lierolibre

@@ -64,7 +64,7 @@ DataPath::DataPath(string a_readonly_path)
 		readonly_path = getRoot(a_readonly_path);
 
 #if GVL_WINDOWS
-	configdotdir = "settings";
+	configdotdir = "user";
 #else
 	configdotdir = string(getenv("HOME")) + '/' + ".lierolibre";
 #endif
