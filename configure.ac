@@ -79,6 +79,9 @@ AC_ARG_ENABLE([windows-libraries],
 AC_SUBST([WINDOWS_LDFLAGS])
 AM_CONDITIONAL([HAS_WINDOWS_LDFLAGS], [test "$WINDOWS_LDFLAGS"])
 
+AC_SUBST([WINDOWS_MINGW_LIBS],
+	[$(for i in 'libstdc++' libgcc_s; do locate /usr*$i*.dll | grep $(echo $host | cut -d'-' -f1) | head -n1; done | tr '\n' ' ')])
+
 PKG_CHECK_MODULES([ZLIB], [zlib])
 
 # Get libgvl library and include locations

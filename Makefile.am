@@ -710,7 +710,10 @@ windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll:
 
 if HAS_WINDOWS_LDFLAGS
 dist-hook: lierolibre.exe $(WINDOWS_LIBS)
-	for i in $(WINDOWS_LIBS) .libs/lierolibre.exe; do $(STRIP) $$i -o $(distdir)/$$(basename $$i); done
+	for i in $(WINDOWS_LIBS) $(WINDOWS_MINGW_LIBS) .libs/lierolibre.exe; do \
+		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
+		chmod +x $(distdir)/$$(basename $$i); done
+	echo $(host) $(target) $(build)
 	cp scripts/lierolibre-cmd.bat $(distdir)
 	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
 	mv $(distdir)/NEWS $(distdir)/NEWS.txt
