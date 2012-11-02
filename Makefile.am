@@ -692,7 +692,7 @@ endif
 windows/boost-program_options-1.51.0/stage/lib/libboost_program_options-mt.dll:
 	cd windows/boost-program_options-1.51.0/ && \
 		./bootstrap.sh && \
-		./b2 toolset=gcc-mingw32 target-os=windows link=shared --layout=tagged -sNO_BZIP2=1 -sNO_ZLIB=1
+		./b2 toolset=gcc-mingw32 target-os=windows variant=release link=shared --layout=tagged -sNO_BZIP2=1 -sNO_ZLIB=1 linkflags='-static-libgcc -static-libstdc++' stage/lib/libboost_program_options-mt.dll
 
 windows/zlib-1.2.7/zlib1.dll:
 	cd windows/zlib-1.2.7/ && \
@@ -701,18 +701,17 @@ windows/zlib-1.2.7/zlib1.dll:
 windows/SDL-1.2.15/build/.libs/SDL.dll:
 	cd windows/SDL-1.2.15/ && \
 		./configure --host=i686-w64-mingw32 && \
-		make
+		make LDFLAGS='-static-libgcc -static-libstdc++'
 
 windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll:
 	cd windows/libconfig-1.4.8/ && \
 		./configure --host=i686-w64-mingw32 && \
-		make
+		make LDFLAGS='-static-libgcc -static-libstdc++'
 
 if HAS_WINDOWS_LDFLAGS
-dist-hook: lierolibre.exe
-	$(STRIP) .libs/lierolibre.exe -o $(distdir)/lierolibre.exe
+dist-hook: lierolibre.exe $(WINDOWS_LIBS)
+	for i in $(WINDOWS_LIBS) .libs/lierolibre.exe; do $(STRIP) $$i -o $(distdir)/$$(basename $$i); done
 	cp scripts/lierolibre-cmd.bat $(distdir)
-	cp $(WINDOWS_LIBS) $(distdir)
 	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
 	mv $(distdir)/NEWS $(distdir)/NEWS.txt
 	cd $(distdir) && rm -r $(WINDOWS_DIST_REMOVE)
