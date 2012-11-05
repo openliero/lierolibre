@@ -138,6 +138,8 @@ Uint32 SDLToDOSKey(SDLKey key)
 	std::map<int, int>::iterator i = SDLToDOSScanCodes.find(Uint32(key));
 	if(i != SDLToDOSScanCodes.end())
 		return i->second;
+	if(key == 313)
+		return 144; // RALT falls outside of map on *nix, special-cased for now
 	return 89;
 }
 
