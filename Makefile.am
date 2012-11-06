@@ -707,9 +707,9 @@ dist-hook: lierolibre.exe $(WINDOWS_LIBS) $(nodist_pkgdata_DATA)
 	cp data/LIERO.CHR $(distdir)/data
 	cp data/LIERO.SND $(distdir)/data
 	mv $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
-	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
-	mv $(distdir)/NEWS $(distdir)/NEWS.txt
-	mv $(distdir)/ChangeLog $(distdir)/ChangeLog.txt
+	for i in AUTHORS NEWS ChangeLog; do \
+		mv $(distdir)/$$i $(distdir)/$$i.txt; \
+		sed 's/$//' -i $(distdir)/$$i.txt; done
 	mkdir $(distdir)/user
 	mkdir $(distdir)/libsrc
 	cp -r windows/SDL-1.2.15/ $(distdir)/libsrc/
