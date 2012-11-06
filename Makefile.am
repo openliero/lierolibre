@@ -664,7 +664,7 @@ WINDOWS_LIBS_A = \
 	windows/libconfig-1.4.8/lib/.libs/libconfig++.a
 
 WINDOWS_LIBS_DLL = \
-	windows/boost-program_options-1.51.0/stage/lib/libboost_program_options-mt.dll \
+	windows/boost-program_options-1.51.0/stage/lib/libboost_program_options.dll \
 	windows/zlib-1.2.7/zlib1.dll \
 	windows/SDL-1.2.15/build/.libs/SDL.dll \
 	windows/SDL_mixer-1.2.12/lib/x86/SDL_mixer.dll
@@ -677,12 +677,12 @@ endif
 
 .PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
 
-windows/boost-program_options-1.51.0/stage/lib/libboost_program_options-mt.dll:
+windows/boost-program_options-1.51.0/stage/lib/libboost_program_options.dll:
 	cd windows/boost-program_options-1.51.0/ ;\
 		./bootstrap.sh ;\
 		rm -rf stage ;\
 		rm -rf bin.v2 ;\
-		./b2 toolset=gcc-mingw32 target-os=windows variant=release link=shared --layout=tagged -sNO_BZIP2=1 -sNO_ZLIB=1 linkflags='-static-libgcc -static-libstdc++' stage/lib/libboost_program_options-mt.dll stage/lib/libboost_program_options-mt.dll.a
+		./b2 toolset=gcc-mingw32 target-os=windows variant=release link=shared -sNO_BZIP2=1 -sNO_ZLIB=1 linkflags='-static-libgcc -static-libstdc++' stage/lib/libboost_program_options.dll stage/lib/libboost_program_options.dll.a
 
 windows/zlib-1.2.7/zlib1.dll:
 	cd windows/zlib-1.2.7/ && \
