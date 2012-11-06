@@ -8,12 +8,12 @@ no longer applies.
 The included SDL shared library is licensed under LGPLv2.1+. The source code
 for this library is located in "libsrc\SDL-1.2.15".
 
-The included libconfig++ shared library is licensed under LGPLv2.1+. The source
-code for this library is located in "libsrc\libconfig".
+The statically linked libconfig++ library is licensed under LGPLv2.1+. The source
+code for this library is located in "libsrc\libconfig-1.4.8".
 
 The included SDL_mixer shared library is licensed under the Zlib license.
 
-The Zlib library used in lierolibre is licensed under the Zlib license.
+The included Zlib shared library is licensed under the Zlib license.
 
 The included boost_program_options shared library is licensed under the BSL-1.0.
 
@@ -42,9 +42,7 @@ Files: lierolibre.exe
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
            2010, Mario Carbajal "basro"
            2012, Martin Erik Werner <martinerikwerner@gmail.com>
-           1995-2012 Jean-loup Gailly and Mark Adler
-License: BSD-2-Clause and Zlib
-Comment: ZLib is statically linked into the executable.
+License: BSD-2-Clause
 
 Files: NEWS.txt
 Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
@@ -71,8 +69,8 @@ Files: SDL.dll libsrc/SDL-1.2.15/*
 Copyright: 1997-2012 Sam Lantinga
 License: LGPL-2.1+
 
-Files: libconfig++.dll libsrc/libconfig/*
-Copyright: 2005-2009  Mark A Lindner
+Files: libconfig++.dll libsrc/libconfig-1.4.8/*
+Copyright: 2005-2011 Mark A Lindner
 License: LGPL-2.1+
 
 Files: SDL_mixer.dll
