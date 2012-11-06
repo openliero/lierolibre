@@ -66,6 +66,8 @@ AS_IF([test x"$pkgcSDLM" = x"no"], [
 		[AC_MSG_WARN([SDL_mixer library not found, you will need this to link lierolibre!])])
 	])
 
+PKG_CHECK_MODULES([ZLIB], [zlib])
+
 AC_ARG_ENABLE([windows-includes],
 	[AS_HELP_STRING([--enable-windows-includes],
 		[use includes from local folder ./windows/include/])],
@@ -75,14 +77,10 @@ AC_SUBST([WINDOWS_CPPFLAGS])
 AC_ARG_ENABLE([windows-libraries],
 	[AS_HELP_STRING([--enable-windows-libraries],
 		[compile and use libraries from local folder ./windows/include/])],
-	[WINDOWS_LDFLAGS='-Lwindows/boost-program_options-1.51.0/stage/lib -llibboost_program_options-mt -Lwindows/zlib-1.2.7 -lz -Lwindows/SDL-1.2.15/build/.libs -lSDL -Lwindows/SDL_mixer-1.2.12/lib/x86 -lSDL_mixer -Lwindows/libconfig-1.4.8/lib/.libs -llibconfig++ -static-libgcc -static-libstdc++'])
+	[WINDOWS_LDFLAGS='-Lwindows/boost-program_options-1.51.0/stage/lib -Lwindows/zlib-1.2.7 -Lwindows/SDL-1.2.15/build/.libs -Lwindows/libconfig-1.4.8/lib/.libs/ -Lwindows/SDL_mixer-1.2.12/lib/x86/ -lboost_program_options-mt -static-libgcc -static-libstdc++'; LIBCONFIGXX_LIBS="windows/libconfig-1.4.8/lib/.libs/libconfig++.a"])
 AC_SUBST([WINDOWS_LDFLAGS])
+AC_SUBST([LIBCONFIGXX_LIBS])
 AM_CONDITIONAL([HAS_WINDOWS_LDFLAGS], [test "$WINDOWS_LDFLAGS"])
-
-AC_SUBST([WINDOWS_MINGW_LIBS],
-	[$(for i in 'libstdc++' libgcc_s; do locate /usr*$i*.dll | grep $(echo $host | cut -d'-' -f1) | head -n1; done | tr '\n' ' ')])
-
-PKG_CHECK_MODULES([ZLIB], [zlib])
 
 # Get libgvl library and include locations
 AC_ARG_WITH([gvl-include-path],

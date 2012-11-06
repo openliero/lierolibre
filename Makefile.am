@@ -660,12 +660,16 @@ NIXBIN_LIB_DEBS_NOSRC = \
 	libxcb1 \
 	zlib1g
 
-WINDOWS_LIBS = \
+WINDOWS_LIBS_A = \
+	windows/libconfig-1.4.8/lib/.libs/libconfig++.a
+
+WINDOWS_LIBS_DLL = \
 	windows/boost-program_options-1.51.0/stage/lib/libboost_program_options-mt.dll \
 	windows/zlib-1.2.7/zlib1.dll \
 	windows/SDL-1.2.15/build/.libs/SDL.dll \
-	windows/SDL_mixer-1.2.12/lib/x86/SDL_mixer.dll \
-	windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll
+	windows/SDL_mixer-1.2.12/lib/x86/SDL_mixer.dll
+
+WINDOWS_LIBS = $(WINDOWS_LIBS_A) $(WINDOWS_LIBS_DLL)
 
 WINDOWS_DIST_REMOVE = \
 	aclocal.m4 \
@@ -703,17 +707,16 @@ windows/SDL-1.2.15/build/.libs/SDL.dll:
 		./configure --host=i686-w64-mingw32 && \
 		make LDFLAGS='-static-libgcc -static-libstdc++'
 
-windows/libconfig-1.4.8/lib/.libs/libconfig++-9.dll:
+windows/libconfig-1.4.8/lib/.libs/libconfig++.a:
 	cd windows/libconfig-1.4.8/ && \
 		./configure --host=i686-w64-mingw32 && \
 		make LDFLAGS='-static-libgcc -static-libstdc++'
 
 if HAS_WINDOWS_LDFLAGS
 dist-hook: lierolibre.exe $(WINDOWS_LIBS)
-	for i in $(WINDOWS_LIBS) $(WINDOWS_MINGW_LIBS) .libs/lierolibre.exe; do \
+	for i in $(WINDOWS_LIBS_DLL) .libs/lierolibre.exe; do \
 		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
 		chmod +x $(distdir)/$$(basename $$i); done
-	echo $(host) $(target) $(build)
 	cp scripts/lierolibre-cmd.bat $(distdir)
 	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
 	mv $(distdir)/NEWS $(distdir)/NEWS.txt
