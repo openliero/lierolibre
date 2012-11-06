@@ -671,22 +671,6 @@ WINDOWS_LIBS_DLL = \
 
 WINDOWS_LIBS = $(WINDOWS_LIBS_A) $(WINDOWS_LIBS_DLL)
 
-WINDOWS_DIST_REMOVE = \
-	aclocal.m4 \
-	autogen.sh \
-	configure \
-	configure.ac \
-	COPYING \
-	INSTALL \
-	Makefile.am \
-	Makefile.in \
-	man/ \
-	README \
-	README_linuxbin \
-	scripts/ \
-	src/ \
-	windows/
-
 if HAS_WINDOWS_LDFLAGS
 EXTRA_lierolibre_DEPENDENCIES = $(WINDOWS_LIBS)
 endif
@@ -713,14 +697,17 @@ windows/libconfig-1.4.8/lib/.libs/libconfig++.a:
 		make LDFLAGS='-static-libgcc -static-libstdc++'
 
 if HAS_WINDOWS_LDFLAGS
-dist-hook: lierolibre.exe $(WINDOWS_LIBS)
+dist-hook: lierolibre.exe $(WINDOWS_LIBS) $(nodist_pkgdata_DATA)
 	for i in $(WINDOWS_LIBS_DLL) .libs/lierolibre.exe; do \
 		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
 		chmod +x $(distdir)/$$(basename $$i); done
 	cp scripts/lierolibre-cmd.bat $(distdir)
+	cp data/LIERO.CHR $(distdir)/data
+	cp data/LIERO.SND $(distdir)/data
+	mv $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
 	mv $(distdir)/AUTHORS $(distdir)/AUTHORS.txt
 	mv $(distdir)/NEWS $(distdir)/NEWS.txt
-	cd $(distdir) && rm -r $(WINDOWS_DIST_REMOVE)
+	mv $(distdir)/ChangeLog $(distdir)/ChangeLog.txt
 	mkdir $(distdir)/user
 	mkdir $(distdir)/libsrc
 	cp -r windows/SDL-1.2.15/ $(distdir)/libsrc/
