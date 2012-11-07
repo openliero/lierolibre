@@ -1,7 +1,5 @@
 #!/bin/bash
 ./autogen.sh
 ./configure --enable-windows-includes --enable-windows-libraries --host=i686-w64-mingw32 --build=x86_64-unknown-linux-gnu
-make
-cp .libs/lierolibre.exe lierolibre.exe
-i686-w64-mingw32-strip lierolibre.exe
+make distdir
 
