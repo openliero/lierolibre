@@ -79,14 +79,12 @@ dist_appicon_DATA = \
 	data/lierolibre.svg
 
 dist_pkgdata_DATA = \
+	data/LIERO.CHR \
 	data/LIERO.DAT \
 	data/LIERO.OPT \
+	data/LIERO.SND \
 	data/NAMES.DAT \
 	data/liero.cfg
-
-nodist_pkgdata_DATA = \
-	data/LIERO.CHR \
-	data/LIERO.SND
 
 MANPAGES_SOURCES = \
 	man/lierolibre.6.am \
@@ -704,8 +702,6 @@ dist-hook: lierolibre.exe $(WINDOWS_LIBS) $(nodist_pkgdata_DATA)
 		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
 		chmod +x $(distdir)/$$(basename $$i); done
 	cp scripts/lierolibre-cmd.bat $(distdir)
-	cp data/LIERO.CHR $(distdir)/data
-	cp data/LIERO.SND $(distdir)/data
 	mv $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
 	for i in AUTHORS NEWS ChangeLog; do \
 		mv $(distdir)/$$i $(distdir)/$$i.txt; \
@@ -827,7 +823,7 @@ dist-nixbin-libsrc:
 		sed -n 's/E: Unable to find a source package for \(.*\)/\1/p' | \
 		xargs -I '{}' touch 00MISSING_'{}'.debsource
 
-dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) $(nodist_pkgdata_DATA) \
+dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) \
 		$(MANS_TXT) dist-nixbin-libcopyright dist-nixbin-libsrc
 	cp -aT $(PACKAGE_DIRNAME) $(NIXBIN_DIRNAME)
 	cp -a lib/ $(NIXBIN_DIRNAME)
