@@ -62,7 +62,6 @@ MANS_TXT = $(nodist_man6_MANS:.6=.txt)
 dist_doc_DATA = \
 	AUTHORS \
 	COPYING \
-	COPYING.txt \
 	ChangeLog \
 	NEWS \
 	README \
