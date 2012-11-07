@@ -40,8 +40,6 @@
 #include <cassert>
 #include <map>
 
-#include <gvl/support/platform.hpp> // For GVL_LINUX
-
 //int SDLToDOSScanCodes[SDLK_LAST] = {};
 
 std::map<int, int> SDLToDOSScanCodes;
@@ -73,8 +71,8 @@ SDLKey lieroToSDLKeys[] =
 	Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,
 	Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,
 	Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z*/
-
-
+	
+	
 	Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z, // 27 zeroes
 	SDLK_KP_ENTER, // Enter (Pad)
 	SDLK_RCTRL, // Right Ctrl
@@ -113,7 +111,7 @@ void initKeys()
 	{
 		SDLToDOSScanCodes[i] = 89;
 	}*/
-
+	
 	for(std::size_t i = 0; i < maxScanCodes; ++i)
 	{
 		if(lieroToSDLKeys[i] != SDLK_UNKNOWN)
@@ -140,17 +138,15 @@ Uint32 SDLToDOSKey(SDLKey key)
 	std::map<int, int>::iterator i = SDLToDOSScanCodes.find(Uint32(key));
 	if(i != SDLToDOSScanCodes.end())
 		return i->second;
-#if GVL_LINUX
 	if(key == 313)
 		return 144; // RALT falls outside of map on *nix, special-cased for now
-#endif
 	return 89;
 }
 
 Uint32 SDLToDOSKey(SDL_keysym const& keysym)
 {
 	Uint32 key = SDLToDOSKey(keysym.sym);
-
+	
 	if(key >= 177) // Liero doesn't have keys >= 177
 		return 89; // Arbitrarily translate it to 89
 	return key;
