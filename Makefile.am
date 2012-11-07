@@ -669,6 +669,8 @@ WINDOWS_LIBS_DLL = \
 
 WINDOWS_LIBS = $(WINDOWS_LIBS_A) $(WINDOWS_LIBS_DLL)
 
+WINDOWS_TXT = AUTHORS COPYING ChangeLog NEWS
+
 if HAS_WINDOWS_LDFLAGS
 EXTRA_lierolibre_DEPENDENCIES = $(WINDOWS_LIBS)
 endif
@@ -702,9 +704,9 @@ dist-hook: lierolibre.exe $(WINDOWS_LIBS) $(nodist_pkgdata_DATA)
 		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
 		chmod +x $(distdir)/$$(basename $$i); done
 	cp scripts/lierolibre-cmd.bat $(distdir)
-	mv $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
-	for i in AUTHORS NEWS ChangeLog; do \
-		mv $(distdir)/$$i $(distdir)/$$i.txt; \
+	cp $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
+	for i in $(WINDOWS_TXT); do \
+		cp $(distdir)/$$i $(distdir)/$$i.txt; \
 		sed 's/$$//' -i $(distdir)/$$i.txt; done
 	mkdir $(distdir)/user
 	mkdir $(distdir)/libsrc
@@ -712,6 +714,16 @@ dist-hook: lierolibre.exe $(WINDOWS_LIBS) $(nodist_pkgdata_DATA)
 	cp -r windows/libconfig-1.4.8/ $(distdir)/libsrc/
 	-make -C $(distdir)/libsrc/SDL-1.2.15/ distclean
 	-make -C $(distdir)/libsrc/libconfig-1.4.8/ distclean
+	sed '/no longer applies./r COPYING_winbin' -i $(distdir)/COPYING.txt
+	sed \
+		-e '/START_MACHINE_READABLE/,/END_MACHINE_READABLE/d' \
+		-e '/.*_HUMAN_READABLE/d' \
+		-i $(distdir)/COPYING.txt
+	sed '/         separate licenses, and not covered under the BSD-2-Clause license/r COPYING_winbin' -i $(distdir)/COPYING.txt
+	sed \
+		-e '/START_HUMAN_READABLE/,/END_HUMAN_READABLE/d' \
+		-e '/.*_MACHINE_READABLE/d' \
+		-i $(distdir)/COPYING.txt
 else
 dist-hook:
 	cp $(distdir)/src/gvl/_build/Gvl_C++0x.props \
