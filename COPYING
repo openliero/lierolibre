@@ -1,9 +1,10 @@
 lierolibre, the gvl library, and the data helper scripts are released under the
-BDS-2-Clause License
+BDS-2-Clause License.
 
 The original graphics for Liero, the new replacement sounds, and the
 configuration variables extracted from the original game are released under
 the WTFPL license. Note that the old freeware license in data/LIERO(ENG).TXT
+and the information about the old LIERO.EXE and LIERO.SND in data/LICENSE.TXT
 no longer applies.
 
 The type_info header is licensed under the Boost Software License 1.0, and
@@ -66,10 +67,11 @@ License: BSD-2-Clause
 Files: data/*
 Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
 License: WTFPL
-Comment: Note that the old freeware license in data/LIERO(ENG).TXT no longer
-         applies.
+Comment: Note that the old freeware license in data/LIERO(ENG).TXT and the
+         information about the old LIERO.EXE and LIERO.SND in data/LICENSE.TXT
+         no longer applies.
 
-Files: data/sounds/*.wav
+Files: data/sounds/*.wav data/LIERO.SND
 Copyright: 2012, "sea"
 License: WTFPL
 
