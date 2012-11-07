@@ -662,10 +662,10 @@ WINDOWS_LIBS_A = \
 	windows/libconfig-1.4.8/lib/.libs/libconfig++.a
 
 WINDOWS_LIBS_DLL = \
-	windows/boost-program_options-1.51.0/stage/lib/libboost_program_options.dll \
-	windows/zlib-1.2.7/zlib1.dll \
 	windows/SDL-1.2.15/build/.libs/SDL.dll \
-	windows/SDL_mixer-1.2.12/lib/x86/SDL_mixer.dll
+	windows/SDL_mixer-1.2.12/lib/x86/SDL_mixer.dll \
+	windows/boost-program_options-1.51.0/stage/lib/libboost_program_options.dll \
+	windows/zlib-1.2.7/zlib1.dll
 
 WINDOWS_LIBS = $(WINDOWS_LIBS_A) $(WINDOWS_LIBS_DLL)
 
@@ -699,10 +699,12 @@ windows/libconfig-1.4.8/lib/.libs/libconfig++.a:
 		make LDFLAGS='-static-libgcc -static-libstdc++'
 
 if HAS_WINDOWS_LDFLAGS
-dist-hook: lierolibre.exe $(WINDOWS_LIBS) $(nodist_pkgdata_DATA)
+dist-hook: lierolibre.exe $(WINDOWS_LIBS)
 	for i in $(WINDOWS_LIBS_DLL) .libs/lierolibre.exe; do \
 		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
 		chmod +x $(distdir)/$$(basename $$i); done
+	cp windows/msvcp100.dll $(distdir)
+	cp windows/msvcr100.dll $(distdir)
 	cp scripts/lierolibre-cmd.bat $(distdir)
 	cp $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
 	for i in $(WINDOWS_TXT); do \
