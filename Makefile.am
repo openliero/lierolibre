@@ -588,10 +588,11 @@ EXTRA_DIST = \
 
 
 LIB_ARCH_NIXBIN_LIBFILES = \
-	lib/libz.so.1 \
+	lib/libcap.so.2 \
 	lib/libdbus-1.so.3 \
+	lib/libtinfo.so.5 \
 	lib/libwrap.so.0 \
-	lib/libtinfo.so.5
+	lib/libz.so.1
 
 USR_LIB_ARCH_NIXBIN_LIBFILES = \
 	lib/libconfig++.so \
@@ -618,9 +619,6 @@ USR_LIB_ARCH_NIXBIN_LIBFILES = \
 USR_LIB_NIXBIN_LIBFILES = \
 	lib/libboost_program_options.so \
 	lib/libmad.so.0
-
-LIB_NIXBIN_LIBFILES = \
-	lib/libcap.so.2
 
 USR_LIB_ARCH_PA_NIXBIN_LIBFILES = \
 	lib/libpulsecommon-2.0.so
@@ -846,7 +844,6 @@ dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) \
 	cp -a lib/ $(NIXBIN_DIRNAME)
 	cp -a libsrc/ $(NIXBIN_DIRNAME)
 	cp -a $(pkglibexec_PROGRAMS) $(NIXBIN_DIRNAME)
-	cp -a $(nodist_pkgdata_DATA) $(NIXBIN_DIRNAME)/data/
 	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
 	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
 	cp -a README_linuxbin $(NIXBIN_DIRNAME)
