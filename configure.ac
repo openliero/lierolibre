@@ -80,8 +80,9 @@ AC_SUBST([WINDOWS_CPPFLAGS])
 AC_ARG_ENABLE([windows-libraries],
 	[AS_HELP_STRING([--enable-windows-libraries],
 		[compile and use libraries from local folder ./windows/include/, and force static linking for libconfig++])],
-	[WINDOWS_LDFLAGS='-Lwindows/boost-program_options-1.51.0/stage/lib -Lwindows/zlib-1.2.7 -Lwindows/SDL-1.2.15/build/.libs -Lwindows/libconfig-1.4.8/lib/.libs/ -Lwindows/SDL_mixer-1.2.12/lib/x86/ -lboost_program_options -static-libgcc -static-libstdc++'; LIBCONFIGXX_LIBS="windows/libconfig-1.4.8/lib/.libs/libconfig++.a"])
+	[WINDOWS_LDFLAGS='-Lwindows/boost-program_options-1.51.0/stage/lib -Lwindows/zlib-1.2.7 -Lwindows/SDL-1.2.15/build/.libs -Lwindows/libconfig-1.4.8/lib/.libs/ -Lwindows/SDL_mixer-1.2.12/lib/x86/ -lboost_program_options -static-libgcc -static-libstdc++'; LIBCONFIGXX_CPPFLAGS="-DLIBCONFIGXX_STATIC"; LIBCONFIGXX_LIBS="windows/libconfig-1.4.8/lib/.libs/libconfig++.a"])
 AC_SUBST([WINDOWS_LDFLAGS])
+AC_SUBST([LIBCONFIGXX_CPPFLAGS])
 AC_SUBST([LIBCONFIGXX_LIBS])
 AM_CONDITIONAL([HAS_WINDOWS_LDFLAGS], [test "$WINDOWS_LDFLAGS"])
 

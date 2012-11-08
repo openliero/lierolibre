@@ -12,7 +12,7 @@ NIXBIN_DIRNAME = $(PACKAGE_DIRNAME)_linux-$(build_cpu)
 
 pkglibexec_PROGRAMS = lierolibre
 # It seems it only includes src/../ by default
-lierolibre_CPPFLAGS = $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src $(WINDOWS_CPPFLAGS)
+lierolibre_CPPFLAGS = $(LIBCONFIGXX_CPPFLAGS) $(GVL_CPPFLAGS) $(SDL_CPPFLAGS) -I$(srcdir)/src $(WINDOWS_CPPFLAGS)
 lierolibre_CFLAGS = $(LIBCONFIGXX_CFLAGS) $(SDL_MIXER_CFLAGS) $(SDL_CFLAGS) $(RELPATH_CFLAGS)
 lierolibre_CXXFLAGS = $(SDL_CXXFLAGS) $(RELPATH_CFLAGS)
 lierolibre_LDADD = src/gvl/libgvl.la $(LIBCONFIGXX_LIBS) $(SDL_MIXER_LIBS) $(SDL_LIBS) $(BOOST_PO_LIBS)
