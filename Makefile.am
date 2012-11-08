@@ -773,7 +773,6 @@ data/LIERO.SND: $(SOUND_SOURCES)
 
 clean-local:
 	rm -f \
-		$(nodist_pkgdata_DATA) \
 		$(nodist_bin_SCRIPTS) \
 		$(nodist_man6_MANS) \
 		$(MANS_TXT)
