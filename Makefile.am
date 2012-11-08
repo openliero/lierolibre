@@ -152,6 +152,7 @@ dist_noinst_DATA = \
 	data/LIERO.TXT \
 	data/LIEROENG.TXT \
 	data/lierolibre.xpm \
+	data/sounds/sounds.txt \
 	lgpl-2.1.txt
 
 lierolibre_SOURCES = \
