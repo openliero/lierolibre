@@ -74,9 +74,12 @@ AC_ARG_ENABLE([windows-includes],
 	[WINDOWS_CPPFLAGS='-I./windows/include/'])
 AC_SUBST([WINDOWS_CPPFLAGS])
 
+# Search paths for embedded windows libraries, force libconfig++ static
+# (I've been unable to link stdc++ and gcc_s statically in a shared
+# libconfig++-9.dll)
 AC_ARG_ENABLE([windows-libraries],
 	[AS_HELP_STRING([--enable-windows-libraries],
-		[compile and use libraries from local folder ./windows/include/])],
+		[compile and use libraries from local folder ./windows/include/, and force static linking for libconfig++])],
 	[WINDOWS_LDFLAGS='-Lwindows/boost-program_options-1.51.0/stage/lib -Lwindows/zlib-1.2.7 -Lwindows/SDL-1.2.15/build/.libs -Lwindows/libconfig-1.4.8/lib/.libs/ -Lwindows/SDL_mixer-1.2.12/lib/x86/ -lboost_program_options -static-libgcc -static-libstdc++'; LIBCONFIGXX_LIBS="windows/libconfig-1.4.8/lib/.libs/libconfig++.a"])
 AC_SUBST([WINDOWS_LDFLAGS])
 AC_SUBST([LIBCONFIGXX_LIBS])
