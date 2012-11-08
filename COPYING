@@ -3,16 +3,19 @@ BDS-2-Clause License.
 
 The original graphics for Liero, the new replacement sounds, and the
 configuration variables extracted from the original game are released under
-the WTFPL license. Note that the old freeware license in data/LIERO(ENG).TXT
+the WTFPL License. Note that the old freeware license in data/LIERO(ENG).TXT
 and the information about the old LIERO.EXE and LIERO.SND in data/LICENSE.TXT
 no longer applies.
+
+The filesystem code and the lfs header originates from Boost and is licensed
+under the Boost Software License 1.0 and under the BSD-2-Clause License.
 
 The type_info header is licensed under the Boost Software License 1.0, and
 is included in the gvl library.
 
 The SDL m4 script is LGPLv2.1+.
 
-The autotools content is in part licensed under the BSD-2-Clause license of
+The autotools content is in part licensed under the BSD-2-Clause License of
 lierolibre, and also under various custom permissive free software licenses.
 The content under the BSD-2-Clause license falls under the GPL-2+ if used
 outside of lierolibre.
@@ -46,11 +49,24 @@ Files: src/argParse.* src/boostTesting.cpp src/configCompat.cpp
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: BSD-2-Clause
 
-Files: src/console.* src/exactObjectList.hpp src/fastObjectList.hpp src/lfs.hpp
-       src/rand.* src/rect.hpp src/sdlmain.cpp src/sfx.* src/sobject.* src/sys.*
+Files: src/console.* src/exactObjectList.hpp src/fastObjectList.hpp src/rand.*
+       src/rect.hpp src/sdlmain.cpp src/sfx.* src/sobject.* src/sys.*
        src/text.* src/_build/*
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
 License: BSD-2-Clause
+
+Files: src/filesystem.hpp
+Copyright: 2001, Dietmar Kühl
+           2002, Jan Langer
+           2002-2003, Beman Dawes
+           2007-2010, Erik Lindroos
+           2010, "basro"
+License: BSL-1.0 and BSD-2-Clause
+
+Files: src/filesystem.cpp
+Copyright: 2002, Jens Maurer
+           2007-2010, Erik Lindroos
+License: BSL-1.0 and BSD-2-Clause
 
 Files: src/binReader.* src/constants.* src/main.cpp src/math.* src/reader.*
 Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
