@@ -61,15 +61,9 @@ MANS_TXT = $(nodist_man6_MANS:.6=.txt)
 
 dist_doc_DATA = \
 	AUTHORS \
-	COPYING \
 	ChangeLog \
 	NEWS \
-	README \
-	README.txt \
-	README_linuxbin \
-	data/LIERO.TXT \
-	data/LIEROENG.TXT \
-	lgpl-2.1.txt
+	README
 
 dist_desktop_DATA = \
 	data/lierolibre.desktop
@@ -149,9 +143,16 @@ dist_noinst_DATA = \
 	$(MANPAGES_SOURCES) \
 	$(SOUND_SOURCES) \
 	$(WINDOWS_SOURCES) \
+	COPYING \
+	COPYING_winbin \
+	README.txt \
+	README_linuxbin \
 	data/FILE_ID.DIZ \
 	data/LICENSE.TXT \
-	data/lierolibre.xpm
+	data/LIERO.TXT \
+	data/LIEROENG.TXT \
+	data/lierolibre.xpm \
+	lgpl-2.1.txt
 
 lierolibre_SOURCES = \
 	src/binReader.cpp \
