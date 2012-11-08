@@ -582,7 +582,9 @@ EXTRA_DIST = \
 	src/gvl/tut/quickcheck/context.hpp \
 	src/gvl/tut/quickcheck/generator.hpp \
 	src/gvl/tut/quickcheck/property.hpp \
-	src/gvl/tut/quickcheck/quickcheck.hpp
+	src/gvl/tut/quickcheck/quickcheck.hpp \
+	\
+	src/boostTesting.cpp
 
 
 LIB_ARCH_NIXBIN_LIBFILES = \
