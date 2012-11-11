@@ -683,7 +683,7 @@ windows/boost-program_options-1.51.0/stage/lib/libboost_program_options.dll:
 		./bootstrap.sh ;\
 		rm -rf stage ;\
 		rm -rf bin.v2 ;\
-		./b2 toolset=gcc-mingw32 target-os=windows variant=release link=shared -sNO_BZIP2=1 -sNO_ZLIB=1 linkflags='-static-libgcc -static-libstdc++' stage/lib/libboost_program_options.dll stage/lib/libboost_program_options.dll.a
+		./b2 --user-config=tools/build/v2/user-config_i686-w64-mingw32-gcc.jam toolset=gcc-mingw32 target-os=windows variant=release link=shared -sNO_BZIP2=1 -sNO_ZLIB=1 linkflags='-static-libgcc -static-libstdc++' stage/lib/libboost_program_options.dll stage/lib/libboost_program_options.dll.a
 
 windows/zlib-1.2.7/zlib1.dll:
 	cd windows/zlib-1.2.7/ && \
