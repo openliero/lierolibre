@@ -67,7 +67,7 @@
 #include <cstring>
 #include <cstdlib>
 #if GVL_WINDOWS
-#include <io.h> // _mktemp_s()
+#include <io.h> // _mktemp(), _mktemp_s()
 #endif
 
 std::string changeLeaf(std::string const& path, std::string const& newLeaf)
@@ -186,7 +186,10 @@ void backupFile(std::string const& path)
 	strcpy(tmpFileName, path.c_str());
 	strcat(tmpFileName, "_backup_XXXXXX");
 
-#if GVL_WINDOWS
+#ifdef __MINGW32__
+	// _mktemp_s was only very recently implemented for mingw-w64
+	if (_mktemp(tmpFileName, strlen(tmpFileName) + 1) != 0)
+#elif	GVL_WINDOWS
 	if (_mktemp_s(tmpFileName, strlen(tmpFileName) + 1) != 0)
 #else
 	if (mkstemp(tmpFileName) == -1)
