@@ -188,7 +188,7 @@ void backupFile(std::string const& path)
 
 #ifdef __MINGW32__
 	// _mktemp_s was only very recently implemented for mingw-w64
-	if (_mktemp(tmpFileName, strlen(tmpFileName) + 1) != 0)
+	if (_mktemp(tmpFileName) == NULL)
 #elif	GVL_WINDOWS
 	if (_mktemp_s(tmpFileName, strlen(tmpFileName) + 1) != 0)
 #else
