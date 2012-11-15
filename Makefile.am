@@ -676,8 +676,6 @@ if HAS_WINDOWS_LDFLAGS
 EXTRA_lierolibre_DEPENDENCIES = $(WINDOWS_LIBS)
 endif
 
-.PHONY: clean-local dist-nixbin-dir dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
-
 windows/boost-program_options-1.51.0/stage/lib/libboost_program_options.dll:
 	cd windows/boost-program_options-1.51.0/ ;\
 		./bootstrap.sh ;\
@@ -768,6 +766,8 @@ data/LIERO.SND: $(SOUND_SOURCES)
 	$(srcdir)/scripts/lierolibre-packsounds \
 		$(srcdir)/data/sounds/ \
 		$@
+
+.PHONY: clean-local dist-nixbin-dir dist-nixbin-libcopyright dist-nixbin-libsrc dist-nixbin dist-nixbin-xz
 
 clean-local:
 	rm -f \
