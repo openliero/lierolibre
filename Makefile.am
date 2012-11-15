@@ -843,7 +843,6 @@ dist-nixbin-dir: distdir $(pkglibexec_PROGRAMS) $(NIXBIN_LIBFILES) \
 	cp -a $(pkglibexec_PROGRAMS) $(NIXBIN_DIRNAME)
 	cp -a $(nodist_man6_MANS) $(NIXBIN_DIRNAME)/man/
 	cp -a $(MANS_TXT) $(NIXBIN_DIRNAME)/man/
-	cp -a README_linuxbin $(NIXBIN_DIRNAME)
 
 dist-nixbin: dist-nixbin-dir
 	tar caf $(NIXBIN_DIRNAME).tar.gz $(NIXBIN_DIRNAME)
