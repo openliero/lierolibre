@@ -704,8 +704,6 @@ dist-hook: lierolibre.exe $(WINDOWS_LIBS)
 	for i in $(WINDOWS_LIBS_DLL) .libs/lierolibre.exe; do \
 		$(STRIP) $$i -o $(distdir)/$$(basename $$i); \
 		chmod +x $(distdir)/$$(basename $$i); done
-	cp windows/msvcp100.dll $(distdir)
-	cp windows/msvcr100.dll $(distdir)
 	cp scripts/lierolibre-cmd.bat $(distdir)
 	cp $(distdir)/data/liero.cfg $(distdir)/data/lierocfg.txt
 	for i in $(WINDOWS_TXT); do \
@@ -729,13 +727,13 @@ dist-hook: lierolibre.exe $(WINDOWS_LIBS)
 		-i $(distdir)/COPYING.txt
 else
 dist-hook:
+endif
 	cp $(distdir)/src/gvl/_build/Gvl_C++0x.props \
 		"$(distdir)/src/gvl/_build/Gvl C++0x.props"
 	cp $(distdir)/src/gvl/_build/Gvl_IEEE_SEE2.props \
 		"$(distdir)/src/gvl/_build/Gvl IEEE SEE2.props"
 	cp $(distdir)/src/gvl/_build/Gvl_Standard_Config.props \
 		"$(distdir)/src/gvl/_build/Gvl Standard Config.props"
-endif
 
 $(nodist_bin_SCRIPTS): scripts/lierolibre.am
 	install -d scripts/
