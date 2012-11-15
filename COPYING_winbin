@@ -51,21 +51,4 @@ License: Zlib
 Files: boost_program_options.dll
 Copyright: Various Boost authors
 License: BSL-1.0
-
-Files: msvcp100.dll msvcr100.dll
-Copyright: Microsoft
-License: BSD-2-Clause
-Comment:
- The original license note for these files read:
- .
- For your convenience, we have provided the following folders for use when
- redistributing VC++ runtime files. Subject to the license terms for the
- software, you may redistribute the folder (unmodified) in the application
- local folder as a sub-folder with no change to the folder name. You may also
- redistribute all the files within a folder, listed below the folder for your
- convenience, as an entire set.
- .
- These two files are originally contained in a subfolder, they are
- distributed "as an entire set" and "subject to the license terms for
- the software", which is the BSD-2-Clause of lierolibre.
 END_MACHINE_READABLE
