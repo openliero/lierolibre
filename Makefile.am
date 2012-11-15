@@ -133,7 +133,6 @@ WINDOWS_SOURCES = \
 	src/gvl/_build/gvl.vcproj \
 	src/gvl/_build/gvl.vcxproj \
 	src/gvl/_build/gvl.vcxproj.filters \
-	windows/assemble-release.bat \
 	windows/visualC/liero.vcproj \
 	windows/visualC/liero.vcxproj \
 	windows/visualC/lierolibre.sln
