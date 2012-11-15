@@ -1,6 +1,7 @@
 lierolibre NEWS - History of user-visible changes.
 
-Version 0.4.1 - November 2012, by Martin Erik Werner
+
+Version 0.5 - November 2012, by Martin Erik Werner
 * Fixed packgfx and packlev scripts to work with newer ImageMagick
 * Fixed the packsounds script so that it won't fail with non-english shell
 * Removed unused fullscreen resolution extension menu options
@@ -10,6 +11,7 @@ Version 0.4.1 - November 2012, by Martin Erik Werner
 * Changed windows homedir name from "settings" to "user"
 * Pre-packed LIERO.CHR and LIERO.SND are now included in the source release
 * Enabled cross-compilation from Linux for Windows
+
 
 Version 0.4 - June 2012, by Martin Erik Werner
 * Fixed a bug where the EXE file path would not be set
