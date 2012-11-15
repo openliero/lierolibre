@@ -59,7 +59,7 @@ copies the file
 .I #CFGFILE#
 from this directory to
 .I $HOME/.#PACKAGE#/
-unless already it already exists in this location.
+unless it already exists in this location.
 .I #CFGFILE#
 is a plain text file which can be modified, go wild! But don't be surprised if the game crahes ;)
 
