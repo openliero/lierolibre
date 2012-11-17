@@ -44,6 +44,11 @@ Copyright: 1998-1999 Joosa Reikkinen "MetsnElimet"
            2012, Martin Erik Werner <martinerikwerner@gmail.com>
 License: WTFPL and BSD-2-Clause
 
+Files: src/*
+Copyright: 2007-2010, Erik Lindroos <gliptic@gmail.com>
+           2010, Mario Carbajal "basro"
+License: BSD-2-Clause
+
 Files: src/argParse.* src/boostTesting.cpp src/configCompat.cpp
        src/configHelper.* src/configInit.* src/dataPath.* src/to_string.*
 Copyright: 2012, Martin Erik Werner <martinerikwerner@gmail.com>
