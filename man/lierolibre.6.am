@@ -50,7 +50,13 @@ as the
 .I inputfile
 parameter.
 
-.PP
+.SH OPTIONS
+
+.TP
+[\fB\-f\fR|\fB\-\-file\fR] \fIinputfile
+Reads game variables from the given file or directory.
+
+.IP
 If
 .I inputfile
 points to a directory (which is the default case),
@@ -60,15 +66,6 @@ copies the file
 from this directory to
 .I $HOME/.#PACKAGE#/
 unless it already exists in this location.
-.I #CFGFILE#
-is a plain text file which can be modified, go wild! But don't be surprised if the game crahes ;)
-
-
-.SH OPTIONS
-
-.TP
-[\fB\-f\fR|\fB\-\-file\fR] \fIinputfile
-Reads game variables from the given file or directory.
 
 .IP
 If
@@ -112,23 +109,57 @@ Sets the SDL_VIDEODRIVER environment variable.
 \fB-h\fR|\fB\-\-help
 Print a brief help overview.
 
+
 .SH EXAMPLES
 
+.TP
 .B #PACKAGE# mymod/LIERO.EXE
-.RS 4
 Reads game variables from a (potentially) modded EXE file, and reads game data from files in
 .IR mymod/ .
-.RE
 
+.TP
 .B #PACKAGE# -f mymod/LIERO.EXE -d #PKGDATADIR# -w mymod_liero.cfg
-.RS 4
 Reads game variables from a (potentially) modded EXE file and writes them to a plain text config file (and starts the game).
-.RE
 
+.TP
 .B #PACKAGE# mymod_liero.cfg mydata
-.RS 4
 Reads game variables from a custom plain text config file, and reads the game data from another directory.
-.RE
+
+
+.SH FILES
+
+.TP
+.I #PKGDATADIR#/#CFGFILE# $HOME/.#PACKAGE#/#CFGFILE#
+Game variables file in plaintext format.
+
+.IP
+The
+.I $HOME/.#PACKAGE#/#CFGFILE#
+file normally takes precedence, and is created for easy modding of the game variables.
+
+.TP
+.I #PKGDATADIR#/LIERO.DAT $HOME/LIERO.DAT
+User settings file in binary format,
+.I #PKGDATADIR#/LIERO.DAT
+contains the default configuration.
+
+.TP
+.I #PKGDATADIR#/LIERO.CHR
+Graphics data in binary format,
+use
+.BR #PACKAGE#-extractgfx (6)
+to extract it into a more editable format.
+
+.TP
+.I #PKGDATADIR#/LIERO.SND
+Sound data in binary format,
+use
+.BR #PACKAGE#-extractsounds (6)
+to extract it into a more editable format.
+
+.TP
+.I #PKGDATADIR#/NAMES.DAT
+List of names for picking random player names.
 
 
 .SH AUTHORS
