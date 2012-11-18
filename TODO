@@ -1,0 +1,8 @@
+* Decide on SND CHR blobs
+* Flickering menu selection
+* Scale2x
+* LIERO.DAT -> liero_settings.cfg
+* Don't use SND format
+  + Enable more sounds
+* Don't use CHR format
+* Don't use NAMES.DAT file

@@ -152,7 +152,8 @@ dist_noinst_DATA = \
 	data/LIEROENG.TXT \
 	data/lierolibre.xpm \
 	data/sounds/sounds.txt \
-	lgpl-2.1.txt
+	lgpl-2.1.txt \
+        TODO
 
 lierolibre_SOURCES = \
 	src/binReader.cpp \
