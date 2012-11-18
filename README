@@ -24,7 +24,20 @@ likely to not work (make the game refuse to start, or crash) though:
   ! Changing integers to strings, strings to integers, etc.
   ! Changing the sine and cosine tables
 
+The file 'data/LIERO.DAT' contains the default user settings in binary format.
+
+The file 'data/LIERO.CHR' contains graphics data in binary format, it is
+created from the xpm files in 'data/graphics/' via the
+'scripts/lierolibre-packgfx' script.
+
+The file 'data/LIERO.SND' contains sound data in binary format, it is
+created from the wav files in 'data/sounds/' via the
+'scripts/lierolibre-packsounds' script.
+
+The file 'data/NAMES.DAT' contains a list of names for picking random player names.
+
 To use custom levels, .lev files can be placed in $HOME/.lierolibre.
+
 
 Compiling, running and installing:
 
