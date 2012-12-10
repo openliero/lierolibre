@@ -181,7 +181,7 @@ void Texts::loadFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &swstates = texts["weapStates"];
 	for(int i = 0; i < 3; ++i)
 	{
-		 weapStates[i] = (char const*)swstates["weapStates" + to_string(i)];
+		weapStates[i] = (char const*)swstates["weapStates" + to_string(i)];
 	}
 
 	const libconfig::Setting &sknames = texts["keyNames"];

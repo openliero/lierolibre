@@ -53,7 +53,7 @@ WORD dosToWinForeColours[16] =
 	FOREGROUND_RED  | FOREGROUND_GREEN,
 	FOREGROUND_RED  | FOREGROUND_GREEN | FOREGROUND_BLUE,
 	FOREGROUND_INTENSITY,
-	
+
 	FOREGROUND_BLUE  | FOREGROUND_INTENSITY,
 	FOREGROUND_GREEN | FOREGROUND_INTENSITY,
 	FOREGROUND_BLUE  | FOREGROUND_GREEN  | FOREGROUND_INTENSITY,
@@ -74,7 +74,7 @@ WORD dosToWinBackColours[16] =
 	BACKGROUND_RED  | BACKGROUND_GREEN,
 	BACKGROUND_RED  | BACKGROUND_GREEN | BACKGROUND_BLUE,
 	BACKGROUND_INTENSITY,
-	
+
 	BACKGROUND_BLUE  | BACKGROUND_INTENSITY,
 	BACKGROUND_GREEN | BACKGROUND_INTENSITY,
 	BACKGROUND_BLUE  | BACKGROUND_GREEN  | BACKGROUND_INTENSITY,
@@ -88,14 +88,14 @@ void init()
 {
 	stdIn = GetStdHandle(STD_INPUT_HANDLE);
 	stdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-		
+
 	GetConsoleScreenBufferInfo(stdOut, &bufferInfo);
 }
 
 void setAttributes(int attr)
 {
 	WORD f = dosToWinForeColours[attr & 0xf] | dosToWinBackColours[(attr >> 4) & 0xf];
-	
+
 	SetConsoleTextAttribute(stdOut, f);
 }
 
@@ -103,13 +103,13 @@ int getAttributes()
 {
 	WORD const allFore = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY;
 	WORD const allBack = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY;
-	
+
 	CONSOLE_SCREEN_BUFFER_INFO info;
 	GetConsoleScreenBufferInfo(stdOut, &info);
-	
+
 	int fore = 0x7;
 	int back = 0x0;
-	
+
 	for(int i = 0; i < 16; ++i)
 	{
 		if((info.wAttributes & allFore) == dosToWinForeColours[i])
@@ -117,7 +117,7 @@ int getAttributes()
 		if((info.wAttributes & allBack) == dosToWinBackColours[i])
 			back = i;
 	}
-	
+
 	return (back << 4) | fore;
 }
 
@@ -144,14 +144,14 @@ void writeTextBar(std::string const& str, int barFormat)
 		ptr += 3;
 		len -= 3;
 	}
-		
+
 	DWORD dummy;
 	WriteConsole(stdOut, ptr, DWORD(len), &dummy, 0);
 	
 	setAttributes(barFormat);
 	
 	int left = bufferInfo.dwSize.X - int(len);
-	
+
 	for(int i = 0; i < left; ++i)
 		WriteConsole(stdOut, " ", 1, &dummy, 0);
 }
@@ -159,7 +159,7 @@ void writeTextBar(std::string const& str, int barFormat)
 void waitForAnyKey()
 {
 	FlushConsoleInputBuffer(stdIn);
-	INPUT_RECORD input[1];	
+	INPUT_RECORD input[1];
 	do
 	{
 		DWORD read = 0;
@@ -172,15 +172,15 @@ void clear()
 {
 	DWORD dummy;
 	COORD ul = {0, 0};
-	
+
 	FillConsoleOutputAttribute(
 		stdOut, 0, int(bufferInfo.dwSize.X) * bufferInfo.dwSize.Y,
 		ul, &dummy);
-	
+
 	FillConsoleOutputCharacter(
 		stdOut, 32, int(bufferInfo.dwSize.X) * bufferInfo.dwSize.Y,
 		ul, &dummy);
-		
+
 	SetConsoleCursorPosition(stdOut, ul);
 }
 
@@ -193,7 +193,7 @@ namespace Console
 
 void init()
 {
-	
+
 }
 
 void setAttributes(int attr)
@@ -223,12 +223,12 @@ void writeTextBar(std::string const& str, int barFormat)
 
 void waitForAnyKey()
 {
-	
+
 }
 
 void clear()
 {
-	
+
 }
 
 }
