@@ -74,7 +74,6 @@ enum
 	BonusBounceDiv,
 	BonusFlickerTime,
 
-
 	AimMaxRight,
 	AimMinRight,
 	AimMaxLeft,
@@ -169,15 +168,9 @@ enum
 	HAirJump,
 	HMultiJump,
 
-
-
 	MaxH
 };
 
 // TODO: Move these to Common
-
-
-
-
 
 #endif // LIERO_CONSTANTS_HPP

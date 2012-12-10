@@ -66,7 +66,6 @@ string valueConstantsNamesCFGVer0[] =
 	"SplinterLarpaVelDiv",
 	"SplinterCracklerVelDiv",
 
-
 	// WormFloat hack
 	"WormFloatLevel",
 

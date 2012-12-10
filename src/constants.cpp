@@ -77,7 +77,6 @@ std::string valueConstantsNames[] =
 	"BonusBounceDiv",
 	"BonusFlickerTime",
 
-
 	"AimMaxRight",
 	"AimMinRight",
 	"AimMaxLeft",
@@ -199,8 +198,6 @@ int CSint24desc[][3] =
 
 	{BonusGravity, 0x72C3, 0x72C9},
 	{BObjGravity, 0x744A, 0x7450},
-
-
 
 	// WormFloat hack
 	{WormFloatPower, 0x29DB, 0x29E1},
