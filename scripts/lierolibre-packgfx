@@ -52,7 +52,7 @@ done
 
 touch "$4" 2>&- || { echo >&2 "'"$4"' is not writable, aborting"; exit 1; }
 
-hash convert 2>&- || { echo >&2 "This script requires the "'"convert"'" tool from the "'"ImageMagick"'" suite, aborting"; exit 1; }
+hash gm 2>&- || { echo >&2 "This script requires the "'"gm"'" tool from the "'"GraphicsMagick"'" suite, aborting"; exit 1; }
 
 inputfile1="$1"
 inputfile2="$2"
@@ -135,15 +135,15 @@ writestring "$title" "$titlesize"
 for i in $img1_header; do
 	writedec "$i"
 done
-convert "$inputfile1" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
+gm convert "$inputfile1" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
 
 for i in $img2_header; do
 	writedec "$i"
 done
-convert "$inputfile2" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
+gm convert "$inputfile2" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
 
 for i in $img3_header; do
 	writedec "$i"
 done
-convert "$inputfile3" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
+gm convert "$inputfile3" -set colorspace Gray -depth 8 gray:- >> "$outputfile"
 

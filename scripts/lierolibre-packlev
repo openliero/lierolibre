@@ -50,10 +50,10 @@ fi
 
 touch "$2" 2>&- || { echo >&2 "'"$2"' is not writable, aborting"; exit 1; }
 
-hash convert 2>&- || { echo >&2 "This script requires the "'"convert"'" tool from the "'"ImageMagick"'" suite, aborting"; exit 1; }
+hash gm 2>&- || { echo >&2 "This script requires the "'"gm"'" tool from the "'"GraphicsMagick"'" suite, aborting"; exit 1; }
 
 inputfile="$1"
 outputfile="$2"
 
-convert "$inputfile" -set colorspace Gray -depth 8 gray:- > "$outputfile"
+gm convert "$inputfile" -set colorspace Gray -depth 8 gray:- > "$outputfile"
 

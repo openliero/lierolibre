@@ -59,7 +59,7 @@ if [ ! -w "$2" ]; then
 	exit 1
 fi
 
-hash convert 2>&- || { echo >&2 "This script requires the "'"convert"'" tool from the "'"ImageMagick"'" suite, aborting"; exit 1; }
+hash gm 2>&- || { echo >&2 "This script requires the "'"gm"'" tool from the "'"GraphicsMagick"'" suite, aborting"; exit 1; }
 
 inputfile="$1"
 outputdir="$2"
@@ -79,11 +79,11 @@ imgdim3=4x120
 
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset1" count="$imgsize1" \
 	2>/dev/null | \
-	convert -depth 8 -size "$imgdim1" gray:- "$outputdir"/gfx1.xpm
+	gm convert -depth 8 -size "$imgdim1" gray:- "$outputdir"/gfx1.xpm
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset2" count="$imgsize2" \
 	2>/dev/null | \
-	convert -depth 8 -size "$imgdim2" gray:- "$outputdir"/gfx2.xpm
+	gm convert -depth 8 -size "$imgdim2" gray:- "$outputdir"/gfx2.xpm
 dd if="$inputfile" bs=1 ibs=1 skip="$imgoffset3" count="$imgsize3" \
 	2>/dev/null | \
-	convert -depth 8 -size "$imgdim3" gray:- "$outputdir"/gfx3.xpm
+	gm convert -depth 8 -size "$imgdim3" gray:- "$outputdir"/gfx3.xpm
 
