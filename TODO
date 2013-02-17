@@ -6,3 +6,4 @@
   + Enable more sounds
 * Don't use CHR format
 * Don't use NAMES.DAT file
+* Unify naming liero.cfg, lierocfg.txt, liero.lng, preferebly.txt ending
