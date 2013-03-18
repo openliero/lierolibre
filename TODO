@@ -8,3 +8,5 @@
 * Don't use NAMES.DAT file
 * Unify naming liero.cfg, lierocfg.txt, liero.lng, preferebly.txt ending
 * At least try to build on all arches
+* Compile the linux binary releases statically to the extent possible, trying
+  to ship 50 shared libs with it seems both painful and unreliable...
