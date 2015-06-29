@@ -54,7 +54,7 @@ Compiling, running and installing:
   To install lierolibre use:
     (sudo) make install
 
-Please report bugs at https://bugs.launchpad.net/lierolibre/+filebug
+Please report bugs at https://gitlab.com/groups/lierolibre/issues
 
 For more information see the manual pages in the man/ direcory, and visit the
 Launchpad page:

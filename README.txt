@@ -52,7 +52,7 @@ To load a custom game variables text file use
 Again, if the data files are in the same directory as mod.txt, the -d option
 can be omitted.
 
-Please report bugs at https://bugs.launchpad.net/lierolibre/+filebug
+Please report bugs at https://gitlab.com/groups/lierolibre/issues
 
 For more information visit the Launchpad page:
 https://launchpad.net/lierolibre
