@@ -1,9 +1,9 @@
 [submodule "data"]
 	path = data
-	url = git://gitorious.org/lierolibre/lierolibre-data.git
+	url = https://gitlab.com/lierolibre/lierolibre-data.git
 [submodule "gvl"]
 	path = src/gvl
-	url = git://gitorious.org/lierolibre/gvl.git
+	url = https://gitlab.com/lierolibre/gvl.git
 [submodule "windows"]
 	path = windows
-	url = git://gitorious.org/lierolibre/lierolibre-w32depends.git
+	url = https://gitlab.com/lierolibre/lierolibre-w32depends.git
