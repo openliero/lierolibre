@@ -160,19 +160,19 @@ void Common::loadConstantsFromCFGVer0(string cfgFilePath)
 	const Setting &vconstants = constants["Values"];
 	for(int i = 0; i < MaxC; ++i)
 	{
-		C[i] = (int)vconstants[valueConstantsNamesCFGVer0[i]];
+		C[i] = (int)vconstants[valueConstantsNamesCFGVer0[i].c_str()];
 	}
 
 	const Setting &sconstants = constants["Strings"];
 	for(int i = 0; i < MaxS; ++i)
 	{
-		S[i]= (char const*)sconstants[stringConstantsNamesCFGVer0[i]];
+		S[i]= (char const*)sconstants[stringConstantsNamesCFGVer0[i].c_str()];
 	}
 
 	const Setting &hconstants = constants["Hacks"];
 	for(int i = 0; i < MaxH; ++i)
 	{
-		H[i] = (bool)hconstants[hackConstantsNamesVer0[i]];
+		H[i] = (bool)hconstants[hackConstantsNamesVer0[i].c_str()];
 	}
 }
 

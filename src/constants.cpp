@@ -523,19 +523,19 @@ void Common::loadConstantsFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &vconstants = constants["Values"];
 	for(int i = 0; i < MaxC; ++i)
 	{
-		C[i] = (int)vconstants[valueConstantsNames[i]];
+		C[i] = (int)vconstants[valueConstantsNames[i].c_str()];
 	}
 
 	const libconfig::Setting &sconstants = constants["Strings"];
 	for(int i = 0; i < MaxS; ++i)
 	{
-		S[i]= (char const*)sconstants[stringConstantsNames[i]];
+		S[i]= (char const*)sconstants[stringConstantsNames[i].c_str()];
 	}
 
 	const libconfig::Setting &hconstants = constants["Hacks"];
 	for(int i = 0; i < MaxH; ++i)
 	{
-		H[i] = (bool)hconstants[hackConstantsNames[i]];
+		H[i] = (bool)hconstants[hackConstantsNames[i].c_str()];
 	}
 }
 

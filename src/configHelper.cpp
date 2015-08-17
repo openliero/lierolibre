@@ -54,14 +54,10 @@ template Uint8 ConfigHelper::getValue<Uint8, const Setting, int>(const Setting &
 
 template Uint8 ConfigHelper::getValue<Uint8, const Setting, char const*>(const Setting &node, char const* index);
 
-template Uint8 ConfigHelper::getValue<Uint8, const Setting, string>(const Setting &node, string index);
-
 // Non-const
 template Uint8 ConfigHelper::getValue<Uint8, Setting, int>(Setting &node, int index);
 
 template Uint8 ConfigHelper::getValue<Uint8, Setting, char const*>(Setting &node, char const* index);
-
-template Uint8 ConfigHelper::getValue<Uint8, Setting, string>(Setting &node, string index);
 
 
 // Since we still need specialisation per value type (Setting::Type),
@@ -72,7 +68,7 @@ void ConfigHelper::put(Setting &node, string variable, string value)
 	{
 		node.add(variable, Setting::TypeString) = value;
 	} else {
-		Setting &var = node[variable];
+		Setting &var = node[variable.c_str()];
 		var = value;
 	}
 }
@@ -83,7 +79,7 @@ void ConfigHelper::put(Setting &node, string variable, int value)
 	{
 		node.add(variable, Setting::TypeInt) = value;
 	} else {
-		Setting &var = node[variable];
+		Setting &var = node[variable.c_str()];
 		var = value;
 	}
 }
@@ -94,7 +90,7 @@ void ConfigHelper::put(Setting &node, string variable, Uint8 value)
 	{
 		node.add(variable, Setting::TypeInt) = value;
 	} else {
-		Setting &var = node[variable];
+		Setting &var = node[variable.c_str()];
 		var = value;
 	}
 }
@@ -105,7 +101,7 @@ void ConfigHelper::put(Setting &node, string variable, bool value)
 	{
 		node.add(variable, Setting::TypeBoolean) = value;
 	} else {
-		Setting &var = node[variable];
+		Setting &var = node[variable.c_str()];
 		var = value;
 	}
 }
@@ -135,6 +131,6 @@ Setting& ConfigHelper::getSubgroup(Setting &node, string groupName)
 	{
 		node.add(groupName, Setting::TypeGroup);
 	}
-	return node[groupName];
+	return node[groupName.c_str()];
 }
 

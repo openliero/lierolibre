@@ -162,7 +162,7 @@ void Texts::loadFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &sgmodes = texts["gameModes"];
 	for(int i = 0; i < 4; ++i)
 	{
-		gameModes[i] = (char const*)sgmodes["gameModes" + to_string(i)];
+		gameModes[i] = (char const*)sgmodes[("gameModes" + to_string(i)).c_str()];
 	}
 
 	const libconfig::Setting &sgmspec = texts["gameModeSpec"];
@@ -181,13 +181,13 @@ void Texts::loadFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &swstates = texts["weapStates"];
 	for(int i = 0; i < 3; ++i)
 	{
-		 weapStates[i] = (char const*)swstates["weapStates" + to_string(i)];
+		 weapStates[i] = (char const*)swstates[("weapStates" + to_string(i)).c_str()];
 	}
 
 	const libconfig::Setting &sknames = texts["keyNames"];
 	for(int i = 1; i < 177; ++i) // First key starts at 1
 	{
-		keyNames[i] = (char const*)sknames["keyNames" + to_string(i)];
+		keyNames[i] = (char const*)sknames[("keyNames" + to_string(i)).c_str()];
 	}
 
 	selWeap = (char const*)texts["selWeap"];
@@ -315,8 +315,8 @@ void Common::loadPaletteFromCFG(std::string cfgFilePath)
 	const libconfig::Setting &scanim = palette["colorAnim"];
 	for(int i = 0; i < 4; ++i)
 	{
-		colorAnim[i].from = (int)scanim["colorAnim" + to_string(i) + "from"];
-		colorAnim[i].to = (int)scanim["colorAnim" + to_string(i) + "to"];
+		colorAnim[i].from = (int)scanim[("colorAnim" + to_string(i) + "from").c_str()];
+		colorAnim[i].to = (int)scanim[("colorAnim" + to_string(i) + "to").c_str()];
 	}
 }
 
@@ -383,7 +383,7 @@ void Common::loadMaterialsFromCFG(std::string cfgFilePath)
 
 	for(int i = 0; i < 256; ++i)
 	{
-		const libconfig::Setting &smflags = smaterials["flags" + to_string(i)];
+		const libconfig::Setting &smflags = smaterials[("flags" + to_string(i)).c_str()];
 		materials[i].flags = smflags;
 	}
 }
