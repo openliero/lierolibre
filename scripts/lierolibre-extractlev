@@ -58,5 +58,5 @@ imgsize=$((504 * 350))
 imgdim=504x350
 
 dd if="$inputfile" bs=1 ibs=1 count="$imgsize" 2>/dev/null | \
-	gm convert -depth 8 -size "$imgdim" gray:- "$outputfile"
+	convert -depth 8 -size "$imgdim" gray:- "$outputfile"
 

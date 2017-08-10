@@ -26,9 +26,9 @@ if test x"$HAS_SOX" != x"yes" ; then
 	AC_MSG_WARN([SoX not found, you will need this to build the sound data!])
 fi
 
-AC_CHECK_PROG(HAS_GM, gm, yes)
-if test x"$HAS_GM" != x"yes" ; then
-	AC_MSG_WARN([GraphicsMagick not found, you will need this to build the graphics data!])
+AC_CHECK_PROG(HAS_IM, convert, yes)
+if test x"$HAS_IM" != x"yes" ; then
+	AC_MSG_WARN([ImageMagick not found, you will need this to build the graphics data!])
 fi
 
 # Checks for libraries.
