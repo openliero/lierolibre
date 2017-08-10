@@ -61,7 +61,7 @@ hash sox 2>&- || { echo >&2 "This script requires the "'"SoX"'" audio manipulato
 inputdir="$1"
 outputfile="$2"
 names="SHOTGUN SHOT RIFLE BAZOOKA BLASTER THROW LARPA EXP3A EXP3B EXP2 EXP3 EXP4 EXP5 DIRT BUMP DEATH1 DEATH2 DEATH3 HURT1 HURT2 HURT3 ALIVE BEGIN DROPSHEL RELOADED MOVEUP MOVEDOWN SELECT BOING BURNER"
-LANG=C # relying on english output from dd
+LC_ALL=C # relying on english output from dd
 
 for i in $names; do
 	if [ ! -r "$inputdir"/"$i".wav ]; then
