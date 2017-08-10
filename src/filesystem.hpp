@@ -85,7 +85,7 @@ FILE* tolerantFOpen(std::string const& name, char const* mode);
 std::size_t fileLength(FILE* f);
 
 struct dir_itr_imp;
-typedef std::auto_ptr<dir_itr_imp> dir_itr_imp_ptr;
+typedef std::unique_ptr<dir_itr_imp> dir_itr_imp_ptr;
 
 
 void dir_itr_init( dir_itr_imp_ptr & m_imp, char const* dir_path );

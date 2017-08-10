@@ -97,13 +97,13 @@ struct Menu
 
 	bool onLeftRight(Common& common, int dir)
 	{
-		std::auto_ptr<ItemBehavior> b(getItemBehavior(common, selection()));
+		std::unique_ptr<ItemBehavior> b(getItemBehavior(common, selection()));
 		return b->onLeftRight(*this, selection(), dir);
 	}
 
 	int onEnter(Common& common)
 	{
-		std::auto_ptr<ItemBehavior> b(getItemBehavior(common, selection()));
+		std::unique_ptr<ItemBehavior> b(getItemBehavior(common, selection()));
 		return b->onEnter(*this, selection());
 	}
 
@@ -111,7 +111,7 @@ struct Menu
 	{
 		for(std::size_t i = 0; i < items.size(); ++i)
 		{
-			std::auto_ptr<ItemBehavior> b(getItemBehavior(common, i));
+			std::unique_ptr<ItemBehavior> b(getItemBehavior(common, i));
 
 			b->onUpdate(*this, i);
 		}

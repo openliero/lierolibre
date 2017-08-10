@@ -1965,7 +1965,7 @@ void Gfx::mainLoop()
 
 		if(selection == MaNewGame)
 		{
-			std::auto_ptr<Controller> newController(new LocalController(common, settings));
+			std::unique_ptr<Controller> newController(new LocalController(common, settings));
 
 			Level* oldLevel = controller->currentLevel();
 
@@ -1984,7 +1984,7 @@ void Gfx::mainLoop()
 				newController->swapLevel(newLevel);
 			}
 
-			controller = newController;
+			std::swap(controller, newController);
 		}
 		else if(selection == MaResumeGame)
 		{

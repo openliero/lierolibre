@@ -127,7 +127,7 @@ struct ReplayReader : Replay
 		// Nothing
 	}
 
-	std::auto_ptr<Game> beginPlayback(gvl::shared_ptr<Common> common);
+	std::unique_ptr<Game> beginPlayback(gvl::shared_ptr<Common> common);
 	bool playbackFrame();
 
 	gvl::filter_ptr str;

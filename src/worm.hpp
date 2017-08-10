@@ -432,7 +432,7 @@ struct Worm : gvl::shared
 	//Viewport* viewport; // !CLONING
 	int index; // 0 or 1
 
-	std::auto_ptr<WormAI> ai;
+	std::unique_ptr<WormAI> ai;
 
 	int reacts[4];
 	WormWeapon weapons[5];

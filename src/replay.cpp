@@ -440,7 +440,7 @@ ReplayReader::ReplayReader(gvl::stream_ptr str_init)
 
 uint32_t const replayMagic = ('L' << 24) | ('R' << 16) | ('P' << 8) | 'F';
 
-std::auto_ptr<Game> ReplayReader::beginPlayback(gvl::shared_ptr<Common> common)
+std::unique_ptr<Game> ReplayReader::beginPlayback(gvl::shared_ptr<Common> common)
 {
 	uint32_t readMagic = gvl::read_uint32(reader);
 	if(readMagic != replayMagic)
@@ -451,7 +451,7 @@ std::auto_ptr<Game> ReplayReader::beginPlayback(gvl::shared_ptr<Common> common)
 	
 	gvl::shared_ptr<Settings> settings(new Settings);
 
-	std::auto_ptr<Game> game(new Game(common, settings));
+	std::unique_ptr<Game> game(new Game(common, settings));
 
 	read(reader, context, *game);
 #ifdef DEBUG_REPLAYS

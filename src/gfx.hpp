@@ -263,7 +263,7 @@ struct Gfx
 	gvl::rect lastUpdateRect; // Last region that was updated when flipping
 	Rand rand; // PRNG for things that don't affect the game
 	gvl::shared_ptr<Common> common;
-	std::auto_ptr<Controller> controller;
+	std::unique_ptr<Controller> controller;
 
 	std::vector<Joystick> joysticks;
 };
