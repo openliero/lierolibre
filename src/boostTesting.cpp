@@ -41,7 +41,6 @@
 
 #include "dataPath.hpp"
 
-using namespace boost::filesystem;
 using namespace std;
 
 string correct_message;
@@ -63,7 +62,7 @@ struct DirectorySetup
 		map<string, bool> file_access_map;
 		map<string, bool>::iterator file_access_pair;
 		vector<string> names_rw;
-		fstream file;
+		std::fstream file;
 		string filepath;
 	DirectorySetup()
 	{
@@ -100,8 +99,8 @@ struct DirectorySetup
 	{
 //	cout << "teardown DirectorySetup" << endl;
 	setenv("HOME", original_home.c_str(), 1);
-	remove_all(temp_homedir);
-	remove_all(temp_readonlydir);
+	boost::filesystem::remove_all(temp_homedir);
+	boost::filesystem::remove_all(temp_readonlydir);
 	}
 };
 
@@ -111,7 +110,7 @@ struct ConfigdirSetup : DirectorySetup
 	{
 		temp_configdir = temp_homedir + '/' + ".lierolibre";
 
-		create_directory(temp_configdir);
+		boost::filesystem::create_directory(temp_configdir);
 	}
 };
 
@@ -133,7 +132,7 @@ struct FilesInReadonlySetup : virtual ConfigdirSetup
 				file.close();
 			} else {
 				cout << "Can't write to file: "
-							<< file << endl;
+							<< filepath << endl;
 			}
 		}
 	}
@@ -164,7 +163,7 @@ struct FilesInWritableSetup : virtual ConfigdirSetup
 					file.close();
 				} else {
 					cout << "Can't write to file: "
-						 << file << endl;
+						 << filepath << endl;
 				}
 			}
 		}
